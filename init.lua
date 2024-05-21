@@ -521,7 +521,24 @@ local plugins = {
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          notification = {
+            window = {
+              normal_hl = 'Comment', -- Base highlight group in the notification window
+              winblend = 10,
+              border = border, -- Border style for the floating window
+              align = 'top',
+            },
+          },
+          integration = {
+            ['nvim-tree'] = {
+              enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
+            },
+          },
+        },
+      },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
