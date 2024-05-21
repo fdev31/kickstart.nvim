@@ -2,8 +2,10 @@ vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
 
 vim.cmd 'highlight Normal guibg=NONE ctermbg=NONE'
 
-vim.api.nvim_set_hl(0, 'Normal', { ctermbg = nil, bg = nil, guibg = nil })
-vim.api.nvim_set_hl(0, 'NormalFloat', { ctermbg = nil, bg = nil, guibg = nil })
+local no_color = { ctermbg = nil, guibg = nil, bg = nil }
+
+vim.api.nvim_set_hl(0, 'Normal', no_color)
+vim.api.nvim_set_hl(0, 'NormalFloat', no_color)
 vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = 'NVimDarkGrey2' })
 
 -- neovide / background-color {{{
