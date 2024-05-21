@@ -169,12 +169,21 @@ M = {
     'zbirenbaum/copilot-cmp',
     lazy = false,
     autostart = true,
-    dependencies = { 'zbirenbaum/copilot.lua' },
     config = function()
       require('copilot_cmp').setup()
     end,
   },
-  { 'zbirenbaum/copilot.lua', lazy = true, autostart = true, opts = {}, cmd = 'Copilot', event = 'InsertEnter' },
+  {
+    'zbirenbaum/copilot.lua',
+    lazy = true,
+    autostart = true,
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+  },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
     branch = 'canary',
