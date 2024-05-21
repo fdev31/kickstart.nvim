@@ -337,7 +337,6 @@ local plugins = {
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
-      current_line_blame = false,
       numhl = true,
     },
   },
@@ -379,6 +378,7 @@ local plugins = {
       }, { mode = 'v' })
     end,
   },
+
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -939,7 +939,7 @@ local plugins = {
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone' },
+        completion = { completeopt = 'menu,menuone,noinsert' },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
