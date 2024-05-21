@@ -164,7 +164,17 @@ M = {
       }
     end,
   },
-  { 'github/copilot.vim', lazy = false },
+  { 'onsails/lspkind.nvim' },
+  {
+    'zbirenbaum/copilot-cmp',
+    lazy = false,
+    autostart = true,
+    dependencies = { 'zbirenbaum/copilot.lua' },
+    config = function()
+      require('copilot_cmp').setup()
+    end,
+  },
+  { 'zbirenbaum/copilot.lua', lazy = true, autostart = true, opts = {}, cmd = 'Copilot', event = 'InsertEnter' },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
     branch = 'canary',

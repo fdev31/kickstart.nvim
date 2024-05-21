@@ -800,10 +800,17 @@ local plugins = {
       local ensure_installed = vim.tbl_keys(filtered_servers)
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'markdownlint',
       })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
+      require('mason-tool-installer').setup {
+        ensure_installed = ensure_installed,
+        auto_update = false,
+        run_on_start = false,
+        integrations = {
+          ['mason-lspconfig'] = true,
+          ['mason-null-ls'] = false,
+          ['mason-nvim-dap'] = false,
+        },
+      }
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -899,6 +906,7 @@ local plugins = {
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
+      'zbirenbaum/copilot-cmp',
       'hrsh7th/cmp-path',
     },
     config = function()
@@ -907,7 +915,17 @@ local plugins = {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
+      local lspkind = require 'lspkind'
+
       cmp.setup {
+        style = 'atom_color',
+        formatting = {
+          format = lspkind.cmp_format {
+            mode = 'symbol',
+            max_width = 300,
+            symbol_map = { Copilot = '' },
+          },
+        },
         window = {
           completion = cmp.config.window.bordered {
             border = border, -- custom border characters
@@ -923,7 +941,7 @@ local plugins = {
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = { completeopt = 'menu,menuone' },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
@@ -942,13 +960,13 @@ local plugins = {
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          -- ['<C-y>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -978,9 +996,10 @@ local plugins = {
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'path' },
+          { group_index = 2, name = 'nvim_lsp' },
+          { group_index = 2, name = 'copilot' },
+          { group_index = 2, name = 'luasnip' },
+          { group_index = 2, name = 'path' },
         },
       }
     end,
@@ -1112,7 +1131,7 @@ local plugins = {
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
