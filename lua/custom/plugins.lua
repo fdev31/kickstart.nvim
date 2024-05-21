@@ -180,9 +180,11 @@ M = {
     cmd = 'Copilot',
     event = 'InsertEnter',
     opts = {
-      suggestion = { enabled = false },
       panel = { enabled = false },
-      suggestion = { enabled = true, auto_trigger = true },
+      suggestion = {
+        enabled = false,
+        auto_trigger = false,
+      },
       filetypes = {
         markdown = true,
         ['.'] = true,

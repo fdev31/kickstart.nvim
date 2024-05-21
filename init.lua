@@ -243,8 +243,6 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-require 'custom.options'
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -1166,7 +1164,7 @@ local plugins = {
 
 require('lazy').setup(plugins)
 
-require 'custom.settings'
+require 'custom.options'
 
 require 'custom.keymap'
 -- The line beneath this is called `modeline`. See `:help modeline`
