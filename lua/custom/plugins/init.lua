@@ -175,14 +175,19 @@ M = {
   },
   {
     'zbirenbaum/copilot.lua',
-    lazy = true,
+    lazy = false,
     autostart = true,
+    cmd = 'Copilot',
+    event = 'InsertEnter',
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
+      suggestion = { enabled = true, auto_trigger = true },
+      filetypes = {
+        markdown = true,
+        ['.'] = true,
+      },
     },
-    cmd = 'Copilot',
-    event = 'InsertEnter',
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
