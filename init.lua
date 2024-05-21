@@ -526,8 +526,6 @@ local plugins = {
         opts = {
           notification = {
             window = {
-              normal_hl = 'Comment', -- Base highlight group in the notification window
-              winblend = 10,
               border = border, -- Border style for the floating window
               align = 'top',
             },
