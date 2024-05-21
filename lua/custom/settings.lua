@@ -24,8 +24,9 @@ if vim.g.neovide then
       _scaleChange(1 / 1.2)
     end,
   })
-else
-  vim.api.nvim_set_hl(0, 'Normal', { ctermbg = nil, bg = nil, guibg = nil })
-  vim.api.nvim_set_hl(0, 'NormalFloat', { ctermbg = nil, bg = nil, guibg = nil })
 end
+
+vim.api.nvim_set_hl(0, 'Normal', { ctermbg = nil, bg = nil, guibg = nil })
+vim.api.nvim_set_hl(0, 'NormalFloat', { ctermbg = nil, bg = nil, guibg = nil })
+vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = 'NVimDarkGrey2' })
 -- }}}
