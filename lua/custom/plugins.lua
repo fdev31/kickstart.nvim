@@ -4,6 +4,9 @@
 -- See the kickstart.nvim README for more information
 local lib = require 'custom.lib'
 local settings = require 'custom.settings'
+
+local color = '#ff0000'
+
 M = {
   --[[ {
     'dgagn/diagflow.nvim',
@@ -22,6 +25,16 @@ M = {
       end,
     },
   }, ]]
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      vim.opt.termguicolors = true
+      require('colorizer').setup({ '*' }, {
+        css = true,
+        RRGGBBAA = true,
+      })
+    end,
+  },
   {
     'stevearc/aerial.nvim',
     lazy = false,
