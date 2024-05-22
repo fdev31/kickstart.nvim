@@ -1,4 +1,4 @@
-M = {
+return {
   useLspNotifications = false,
   useCopilot = true,
   useCodeium = true,
@@ -92,5 +92,3 @@ M = {
     'TID252',
   },
 }
-
-return M

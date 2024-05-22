@@ -84,14 +84,8 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 local settings = require 'custom.settings'
-local lib = require 'custom.lib'
-
--- make codeium usage conditional
-settings.useCodeium = function()
-  return not lib.file_exists '/home/fab/liberty/code'
-end
-
-require 'custom.plugins' -- load plugins (after lib has been patched)
+pcall(require, 'custom.init') -- let a chance to load custom code
+require 'custom.plugins' -- execute plugin code
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
