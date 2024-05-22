@@ -55,23 +55,3 @@ if lib.isGitMergetool then
   map('n', 'dr', '<cmd>diffget REMOTE<CR>', { noremap = true, silent = true, desc = 'Merge get remote' })
   map('n', 'dl', '<cmd>diffget LOCAL<CR>', { noremap = true, silent = true, desc = 'Merge get local' })
 end
-
--- codeium
-
-if not lib.isWorkLaptop then
-  map('i', '<C-g>', function()
-    return vim.fn['codeium#Accept']()
-  end, { noremap = true, silent = true, expr = true, desc = 'Codeium Validate completion' })
-
-  map('i', '<C-b>', function()
-    return vim.fn['codeium#Complete']()
-  end, { noremap = true, silent = true, expr = true, desc = 'Codeium Complete' })
-
-  map('i', '<C-;>', function()
-    return vim.fn['codeium#CycleCompletions'](1)
-  end, { noremap = true, silent = true, expr = true, desc = 'Codeium Switch to next completion' })
-
-  map('i', '<C-,>', function()
-    return vim.fn['codeium#CycleCompletions'](-1)
-  end, { noremap = true, silent = true, expr = true, desc = 'Codeium Switch to previous completion' })
-end

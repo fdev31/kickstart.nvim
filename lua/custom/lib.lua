@@ -1,5 +1,7 @@
 local exported = {}
 
+exported.cmp_dependencies = {}
+
 local function file_exists(name)
   local f = io.open(name, 'r')
   if f ~= nil then
@@ -120,6 +122,65 @@ exported.cmp_sources = {
 
 if exported.useCopilot then
   table.insert(exported.cmp_sources, { group_index = 2, name = 'copilot' })
+end
+if exported.useCodeium then
+  table.insert(exported.cmp_sources, { group_index = 2, name = 'codeium' })
+end
+
+if exported.useCopilot then
+  table.insert(exported.cmp_dependencies, {
+    'zbirenbaum/copilot-cmp',
+    lazy = false,
+    autostart = true,
+    dependencies = {
+      'hrsh7th/nvim-cmp',
+      'zbirenbaum/copilot.lua',
+      'onsails/lspkind.nvim',
+    },
+    config = function()
+      require('copilot_cmp').setup()
+    end,
+  })
+  table.insert(exported.cmp_dependencies, {
+    'zbirenbaum/copilot.lua',
+    lazy = false,
+    autostart = true,
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    opts = {
+      panel = { enabled = false },
+      suggestion = {
+        enabled = false,
+        auto_trigger = false,
+      },
+      filetypes = {
+        markdown = true,
+        ['.'] = true,
+      },
+    },
+  })
+  table.insert(exported.cmp_dependencies, {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    branch = 'canary',
+    lazy = false,
+    dependencies = {
+      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    },
+    opts = { debug = true },
+  })
+end
+
+if exported.useCodeium then
+  table.insert(exported.cmp_dependencies, {
+    'Exafunction/codeium.nvim',
+    cmd = 'Codeium',
+    build = ':Codeium Auth',
+    opts = {
+      disable_bindings = true,
+      enable_chat = true,
+    },
+  })
 end
 
 return exported
