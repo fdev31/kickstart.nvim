@@ -852,7 +852,7 @@ local plugins = {
             mode = 'symbol',
             max_width = 50,
             ellipsis_char = '…',
-            symbol_map = { Copilot = '', Codeium = '' },
+            symbol_map = { Copilot = ' ', Codeium = '󰘦 ' },
           },
         },
         window = {
