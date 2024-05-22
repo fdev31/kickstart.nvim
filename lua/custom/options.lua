@@ -8,6 +8,7 @@ vim.api.nvim_set_hl(0, 'Normal', no_background)
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
 vim.api.nvim_set_hl(0, 'FloatBorder', no_background)
 vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = '#21222c' })
+vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { bg = 'NONE', fg = '#888888' })
 
 -- neovide / background-color {{{
 if vim.g.neovide then
