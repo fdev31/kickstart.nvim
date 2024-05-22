@@ -83,7 +83,15 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
+local settings = require 'custom.settings'
 local lib = require 'custom.lib'
+
+-- make codeium usage conditional
+settings.useCodeium = function()
+  return not lib.file_exists '/home/fab/liberty/code'
+end
+
+require 'custom.plugins' -- load plugins (after lib has been patched)
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -234,16 +242,16 @@ local lspconfig_deps = {
   -- used for completion, annotations and signatures of Neovim apis
   { 'folke/neodev.nvim', opts = {} },
 }
-if lib.useLspNotifications then
+if settings.useLspNotifications then
   -- Useful status updates for LSP.
   -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
   table.insert(lspconfig_deps, {
-    enable = lib.useLspNotifications,
+    enable = settings.useLspNotifications,
     'j-hui/fidget.nvim',
     opts = {
       notification = {
         window = {
-          border = lib.border, -- Border style for the floating window
+          border = settings.border, -- Border style for the floating window
           align = 'top',
         },
       },
@@ -681,8 +689,8 @@ local plugins = {
                 -- config = "<path_to_custom_ruff_toml>",  -- Custom config for ruff to use
                 -- select = ruff_rules,
                 -- ignore = ruff_ignore, -- Rules to be ignored by ruff
-                extendSelect = lib.ruff_rules, -- Rules that are additionally used by ruff
-                extendIgnore = lib.ruff_ignore, -- Rules that are additionally ignored by ruff
+                extendSelect = settings.ruff_rules, -- Rules that are additionally used by ruff
+                extendIgnore = settings.ruff_ignore, -- Rules that are additionally ignored by ruff
                 format = { 'ALL' }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
                 unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
 
@@ -757,8 +765,8 @@ local plugins = {
               -- certain features of an LSP (for example, turning off formatting for tsserver)
               server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
               server.handlers = {
-                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = lib.border }),
-                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = lib.border }),
+                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = settings.border }),
+                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = settings.border }),
               }
               require('lspconfig')[server_name].setup(server)
             end
@@ -824,7 +832,7 @@ local plugins = {
           end
           return 'make install_jsregexp'
         end)(),
-        dependencies = lib.cmp_dependencies,
+        dependencies = settings.cmp_dependencies,
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -855,11 +863,11 @@ local plugins = {
         },
         window = {
           completion = cmp.config.window.bordered {
-            border = lib.border, -- custom border characters
+            border = settings.border, -- custom border characters
             winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None',
           },
           documentation = cmp.config.window.bordered {
-            border = lib.border, -- custom border characters
+            border = settings.border, -- custom border characters
             winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None',
           },
         },
@@ -922,7 +930,7 @@ local plugins = {
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
-        sources = lib.cmp_sources,
+        sources = settings.cmp_sources,
       }
     end,
   },

@@ -3,6 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 local lib = require 'custom.lib'
+local settings = require 'custom.settings'
 M = {
   --[[ {
     'dgagn/diagflow.nvim',
@@ -166,5 +167,63 @@ M = {
   },
   { 'onsails/lspkind.nvim' },
 }
+
+if settings.useCopilot then
+  lib.extend(settings.cmp_dependencies, {
+    {
+      'zbirenbaum/copilot-cmp',
+      lazy = false,
+      autostart = true,
+      dependencies = {
+        'hrsh7th/nvim-cmp',
+        'zbirenbaum/copilot.lua',
+        'onsails/lspkind.nvim',
+      },
+      config = function()
+        require('copilot_cmp').setup()
+      end,
+    },
+    {
+      'zbirenbaum/copilot.lua',
+      lazy = false,
+      autostart = true,
+      cmd = 'Copilot',
+      event = 'InsertEnter',
+      opts = {
+        panel = { enabled = false },
+        suggestion = {
+          enabled = false,
+          auto_trigger = false,
+        },
+        filetypes = {
+          markdown = true,
+          ['.'] = true,
+        },
+      },
+    },
+    {
+      'CopilotC-Nvim/CopilotChat.nvim',
+      branch = 'canary',
+      lazy = false,
+      dependencies = {
+        { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+        { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+      },
+      opts = { debug = true },
+    },
+  })
+end
+
+if settings.useCodeium then
+  table.insert(settings.cmp_dependencies, {
+    'Exafunction/codeium.nvim',
+    cmd = 'Codeium',
+    build = ':Codeium Auth',
+    opts = {
+      disable_bindings = true,
+      enable_chat = true,
+    },
+  })
+end
 
 return M
