@@ -83,88 +83,7 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
---
-local border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
-local ruff_rules = {
-  'A',
-  'AIR',
-  'ANN',
-  'ARG',
-  'ASYNC',
-  'B',
-  'B',
-  'BLE',
-  'C',
-  'C4',
-  'C90',
-  'COMFA',
-  'D',
-  'D',
-  'DTZ',
-  'E',
-  'EM',
-  'EXE',
-  'F',
-  'FBT',
-  'FIX',
-  'FLY',
-  'G',
-  'I',
-  'ICN',
-  'INP',
-  'INT',
-  'ISC',
-  'LOG',
-  'N',
-  'PERF',
-  'PIE',
-  'PL',
-  'PLC',
-  'PLE',
-  'PLR',
-  'PLW',
-  'PT',
-  'PYI',
-  'Q',
-  'RET',
-  'RSE',
-  'RUF',
-  'S',
-  'SIM',
-  'SLF',
-  'SLOT',
-  'T10',
-  'TCH',
-  'TD',
-  'TID',
-  'TRIO',
-  'TRY',
-  'UP',
-  'W',
-  'YTT',
-}
-local ruff_ignore = {
-  'ANN002',
-  'ANN003',
-  'ANN101',
-  'ANN102',
-  'ANN204',
-  'D105',
-  'D107',
-  'E203',
-  'ISC001',
-  'PLW0603',
-  'PTH118',
-  'RET503',
-  'S101',
-  'S311',
-  'S404',
-  'S602',
-  'S603',
-  'S605',
-  'S607',
-  'TID252',
-}
+local lib = require 'custom.lib'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -740,8 +659,8 @@ local plugins = {
                 -- config = "<path_to_custom_ruff_toml>",  -- Custom config for ruff to use
                 -- select = ruff_rules,
                 -- ignore = ruff_ignore, -- Rules to be ignored by ruff
-                extendSelect = ruff_rules, -- Rules that are additionally used by ruff
-                extendIgnore = ruff_ignore, -- Rules that are additionally ignored by ruff
+                extendSelect = lib.ruff_rules, -- Rules that are additionally used by ruff
+                extendIgnore = lib.ruff_ignore, -- Rules that are additionally ignored by ruff
                 format = { 'ALL' }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
                 unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
 
@@ -816,8 +735,8 @@ local plugins = {
               -- certain features of an LSP (for example, turning off formatting for tsserver)
               server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
               server.handlers = {
-                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+                ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = lib.border }),
+                ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = lib.border }),
               }
               require('lspconfig')[server_name].setup(server)
             end
@@ -923,11 +842,11 @@ local plugins = {
         },
         window = {
           completion = cmp.config.window.bordered {
-            border = border, -- custom border characters
+            border = lib.border, -- custom border characters
             winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None',
           },
           documentation = cmp.config.window.bordered {
-            border = border, -- custom border characters
+            border = lib.border, -- custom border characters
             winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None',
           },
         },
