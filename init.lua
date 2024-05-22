@@ -836,7 +836,7 @@ local plugins = {
         formatting = {
           format = lspkind.cmp_format {
             mode = 'symbol',
-            max_width = 300,
+            max_width = 100,
             symbol_map = { Copilot = '' },
           },
         },
@@ -909,12 +909,7 @@ local plugins = {
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
-        sources = {
-          { group_index = 2, name = 'nvim_lsp' },
-          { group_index = 2, name = 'copilot' },
-          { group_index = 2, name = 'luasnip' },
-          { group_index = 2, name = 'path' },
-        },
+        sources = lib.cmp_sources,
       }
     end,
   },

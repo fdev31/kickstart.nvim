@@ -109,4 +109,14 @@ exported.ruff_ignore = {
   'TID252',
 }
 
+exported.cmp_sources = {
+  { group_index = 2, name = 'nvim_lsp' },
+  { group_index = 2, name = 'luasnip' },
+  { group_index = 2, name = 'path' },
+}
+
+if exported.useCopilot then
+  table.insert(exported.cmp_sources, { group_index = 2, name = 'copilot' })
+end
+
 return exported
