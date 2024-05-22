@@ -23,6 +23,7 @@ exported.isWorkLaptop = file_exists '/home/fab/liberty/code'
 
 exported.isGitMergetool = vim.env.TEXTDOMAIN == 'git' or vim.env.GIT_PREFIX ~= nil
 
+exported.useLspNotifications = false
 exported.useCopilot = true
 exported.useCodeium = function()
   return not exported.isWorkLaptop

@@ -224,6 +224,37 @@ vim.opt.rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 --
+local lspconfig_deps = {
+  -- Automatically install LSPs and related tools to stdpath for Neovim
+  { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+  'williamboman/mason-lspconfig.nvim',
+  'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+  -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
+  -- used for completion, annotations and signatures of Neovim apis
+  { 'folke/neodev.nvim', opts = {} },
+}
+if lib.useLspNotifications then
+  -- Useful status updates for LSP.
+  -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+  table.insert(lspconfig_deps, {
+    enable = lib.useLspNotifications,
+    'j-hui/fidget.nvim',
+    opts = {
+      notification = {
+        window = {
+          border = lib.border, -- Border style for the floating window
+          align = 'top',
+        },
+      },
+      integration = {
+        ['nvim-tree'] = {
+          enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
+        },
+      },
+    },
+  })
+end
 -- NOTE: Here is where you install your plugins.
 local plugins = {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -432,35 +463,7 @@ local plugins = {
   },
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-      -- Useful status updates for LSP.
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      {
-        'j-hui/fidget.nvim',
-        opts = {
-          notification = {
-            window = {
-              border = border, -- Border style for the floating window
-              align = 'top',
-            },
-          },
-          integration = {
-            ['nvim-tree'] = {
-              enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
-            },
-          },
-        },
-      },
-
-      -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-      -- used for completion, annotations and signatures of Neovim apis
-      { 'folke/neodev.nvim', opts = {} },
-    },
+    dependencies = lspconfig_deps,
     config = function()
       -- Brief aside: **What is LSP?**
       --
