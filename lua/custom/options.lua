@@ -6,7 +6,7 @@ local no_color = { ctermbg = nil, guibg = nil, bg = nil }
 
 vim.api.nvim_set_hl(0, 'Normal', no_color)
 vim.api.nvim_set_hl(0, 'NormalFloat', no_color)
-vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = 'NVimDarkGrey2' })
+vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = '#21222c' })
 
 -- neovide / background-color {{{
 if vim.g.neovide then
