@@ -24,7 +24,9 @@ exported.isWorkLaptop = file_exists '/home/fab/liberty/code'
 exported.isGitMergetool = vim.env.TEXTDOMAIN == 'git' or vim.env.GIT_PREFIX ~= nil
 
 exported.useCopilot = true
-exported.useCodeium = true
+exported.useCodeium = function()
+  return not exported.isWorkLaptop
+end
 
 exported.border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' }
 
