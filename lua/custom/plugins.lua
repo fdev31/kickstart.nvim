@@ -13,6 +13,20 @@ M = {
     lazy = not lib.isGitMergetool,
     config = function()
       require('diffview').setup {
+        keymaps = {
+          view = {
+            { 'n', 'dl', require('diffview.actions').conflict_choose 'base', { desc = 'Get left version (ours conflict)' } },
+            { 'n', 'dr', require('diffview.actions').conflict_choose 'theirs', { desc = 'Get right version (theirs conflict)' } },
+            {
+              'n',
+              'db',
+              function()
+                vim.cmd 'diffget 8'
+              end,
+              { desc = 'Get original version (before conflict)' },
+            },
+          },
+        },
         view = {
           merge_tool = {
             layout = 'diff4_mixed',
