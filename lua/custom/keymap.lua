@@ -46,12 +46,3 @@ end, { noremap = true, silent = true, desc = '[G]it [u]ndo saged hunk' })
 map('n', '<leader>gb', function()
   package.loaded.gitsigns.blame_line()
 end, { desc = '[G]it [B]lame Line' })
-
--- Navigation
-
--- vim diff
-
-if lib.isGitMergetool then
-  map('n', 'dr', '<cmd>diffget REMOTE<CR>', { noremap = true, silent = true, desc = 'Merge get remote' })
-  map('n', 'dl', '<cmd>diffget LOCAL<CR>', { noremap = true, silent = true, desc = 'Merge get local' })
-end

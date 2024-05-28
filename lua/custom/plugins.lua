@@ -8,6 +8,20 @@ local settings = require 'custom.settings'
 local color = '#ff0000'
 
 M = {
+  {
+    'sindrets/diffview.nvim',
+    lazy = not lib.isGitMergetool,
+    config = function()
+      require('diffview').setup {
+        view = {
+          merge_tool = {
+            layout = 'diff4_mixed',
+          },
+        },
+      }
+    end,
+  },
+
   --[[ {
     'dgagn/diagflow.nvim',
     -- event = 'LspAttach', This is what I use personally and it works great

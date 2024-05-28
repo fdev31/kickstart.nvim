@@ -1,3 +1,4 @@
+local lib = require 'custom.lib'
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
 
 vim.cmd 'highlight Normal guibg=NONE ctermbg=NONE'
