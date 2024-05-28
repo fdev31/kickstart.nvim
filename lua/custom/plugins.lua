@@ -5,18 +5,26 @@
 local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
-local color = '#ff0000'
-
 M = {
   {
     'sindrets/diffview.nvim',
-    lazy = not lib.isGitMergetool,
+    lazy = false,
     config = function()
       require('diffview').setup {
         keymaps = {
           view = {
-            { 'n', 'dl', require('diffview.actions').conflict_choose 'base', { desc = 'Get left version (ours conflict)' } },
-            { 'n', 'dr', require('diffview.actions').conflict_choose 'theirs', { desc = 'Get right version (theirs conflict)' } },
+            {
+              'n',
+              'dl',
+              require('diffview.actions').conflict_choose 'base',
+              { desc = 'Get left version (ours conflict)' },
+            },
+            {
+              'n',
+              'dr',
+              require('diffview.actions').conflict_choose 'theirs',
+              { desc = 'Get right version (theirs conflict)' },
+            },
             {
               'n',
               'db',
