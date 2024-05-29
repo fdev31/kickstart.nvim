@@ -16,7 +16,7 @@ M = {
             {
               'n',
               'dl',
-              require('diffview.actions').conflict_choose 'base',
+              require('diffview.actions').conflict_choose 'ours',
               { desc = 'Get left version (ours conflict)' },
             },
             {
@@ -28,9 +28,7 @@ M = {
             {
               'n',
               'db',
-              function()
-                vim.cmd 'diffget 8'
-              end,
+              require('diffview.actions').conflict_choose 'base',
               { desc = 'Get original version (before conflict)' },
             },
           },
