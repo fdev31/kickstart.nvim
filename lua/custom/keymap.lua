@@ -1,6 +1,4 @@
 local map = vim.keymap.set
--- local nomap = vim.keymap.del
-local lib = require 'custom.lib'
 
 map('n', '<leader>s', function()
   if vim.diagnostic.is_disabled(0) then
@@ -46,3 +44,13 @@ end, { noremap = true, silent = true, desc = '[G]it [u]ndo saged hunk' })
 map('n', '<leader>gb', function()
   package.loaded.gitsigns.blame_line()
 end, { desc = '[G]it [B]lame Line' })
+
+-- project / sessions
+
+map('n', '<leader>p', function()
+  vim.cmd 'Telescope neovim-project'
+end, { desc = '[p]roject list' })
+
+map('n', '<leader>P', function()
+  vim.cmd 'Telescope neovim-project discover'
+end, { desc = '[P]roject discover' })
