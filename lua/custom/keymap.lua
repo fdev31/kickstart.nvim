@@ -58,3 +58,7 @@ end, { desc = '[P]roject discover' })
 map('n', '<C-,>', function()
   package.loaded.telescope.extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
+
+map('n', '<leader><leader>', function()
+  require('telescope').extensions.smart_open.smart_open()
+end, { desc = 'Smart open' })
