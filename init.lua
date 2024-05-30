@@ -347,7 +347,6 @@ local plugins = {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'stevearc/aerial.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -400,23 +399,11 @@ local plugins = {
         --   },
         -- },
         -- pickers = {}
-        extensions = {
-          aerial = {
-            highlight_on_hover = true,
-            highlight_on_closest = true,
-            autojump = true,
-            show_guides = true,
-            -- Display symbols as <root>.<parent>.<symbol>
-            show_nesting = {
-              ['_'] = true, -- This key will be the default
-              python = true,
-              js = true,
-            },
-          },
+        extensions = vim.tbl_deep_extend('force', settings.telescope_extensions, {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
-        },
+        }),
       }
 
       -- Enable Telescope extensions if they are installed
@@ -436,10 +423,6 @@ local plugins = {
       vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { desc = '[F]ind [R]eference' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[' .. vim.g.mapleader .. '] Find existing buffers' })
-
-      vim.keymap.set('n', '<C-,>', function()
-        require('telescope').extensions.aerial.aerial()
-      end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

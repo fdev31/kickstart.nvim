@@ -3,6 +3,20 @@ return {
   useCopilot = true,
   useCodeium = true,
   border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  telescope_extensions = {
+    aerial = {
+      highlight_on_hover = true,
+      highlight_on_closest = true,
+      autojump = true,
+      show_guides = true,
+      -- Display symbols as <root>.<parent>.<symbol>
+      show_nesting = {
+        ['_'] = true, -- This key will be the default
+        python = true,
+        js = true,
+      },
+    },
+  },
   cmp_sources = {
     { group_index = 2, name = 'nvim_lsp' },
     { group_index = 2, name = 'luasnip' },
