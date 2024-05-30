@@ -1,5 +1,4 @@
-return {
-  useLspNotifications = false,
+local M = {
   useCopilot = true,
   useCodeium = true,
   border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
@@ -24,6 +23,7 @@ return {
     { group_index = 2, name = 'copilot' },
     { group_index = 2, name = 'codeium' },
   },
+  lspconfig_dependencies = {},
   cmp_dependencies = {},
   ruff_rules = {
     'A',
@@ -101,3 +101,4 @@ return {
     'TID252',
   },
 }
+return M

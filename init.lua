@@ -228,37 +228,6 @@ vim.opt.rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 --
-local lspconfig_deps = {
-  -- Automatically install LSPs and related tools to stdpath for Neovim
-  { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-  'williamboman/mason-lspconfig.nvim',
-  'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-  -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-  -- used for completion, annotations and signatures of Neovim apis
-  { 'folke/neodev.nvim', opts = {} },
-}
-if settings.useLspNotifications then
-  -- Useful status updates for LSP.
-  -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-  table.insert(lspconfig_deps, {
-    enable = settings.useLspNotifications,
-    'j-hui/fidget.nvim',
-    opts = {
-      notification = {
-        window = {
-          border = settings.border, -- Border style for the floating window
-          align = 'top',
-        },
-      },
-      integration = {
-        ['nvim-tree'] = {
-          enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
-        },
-      },
-    },
-  })
-end
 -- NOTE: Here is where you install your plugins.
 local plugins = {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -388,11 +357,9 @@ local plugins = {
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       --
-      local telescope = require 'telescope'
-      telescope.setup {
+      require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
         -- defaults = {
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
@@ -450,7 +417,16 @@ local plugins = {
   },
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    dependencies = lspconfig_deps,
+    dependencies = vim.tbl_deep_extend('force', settings.lspconfig_dependencies, {
+      -- Automatically install LSPs and related tools to stdpath for Neovim
+      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      'williamboman/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+      -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
+      -- used for completion, annotations and signatures of Neovim apis
+      { 'folke/neodev.nvim', opts = {} },
+    }),
     config = function()
       -- Brief aside: **What is LSP?**
       --
