@@ -23,14 +23,16 @@ local M = {
         end -- }}}
 
         -- insert just commands {{{
-        local just_targets = io.popen('just --list | sed "1d"'):read '*a'
+        local just_targets = io.popen('just --list'):read '*a'
         local just_targets_list = vim.split(just_targets, '\n')
         -- append to the commands as "just <target name>" for text and command
-        for _, target in ipairs(just_targets_list) do
-          -- strip starting and ending blanks
-          target = target:gsub('[ \t\n]*$', ''):gsub('^[ \t\n]*', ''):gsub('[*].*$', '')
-          if #target > 0 then
-            table.insert(options, { text = target .. ' (just)', command = 'just ' .. target })
+        for i, target in ipairs(just_targets_list) do
+          if i > 1 then
+            -- strip starting and ending blanks
+            target = target:gsub('[ \t\n]*$', ''):gsub('^[ \t\n]*', ''):gsub('[*].*$', '')
+            if #target > 0 then
+              table.insert(options, { text = 'just → ' .. target, command = 'just ' .. target })
+            end
           end
         end
         -- }}}
