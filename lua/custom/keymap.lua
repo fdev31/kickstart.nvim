@@ -69,4 +69,4 @@ end, { desc = '[C]opilot [O]ptimize' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
   require('telescope').extensions.custom_actions.custom_actions()
-end, { desc = 'Custom commands' })
+end, { desc = '[C]ustom [C]ommands' })
