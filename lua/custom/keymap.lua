@@ -68,5 +68,5 @@ map({ 'n', 'v' }, '<leader>co', function()
 end, { desc = '[C]opilot [O]ptimize' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
-  require('telescope').extensions.commands.commands()
+  require('telescope').extensions.custom_actions.custom_actions()
 end, { desc = 'Custom commands' })
