@@ -190,7 +190,7 @@ M = {
   },
   {
     'mfussenegger/nvim-dap-python',
-    requires = { 'rcarriga/nvim-dap-ui' },
+    dependencies = { 'rcarriga/nvim-dap-ui' },
     ft = { 'python', 'javascript', 'sh' },
     config = function()
       require('dap-python').setup()
@@ -198,7 +198,7 @@ M = {
   },
   {
     'mxsdev/nvim-dap-vscode-js',
-    requires = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap' },
     ft = 'javascript',
     config = function()
       require('dap-vscode-js').setup {
@@ -209,7 +209,7 @@ M = {
   },
   {
     'rcarriga/nvim-dap-ui',
-    requires = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap' },
     lazy = false,
     config = function()
       require('dapui').setup()
@@ -250,7 +250,6 @@ if settings.useCopilot then
     {
       'zbirenbaum/copilot-cmp',
       lazy = false,
-      autostart = true,
       dependencies = {
         'hrsh7th/nvim-cmp',
         'zbirenbaum/copilot.lua',
