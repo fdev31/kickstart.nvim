@@ -7,6 +7,38 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'adoyle-h/telescope-extension-maker.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      local maker = require 'telescope-extension-maker'
+      maker.register {
+        name = 'commands',
+
+        command = function()
+          return {
+            { text = 'tox', command = 'tox' },
+          }
+        end,
+
+        onSubmit = function(item)
+          if vim.tbl_islist(item) then
+            error 'Not support multiple selections'
+          end
+
+          if item.cmd then
+            vim.cmd(item.cmd)
+          elseif item.command then
+            vim.cmd('terminal ' .. item.command)
+          elseif item.handler then
+            item.handler()
+          else
+            vim.cmd('!' .. item.text)
+          end
+        end,
+      }
+    end,
+  },
+  {
     'danielfalk/smart-open.nvim',
     branch = '0.2.x',
     lazy = false,

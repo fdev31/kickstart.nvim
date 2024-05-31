@@ -58,3 +58,15 @@ end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 map('n', '<leader><leader>', function()
   require('telescope').extensions.smart_open.smart_open()
 end, { desc = 'Smart open' })
+
+map({ 'n', 'v' }, '<leader>ce', function()
+  vim.cmd 'CopilotChatExplain'
+end, { desc = '[C]opilot [E]xplain' })
+
+map({ 'n', 'v' }, '<leader>co', function()
+  vim.cmd 'CopilotChatOptimize'
+end, { desc = '[C]opilot [O]ptimize' })
+
+map({ 'n', 'v' }, '<leader>cc', function()
+  require('telescope').extensions.commands.commands()
+end, { desc = 'Custom commands' })

@@ -83,6 +83,9 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
+-- enable colors
+vim.opt.termguicolors = true
+
 local settings = require 'custom.settings'
 pcall(require, 'custom.init') -- let a chance to load custom code
 require 'custom.plugins' -- execute plugin code
@@ -101,8 +104,6 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- enable colors
-vim.opt.termguicolors = true
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -775,7 +776,7 @@ local plugins = {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
-    dependencies = {
+    dependencies = vim.list_extend({
       -- Snippet Engine & its associated nvim-cmp source
       {
         'L3MON4D3/LuaSnip',
@@ -788,7 +789,6 @@ local plugins = {
           end
           return 'make install_jsregexp'
         end)(),
-        dependencies = settings.cmp_dependencies,
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -798,18 +798,21 @@ local plugins = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'onsails/lspkind.nvim',
-    },
+    }, settings.cmp_dependencies),
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/.config/Code/User/snippets/' } }
 
       local lspkind = require 'lspkind'
 
       cmp.setup {
         style = 'atom_color',
         formatting = {
+          expandable_indicator = true,
+          fields = { 'abbr', 'kind', 'menu' },
           format = lspkind.cmp_format {
             mode = 'symbol',
             max_width = 50,
@@ -872,12 +875,12 @@ local plugins = {
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<C-Right>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<C-Left>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
@@ -928,7 +931,7 @@ local plugins = {
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
