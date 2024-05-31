@@ -41,10 +41,6 @@ map('n', '<leader>gu', function()
   package.loaded.gitsigns.undo_stage_hunk()
 end, { noremap = true, silent = true, desc = '[G]it [u]ndo saged hunk' })
 
-map('n', '<leader>gb', function()
-  package.loaded.gitsigns.blame_line()
-end, { desc = '[G]it [B]lame Line' })
-
 -- project / sessions
 
 map('n', '<leader>p', function()
