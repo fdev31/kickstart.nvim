@@ -68,15 +68,15 @@ M = {
       } -- }}}
     end,
   },
-
-  --[[ {
+  {
     'dgagn/diagflow.nvim',
-    -- event = 'LspAttach', This is what I use personally and it works great
+    event = 'LspAttach', -- This is what I use personally and it works great
     opts = {
-      enable = false,
+      enable = true,
       scope = 'line', -- or cursor
       placement = 'inline',
       inline_padding_left = 3,
+      show_borders = true,
       show_sign = true,
       update_event = { 'DiagnosticChanged', 'BufReadPost' }, -- the event that updates the diagnostics cache
       render_event = { 'DiagnosticChanged', 'CursorMoved' },
@@ -85,7 +85,7 @@ M = {
         return diagnostic.message
       end,
     },
-  }, ]]
+  },
   {
     'norcalli/nvim-colorizer.lua',
     config = function()

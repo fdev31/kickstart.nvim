@@ -1,11 +1,9 @@
 local map = vim.keymap.set
 
 map('n', '<leader>s', function()
-  if vim.diagnostic.is_disabled(0) then
-    vim.diagnostic.enable()
-  else
-    vim.diagnostic.disable()
-  end
+  local enabled = vim.diagnostic.is_enabled()
+  vim.diagnostic.enable(not enabled)
+  vim.cmd 'DiagflowToggle'
 end, { desc = 'Toggle diagno[S]tics' })
 
 map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
