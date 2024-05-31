@@ -698,11 +698,13 @@ local plugins = {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'markdownlint',
+        'codespell',
+        'taplo',
       })
       require('mason-tool-installer').setup {
         ensure_installed = ensure_installed,
-        auto_update = false,
-        run_on_start = false,
+        auto_update = true,
+        run_on_start = true,
         integrations = {
           ['mason-lspconfig'] = true,
           ['mason-null-ls'] = false,
