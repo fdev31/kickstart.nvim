@@ -80,7 +80,6 @@ M = {
       show_sign = true,
       update_event = { 'DiagnosticChanged', 'BufReadPost' }, -- the event that updates the diagnostics cache
       render_event = { 'DiagnosticChanged', 'CursorMoved' },
-      show_borders = false,
       format = function(diagnostic)
         return diagnostic.message
       end,
