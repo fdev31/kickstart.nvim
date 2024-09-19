@@ -6,6 +6,7 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
+  { 'EdenEast/nightfox.nvim' },
   {
     'adoyle-h/telescope-extension-maker.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
@@ -157,6 +158,7 @@ M = {
       -- Adapters {{{
       dap.adapters['pwa-node'] = {
         type = 'server',
+        port = 9229,
       }
       dap.adapters.bashdb = {
         type = 'executable',
