@@ -797,6 +797,15 @@ local plugins = {
           lsp_format = lsp_format_opt,
         }
       end,
+      lang_to_ext = {
+        toml = 'toml',
+      },
+      formatters = {
+        toml_fmt = {
+          command = 'toml-fmt',
+          stdin = true,
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'ruff_format' },
@@ -946,6 +955,7 @@ local plugins = {
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'dracula'
+      -- vim.cmd.colorscheme 'duskfox'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
