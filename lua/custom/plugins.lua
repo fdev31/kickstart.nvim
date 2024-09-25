@@ -75,15 +75,15 @@ M = {
     opts = {
       enable = true,
       scope = 'line', -- or cursor
-      placement = 'inline',
-      inline_padding_left = 3,
+      -- placement = 'inline',
+      -- inline_padding_left = 3,
       show_borders = true,
       show_sign = true,
       update_event = { 'DiagnosticChanged', 'BufReadPost' }, -- the event that updates the diagnostics cache
       render_event = { 'DiagnosticChanged', 'CursorMoved' },
-      format = function(diagnostic)
-        return diagnostic.message
-      end,
+      -- format = function(diagnostic)
+      --   return diagnostic.message
+      -- end,
     },
   },
   {
