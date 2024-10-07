@@ -141,7 +141,6 @@ M = {
   },
   { 'aklt/plantuml-syntax', ft = 'plantuml' },
   { 'NoahTheDuke/vim-just', ft = 'just' },
-  { 'vim-scripts/confluencewiki.vim', ft = 'confluencewiki' },
   { 'nvim-neotest/nvim-nio' },
   { -- DAPS
     'mfussenegger/nvim-dap',
@@ -256,13 +255,24 @@ M = {
   },
   { 'onsails/lspkind.nvim' },
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
+    'OXY2DEV/markview.nvim',
+    lazy = false, -- Recommended
+    -- ft = "markdown" -- If you decide to lazy-load anyway
+
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+
+    config = function()
+      local presets = require 'markview.presets'
+
+      require('markview').setup {
+        checkboxes = presets.checkboxes.nerd,
+        headings = presets.headings.marker,
+        horizontal_rules = presets.horizontal_rules.arrowed,
+      }
+    end,
   },
 }
 
