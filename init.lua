@@ -255,11 +255,11 @@ local plugins = {
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        add = { text = '' },
+        change = { text = '' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '' },
       },
       numhl = true,
       current_line_blame = true,
@@ -968,6 +968,7 @@ local plugins = {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
+      require('mini.align').setup {}
       -- Better Around/Inside textobjects
       --
       -- Examples:
