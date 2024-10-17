@@ -6,6 +6,16 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
+  {
+    'fei6409/log-highlight.nvim',
+    config = function()
+      require('log-highlight').setup {
+        pattern = {
+          'xdev=.*',
+        },
+      }
+    end,
+  },
   -- with lazy.nvim
   {
     'chentoast/marks.nvim',
