@@ -6,7 +6,19 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
-  { 'EdenEast/nightfox.nvim' },
+  -- with lazy.nvim
+  {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    opts = {
+      bookmark_0 = {
+        sign = '⚑',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+      },
+    },
+  },
   {
     'adoyle-h/telescope-extension-maker.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
