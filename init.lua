@@ -615,7 +615,7 @@ local plugins = {
         -- tsserver = {},
         --
         html = {},
-        ruff = {
+        ruff_lsp = {
           disabled = true,
         },
         pyright = {
@@ -650,7 +650,7 @@ local plugins = {
                 pyls_isort = { enabled = false },
                 -- ruff
                 ruff = {
-                  enabled = false, -- Enable the plugin -- NOTE: using ruff-lsp instead
+                  enabled = true,
                 },
               },
             },
@@ -663,35 +663,6 @@ local plugins = {
             init_options = {
               typescript = {
                 tsdk = '/usr/lib/node_modules/typescript/lib/',
-              },
-            },
-          },
-        },
-        ruff_lsp = {
-          default_config = {
-            root_dir = require('lspconfig').util.find_git_ancestor,
-            init_options = {
-              settings = {
-                args = {},
-                formatEnabled = true, -- Enable formatting using ruffs formatter
-                -- executable = "<path-to-ruff-bin>",  -- Custom path to ruff
-                -- config = "<path_to_custom_ruff_toml>",  -- Custom config for ruff to use
-                -- select = ruff_rules,
-                -- ignore = ruff_ignore, -- Rules to be ignored by ruff
-                extendSelect = settings.ruff_rules, -- Rules that are additionally used by ruff
-                extendIgnore = settings.ruff_ignore, -- Rules that are additionally ignored by ruff
-                format = { 'ALL' }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
-                unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
-
-                -- Rules that are ignored when a pyproject.toml or ruff.toml is present:
-                lineLength = 140, -- Line length to pass to ruff checking and formatting
-                exclude = { '__about__.py' }, -- Files to be excluded by ruff checking
-                perFileIgnores = { ['__init__.py'] = 'CPY001' }, -- Rules that should be ignored for specific files
-                preview = true, -- Whether to enable the preview style linting and formatting.
-                targetVersion = 'py312', -- The minimum python version to target (applies for both linting and formatting).
-                pycodestyle = {
-                  convention = 'google',
-                },
               },
             },
           },
@@ -711,7 +682,6 @@ local plugins = {
           },
         },
       }
-
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
