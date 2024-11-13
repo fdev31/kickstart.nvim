@@ -748,10 +748,21 @@ local plugins = {
         mode = '',
         desc = '[F]or[m]at buffer',
       },
+      {
+        '<leader>ft',
+        function()
+          vim.g.disable_autoformat = not vim.g.disable_autoformat
+        end,
+        mode = '',
+        desc = '[F]ormat [T]oggle',
+      },
     },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        if vim.g.disable_autoformat then
+          return
+        end
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
@@ -779,6 +790,7 @@ local plugins = {
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'ruff_format' },
+        javascript = { 'eslint' },
         toml = { 'toml_fmt' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
