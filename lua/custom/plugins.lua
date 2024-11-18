@@ -7,6 +7,15 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'michaelrommel/nvim-silicon',
+    lazy = true,
+    cmd = 'Silicon',
+    opts = {
+      to_clipboard = true,
+      output = '/tmp/code.png',
+    },
+  },
+  {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
