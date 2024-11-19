@@ -7,6 +7,10 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+  {
     'michaelrommel/nvim-silicon',
     lazy = true,
     cmd = 'Silicon',
