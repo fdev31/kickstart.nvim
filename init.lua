@@ -752,6 +752,7 @@ local plugins = {
         '<leader>ft',
         function()
           vim.g.disable_autoformat = not vim.g.disable_autoformat
+          print(vim.g.disable_autoformat and 'Autoformat disabled' or 'Autoformat enabled')
         end,
         mode = '',
         desc = '[F]ormat [T]oggle',
