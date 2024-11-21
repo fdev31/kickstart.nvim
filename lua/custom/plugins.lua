@@ -7,6 +7,13 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'nvim-telescope/telescope-dap.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('telescope').load_extension 'dap'
+    end,
+  },
+  {
     'natecraddock/workspaces.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
@@ -204,6 +211,7 @@ M = {
     config = function()
       local dap = require 'dap'
       vim.fn.sign_define('DapBreakpoint', { text = '🚩', texthl = '', linehl = '', numhl = '' })
+      vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
 
       dap.defaults.fallback.force_external_terminal = true
       dap.defaults.fallback.external_terminal = {
@@ -223,7 +231,23 @@ M = {
       -- Configurations {{{
       dap.configurations.javascript = {
         {
-          name = 'Attach to process',
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch file',
+          program = '${file}',
+          cwd = vim.fn.getcwd(),
+          sourceMaps = true,
+        },
+        {
+          type = 'pwa-node',
+          request = 'attach',
+          name = 'Attach',
+          processId = require('dap.utils').pick_process,
+          cwd = vim.fn.getcwd(),
+          sourceMaps = true,
+        },
+        {
+          name = 'Attach to CPE',
           type = 'pwa-node',
           request = 'attach',
           address = '192.168.100.42',

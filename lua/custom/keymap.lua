@@ -16,9 +16,18 @@ map('n', '<C-,>', function()
   require('telescope').extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 
+local _dapVisible = false
 -- dap
 map('n', '<leader>i', function()
-  require('dapui').toggle()
+  if _dapVisible then
+    require('dapui').close()
+    _dapVisible = false
+  else
+    require('dapui').open()
+    _dapVisible = true
+    require('telescope').extensions.dap.configurations {}
+  end
+  -- require('dapui').toggle()
 end, { noremap = true, silent = true, desc = 'Toggle debugger UI' })
 
 map('n', '<leader>b', function()
