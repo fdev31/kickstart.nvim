@@ -7,6 +7,10 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'theHamsta/nvim-dap-virtual-text',
+    opts = {},
+  },
+  {
     'nvim-telescope/telescope-dap.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
@@ -216,7 +220,7 @@ M = {
       dap.defaults.fallback.force_external_terminal = true
       dap.defaults.fallback.external_terminal = {
         command = '/usr/bin/kitty',
-        args = { '-e' },
+        -- args = { '-e' },
       }
       -- Adapters {{{
       dap.adapters['pwa-node'] = {
@@ -240,18 +244,25 @@ M = {
         },
         {
           type = 'pwa-node',
-          request = 'attach',
+          request = 'attach local',
+          skipFiles = { '<node_internals>/**' },
           name = 'Attach',
           processId = require('dap.utils').pick_process,
           cwd = vim.fn.getcwd(),
           sourceMaps = true,
         },
         {
-          name = 'Attach to CPE',
+          name = 'Attach to JSAPP',
           type = 'pwa-node',
+          protocol = 'inspector',
+          mode = 'remote',
+          skipFiles = { '<node_internals>/**' },
           request = 'attach',
           address = '192.168.100.42',
-          cwd = '${workspaceFolder}',
+          port = 9229,
+          remoteRoot = '/usr/share/lgioui/app/',
+          localRoot = vim.fn.getcwd(),
+          stopOnEntry = true,
         },
       }
       dap.configurations.sh = {
