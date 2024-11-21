@@ -68,3 +68,7 @@ end, { desc = '[C]opilot [O]ptimize' })
 map({ 'n', 'v' }, '<leader>cc', function()
   require('telescope').extensions.custom_actions.custom_actions()
 end, { desc = '[C]ustom [C]ommands' })
+
+map('n', '<leader>ww', function()
+  require('telescope').extensions.workspaces.workspaces()
+end, { desc = '[W]alk [W]orkspaces' })
