@@ -261,7 +261,8 @@ M = {
           address = '192.168.100.42',
           port = 9229,
           remoteRoot = '/usr/share/lgioui/app/',
-          localRoot = vim.fn.getcwd(),
+          cwd = '${workspaceFolder}',
+          localRoot = '${workspaceFolder}',
           stopOnEntry = true,
         },
       }
