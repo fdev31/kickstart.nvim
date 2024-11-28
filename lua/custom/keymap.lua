@@ -16,6 +16,10 @@ map('n', '<C-,>', function()
   require('telescope').extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 
+map('n', '<leader>fM', function()
+  require('telescope.builtin').marks()
+end, { noremap = true, silent = true, desc = '[F]ind [M]ark' })
+
 local _dapVisible = false
 -- dap
 map('n', '<leader>i', function()
