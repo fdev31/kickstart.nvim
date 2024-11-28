@@ -1,7 +1,26 @@
+-- read ~/.onemw/config and extract the value of STB_IP
+
+local function get_stb_ip()
+  local file = io.open(os.getenv 'HOME' .. '/.onemw/config', 'r')
+  if not file then
+    return nil
+  end
+  for line in file:lines() do
+    local key, value = line:match '^(STB_IP)=(.*)$'
+    if key and value then
+      file:close()
+      return value
+    end
+  end
+  file:close()
+  return nil
+end
+
 local M = {
   useCopilot = true,
   useCodeium = true,
   border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  stb_ip = get_stb_ip(),
   diy_telescopes = {
     custom_actions = {
       command = function()
