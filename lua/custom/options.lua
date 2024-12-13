@@ -3,6 +3,15 @@ vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
 
 vim.cmd 'highlight Normal guibg=NONE ctermbg=NONE'
 
+-- collect environment variables in a table
+local get_env = function()
+  local env = {}
+  for k, v in pairs(vim.loop.os_getenv()) do
+    env[k] = v
+  end
+  return env
+end
+
 local no_background = { ctermbg = nil, guibg = nil, bg = nil }
 
 vim.api.nvim_set_hl(0, 'Normal', no_background)
@@ -124,7 +133,7 @@ require('lspconfig.ui.windows').default_options = {
 }
 
 require('nvim-treesitter.configs').setup {
-  modules = { 'highlight', 'incremental_selection', 'folding' },
+  modules = { 'highlight', 'incremental_selection', 'folding', 'mashup' },
   sync_install = true,
   ignore_install = {},
   ensure_installed = {
