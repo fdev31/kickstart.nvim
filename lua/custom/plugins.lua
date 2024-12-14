@@ -418,6 +418,7 @@ if settings.useCopilot then
     },
     {
       'CopilotC-Nvim/CopilotChat.nvim',
+      branch = 'main',
       lazy = false,
       dependencies = {
         { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
