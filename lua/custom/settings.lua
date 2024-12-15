@@ -143,7 +143,7 @@ local M = {
     'TCH',
     'TD',
     'TID',
-    'TRIO',
+    'ASYNC1',
     'TRY',
     'UP',
     'W',
