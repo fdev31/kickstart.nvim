@@ -64,8 +64,16 @@ M = {
     lazy = true,
     cmd = 'Silicon',
     opts = {
+      --      disable_defaults = true,
       to_clipboard = true,
       output = '/tmp/code.png',
+      --      background = '#212131',
+      tab_width = 2,
+      theme = Dracula,
+      font = 'Fira Code',
+      shadow_blur_radius = 7,
+      pad_horiz = 30,
+      pad_vert = 30,
     },
   },
   {
