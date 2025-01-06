@@ -1,10 +1,10 @@
 local map = vim.keymap.set
 
-map('n', '<leader>s', function()
+map('n', '<leader>Q', function()
   local enabled = vim.diagnostic.is_enabled()
   vim.diagnostic.enable(not enabled)
   vim.cmd 'DiagflowToggle'
-end, { desc = 'Toggle diagno[S]tics' })
+end, { desc = 'Toggle diagno[Q]tics' })
 
 map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
 
