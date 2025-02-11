@@ -13,7 +13,6 @@ M = {
     ft = { 'python' },
     keys = {
       {
-        'n',
         '<leader>mr',
         function()
           local mcp = require 'micropython_nvim'
