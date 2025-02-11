@@ -638,6 +638,11 @@ local plugins =
           -- But for many setups, the LSP (`ts_ls`) will work just fine
           -- ts_ls = {},
           --
+          --
+          textlsp = {},
+          harper_ls = {},
+          dprint = {},
+          typos_lsp = {},
           html = {},
           ruff_lsp = {
             disabled = true,
@@ -729,12 +734,6 @@ local plugins =
           end
         end
         local ensure_installed = vim.tbl_keys(filtered_servers)
-        vim.list_extend(ensure_installed, {
-          'stylua', -- Used to format Lua code
-          'markdownlint',
-          'codespell',
-          'taplo',
-        })
         require('mason-tool-installer').setup { ensure_installed = ensure_installed, auto_update = true, run_on_start = true, integrations = {
           ['mason-lspconfig'] = true,
           ['mason-null-ls'] = false,
@@ -742,6 +741,8 @@ local plugins =
         } }
 
         require('mason-lspconfig').setup {
+          automatic_installation = true,
+          ensure_installed = ensure_installed,
           handlers = {
             function(server_name)
               local server = servers[server_name] or {}
