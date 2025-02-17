@@ -160,7 +160,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 40
+vim.opt.scrolloff = 2
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
