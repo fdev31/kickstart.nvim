@@ -7,6 +7,13 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'folke/snacks.nvim',
+    ---@type snacks.Config
+    opts = {
+      image = {},
+    },
+  },
+  {
     'karb94/neoscroll.nvim',
     opts = {
       mappings = { -- Keys to be mapped to their corresponding default scrolling animation
