@@ -7,6 +7,17 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    config = function()
+      -- Setup orgmode
+      require('orgmode').setup {
+        org_agenda_files = '~/orgfiles/**/*',
+        org_default_notes_file = '~/orgfiles/refile.org',
+      }
+    end,
+  },
+  {
     'folke/snacks.nvim',
     ---@type snacks.Config
     opts = {
