@@ -6,6 +6,7 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
+  { 'akinsho/org-bullets.nvim' },
   {
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
@@ -15,6 +16,7 @@ M = {
         org_agenda_files = '~/orgfiles/**/*',
         org_default_notes_file = '~/orgfiles/refile.org',
       }
+      require('org-bullets').setup()
     end,
   },
   {
