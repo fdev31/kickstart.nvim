@@ -135,7 +135,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes:2'
+vim.opt.signcolumn = 'auto:1-5'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -252,6 +252,7 @@ local plugins =
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
       'lewis6991/gitsigns.nvim',
       opts = {
+        sign_priority = 1,
         signs = {
           add = { text = '' },
           change = { text = '' },
