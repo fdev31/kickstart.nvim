@@ -14,11 +14,16 @@ end
 
 local no_background = { ctermbg = nil, guibg = nil, bg = nil }
 
+local sideColor = '#282a36'
+
 vim.api.nvim_set_hl(0, 'Normal', no_background)
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
 vim.api.nvim_set_hl(0, 'FloatBorder', no_background)
 vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = '#21222c' })
 vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { bg = 'NONE', fg = '#888888' })
+vim.api.nvim_set_hl(0, 'SignColumn', { bg = sideColor })
+vim.api.nvim_set_hl(0, 'DiagnosticHint', { bg = sideColor, fg = '#ffcc00' })
+vim.api.nvim_set_hl(0, 'DiagnosticError', { bg = sideColor, fg = '#ff0000' })
 
 -- neovide / background-color {{{
 if vim.g.neovide then
