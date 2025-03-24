@@ -25,6 +25,11 @@ vim.api.nvim_set_hl(0, 'SignColumn', { bg = sideColor })
 vim.api.nvim_set_hl(0, 'DiagnosticHint', { bg = sideColor, fg = '#ffcc00' })
 vim.api.nvim_set_hl(0, 'DiagnosticError', { bg = sideColor, fg = '#ff0000' })
 
+vim.api.nvim_set_hl(0, 'Cursor', { fg = '#000000', bg = '#FFaa33' })
+vim.api.nvim_set_hl(0, 'Cursor2', { fg = '#000000', bg = '#FF0066' })
+
+vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50'
+
 -- neovide / background-color {{{
 if vim.g.neovide then
   mapKey('!', '<S-Insert>', '<C-R>+') -- allow Shit+Insert on the prompt
