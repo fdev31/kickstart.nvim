@@ -815,7 +815,7 @@ local plugins =
         },
         formatters = {
           toml_fmt = {
-            command = 'toml-fmt',
+            command = 'toml_reformat',
             stdin = true,
           },
         },
