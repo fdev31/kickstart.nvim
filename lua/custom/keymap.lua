@@ -98,3 +98,13 @@ end, { desc = '[C]ustom [C]ommands' })
 map('n', '<leader>ww', function()
   require('telescope').extensions.workspaces.workspaces()
 end, { desc = '[W]alk [W]orkspaces' })
+
+map('n', '<leader>ot', function()
+  local file = vim.fn.expand '<cfile>'
+  vim.cmd('tabnew ' .. file)
+end, { desc = 'Open file under cursor in new tab' })
+
+map('n', '<leader>oo', function()
+  local file = vim.fn.expand '<cfile>'
+  vim.cmd('e ' .. file)
+end, { desc = 'Open file under cursor in new tab' })
