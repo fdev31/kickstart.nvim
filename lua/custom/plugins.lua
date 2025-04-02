@@ -80,7 +80,7 @@ M = {
     },
   },
   {
-    'andymass/vim-matchup',
+    'andymass/vim-matchup', -- nice language aware "%"
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       local mod = require 'match-up'
@@ -112,11 +112,11 @@ M = {
     end,
   },
   {
-    'stevearc/dressing.nvim',
+    'stevearc/dressing.nvim', -- better vim.ui (input, select, etc.)
     opts = {},
   },
   {
-    'michaelrommel/nvim-silicon',
+    'michaelrommel/nvim-silicon', -- nice code screenshots
     lazy = true,
     cmd = 'Silicon',
     opts = {
@@ -135,7 +135,7 @@ M = {
     },
   },
   {
-    'MeanderingProgrammer/render-markdown.nvim',
+    'MeanderingProgrammer/render-markdown.nvim', -- better markdown
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
@@ -144,7 +144,7 @@ M = {
     opts = {},
   },
   {
-    'fei6409/log-highlight.nvim',
+    'fei6409/log-highlight.nvim', -- better log files
     config = function()
       require('log-highlight').setup {
         pattern = {
@@ -152,19 +152,6 @@ M = {
         },
       }
     end,
-  },
-  -- with lazy.nvim
-  {
-    'chentoast/marks.nvim',
-    event = 'VeryLazy',
-    opts = {
-      bookmark_0 = {
-        sign = '⚑',
-        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
-        -- defaults to false.
-        annotate = true,
-      },
-    },
   },
   {
     'adoyle-h/telescope-extension-maker.nvim',
@@ -178,7 +165,7 @@ M = {
     end,
   },
   {
-    'danielfalk/smart-open.nvim',
+    'danielfalk/smart-open.nvim', -- magic open "anything"
     branch = '0.2.x',
     lazy = false,
     config = function()
@@ -194,7 +181,7 @@ M = {
     },
   },
   {
-    'sindrets/diffview.nvim',
+    'sindrets/diffview.nvim', -- better diff view
     lazy = false,
     config = function()
       require('diffview').setup { -- {{{
@@ -229,14 +216,14 @@ M = {
     end,
   },
   {
-    'dgagn/diagflow.nvim',
+    'dgagn/diagflow.nvim', -- diagnostics in virtual text
     event = 'LspAttach', -- This is what I use personally and it works great
     opts = {
       enable = true,
       scope = 'line', -- or cursor
       -- placement = 'inline',
       -- inline_padding_left = 3,
-      show_borders = true,
+      -- show_borders = true,
       show_sign = true,
       update_event = { 'DiagnosticChanged', 'BufReadPost' }, -- the event that updates the diagnostics cache
       render_event = { 'DiagnosticChanged', 'CursorMoved' },
@@ -246,7 +233,7 @@ M = {
     },
   },
   {
-    'norcalli/nvim-colorizer.lua',
+    'norcalli/nvim-colorizer.lua', -- color preview
     config = function()
       vim.opt.termguicolors = true
       require('colorizer').setup({ '*' }, {
@@ -256,7 +243,7 @@ M = {
     end,
   },
   {
-    'stevearc/aerial.nvim',
+    'stevearc/aerial.nvim', -- navigate code symbols
     lazy = false,
     config = function()
       require('aerial').setup {
@@ -279,7 +266,7 @@ M = {
     },
   },
   { -- highlight args
-    'm-demare/hlargs.nvim',
+    'm-demare/hlargs.nvim', -- make arguments a different color
     lazy = false,
     config = function()
       local hlargs = require 'hlargs'
@@ -287,8 +274,8 @@ M = {
       hlargs.enable()
     end,
   },
-  { -- merge / split lines
-    'Wansmer/treesj',
+  {
+    'Wansmer/treesj', -- merge / split lines
     keys = { '<leader>m' },
     lazy = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
