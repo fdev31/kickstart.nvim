@@ -6,7 +6,7 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
-  { 'akinsho/org-bullets.nvim' },
+  { 'akinsho/org-bullets.nvim' }, -- bulletpoints in org mode
   {
     'nvim-orgmode/orgmode',
     event = 'VeryLazy',
@@ -20,14 +20,15 @@ M = {
     end,
   },
   {
-    'folke/snacks.nvim',
+    'folke/snacks.nvim', -- QoL (images, keymaps, ...)
     ---@type snacks.Config
     opts = {
       image = {},
     },
+    priority = 1000,
   },
   {
-    'karb94/neoscroll.nvim',
+    'karb94/neoscroll.nvim', -- animated scroll
     opts = {
       mappings = { -- Keys to be mapped to their corresponding default scrolling animation
         '<C-u>',
