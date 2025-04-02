@@ -31,7 +31,6 @@ map('n', '<leader>i', function()
     _dapVisible = true
     require('telescope').extensions.dap.configurations {}
   end
-  -- require('dapui').toggle()
 end, { noremap = true, silent = true, desc = 'Toggle debugger UI' })
 
 map('n', '<leader>b', function()
@@ -50,20 +49,6 @@ end)
 map('n', '<F12>', function()
   require('dap').step_out()
 end)
-
--- gitsigns
---
-map('n', '<leader>ga', function()
-  package.loaded.gitsigns.stage_hunk()
-end, { noremap = true, silent = true, desc = '[G]it [a]dd hunk' })
-
-map('n', '<leader>gA', function()
-  package.loaded.gitsigns.stage_buffer()
-end, { noremap = true, silent = true, desc = '[G]it [A]dd buffer' })
-
-map('n', '<leader>gu', function()
-  package.loaded.gitsigns.undo_stage_hunk()
-end, { noremap = true, silent = true, desc = '[G]it [u]ndo saged hunk' })
 
 -- project / sessions
 
