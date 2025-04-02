@@ -50,16 +50,6 @@ map('n', '<F12>', function()
   require('dap').step_out()
 end)
 
--- project / sessions
-
-map('n', '<leader>p', function()
-  vim.cmd 'Telescope neovim-project'
-end, { desc = '[p]roject list' })
-
-map('n', '<leader>P', function()
-  vim.cmd 'Telescope neovim-project discover'
-end, { desc = '[P]roject discover' })
-
 map('n', '<C-,>', function()
   package.loaded.telescope.extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
