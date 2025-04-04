@@ -11,13 +11,23 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '<C-n>', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
     filesystem = {
       window = {
         mappings = {
-          ['\\'] = 'close_window',
+          ['<C-n>'] = 'close_window',
+          ['<leader>+'] = 'git_add_file',
+          ['<leader>-'] = 'git_unstage_file',
+          ['p'] = {
+            'toggle_preview',
+            config = {
+              use_float = false,
+              -- use_image_nvim = true,
+              -- title = 'Neo-tree Preview',
+            },
+          },
         },
       },
     },
