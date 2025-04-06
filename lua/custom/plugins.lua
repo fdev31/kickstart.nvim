@@ -17,10 +17,10 @@ M = {
       { 'nvim-tree/nvim-web-devicons', lazy = true },
     },
     keys = {
-      { '<leader>m', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle tag' },
-      { '<leader>M', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple open tags window' },
-      { '<leader>n', '<cmd>Grapple cycle_tags next<cr>', desc = 'Grapple cycle next tag' },
-      { '<leader>p', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Grapple cycle previous tag' },
+      { '<leader>m', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle [m]ark' },
+      { '<leader>M', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple [M]ove' },
+      { '<leader>n', '<cmd>Grapple cycle_tags next<cr>', desc = 'Grapple cycle [n]ext tag' },
+      { '<leader>p', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Grapple cycle [p]revious tag' },
     },
   },
   {
@@ -102,9 +102,9 @@ M = {
     event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
     keys = {
       -- Keymap to open VenvSelector to pick a venv.
-      { '<leader>vs', '<cmd>VenvSelect<cr>' },
+      { '<leader>vs', '<cmd>VenvSelect<cr>', desc = '[v]env [s]elect' },
       -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-      { '<leader>vc', '<cmd>VenvSelectCached<cr>' },
+      { '<leader>vc', '<cmd>VenvSelectCached<cr>', desc = '[v]env [c]ache' },
     },
   },
   {
@@ -295,7 +295,7 @@ M = {
         end,
       }
       -- You probably also want to set a keymap to toggle aerial
-      vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>', { desc = 'Toggle [A]erial' })
+      vim.keymap.set('n', '<leader>ta', '<cmd>AerialToggle!<CR>', { desc = '[a]erial' })
       require('telescope').load_extension 'aerial'
     end,
     opts = {},

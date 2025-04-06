@@ -1,5 +1,31 @@
 local lib = require 'custom.lib'
+
+local openDiffView = function(_, map)
+  map('i', '<CR>', function(prompt_bufnr)
+    local selection = require('telescope.actions.state').get_selected_entry()
+    require('telescope.actions').close(prompt_bufnr)
+    vim.cmd('DiffviewOpen ' .. selection.value)
+  end)
+  return true
+end
+
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
+
+vim.api.nvim_create_user_command('Compare', function()
+  vim.ui.select({ 'branch', 'commit' }, {
+    prompt = 'Compare to a:',
+  }, function(choice)
+    if choice == 'branch' then
+      require('telescope.builtin').git_branches {
+        attach_mappings = openDiffView,
+      }
+    elseif choice == 'commit' then
+      require('telescope.builtin').git_commits {
+        attach_mappings = openDiffView,
+      }
+    end
+  end)
+end, {})
 
 -- styling {{{
 local no_background = { ctermbg = nil, guibg = nil, bg = nil }

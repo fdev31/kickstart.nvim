@@ -3,51 +3,25 @@
 -- command: will run in terminal
 -- handler: will run lua function
 --
-local openDiffView = function(_, map)
-  map('i', '<CR>', function(prompt_bufnr)
-    local selection = require('telescope.actions.state').get_selected_entry()
-    require('telescope.actions').close(prompt_bufnr)
-    vim.cmd('DiffviewOpen ' .. selection.value)
-  end)
-  return true
-end
-
 local options = {
-  { 'tox' },
+  {
+    text = 'Compare',
+    cmd = 'Compare',
+  },
   { text = 'Scp cra', cmd = '!scp "%" cra:/tmp' },
   { text = 'Copy diff', cmd = '!git diff "%" | wl-copy ' },
   {
-    text = 'Chdir to parent folder',
-    cmd = 'Chdir',
-  },
-  {
-    text = 'Git add current file',
+    text = ' Git add',
     cmd = '!git add "%"',
   },
   {
-    text = 'Git reset current file',
+    text = ' Git reset',
     cmd = '!git reset HEAD "%"',
   },
   {
     text = 'Git buffer commit history',
     handler = function()
       require('telescope.builtin').git_bcommits()
-    end,
-  },
-  {
-    text = 'DiffView a branch',
-    handler = function()
-      require('telescope.builtin').git_branches {
-        attach_mappings = openDiffView,
-      }
-    end,
-  },
-  {
-    text = 'DiffView a commit',
-    handler = function()
-      require('telescope.builtin').git_commits {
-        attach_mappings = openDiffView,
-      }
     end,
   },
 }

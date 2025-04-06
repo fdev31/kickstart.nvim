@@ -5,21 +5,26 @@ map('n', '<leader>td', function()
   vim.diagnostic.enable(not enabled)
   vim.cmd 'DiagflowToggle'
   print 'plop'
-end, { desc = '[T]oggle [d]iagnostics' })
+end, { desc = '[d]iagnostics' })
 
 map('n', '<leader>rr', function()
   vim.cmd 'OverseerRun'
-end, { desc = '[R]un [R]unnable' })
+end, { desc = '[r]unnable' })
 
-map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [b]uffers' })
+map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[b]uffers' })
 
-map('n', '<leader>fc', require('telescope.builtin').git_bcommits, { desc = '[F]ind GIT [c]hange' })
+map('n', '<leader>fc', require('telescope.builtin').git_bcommits, { desc = '[c]hange (git)' })
 
-map('n', '<leader>tm', require('treesj').toggle, { desc = '[T]oggle [m]ultiline' })
+map('n', '<C-Space>', require('gitsigns').stage_hunk, { desc = 'stage/unstage hunk (git)' })
+map('n', '<leader>C', function()
+  vim.cmd 'Compare'
+end, { desc = '[C]ompare (git)' })
 
-map('n', '<leader>tn', '<cmd> set rnu! <CR>', { noremap = true, silent = true, desc = '[T]oggle relative [n]umber' })
+map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
 
-map('n', '<leader>tN', '<cmd> set number! <CR>', { noremap = true, silent = true, desc = '[T]oggle line [N]umbering' })
+map('n', '<leader>tn', '<cmd> set rnu! <CR>', { noremap = true, silent = true, desc = '[n]umber relative' })
+
+map('n', '<leader>tN', '<cmd> set number! <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
 
 map('n', '<C-,>', function()
   require('telescope').extensions.aerial.aerial()
@@ -27,7 +32,7 @@ end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 
 map('n', '<leader>fM', function()
   require('telescope.builtin').marks()
-end, { noremap = true, silent = true, desc = '[F]ind [M]ark' })
+end, { noremap = true, silent = true, desc = '[M]ark' })
 
 local _dapVisible = false
 -- dap
@@ -40,11 +45,11 @@ map('n', '<leader>ti', function()
     _dapVisible = true
     require('telescope').extensions.dap.configurations {}
   end
-end, { noremap = true, silent = true, desc = '[T]oggle [i]nspector' })
+end, { noremap = true, silent = true, desc = '[i]nspector' })
 
-map('n', '<leader>b', function()
+map('n', '<leader>tb', function()
   require('dap').toggle_breakpoint()
-end, { noremap = true, silent = true, desc = 'Toggle debugger [b]reakpoint' })
+end, { noremap = true, silent = true, desc = 'Debugger [b]reakpoint' })
 
 map('n', '<F5>', function()
   require('dap').continue()
@@ -65,29 +70,29 @@ end, { desc = 'Smart open' })
 
 map({ 'n', 'v' }, '<leader>ce', function()
   vim.cmd 'CopilotChatExplain'
-end, { desc = '[C]opilot [E]xplain' })
+end, { desc = '[e]xplain' })
 
 map({ 'n', 'v' }, '<leader>co', function()
   vim.cmd 'CopilotChatOptimize'
-end, { desc = '[C]opilot [O]ptimize' })
+end, { desc = '[o]ptimize' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
   require('telescope').extensions.custom_actions.custom_actions()
-end, { desc = '[C]ustom [C]ommands' })
+end, { desc = '[c]ommands' })
 
 map('n', '<leader>ww', function()
   require('telescope').extensions.workspaces.workspaces()
-end, { desc = '[W]alk [W]orkspaces' })
+end, { desc = '[w]alk [w]orkspaces' })
 
 map('n', '<leader>ot', function()
   local file = vim.fn.expand '<cfile>'
   vim.cmd('tabnew ' .. file)
-end, { desc = 'Open file under cursor in new tab' })
+end, { desc = 'Open file under cursor in new [t]ab' })
 
 map('n', '<leader>oo', function()
   local file = vim.fn.expand '<cfile>'
   vim.cmd('e ' .. file)
-end, { desc = 'Open file under cursor in new tab' })
+end, { desc = '[o]pen file under cursor' })
 
 map('n', 'K', function()
   vim.lsp.buf.hover { border = 'rounded' }
