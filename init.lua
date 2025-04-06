@@ -707,15 +707,10 @@ require('lazy').setup({
       --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-
-      -- filter servers to only include the ones that are not disabled
-      local filtered_servers = {}
-      for server_name, server in pairs(servers) do
-        if not server.disabled then
-          filtered_servers[server_name] = server
-        end
-      end
-      local ensure_installed = vim.tbl_keys(filtered_servers)
+      local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+        'stylua', -- Used to format Lua code
+      })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -896,13 +891,13 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<S-CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          -- ['<CR>'] = cmp.mapping.confirm { select = true },
-          -- ['<Tab>'] = cmp.mapping.select_next_item(),
-          -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          --['<CR>'] = cmp.mapping.confirm { select = true },
+          --['<Tab>'] = cmp.mapping.select_next_item(),
+          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -941,8 +936,13 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'dracula/vim',
+    'Mofiqul/dracula.nvim',
+
     priority = 1000, -- Make sure to load this before all the other start plugins.
+    opts = {
+      transparent_bg = true,
+      italic_comment = true,
+    },
     init = function()
       vim.cmd.colorscheme 'dracula'
     end,
