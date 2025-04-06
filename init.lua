@@ -710,7 +710,6 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
-
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -743,7 +742,6 @@ require('lazy').setup({
         mode = '',
         desc = '[F]or[m]at buffer',
       },
-
       {
         '<leader>tf',
         function()
@@ -1071,4 +1069,3 @@ require 'custom.options'
 require 'custom.keymap'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
---
