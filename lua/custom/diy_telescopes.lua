@@ -2,14 +2,16 @@
 -- cmd: is for vim commands
 -- command: will run in terminal
 -- handler: will run lua function
---
+
+local enable_just = false
+
 local options = {
   {
-    text = 'Compare',
+    text = ' Compare',
     cmd = 'Compare',
   },
-  { text = 'Scp cra', cmd = '!scp "%" cra:/tmp' },
-  { text = 'Copy diff', cmd = '!git diff "%" | wl-copy ' },
+  { text = '→ Scp cra', cmd = '!scp "%" cra:/tmp' },
+  { text = ' Copy diff', cmd = '!git diff "%" | wl-copy ' },
   {
     text = ' Git add',
     cmd = '!git add "%"',
@@ -19,7 +21,7 @@ local options = {
     cmd = '!git reset HEAD "%"',
   },
   {
-    text = 'Git buffer commit history',
+    text = ' Git buffer commit history',
     handler = function()
       require('telescope.builtin').git_bcommits()
     end,
@@ -41,15 +43,17 @@ local M = {
       end -- }}}
 
       -- insert just commands {{{
-      local just_targets = io.popen('just --list'):read '*a'
-      local just_targets_list = vim.split(just_targets, '\n')
-      -- append to the commands as "just <target name>" for text and command
-      for i, target in ipairs(just_targets_list) do
-        if i > 1 then
-          -- strip starting and ending blanks
-          target = target:gsub('[ \t\n]*$', ''):gsub('^[ \t\n]*', ''):gsub('[*].*$', '')
-          if #target > 0 then
-            table.insert(options, { text = 'just → ' .. target, command = 'just ' .. target })
+      if enable_just then
+        local just_targets = io.popen('just --list'):read '*a'
+        local just_targets_list = vim.split(just_targets, '\n')
+        -- append to the commands as "just <target name>" for text and command
+        for i, target in ipairs(just_targets_list) do
+          if i > 1 then
+            -- strip starting and ending blanks
+            target = target:gsub('[ \t\n]*$', ''):gsub('^[ \t\n]*', ''):gsub('[*].*$', '')
+            if #target > 0 then
+              table.insert(options, { text = 'just → ' .. target, command = 'just ' .. target })
+            end
           end
         end
       end
