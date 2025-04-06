@@ -160,3 +160,7 @@ parser_config.confluence_wiki = {
   },
   filetype = 'confluence_wiki', -- if you want to set the filetype automatically
 }
+
+vim.filetype.add {
+  pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
+}
