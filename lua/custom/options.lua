@@ -1,17 +1,7 @@
 local lib = require 'custom.lib'
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
 
-vim.cmd 'highlight Normal guibg=NONE ctermbg=NONE'
-
--- collect environment variables in a table
-local get_env = function()
-  local env = {}
-  for k, v in pairs(vim.loop.os_getenv()) do
-    env[k] = v
-  end
-  return env
-end
-
+-- styling {{{
 local no_background = { ctermbg = nil, guibg = nil, bg = nil }
 
 local sideColor = '#282a36'
@@ -33,10 +23,10 @@ vim.api.nvim_set_hl(0, 'TelescopeNormal', vim.tbl_deep_extend('force', { fg = '#
 --
 vim.api.nvim_set_hl(0, 'Cursor', { fg = '#000000', bg = '#FFaa33' })
 vim.api.nvim_set_hl(0, 'Cursor2', { fg = '#000000', bg = '#FF0066' })
-
-vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50'
+-- }}}
 
 -- neovide / background-color {{{
+vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50'
 if vim.g.neovide then
   local mapKey = vim.keymap.set
   mapKey('!', '<S-Insert>', '<C-R>+') -- allow Shit+Insert on the prompt
@@ -112,8 +102,8 @@ autocmd({ 'BufWritePost' }, {
 })
 -- }}}
 -- }}}
---
-require('nvim-treesitter.configs').setup {
+
+require('nvim-treesitter.configs').setup { -- {{{
   modules = { 'highlight', 'incremental_selection', 'folding', 'mashup' },
   sync_install = true,
   ignore_install = {},
@@ -163,6 +153,8 @@ parser_config.confluence_wiki = {
   },
   filetype = 'confluence_wiki', -- if you want to set the filetype automatically
 }
+
+-- }}}
 
 -- Hyprlang syntax & LSP {{{
 -- LspInstall hyprlang
