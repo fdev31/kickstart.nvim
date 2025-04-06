@@ -21,6 +21,7 @@ return {
     for _, v in pairs(t2) do
       table.insert(t1, v)
     end
+    return t1
   end,
   has = function(tbl, item)
     for _, v in ipairs(tbl) do
