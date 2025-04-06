@@ -421,7 +421,7 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
-        extensions = vim.tbl_deep_extend('force', settings.telescope_extensions, {
+        extensions = vim.tbl_deep_extend('keep', settings.telescope_extensions, {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
@@ -486,7 +486,7 @@ require('lazy').setup({
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
-    dependencies = vim.tbl_deep_extend('force', settings.lspconfig_dependencies, {
+    dependencies = vim.tbl_deep_extend('keep', settings.lspconfig_dependencies, {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
@@ -649,7 +649,7 @@ require('lazy').setup({
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
-        float = vim.tbl_deep_extend('force', settings.popup_style, { source = 'if_many' }),
+        float = vim.tbl_deep_extend('keep', settings.popup_style, { source = 'if_many' }),
         underline = { severity = vim.diagnostic.severity.ERROR },
         signs = vim.g.have_nerd_font and {
           text = {
@@ -679,7 +679,7 @@ require('lazy').setup({
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('keep', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -720,7 +720,7 @@ require('lazy').setup({
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.capabilities = vim.tbl_deep_extend('force', capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
           end,
         },
