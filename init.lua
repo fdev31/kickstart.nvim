@@ -745,7 +745,7 @@ require('lazy').setup({
         '<leader>tf',
         function()
           vim.b.disable_autoformat = not vim.b.disable_autoformat
-          print(vim.b.disable_autoformat and 'Autoformat disabled' or 'Autoformat enabled')
+          vim.notify(vim.b.disable_autoformat and 'Autoformat disabled' or 'Autoformat enabled')
         end,
         mode = '',
         desc = '[T]oggle [f]ormat',
@@ -1067,4 +1067,4 @@ require 'custom.options'
 
 require 'custom.keymap'
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+

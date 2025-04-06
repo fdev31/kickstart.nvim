@@ -4,7 +4,6 @@ map('n', '<leader>td', function()
   local enabled = vim.diagnostic.is_enabled()
   vim.diagnostic.enable(not enabled)
   vim.cmd 'DiagflowToggle'
-  print 'plop'
 end, { desc = '[d]iagnostics' })
 
 map('n', '<leader>rr', function()
