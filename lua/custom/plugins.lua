@@ -7,6 +7,28 @@ local settings = require 'custom.settings'
 
 M = {
   {
+    'cbochs/grapple.nvim',
+    opts = {
+      scope = 'git', -- also try out "git_branch"
+    },
+    event = { 'BufReadPost', 'BufNewFile' },
+    cmd = 'Grapple',
+    dependencies = {
+      { 'nvim-tree/nvim-web-devicons', lazy = true },
+    },
+    keys = {
+      { '<leader>m', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle tag' },
+      { '<leader>M', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple open tags window' },
+      { '<leader>n', '<cmd>Grapple cycle_tags next<cr>', desc = 'Grapple cycle next tag' },
+      { '<leader>p', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Grapple cycle previous tag' },
+    },
+  },
+  {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
     'stevearc/overseer.nvim',
     opts = {},
   },
@@ -56,15 +78,17 @@ M = {
     dependencies = { 'akinsho/toggleterm.nvim', 'stevearc/dressing.nvim' },
     config = function() end,
     ft = { 'python' },
+    --[[
     keys = {
       {
-        '<leader>mr',
+        '<leader>mp',
         function()
           local mcp = require 'micropython_nvim'
           mcp.run()
         end,
       },
     },
+    --]]
   },
   {
     'linux-cultist/venv-selector.nvim',
