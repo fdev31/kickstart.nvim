@@ -16,8 +16,11 @@ local no_background = { ctermbg = nil, guibg = nil, bg = nil }
 
 local sideColor = '#282a36'
 
+vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
+vim.api.nvim_set_hl(0, 'TabLineFill', no_background)
+vim.api.nvim_set_hl(0, 'StatusLine', no_background)
+vim.api.nvim_set_hl(0, 'TelescopeNormal', vim.tbl_deep_extend('force', { fg = '#d8d8f2' }, no_background))
 -- vim.api.nvim_set_hl(0, 'Normal', no_background)
--- vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
 -- vim.api.nvim_set_hl(0, 'FloatBorder', no_background)
 --
 -- vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = '#21222c' })
