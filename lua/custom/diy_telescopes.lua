@@ -2,6 +2,16 @@
 -- cmd: is for vim commands
 -- command: will run in terminal
 -- handler: will run lua function
+--
+local openDiffView = function(_, map)
+  map('i', '<CR>', function(prompt_bufnr)
+    local selection = require('telescope.actions.state').get_selected_entry()
+    require('telescope.actions').close(prompt_bufnr)
+    vim.cmd('DiffviewOpen ' .. selection.value)
+  end)
+  return true
+end
+
 local options = {
   { 'tox' },
   { text = 'Scp cra', cmd = '!scp "%" cra:/tmp' },
@@ -17,6 +27,28 @@ local options = {
   {
     text = 'Git reset current file',
     cmd = '!git reset HEAD "%"',
+  },
+  {
+    text = 'Git buffer commit history',
+    handler = function()
+      require('telescope.builtin').git_bcommits()
+    end,
+  },
+  {
+    text = 'DiffView a branch',
+    handler = function()
+      require('telescope.builtin').git_branches {
+        attach_mappings = openDiffView,
+      }
+    end,
+  },
+  {
+    text = 'DiffView a commit',
+    handler = function()
+      require('telescope.builtin').git_commits {
+        attach_mappings = openDiffView,
+      }
+    end,
   },
 }
 
