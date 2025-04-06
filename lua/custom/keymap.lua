@@ -11,6 +11,13 @@ map('n', '<leader>rr', function()
   vim.cmd 'OverseerRun'
 end, { desc = '[r]unnable' })
 
+map('n', '<leader>D', function()
+  if Snacks.dim.enabled then
+    Snacks.dim.disable()
+  else
+    Snacks.dim.enable()
+  end
+end, { desc = '[D]im' })
 map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[b]uffers' })
 
 map('n', '<leader>fc', require('telescope.builtin').git_bcommits, { desc = '[c]hange (git)' })
