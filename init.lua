@@ -270,6 +270,9 @@ require('lazy').setup({
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
+      current_line_blame = true,
+      numhl = true,
+      signcolumn = true,
       sign_priority = 100,
       signs = {
         add = { text = '' },
@@ -278,9 +281,6 @@ require('lazy').setup({
         topdelete = { text = '' },
         changedelete = { text = '' },
       },
-      numhl = true,
-      signcolumn = true,
-      current_line_blame = true,
     },
   },
 
@@ -345,7 +345,6 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>a', group = '[A]ider', mode = { 'n', 'v' } },
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>f', group = '[F]find' },
@@ -438,12 +437,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[h]elp' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]eymaps' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]iles' })
+      vim.keymap.set('n', '<leader>fF', builtin.git_files, { desc = '[F]iles (git)' })
       vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[s]elect Telescope' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]ord' })
       vim.keymap.set('n', '<leader>fG', builtin.live_grep, { desc = '[G]rep' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[d]iagnostics' })
       vim.keymap.set('n', '<leader>fr', builtin.lsp_references, { desc = '[r]eference' })
-      vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Recent Files ("." for repeat)' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -543,29 +542,7 @@ require('lazy').setup({
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', function()
-            local file_under_cursor = vim.fn.expand('<cfile>'):gsub('^~', vim.env.HOME or os.getenv 'HOME')
-            local current_pos = { vim.fn.line '.', vim.fn.col '.' }
-            local current_buf = vim.api.nvim_get_current_buf()
-
-            -- Try LSP definition
-            local result = vim.lsp.buf_request_sync(0, 'textDocument/definition', vim.lsp.util.make_position_params(), 500)
-
-            if result and next(result) then
-              for _, res in pairs(result) do
-                if res.result and #res.result > 0 then
-                  return vim.lsp.buf.definition()
-                end
-              end
-            end
-
-            -- Check if the file exists and is readable
-            if vim.fn.filereadable(file_under_cursor) or vim.fn.isdirectory(file_under_cursor) then
-              vim.cmd('edit ' .. vim.fn.fnameescape(file_under_cursor))
-            else
-              vim.notify('Could not find ' .. file_under_cursor, vim.log.levels.WARN)
-            end
-          end, 'Goto [d]efinition')
+          map('gd', require('custom.lib').openUnder, 'Goto [d]efinition')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
