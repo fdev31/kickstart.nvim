@@ -21,24 +21,21 @@ local options = {
     cmd = '!git reset HEAD "%"',
   },
   {
-    text = ' Git buffer commit history',
+    text = ' Git log',
     handler = function()
-      require('telescope.builtin').git_bcommits()
+      vim.ui.select({ 'file history', 'line history' }, { prompt = 'Log' }, function(choice)
+        if choice == 'file history' then
+          require('telescope.builtin').git_bcommits()
+        elseif choice == 'line history' then
+          package.loaded.snacks.picker.git_log_line()
+        end
+      end)
     end,
   },
   {
     text = ' Git checkout branch',
     handler = function()
-      require('telescope.builtin').git_branches {
-        attach_mappings = function(_, map)
-          map('i', '<CR>', function(prompt_bufnr)
-            local selection = require('telescope.actions.state').get_selected_entry()
-            require('telescope.actions').close(prompt_bufnr)
-            vim.cmd('!git checkout ' .. selection.value)
-          end)
-          return true
-        end,
-      }
+      package.loaded.snacks.picker.git_branches()
     end,
   },
 }
