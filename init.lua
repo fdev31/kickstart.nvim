@@ -345,6 +345,7 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
+        { '<leader>a', group = '[A]ider', mode = { 'n', 'v' } },
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>f', group = '[F]find' },
@@ -1067,4 +1068,3 @@ require 'custom.options'
 
 require 'custom.keymap'
 -- The line beneath this is called `modeline`. See `:help modeline`
-
