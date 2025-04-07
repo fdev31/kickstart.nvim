@@ -26,6 +26,21 @@ local options = {
       require('telescope.builtin').git_bcommits()
     end,
   },
+  {
+    text = ' Git checkout branch',
+    handler = function()
+      require('telescope.builtin').git_branches {
+        attach_mappings = function(_, map)
+          map('i', '<CR>', function(prompt_bufnr)
+            local selection = require('telescope.actions.state').get_selected_entry()
+            require('telescope.actions').close(prompt_bufnr)
+            vim.cmd('!git checkout ' .. selection.value)
+          end)
+          return true
+        end,
+      }
+    end,
+  },
 }
 
 local M = {
