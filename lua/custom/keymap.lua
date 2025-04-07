@@ -87,7 +87,7 @@ map({ 'n', 'v' }, '<leader>co', function()
 end, { desc = '[o]ptimize' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
-  require('telescope').extensions.custom_actions.custom_actions()
+  require('menus').menu(require('custom.menus').main_menu)
 end, { desc = '[c]ommands' })
 
 map('n', '<leader>ww', function()

@@ -49,7 +49,6 @@ local M = {
   popup_style = popup_style,
   border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
   stb_ip = get_stb_ip(),
-  diy_telescopes = require 'custom.diy_telescopes',
   lsp_servers = {
     textlsp = {},
     harper_ls = {},

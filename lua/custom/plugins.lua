@@ -6,6 +6,7 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
+  { 'fdev31/menus.nvim' },
   {
     'GeorgesAlkhouri/nvim-aider',
     cmd = {
@@ -221,17 +222,6 @@ M = {
           'xdev=.*',
         },
       }
-    end,
-  },
-  {
-    'adoyle-h/telescope-extension-maker.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = function()
-      local maker = require 'telescope-extension-maker'
-      for name, properties in pairs(settings.diy_telescopes) do
-        properties.name = name
-        maker.register(properties)
-      end
     end,
   },
   {

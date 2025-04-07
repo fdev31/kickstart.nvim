@@ -1,91 +1,47 @@
 -- NOTE:
--- cmd: is for vim commands
--- command: will run in terminal
--- handler: will run lua function
+-- cmd: (str) is for vim commands
+-- command: (str) will run in terminal
+-- handler: (function) will run lua code
 
-local enable_just = false
+local M = {}
 
-local options = {
+local builtin = require 'telescope.builtin'
+
+local git_menu = { --{{{
   {
-    text = ' Compare',
+    text = ' Compare to (diffView) ▶',
     cmd = 'Compare',
   },
-  { text = '→ Scp cra', cmd = '!scp "%" cra:/tmp' },
-  { text = ' Copy diff', cmd = '!git diff "%" | wl-copy ' },
   {
-    text = ' Git add',
+    text = ' file history',
+    handler = builtin.git_bcommits,
+  },
+  {
+    text = ' line history',
+    handler = package.loaded.snacks.picker.git_log_line,
+  },
+  {
+    text = ' Add file',
     cmd = '!git add "%"',
   },
   {
-    text = ' Git reset',
+    text = ' Reset file',
     cmd = '!git reset HEAD "%"',
   },
   {
-    text = ' Git log',
-    handler = function()
-      vim.ui.select({ 'file history', 'line history' }, { prompt = 'Log' }, function(choice)
-        if choice == 'file history' then
-          require('telescope.builtin').git_bcommits()
-        elseif choice == 'line history' then
-          package.loaded.snacks.picker.git_log_line()
-        end
-      end)
-    end,
+    text = '⏬Checkout branch',
+    handler = package.loaded.snacks.picker.git_branches,
   },
+} -- }}}
+
+M.main_menu = {
   {
-    text = ' Git checkout branch',
-    handler = function()
-      package.loaded.snacks.picker.git_branches()
-    end,
+    text = ' Git ▶',
+    options = git_menu,
   },
+  { text = ' Silicon', cmd = 'Silicon' },
+  { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
+  { text = '→ Scp cra', cmd = '!scp "%" cra:/tmp' },
 }
 
-local M = {
-  custom_actions = {
-    command = function()
-      -- add text = command if text isn't defined + handle single strings {{{
-      for _, command in ipairs(options) do
-        -- if command is a string, make it an object
-        if command[1] then
-          command.command = command[1]
-        end
-        if not command.text then
-          command.text = command.command or command.cmd
-        end
-      end -- }}}
-
-      -- insert just commands {{{
-      if enable_just then
-        local just_targets = io.popen('just --list'):read '*a'
-        local just_targets_list = vim.split(just_targets, '\n')
-        -- append to the commands as "just <target name>" for text and command
-        for i, target in ipairs(just_targets_list) do
-          if i > 1 then
-            -- strip starting and ending blanks
-            target = target:gsub('[ \t\n]*$', ''):gsub('^[ \t\n]*', ''):gsub('[*].*$', '')
-            if #target > 0 then
-              table.insert(options, { text = 'just → ' .. target, command = 'just ' .. target })
-            end
-          end
-        end
-      end
-      -- }}}
-      return options
-    end,
-
-    onSubmit = function(item)
-      if vim.islist(item) then
-        error 'Not support multiple selections'
-      end
-      -- RUN: cmd = vim cmd, command = terminal cmd (default) or handler = lua function {{{
-      if item.cmd then
-        vim.cmd(item.cmd)
-      elseif item.command then
-        vim.cmd('terminal ' .. item.command)
-      elseif item.handler then
-        item.handler()
-      end -- }}}
-    end,
-  },
-}
 return M
