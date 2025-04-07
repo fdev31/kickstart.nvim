@@ -9,7 +9,7 @@ local builtin = require 'telescope.builtin'
 
 local git_menu = { --{{{
   {
-    text = ' Compare to (diffView) ▶',
+    text = ' Compare to (DiffView) ▶',
     cmd = 'Compare',
   },
   {
