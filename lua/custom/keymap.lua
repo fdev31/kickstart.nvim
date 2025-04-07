@@ -10,6 +10,10 @@ map('n', '<leader>rr', function()
   vim.cmd 'OverseerRun'
 end, { desc = '[r]unnable' })
 
+map('n', '<leader>fg', package.loaded.snacks.picker.git_grep, { desc = '[g]rep (git)' })
+map('n', '<leader>fi', package.loaded.snacks.picker.icons, { desc = '[i]cons' })
+map('n', '<leader>fj', package.loaded.snacks.picker.jumps, { desc = '[j]umps' })
+
 map('n', '<leader>D', function()
   if Snacks.dim.enabled then
     Snacks.dim.disable()
