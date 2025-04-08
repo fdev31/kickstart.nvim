@@ -3,7 +3,7 @@
 --
 local popup_style = { border = 'rounded' }
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+vim.opt.foldtext = 'getline(v:foldstart)'
 vim.opt.wmh = 0
 vim.opt.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
 -- TODO: when every plugin supports it, uncomment the following
@@ -15,13 +15,12 @@ vim.opt.ts = 4
 vim.opt.et = true
 -- vim.opt.fdm = 'marker'
 vim.opt.foldmethod = 'syntax'
--- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   callback = function()
     if require('nvim-treesitter.parsers').has_parser() then
       vim.opt.foldmethod = 'expr'
       vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+      -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
     else
       vim.opt.foldmethod = 'syntax'
     end
@@ -34,6 +33,7 @@ vim.opt.backup = false
 vim.opt.swapfile = false
 vim.opt.writebackup = false
 
+vim.opt.foldenable = false
 vim.opt.termguicolors = true
 vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 
