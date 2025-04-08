@@ -17,6 +17,15 @@ local no_background = { ctermbg = nil, guibg = nil, bg = nil }
 
 local sideColor = '#282a36'
 
+local hover_color = {
+  bg = '#582a36',
+}
+
+vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
+vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
+vim.api.nvim_set_hl(0, 'LspReferenceRead', hover_color)
+vim.api.nvim_set_hl(0, 'LspReferenceTarget', { fg = '#aa45ff' })
+
 vim.api.nvim_set_hl(0, 'DiffViewDiffChange', { bg = '#8B4500' })
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
 vim.api.nvim_set_hl(0, 'TabLineFill', no_background)

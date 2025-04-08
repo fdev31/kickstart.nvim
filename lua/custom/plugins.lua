@@ -279,7 +279,9 @@ M = {
     lazy = false,
     config = function()
       local hlargs = require 'hlargs'
-      hlargs.setup()
+      hlargs.setup {
+        color = '#ffaa00',
+      }
       hlargs.enable()
     end,
   },
