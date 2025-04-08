@@ -17,7 +17,6 @@ local openDiffViewMB = function(_, action)
     require('telescope.actions').close(prompt_bufnr)
     local result = vim.fn.system('git merge-base HEAD ' .. selection.value)
     local merge_base = result:gsub('%s+', '')
-    vim.notify('DiffviewOpen ' .. merge_base .. '...HEAD --imply-local')
     vim.cmd('DiffviewOpen ' .. merge_base .. '...HEAD --imply-local')
   end)
   return true
