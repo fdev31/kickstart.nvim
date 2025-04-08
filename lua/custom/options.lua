@@ -2,7 +2,7 @@ local lib = require 'custom.lib'
 
 local formatter = require('conform').formatters_by_ft
 
-formatter['*'] = { 'codespell', 'trim_whitespace', lsp_format = 'fallback' }
+formatter['*'] = { 'codespell', 'trim_whitespace' }
 formatter.toml = { 'toml_fmt' }
 formatter.lua = { 'stylua' }
 formatter.python = { 'ruff_format' }
