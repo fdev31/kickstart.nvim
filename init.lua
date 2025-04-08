@@ -757,19 +757,9 @@ require('lazy').setup({
           stdin = true,
         },
       },
+      -- log_level = vim.log.levels.DEBUG,
       notify_no_formatters = true,
       notify_on_error = true,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        python = { 'ruff_format' },
-        toml = { 'toml_fmt' },
-        ['*'] = { 'codespell', 'trim_whitespace' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
-      },
     },
   },
 

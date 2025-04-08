@@ -1,5 +1,15 @@
 local lib = require 'custom.lib'
 
+local formatter = require('conform').formatters_by_ft
+
+formatter['*'] = { 'codespell', 'trim_whitespace', lsp_format = 'fallback' }
+formatter.toml = { 'toml_fmt' }
+formatter.lua = { 'stylua' }
+formatter.python = { 'ruff_format' }
+formatter.go = { 'gofmt' }
+formatter.rust = { 'rustfmt', lsp_format = 'fallback' }
+formatter.javascript = { 'eslint_d', 'prettierd' } -- 'eslint_d', lsp_format = 'last' }
+
 local openDiffView = function(_, map)
   map('i', '<CR>', function(prompt_bufnr)
     local selection = require('telescope.actions.state').get_selected_entry()
