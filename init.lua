@@ -464,8 +464,8 @@ require('lazy').setup({
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>fn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[n]eovim files' })
+        package.loaded.snacks.picker.notifications()
+      end, { desc = '[n]otifications' })
     end,
   },
 
