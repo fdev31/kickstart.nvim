@@ -285,14 +285,12 @@ M = {
   },
   {
     'Wansmer/treesj', -- merge / split lines
-    keys = { '<leader>m' },
+    opts = {
+      use_default_keymaps = false,
+      max_join_length = 300,
+    },
     lazy = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = function()
-      require('treesj').setup {
-        max_join_length = 300,
-      }
-    end,
   },
   { 'aklt/plantuml-syntax', ft = 'plantuml' },
   { 'NoahTheDuke/vim-just', ft = 'just' },
