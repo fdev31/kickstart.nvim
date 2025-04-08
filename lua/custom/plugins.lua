@@ -8,11 +8,6 @@ local settings = require 'custom.settings'
 M = {
   { 'fdev31/menus.nvim' },
   {
-    'chentoast/marks.nvim',
-    event = 'VeryLazy',
-    opts = {},
-  },
-  {
     'stevearc/overseer.nvim',
     opts = {},
   },
