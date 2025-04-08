@@ -3,11 +3,11 @@ local lib = require 'custom.lib'
 local formatter = require('conform').formatters_by_ft
 
 formatter['*'] = { 'codespell', 'trim_whitespace' }
-formatter.toml = { 'toml_fmt' }
-formatter.lua = { 'stylua' }
-formatter.python = { 'ruff_format' }
 formatter.go = { 'gofmt' }
+formatter.lua = { 'stylua' }
 formatter.rust = { 'rustfmt' }
+formatter.toml = { 'toml_fmt' }
+formatter.python = { 'ruff_format' }
 formatter.javascript = { 'eslint_d', 'prettierd' }
 
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
