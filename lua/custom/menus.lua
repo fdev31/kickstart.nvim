@@ -50,6 +50,7 @@ M.git_menu = { --{{{
   {
     text = ' Commit',
     handler = function()
+      require('diffview').close()
       vim.cmd ':terminal git commit'
       vim.cmd ':startinsert'
     end,
