@@ -24,7 +24,7 @@ local hover_color = {
 vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceRead', hover_color)
-vim.api.nvim_set_hl(0, 'LspReferenceTarget', { fg = '#aa45ff' })
+-- vim.api.nvim_set_hl(0, 'LspReferenceTarget', { fg = '#aa45ff' })
 
 vim.api.nvim_set_hl(0, 'DiffViewDiffChange', { bg = '#8B4500' })
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
@@ -52,9 +52,9 @@ if vim.g.neovide then
   local mapKey = vim.keymap.set
   mapKey('!', '<S-Insert>', '<C-R>+') -- allow Shit+Insert on the prompt
 
-  vim.g.neovide_opacity = 0.7
+  vim.g.neovide_opacity = 0.85
   vim.g.neovide_cursor_vfx_mode = 'railgun'
-  vim.g.neovide_scale_factor = 0.8
+  -- vim.g.neovide_scale_factor = 0.8
   -- Dynamic Scale
   local _scaleChange = function(fac)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * fac

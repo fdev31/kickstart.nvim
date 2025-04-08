@@ -2,7 +2,8 @@
 --
 --
 local popup_style = { border = 'rounded' }
-
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 vim.opt.wmh = 0
 vim.opt.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
 -- TODO: when every plugin supports it, uncomment the following
@@ -12,7 +13,11 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.sw = 4
 vim.opt.ts = 4
 vim.opt.et = true
-vim.opt.fdm = 'marker'
+-- vim.opt.fdm = 'marker'
+vim.opt.foldmethod = 'syntax'
+-- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+vim.opt.fdm = 'expr'
 vim.opt.autoread = true
 vim.opt.number = false
 
