@@ -91,7 +91,6 @@ M = {
     ---@type snacks.Config
     opts = {
       image = {},
-      dim = {},
       notifier = {},
     },
     priority = 1000,

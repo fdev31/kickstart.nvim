@@ -14,13 +14,6 @@ map('n', '<leader>fg', package.loaded.snacks.picker.git_grep, { desc = '[g]rep (
 map('n', '<leader>fi', package.loaded.snacks.picker.icons, { desc = '[i]cons' })
 map('n', '<leader>fj', package.loaded.snacks.picker.jumps, { desc = '[j]umps' })
 
-map('n', '<leader>D', function()
-  if Snacks.dim.enabled then
-    Snacks.dim.disable()
-  else
-    Snacks.dim.enable()
-  end
-end, { desc = '[D]im' })
 map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[b]uffers' })
 
 map('n', '<leader>fc', package.loaded.snacks.picker.git_diff, { desc = '[c]hange (git)' })
