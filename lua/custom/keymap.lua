@@ -10,6 +10,10 @@ map('n', '<leader>rr', function()
   vim.cmd 'OverseerRun'
 end, { desc = '[r]unnable' })
 
+map('n', '<leader>do', require('diffview').open, { desc = '[D]iff Open' })
+map('n', '<leader>dc', require('diffview').close, { desc = '[D]iff Close' })
+map('n', '<leader>fi', package.loaded.snacks.picker.icons, { desc = '[i]cons' })
+
 map('n', '<leader>fg', package.loaded.snacks.picker.git_grep, { desc = '[g]rep (git)' })
 map('n', '<leader>fi', package.loaded.snacks.picker.icons, { desc = '[i]cons' })
 map('n', '<leader>fj', package.loaded.snacks.picker.jumps, { desc = '[j]umps' })
