@@ -20,7 +20,7 @@ map('n', '<leader>fc', package.loaded.snacks.picker.git_diff, { desc = '[c]hange
 
 map('n', '<C-Space>', require('gitsigns').stage_hunk, { desc = 'stage/unstage hunk (git)' })
 map('n', '<leader>C', function()
-  vim.cmd 'Compare'
+  require('menus').menu(require('custom.menus').git_compare_what)
 end, { desc = '[C]ompare (git)' })
 
 map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
