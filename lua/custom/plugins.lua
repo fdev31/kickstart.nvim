@@ -8,23 +8,6 @@ local settings = require 'custom.settings'
 M = {
   { 'fdev31/menus.nvim' },
   {
-    'cbochs/grapple.nvim',
-    opts = {
-      scope = 'git', -- also try out "git_branch"
-    },
-    event = { 'BufReadPost', 'BufNewFile' },
-    cmd = 'Grapple',
-    dependencies = {
-      { 'nvim-tree/nvim-web-devicons', lazy = true },
-    },
-    keys = {
-      { '<leader>M', '<cmd>Grapple toggle<cr>', desc = 'Grapple' },
-      { '<leader>m', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple [m]ove' },
-      { '<leader>n', '<cmd>Grapple cycle_tags next<cr>', desc = 'Grapple cycle [n]ext tag' },
-      { '<leader>p', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Grapple cycle [p]revious tag' },
-    },
-  },
-  {
     'chentoast/marks.nvim',
     event = 'VeryLazy',
     opts = {},
