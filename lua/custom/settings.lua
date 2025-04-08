@@ -17,7 +17,16 @@ vim.opt.et = true
 vim.opt.foldmethod = 'syntax'
 -- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
-vim.opt.fdm = 'expr'
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  callback = function()
+    if require('nvim-treesitter.parsers').has_parser() then
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+    else
+      vim.opt.foldmethod = 'syntax'
+    end
+  end,
+})
 vim.opt.autoread = true
 vim.opt.number = false
 
