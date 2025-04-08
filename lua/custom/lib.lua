@@ -1,4 +1,12 @@
 return {
+  -- This is a collection of utility functions for various tasks.
+  -- partial function supports think "functools.partial" in python
+  partial = function(fn, ...)
+    local n, args = select('#', ...), { ... }
+    return function()
+      return fn(unpack(args, 1, n))
+    end
+  end,
   dump_json = function(obj)
     -- dump a serialized JSON string of diagnostics in /tmp/dump.json
     local file = io.open('/tmp/dump.json', 'w')
