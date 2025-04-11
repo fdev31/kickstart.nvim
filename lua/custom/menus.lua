@@ -36,7 +36,7 @@ M.git_compare_what = {
     end,
   },
   {
-    text = 'branch merge base (PR like)',
+    text = 'branch "merge base" (PR like)',
     handler = function()
       telescope.git_branches { attach_mappings = openDiffViewMB }
     end,
@@ -83,7 +83,7 @@ M.git_menu = { --{{{
   },
   {
     text = '⏬Checkout branch',
-    handler = package.loaded.snacks.picker.git_branches,
+    handler = telescope.git_branches,
   },
 } -- }}}
 
