@@ -94,7 +94,7 @@ M.main_menu = {
   },
   { text = ' DiffView Open', cmd = 'DiffviewOpen' },
   { text = ' DiffView Close', cmd = 'DiffviewClose' },
-  { text = ' Silicon', cmd = 'Silicon' },
+  { text = ' Silicon', cmd = "'<,'> Silicon" },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = '→ Scp cra', cmd = '!scp "%" cra:/tmp' },
 }
