@@ -729,7 +729,6 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
       format_on_save = function(bufnr)
         if vim.b.disable_autoformat then
           return
