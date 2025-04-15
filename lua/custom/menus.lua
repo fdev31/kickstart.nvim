@@ -54,8 +54,7 @@ M.git_menu = { --{{{
   },
   {
     text = '󱖫 Status',
-    handler = package.loaded.snacks.picker.git_status,
-    -- handler = builtin.git_status,
+    handler = telescope.git_status,
   },
   {
     text = ' Cached',

@@ -22,7 +22,7 @@ map('n', '<leader>fj', package.loaded.snacks.picker.jumps, { desc = '[j]umps' })
 
 map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[b]uffers' })
 
-map('n', '<leader>fc', package.loaded.snacks.picker.git_diff, { desc = '[c]hange (git)' })
+map('n', '<leader>fc', require('telescope.builtin').git_status, { desc = '[c]hange (git)' })
 
 map('n', '<C-Space>', require('gitsigns').stage_hunk, { desc = 'stage/unstage hunk (git)' })
 map('n', '<leader>C', function()
