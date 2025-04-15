@@ -1,3 +1,4 @@
+local partial = require('custom.lib').partial
 local map = vim.keymap.set
 
 map('n', '<leader>td', function()
@@ -7,8 +8,8 @@ map('n', '<leader>td', function()
 end, { desc = '[d]iagnostics' })
 
 -- {{{
-map('n', '<leader>do', require('diffview').open, { desc = '[D]iff Open' })
-map('n', '<leader>dc', require('diffview').close, { desc = '[D]iff Close' })
+map('n', '<leader>do', partial(require('diffview').open, '-uno'), { desc = '[D]iff Open' })
+map('n', '<leader>dc', partial(require('diffview').close), { desc = '[D]iff Close' })
 map('n', '<leader>fi', package.loaded.snacks.picker.icons, { desc = '[i]cons' })
 
 --- }}}
