@@ -91,11 +91,12 @@ M.main_menu = {
     text = ' Git ▶',
     options = M.git_menu,
   },
+  { text = ' Runnables', cmd = 'OverseerRun' },
   { text = ' DiffView Open', cmd = 'DiffviewOpen' },
-  { text = ' DiffView Close', cmd = 'DiffviewClose' },
-  { text = ' Silicon', cmd = "'<,'> Silicon" },
+  { text = ' DiffView Close', cmd = 'DiffviewClose' },
+  { text = ' Silicon', cmd = "'<,'> Silicon" },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
-  { text = '→ Scp cra', cmd = '!scp "%" cra:/tmp' },
+  { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
 }
 
 return M
