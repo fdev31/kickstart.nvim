@@ -36,7 +36,6 @@ vim.opt.writebackup = false
 vim.opt.foldenable = false
 vim.opt.termguicolors = true
 vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
-vim.g.copilot_node_command = '/usr/bin/node'
 
 local function get_stb_ip()
   local file = io.open(os.getenv 'HOME' .. '/.onemw/config', 'r')

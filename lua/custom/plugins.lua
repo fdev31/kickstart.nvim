@@ -458,6 +458,7 @@ if settings.useCopilot then
       event = 'InsertEnter',
       opts = {
         panel = { enabled = false },
+        copilot_node_command = '/bin/node',
         suggestion = {
           enabled = false,
           auto_trigger = false,
