@@ -55,7 +55,7 @@ M.git_menu = { --{{{
   },
   {
     text = ' Amend',
-    command = 'git commit --cached --no-edit',
+    cmd = 'silent !git commit --amend --no-edit',
   },
   -- {
   --   text = ' Cached',
@@ -68,10 +68,6 @@ M.git_menu = { --{{{
   {
     text = ' line history',
     handler = package.loaded.snacks.picker.git_log_line,
-  },
-  {
-    text = ' Add file',
-    cmd = '!git add "%"',
   },
   {
     text = ' Reset file',
