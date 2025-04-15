@@ -23,20 +23,21 @@ local openDiffViewMB = function(_, action)
 end
 
 M.git_compare_what = {
+  { text = 'Working copy', cmd = 'DiffviewOpen -uno' },
   {
-    text = 'branch',
+    text = 'Branch ▶',
     handler = function()
       telescope.git_branches { attach_mappings = openDiffView }
     end,
   },
   {
-    text = 'commit',
+    text = 'Commit ▶',
     handler = function()
       telescope.git_commits { attach_mappings = openDiffView }
     end,
   },
   {
-    text = 'branch "merge base" (PR like)',
+    text = 'Branch "merge base" (PR like) ▶',
     handler = function()
       telescope.git_branches { attach_mappings = openDiffViewMB }
     end,
@@ -53,17 +54,13 @@ M.git_menu = { --{{{
     end,
   },
   {
-    text = '󱖫 Status',
-    handler = telescope.git_status,
+    text = ' Amend',
+    command = 'git commit --cached --no-edit',
   },
-  {
-    text = ' Cached',
-    command = 'git diff --cached',
-  },
-  {
-    text = ' Compare to (DiffView) ▶',
-    options = M.git_compare_what,
-  },
+  -- {
+  --   text = ' Cached',
+  --   command = 'git diff --cached',
+  -- },
   {
     text = ' file history',
     handler = telescope.git_bcommits,
@@ -81,8 +78,21 @@ M.git_menu = { --{{{
     cmd = '!git reset HEAD "%"',
   },
   {
-    text = '⏬Checkout branch',
+    text = ' Checkout branch',
     handler = telescope.git_branches,
+  },
+  {
+    text = ' Stash changes ▶',
+    options = {
+      {
+        text = ' Push',
+        handler = function()
+          local message = vim.ui.input { prompt = 'Stash message: ' }
+          vim.cmd('!git stash push -m "' .. message .. '"')
+        end,
+      },
+      { text = '󰋺 Apply', handler = telescope.git_stash },
+    },
   },
 } -- }}}
 
@@ -91,9 +101,11 @@ M.main_menu = {
     text = ' Git ▶',
     options = M.git_menu,
   },
-  { text = ' Runnables', cmd = 'OverseerRun' },
-  { text = ' DiffView Open', cmd = 'DiffviewOpen' },
-  { text = ' DiffView Close', cmd = 'DiffviewClose' },
+  {
+    text = ' DiffView ▶',
+    options = M.git_compare_what,
+  },
+  { text = ' Runnables ▶', cmd = 'OverseerRun' },
   { text = ' Silicon', cmd = "'<,'> Silicon" },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
