@@ -40,10 +40,6 @@ return {
     return false
   end,
   openUnder = function()
-    local file_under_cursor = vim.fn.expand('<cfile>'):gsub('^~', vim.env.HOME or os.getenv 'HOME')
-    local current_pos = { vim.fn.line '.', vim.fn.col '.' }
-    local current_buf = vim.api.nvim_get_current_buf()
-
     -- Try LSP definition
     local result = vim.lsp.buf_request_sync(0, 'textDocument/definition', vim.lsp.util.make_position_params(), 500)
 
@@ -54,7 +50,7 @@ return {
         end
       end
     end
-
+    local file_under_cursor = vim.fn.fnamemodify(vim.fn.expand '<cfile>', ':p')
     -- Check if the file exists and is readable
     if vim.fn.filereadable(file_under_cursor) or vim.fn.isdirectory(file_under_cursor) then
       vim.cmd('edit ' .. vim.fn.fnameescape(file_under_cursor))
