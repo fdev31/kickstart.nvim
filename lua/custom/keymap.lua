@@ -6,10 +6,6 @@ map('n', '<leader>td', function()
   vim.cmd 'DiagflowToggle'
 end, { desc = '[d]iagnostics' })
 
-map('n', '<leader>rr', function()
-  vim.cmd 'OverseerRun'
-end, { desc = '[r]unnable' })
-
 -- {{{
 map('n', '<leader>do', require('diffview').open, { desc = '[D]iff Open' })
 map('n', '<leader>dc', require('diffview').close, { desc = '[D]iff Close' })
