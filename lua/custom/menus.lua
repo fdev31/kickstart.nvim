@@ -26,7 +26,7 @@ M.git_compare_what = {
   {
     text = 'branch',
     handler = function()
-      require('telescope.builtin').git_branches { attach_mappings = openDiffView }
+      telescope.git_branches { attach_mappings = openDiffView }
     end,
   },
   {
