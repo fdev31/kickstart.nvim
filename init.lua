@@ -462,7 +462,7 @@ require('lazy').setup({
         }
       end, { desc = '[/] Open Files' })
 
-      -- Shortcut for searching your Neovim configuration files
+      -- Shortcut for searching your Neovim notifications
       vim.keymap.set('n', '<leader>fn', function()
         package.loaded.snacks.picker.notifications()
       end, { desc = '[n]otifications' })
