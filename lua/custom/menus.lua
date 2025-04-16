@@ -83,8 +83,11 @@ M.git_menu = { --{{{
       {
         text = ' Push',
         handler = function()
-          local message = vim.ui.input { prompt = 'Stash message: ' }
-          vim.cmd('!git stash push -m "' .. message .. '"')
+          vim.ui.input({
+            prompt = 'Stash message: ',
+          }, function(input)
+            vim.cmd('!git stash push -m "' .. input .. '"')
+          end)
         end,
       },
       { text = '󰋺 Apply', handler = telescope.git_stash },
