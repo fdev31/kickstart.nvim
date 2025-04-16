@@ -109,6 +109,8 @@ M.main_menu = {
   { text = ' Silicon', cmd = "'<,'> Silicon" },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
+  { text = '󰚰 Lazy update', cmd = 'Lazy update' },
+  { text = '󱊒 Mason update', cmd = 'MasonToolsUpdate' },
 }
 
 return M
