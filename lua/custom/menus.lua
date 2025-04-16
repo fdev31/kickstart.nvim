@@ -87,7 +87,11 @@ M.git_menu = { --{{{
           vim.ui.input({
             prompt = 'Stash message: ',
           }, function(input)
-            vim.cmd('!git stash push -m "' .. input .. '"')
+            if input then
+              vim.cmd('!git stash push -m "' .. input .. '"')
+            else
+              vim.notify('Canceled', 'info', { title = 'Stash' })
+            end
           end)
         end,
       },
