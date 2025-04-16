@@ -55,18 +55,19 @@ M.git_menu = { --{{{
   },
   {
     text = ' Amend',
-    cmd = 'silent !git commit --amend --no-edit',
+    cmd = '!git commit --amend --no-edit',
+    silent = true,
   },
   -- {
   --   text = ' Cached',
   --   command = 'git diff --cached',
   -- },
   {
-    text = ' file history',
+    text = ' File history',
     handler = telescope.git_bcommits,
   },
   {
-    text = ' line history',
+    text = ' Line history',
     handler = package.loaded.snacks.picker.git_log_line,
   },
   {
