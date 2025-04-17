@@ -21,31 +21,22 @@ local hover_color = {
   bg = '#582a36',
 }
 
-local changed_color_dark = '#003300'
+local change_bg = '#003300' -- for diffview
 
+-- lsp auto hover
 vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceRead', hover_color)
-vim.api.nvim_set_hl(0, 'LspReferenceTarget', { fg = '#aa45ff' })
-
+-- diffview
 vim.api.nvim_set_hl(0, 'DiffChange', { italic = true, bold = true, underline = true })
-vim.api.nvim_set_hl(0, 'DiffAdd', { bg = changed_color_dark })
-vim.api.nvim_set_hl(0, 'DiffText', { bold = true, bg = '#ddffee', fg = changed_color_dark })
+vim.api.nvim_set_hl(0, 'DiffAdd', { bg = change_bg })
+vim.api.nvim_set_hl(0, 'DiffText', { bold = true, bg = '#ddffee', fg = change_bg })
+-- transparent backgrounds
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
 vim.api.nvim_set_hl(0, 'TabLineFill', no_background)
 vim.api.nvim_set_hl(0, 'StatusLine', no_background)
 vim.api.nvim_set_hl(0, 'TelescopeNormal', vim.tbl_deep_extend('force', { fg = '#d8d8f2' }, no_background))
--- vim.api.nvim_set_hl(0, 'Normal', no_background)
--- vim.api.nvim_set_hl(0, 'FloatBorder', no_background)
---
--- vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = '#21222c' })
---
--- vim.api.nvim_set_hl(0, 'GitSignsCurrentLineBlame', { bg = 'NONE', fg = '#888888' })
--- vim.api.nvim_set_hl(0, 'SignColumn', { bg = sideColor })
---
--- vim.api.nvim_set_hl(0, 'DiagnosticHint', { bg = sideColor, fg = '#d4b200' })
--- vim.api.nvim_set_hl(0, 'DiagnosticError', { bg = sideColor, fg = '#d40000' })
---
+-- cursor
 vim.api.nvim_set_hl(0, 'Cursor', { fg = '#000000', bg = '#FFaa33' })
 vim.api.nvim_set_hl(0, 'Cursor2', { fg = '#000000', bg = '#FF0066' })
 -- }}}
