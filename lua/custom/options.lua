@@ -21,12 +21,16 @@ local hover_color = {
   bg = '#582a36',
 }
 
+local changed_color_dark = '#003300'
+
 vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceRead', hover_color)
--- vim.api.nvim_set_hl(0, 'LspReferenceTarget', { fg = '#aa45ff' })
+vim.api.nvim_set_hl(0, 'LspReferenceTarget', { fg = '#aa45ff' })
 
-vim.api.nvim_set_hl(0, 'DiffViewDiffChange', { bg = '#8B4500' })
+vim.api.nvim_set_hl(0, 'DiffChange', { italic = true, bold = true, underline = true })
+vim.api.nvim_set_hl(0, 'DiffAdd', { bg = changed_color_dark })
+vim.api.nvim_set_hl(0, 'DiffText', { bold = true, bg = '#ddffee', fg = changed_color_dark })
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
 vim.api.nvim_set_hl(0, 'TabLineFill', no_background)
 vim.api.nvim_set_hl(0, 'StatusLine', no_background)
