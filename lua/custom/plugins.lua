@@ -207,7 +207,7 @@ M = {
         },
         view = {
           merge_tool = {
-            layout = 'diff4_mixed',
+            layout = 'diff3_horizontal',
           },
         },
       } -- }}}
