@@ -6,6 +6,7 @@ local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 
 M = {
+  { 'tpope/vim-fugitive' },
   { 'fdev31/menus.nvim' },
   {
     'stevearc/overseer.nvim',
