@@ -46,11 +46,10 @@ M.git_compare_what = {
 
 M.git_menu = { --{{{
   {
-    text = ' Commit',
+    text = ' Commit',
     handler = function()
       require('diffview').close()
-      vim.cmd ':terminal git commit'
-      vim.cmd ':startinsert'
+      vim.cmd 'G commit'
     end,
   },
   {
@@ -83,6 +82,7 @@ M.git_menu = { --{{{
     options = {
       {
         text = ' Push',
+
         handler = function()
           vim.ui.input({
             prompt = 'Stash message: ',
@@ -97,6 +97,13 @@ M.git_menu = { --{{{
       },
       { text = '󰋺 Apply', handler = telescope.git_stash },
     },
+  },
+  {
+    text = ' Push',
+    handler = function()
+      require('diffview').close()
+      vim.cmd 'G commit'
+    end,
   },
 } -- }}}
 
