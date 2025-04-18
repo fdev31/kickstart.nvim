@@ -32,7 +32,7 @@ map('n', '<leader>tn', '<cmd> set rnu! <CR>', { noremap = true, silent = true, d
 
 map('n', '<leader>tN', '<cmd> set number! <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
 
-map('n', '<C-CR>', function()
+map('n', '<C-p>', function()
   require('telescope').extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 
