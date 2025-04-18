@@ -32,7 +32,7 @@ map('n', '<leader>tn', '<cmd> set rnu! <CR>', { noremap = true, silent = true, d
 
 map('n', '<leader>tN', '<cmd> set number! <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
 
-map('n', '<C-,>', function()
+map('n', '<C-CR>', function()
   require('telescope').extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
 
@@ -55,7 +55,7 @@ end, { noremap = true, silent = true, desc = '[i]nspector' })
 
 map('n', '<leader>tb', function()
   require('dap').toggle_breakpoint()
-end, { noremap = true, silent = true, desc = 'Debugger [b]reakpoint' })
+end, { noremap = true, silent = true, desc = '[b]reakpoint' })
 
 map('n', '<F5>', function()
   require('dap').continue()

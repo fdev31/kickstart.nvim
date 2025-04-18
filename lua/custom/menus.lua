@@ -102,7 +102,7 @@ M.git_menu = { --{{{
     text = ' Push',
     handler = function()
       require('diffview').close()
-      vim.cmd 'G commit'
+      vim.cmd 'G push'
     end,
   },
 } -- }}}

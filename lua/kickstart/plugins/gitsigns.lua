@@ -51,8 +51,8 @@ return {
           gitsigns.diffthis '@'
         end, { desc = 'git [D]iff against last commit' })
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle GIT show [b]lame line' })
-        map('n', '<leader>tx', gitsigns.preview_hunk_inline, { desc = '[T]oggle GIT show [X] missing' })
+        map('n', '<leader>tB', gitsigns.toggle_current_line_blame, { desc = '[b]lame inline (git)' })
+        map('n', '<leader>tx', gitsigns.preview_hunk_inline, { desc = 'show missing [x] (git)' })
       end,
     },
   },
