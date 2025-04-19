@@ -1,4 +1,10 @@
 return {
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+  },
   'onsails/lspkind.nvim',
   {
     'folke/snacks.nvim', -- QoL (images, keymaps, ...)
