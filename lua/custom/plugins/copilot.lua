@@ -58,10 +58,10 @@ else
         agent = 'copilot',
         model = 'gemini-2.5-pro',
 
-        question_header = 'Me ', -- Header to use for user questions
+        question_header = 'Prompt ', -- Header to use for user questions
         answer_header = '  ', -- Header to use for AI answers
         error_header = '  ', -- Header to use for errors
-        separator = '───', -- Separator to use in chat
+        separator = ' ──', -- Separator to use in chat
       },
     },
   }

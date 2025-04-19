@@ -148,6 +148,10 @@ map('n', '<leader>do', function()
 end, { noremap = true, silent = true, desc = 'step [o]ut' })
 
 -- copilot
+--
+map({ 'n', 'v' }, '<leader>cC', function()
+  vim.cmd 'CopilotChat'
+end, { desc = '[C]hat' })
 map({ 'n', 'v' }, '<leader>ce', function()
   vim.cmd 'CopilotChatExplain'
 end, { desc = '[e]xplain' })
