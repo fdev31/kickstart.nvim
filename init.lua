@@ -765,6 +765,9 @@ require('lazy').setup({
       sources = {
         default = settings.cmp_sources,
         providers = settings.cmp_providers,
+        per_filetype = {
+          codecompanion = { 'codecompanion' },
+        },
       },
 
       snippets = { preset = 'luasnip' },
