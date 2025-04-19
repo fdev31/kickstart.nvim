@@ -31,15 +31,16 @@ local sideColor = '#282a36'
 local hover_color = {
   bg = '#582a36',
 }
-local change_bg = '#104310' -- for diffview
+local change_bg = '#154732' -- for diffview
 
 -- lsp auto hover
 vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceRead', hover_color)
 -- diffview
-vim.api.nvim_set_hl(0, 'DiffChange', { italic = true, bold = true, underline = true })
+vim.api.nvim_set_hl(0, 'DiffChange', { bg = change_bg })
 vim.api.nvim_set_hl(0, 'DiffAdd', { bg = change_bg })
+vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#521414', fg = '#521414' })
 vim.api.nvim_set_hl(0, 'DiffText', { bold = true, bg = '#ddffee', fg = change_bg })
 -- transparent backgrounds
 vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
