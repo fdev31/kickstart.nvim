@@ -17,7 +17,7 @@ map('n', '<leader>oo', function()
   vim.cmd('e ' .. file)
 end, { desc = '[o]pen file under cursor' })
 map('n', 'K', function()
-  vim.lsp.buf.hover { border = 'rounded' }
+  vim.lsp.buf.hover()
 end, { buffer = bufnr, desc = 'vim.lsp.buf.hover()' })
 
 -- code actions
