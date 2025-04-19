@@ -1,7 +1,15 @@
-local autocmd = vim.api.nvim_create_autocmd
+vim.filetype.add {
+  pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
+  extension = {
+    wiki = 'confluence_wiki',
+  },
+}
 -- Hyprlang syntax & LSP
 -- LspInstall hyprlang
 -- go install github.com/hyprland-community/hyprls/cmd/hyprls@latest
+--
+local autocmd = vim.api.nvim_create_autocmd
+
 autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = { '*.hl', 'hypr*.conf' },
   callback = function(event)
@@ -12,23 +20,6 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
     }
   end,
 })
-vim.filetype.add {
-  pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
-}
-
--- Confluence wiki
-
-autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = '*.wiki',
-  callback = function()
-    vim.bo.filetype = 'confluence_wiki'
-    vim.bo.makeprg = 'br updes %'
-  end,
-})
-
-vim.filetype.add {
-  pattern = { ['*.wiki'] = 'confluence_wiki' },
-}
 
 local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 parser_config.confluence_wiki = {
