@@ -8,13 +8,9 @@ local telescope = require 'telescope.builtin'
 map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
 map('n', '<leader>tn', '<cmd> set rnu! <CR>', { noremap = true, silent = true, desc = '[n]umber relative' })
 map('n', '<leader>tN', '<cmd> set number! <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
-map('n', '<leader>ot', function()
-  local file = vim.fn.expand '<cfile>'
-  vim.cmd('tabnew ' .. file)
-end, { desc = 'Open file under cursor in new [t]ab' })
 map('n', '<leader>oo', function()
   local file = vim.fn.expand '<cfile>'
-  vim.cmd('e ' .. file)
+  vim.cmd('tabnew ' .. file)
 end, { desc = '[o]pen file under cursor' })
 map('n', 'K', function()
   vim.lsp.buf.hover()
@@ -159,6 +155,10 @@ end, { desc = '[e]xplain' })
 map({ 'n', 'v' }, '<leader>co', function()
   vim.cmd 'CopilotChatOptimize'
 end, { desc = '[o]ptimize' })
+
+map({ 'n', 'v' }, '<leader>cd', function()
+  vim.cmd 'CopilotChatOptimize'
+end, { desc = '[d]ocument' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
   require('menus').menu(require('custom.menus').main_menu)
