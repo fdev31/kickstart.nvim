@@ -49,6 +49,7 @@ M.git_menu = { --{{{
     text = ' Commit',
     handler = function()
       require('diffview').close()
+      vim.cmd 'Neotree close'
       vim.cmd 'G commit'
     end,
   },
