@@ -4,8 +4,8 @@ local map = vim.keymap.set
 
 local telescope = require 'telescope.builtin'
 
-map('n', '<leader>ga', '<cmd>DiffviewClose<CR><cmd>G add %<CR>', { desc = '_add file (git)' })
-map('n', '<leader>gr', '<cmd>DiffviewClose<CR><cmd>G reset HEAD %<CR>', { desc = '_reset file (git)' })
+map('n', '<leader>ga', '<cmd>G add %<CR>', { desc = '_add file (git)' })
+map('n', '<leader>gr', '<cmd>G reset HEAD %<CR>', { desc = '_reset file (git)' })
 map('n', '<leader>gc', '<cmd>DiffviewClose<CR><cmd>G commit %<CR>', { desc = '_commit file (git)' })
 map('n', '<leader>gC', '<cmd>DiffviewClose<CR><cmd>G commit<CR>', { desc = '_Commit all (git)' })
 
