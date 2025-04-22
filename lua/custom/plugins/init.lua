@@ -31,7 +31,7 @@ for _, plugin in ipairs(plugins) do
   end
 end
 
-for _, p in pairs(M) do
+for _, p in ipairs(M) do
   if type(p) == 'table' and not p.opts then
     p.opts = {}
   end
