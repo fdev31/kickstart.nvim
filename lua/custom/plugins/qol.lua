@@ -105,7 +105,6 @@ return {
       vim.keymap.set('n', '<leader>ta', '<cmd>AerialToggle!<CR>', { desc = '[a]erial' })
       require('telescope').load_extension 'aerial'
     end,
-    opts = {},
     dependencies = {
       'nvim-telescope/telescope.nvim',
       'nvim-treesitter/nvim-treesitter',

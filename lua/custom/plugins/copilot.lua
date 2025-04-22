@@ -50,8 +50,8 @@ else
   }
   table.insert(settings.cmp_sources, 'copilot')
   return {
-    { 'fang2hou/blink-copilot', opts = {} },
-    { 'zbirenbaum/copilot.lua', opts = {} },
+    { 'fang2hou/blink-copilot' },
+    { 'zbirenbaum/copilot.lua' },
     {
       'CopilotC-Nvim/CopilotChat.nvim',
       opts = {
