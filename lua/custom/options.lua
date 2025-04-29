@@ -33,6 +33,8 @@ local hover_color = {
 }
 local change_bg = '#154732' -- for diffview
 
+vim.api.nvim_set_hl(0, 'Special', { fg = '#ffaaac' })
+
 -- lsp auto hover
 vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
 vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
