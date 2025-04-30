@@ -56,6 +56,7 @@ else
     } },
     {
       'CopilotC-Nvim/CopilotChat.nvim',
+      branch = 'main',
       opts = {
         agent = 'copilot',
         model = 'gemini-2.5-pro',
