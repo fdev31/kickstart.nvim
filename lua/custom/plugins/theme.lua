@@ -1,14 +1,25 @@
 return {
   {
     'wolfwfr/vimatrix.nvim',
+    lazy = false,
     opts = {
+      window = {
+        general = {
+          zindex = 1000,
+        },
+      },
+      -- logging = {
+      --   print_errors = true,
+      --   log_level = vim.log.levels.DEBUG,
+      -- },
       auto_activation = {
         screensaver = {
           timeout = 60,
+          setup_deferral = 1,
+          ignore_focus = true,
+          block_on_term = true,
+          block_on_cmd_line = true,
         },
-      },
-      window = {
-        border = nil,
       },
       alphabet = {
         built_in = { 'symbols' },
