@@ -1,3 +1,5 @@
+local screensaver_timeout = 60 * 10 -- in seconds
+
 return {
   {
     'wolfwfr/vimatrix.nvim',
@@ -14,7 +16,7 @@ return {
       -- },
       auto_activation = {
         screensaver = {
-          timeout = 60,
+          timeout = screensaver_timeout,
           setup_deferral = 1,
           ignore_focus = true,
           block_on_term = true,
