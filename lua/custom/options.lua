@@ -29,7 +29,7 @@ fmt_formatter.javascript = { 'eslint_d', 'prettierd' }
 local no_background = { ctermbg = nil, guibg = nil, bg = nil }
 local sideColor = '#282a36'
 local hover_color = {
-  bg = '#582a36',
+  bg = '#2a3658',
 }
 local change_bg = '#154732' -- for diffview
 
