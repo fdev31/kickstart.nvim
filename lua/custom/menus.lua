@@ -123,6 +123,7 @@ M.main_menu = {
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
   { text = '󰚰 Lazy update', cmd = 'Lazy update' },
   { text = '󱊒 Mason update', cmd = 'MasonToolsUpdate' },
+  { text = '󰽿 Treesitter context (toggle)', handler = require('treesitter-context').toggle },
 }
 
 return M
