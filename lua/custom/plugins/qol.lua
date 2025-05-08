@@ -4,6 +4,10 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
+    opts = {
+      max_lines = 1, -- Maximum number of lines to show for a single context
+      multiwindow = true,
+    },
   },
   'onsails/lspkind.nvim',
   {
