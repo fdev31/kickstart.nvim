@@ -1,5 +1,12 @@
 return {
   {
+    'karloskar/poetry-nvim',
+    filetype = { 'python' },
+    config = function()
+      require('poetry-nvim').setup()
+    end,
+  },
+  {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
