@@ -82,7 +82,7 @@ return {
           origin = ''
         else
           if diagnostic.code then
-            origin = origin .. ':' .. diagnostic.code
+            origin = origin .. ':' .. vim.inspect(diagnostic.code)
           end
           origin = string.format(' [%s]', origin)
         end
