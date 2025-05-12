@@ -15,37 +15,32 @@ return {
         -- args = { '-e' },
       }
       -- Adapters {{{
-      dap.adapters['pwa-node'] = {
-        type = 'server',
-        port = 9229,
-      }
-      dap.adapters.bashdb = {
+      dap.adapters.node2 = {
         type = 'executable',
-        command = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
-        name = 'bashdb',
-      } -- }}}
-      -- Configurations {{{
+        command = 'node',
+        args = { os.getenv 'HOME' .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js' },
+      }
       dap.configurations.javascript = {
         {
-          type = 'pwa-node',
+          name = 'Launch',
+          type = 'node2',
           request = 'launch',
-          name = 'Launch file',
           program = '${file}',
           cwd = vim.fn.getcwd(),
           sourceMaps = true,
+          protocol = 'inspector',
+          console = 'integratedTerminal',
         },
         {
-          type = 'pwa-node',
-          request = 'attach local',
-          skipFiles = { '<node_internals>/**' },
-          name = 'Attach',
+          -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+          name = 'Attach to process',
+          type = 'node2',
+          request = 'attach',
           processId = require('dap.utils').pick_process,
-          cwd = vim.fn.getcwd(),
-          sourceMaps = true,
         },
         {
           name = 'Attach to JSAPP',
-          type = 'pwa-node',
+          type = 'node2',
           protocol = 'inspector',
           mode = 'remote',
           skipFiles = { '<node_internals>/**' },
@@ -89,17 +84,6 @@ return {
     ft = { 'python', 'javascript', 'sh' },
     config = function()
       require('dap-python').setup()
-    end,
-  },
-  {
-    'mxsdev/nvim-dap-vscode-js',
-    dependencies = { 'mfussenegger/nvim-dap' },
-    ft = 'javascript',
-    config = function()
-      require('dap-vscode-js').setup {
-        debugger_path = '/home/fab/dev/microsoft/vscode-js-debug',
-        adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
-      }
     end,
   },
   {
