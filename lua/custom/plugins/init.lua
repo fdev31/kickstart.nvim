@@ -25,7 +25,7 @@ local plugins = {
 
 for _, plugin in ipairs(plugins) do
   local plug = require('custom.plugins.' .. plugin)
-  lib.textend(M, plug)
+  vim.list_extend(M, plug)
   if plug.setup then
     plug.setup()
   end
