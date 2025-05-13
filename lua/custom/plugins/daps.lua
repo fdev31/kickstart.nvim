@@ -16,6 +16,7 @@ return {
       }
       -- Adapters {{{
       dap.adapters.node2 = {
+        -- NOTE: requires cloning https://github.com/microsoft/vscode-node-debug2.git into ~/dev/microsoft
         type = 'executable',
         command = 'node',
         args = { os.getenv 'HOME' .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js' },
@@ -93,8 +94,8 @@ return {
     end,
   },
   {
-    'mfussenegger/nvim-dap-python',
-    dependencies = { 'rcarriga/nvim-dap-ui' },
+    'mfussenegger/nvim-dap-python', -- requires to install debugpy
+    dependencies = { 'rcarriga/nvim-dap' },
     ft = { 'python', 'javascript', 'sh' },
     config = function()
       require('dap-python').setup()
