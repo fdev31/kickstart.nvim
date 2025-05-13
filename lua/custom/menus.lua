@@ -118,7 +118,6 @@ M.main_menu = {
     options = M.git_compare_what,
   },
   { text = ' Runnables ▶', cmd = 'OverseerRun' },
-  { text = ' Silicon', cmd = "'<,'> Silicon" },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
   { text = '󰚰 Lazy update', cmd = 'Lazy update' },
