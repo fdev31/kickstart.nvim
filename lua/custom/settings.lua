@@ -2,29 +2,29 @@ local popup_style = { border = 'rounded' }
 
 -- custom file types
 
-vim.opt.spell = true
-vim.opt.spelllang = 'en_us'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldtext = 'getline(v:foldstart)'
-vim.opt.wmh = 0
-vim.opt.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
-vim.opt.winborder = 'rounded'
-vim.opt.clipboard = 'unnamedplus'
+vim.o.spell = true
+vim.o.spelllang = 'en_us'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldtext = 'getline(v:foldstart)'
+vim.o.wmh = 0
+vim.o.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
+vim.o.winborder = 'rounded'
+vim.o.clipboard = 'unnamedplus'
 
-vim.opt.sw = 4
-vim.opt.ts = 4
-vim.opt.et = true
--- vim.opt.fdm = 'marker'
-vim.opt.foldmethod = 'syntax'
-vim.opt.autoread = true
-vim.opt.number = false
+vim.o.sw = 4
+vim.o.ts = 4
+vim.o.et = true
+-- vim.o.fdm = 'marker'
+vim.o.foldmethod = 'syntax'
+vim.o.autoread = true
+vim.o.number = false
 
-vim.opt.backup = false
-vim.opt.swapfile = false
-vim.opt.writebackup = false
+vim.o.backup = false
+vim.o.swapfile = false
+vim.o.writebackup = false
 
-vim.opt.foldenable = false
-vim.opt.termguicolors = true
+vim.o.foldenable = false
+vim.o.termguicolors = true
 vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 
 -- read ~/.onemw/config and extract the value of STB_IP

@@ -35,11 +35,11 @@ parser_config.confluence_wiki = {
 autocmd({ 'FileType' }, {
   callback = function()
     if require('nvim-treesitter.parsers').has_parser() then
-      vim.opt.foldmethod = 'expr'
-      vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-      -- vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+      vim.o.foldmethod = 'expr'
+      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+      -- vim.o.foldtext = 'v:lua.vim.treesitter.foldtext()'
     else
-      vim.opt.foldmethod = 'syntax'
+      vim.o.foldmethod = 'syntax'
     end
   end,
 })

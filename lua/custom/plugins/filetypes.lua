@@ -3,7 +3,7 @@ return {
     'aklt/plantuml-syntax',
     ft = 'plantuml',
     config = function()
-      vim.opt.spell = false
+      vim.o.spell = false
       vim.api.nvim_set_hl(0, 'PlantumlColonLine', { link = '@character' })
     end,
   },
