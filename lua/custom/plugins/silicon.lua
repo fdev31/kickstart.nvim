@@ -6,6 +6,7 @@ return {
       has_line_number = true,
       bg_padding = 32,
       mac_window_bar = false,
+      save_path = '/tmp',
       code_font_family = 'Fira Code',
     },
   },
