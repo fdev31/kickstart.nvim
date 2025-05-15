@@ -1,3 +1,5 @@
+local lib = require 'custom.lib'
+
 return {
   {
     'linux-cultist/venv-selector.nvim',
@@ -91,16 +93,22 @@ return {
       format = function(diagnostic)
         local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
         local prefix = ''
+
         if origin == 'Harper' then
           prefix = '  '
           origin = ''
         else
           if diagnostic.code then
-            origin = (origin or ' ') .. vim.inspect(diagnostic.code)
+            local safe_code = lib.safeString(diagnostic.code)
+            origin = string.format('%s %s', origin, safe_code)
+          else
+            origin = ' '
           end
-          origin = string.format(' [%s]', origin)
+          origin = string.format(' ✔️%s', origin)
         end
 
+        -- strip origin for newlines and blanks
+        origin = origin:gsub('^%s+', ''):gsub('%s+$', ''):gsub('\n', ' ')
         return string.format('%s%s%s', prefix, diagnostic.message, origin)
       end,
     },
@@ -157,3 +165,4 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 }
+-- vim:ts=2:sw=2:et:vim

@@ -83,4 +83,14 @@ return {
     end
     return filtered
   end,
+  safeString = function(str)
+    if not str then
+      return ' '
+    end
+    if type(str) == 'string' then
+      return str
+    else
+      return vim.inspect('^%s*(.-)%s*$', '%1')
+    end
+  end,
 }
