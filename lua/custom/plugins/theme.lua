@@ -2,36 +2,6 @@ local screensaver_timeout = 60 * 10 -- in seconds
 
 return {
   {
-    'wolfwfr/vimatrix.nvim',
-    lazy = false,
-    opts = {
-      window = {
-        general = {
-          zindex = 1000,
-        },
-      },
-      -- logging = {
-      --   print_errors = true,
-      --   log_level = vim.log.levels.DEBUG,
-      -- },
-      auto_activation = {
-        screensaver = {
-          timeout = screensaver_timeout,
-          setup_deferral = 1,
-          ignore_focus = true,
-          block_on_term = true,
-          block_on_cmd_line = true,
-        },
-      },
-      alphabet = {
-        built_in = { 'symbols' },
-        custom = { '', '', '', '', '󰌽', '󰣇', '󱌵', '', '', '', '', '', '' },
-        randomize_on_init = true,
-        randomize_on_pick = false,
-      },
-    },
-  },
-  {
     'Mofiqul/dracula.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     opts = {
