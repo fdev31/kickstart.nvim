@@ -75,7 +75,7 @@ local M = {
             autopep8 = { enabled = false },
             yapf = { enabled = false },
             -- linter options
-            pylint = { enabled = false },
+            pylint = { enabled = true },
             mccabe = { enabled = false },
             pyflakes = { enabled = false },
             pycodestyle = { enabled = false },
@@ -90,6 +90,7 @@ local M = {
             -- ruff
             ruff = {
               enabled = true,
+              formatEnabled = true,
             },
           },
         },

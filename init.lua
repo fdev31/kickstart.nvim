@@ -84,6 +84,7 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 pcall(require, 'custom.init') -- let a chance to load custom code
 local custom_plugins = require 'custom.plugins' -- execute plugin code
@@ -610,7 +611,7 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      local servers = settings.lsp_servers
+      local servers = lib.filter_prop(settings.lsp_servers, 'enabled', false)
 
       -- Ensure the servers and tools above are installed
       --

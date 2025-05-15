@@ -73,4 +73,14 @@ return {
     end
   end,
   isGitMergetool = vim.env.TEXTDOMAIN == 'git' or vim.env.GIT_PREFIX ~= nil,
+
+  filter_prop = function(list, propname, not_value)
+    local filtered = {}
+    for _, item in ipairs(list) do
+      if item[propname] ~= not_value then
+        table.insert(filtered, item)
+      end
+    end
+    return filtered
+  end,
 }
