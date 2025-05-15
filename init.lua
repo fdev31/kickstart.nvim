@@ -471,6 +471,7 @@ require('lazy').setup({
       'saghen/blink.cmp',
     }),
     config = function()
+      vim.lsp.set_log_level 'off'
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
