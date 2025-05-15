@@ -58,7 +58,7 @@ local M = {
     dprint = {},
     typos_lsp = {},
     html = {},
-    ruff = {},
+    ruff = { enabled = false },
     pyright = { enabled = false },
     bashls = {},
     cssls = {},
@@ -89,7 +89,7 @@ local M = {
             pyls_isort = { enabled = false },
             -- ruff
             ruff = {
-              enabled = true,
+              enabled = false,
               formatEnabled = true,
             },
           },
