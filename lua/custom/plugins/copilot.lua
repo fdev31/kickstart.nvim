@@ -59,7 +59,7 @@ else
       branch = 'main',
       opts = {
         agent = 'copilot',
-        model = 'gemini-2.5-pro',
+        model = 'claude-3.7-sonnet',
 
         question_header = 'Prompt ', -- Header to use for user questions
         answer_header = '  ', -- Header to use for AI answers
