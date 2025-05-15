@@ -59,9 +59,7 @@ local M = {
     typos_lsp = {},
     html = {},
     ruff = {},
-    pyright = {
-      enabled = false,
-    },
+    pyright = { enabled = false },
     bashls = {},
     cssls = {},
     clangd = {},
