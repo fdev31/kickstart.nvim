@@ -35,6 +35,7 @@ return {
   'onsails/lspkind.nvim',
   {
     'folke/snacks.nvim', -- QoL (images, keymaps, ...)
+    lazy = false,
     ---@type snacks.Config
     opts = {
       image = {},

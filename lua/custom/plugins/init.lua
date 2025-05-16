@@ -33,10 +33,12 @@ for _, plugin in ipairs(plugins) do
 end
 
 for _, p in ipairs(M) do
-  if type(p) == 'table' and not p.opts then
-    p.opts = {}
+  if type(p) == 'table' then
+    if not p.opts then
+      p.opts = {}
+    end
     if p.lazy == nil then
-      p.lazy = true
+      p.lazy = 'VeryLazy'
     end
   end
 end
