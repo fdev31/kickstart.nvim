@@ -7,6 +7,9 @@ return {
     opts = {
       transparent_bg = not vim.g.neovide,
       italic_comment = true,
+      colors = {
+        bg = '#100020',
+      },
     },
     init = function()
       vim.cmd.colorscheme 'dracula'
