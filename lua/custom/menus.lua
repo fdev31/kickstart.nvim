@@ -123,6 +123,7 @@ M.main_menu = {
   { text = '󰚰 Lazy update', cmd = 'Lazy update' },
   { text = '󱊒 Mason update', cmd = 'MasonToolsUpdate' },
   { text = ' Venv selector', cmd = 'VenvSelect' },
+  { text = ' PIO menu', cmd = 'Piomenu' },
   -- { text = '󰽿 Treesitter context (toggle)', handler = require('treesitter-context').toggle },
 }
 

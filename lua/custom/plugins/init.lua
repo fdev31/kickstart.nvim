@@ -15,7 +15,7 @@ local plugins = {
   'markdown',
   'menus',
   'orgmode',
-  'platformio',
+  'embedded',
   'python',
   'qol',
   'silicon',

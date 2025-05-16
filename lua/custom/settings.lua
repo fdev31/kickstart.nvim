@@ -63,6 +63,7 @@ local M = {
     bashls = {},
     cssls = {},
     clangd = {},
+    ccls = {},
     ts_ls = {},
     eslint = {},
     tailwindcss = {},
