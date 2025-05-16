@@ -165,4 +165,4 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 }
--- vim:ts=2:sw=2:et:vim
+-- :ts=2:sw=2:et:
