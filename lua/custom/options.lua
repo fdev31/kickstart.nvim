@@ -18,6 +18,7 @@ local fmt_formatter = require('conform').formatters_by_ft
 fmt_formatter['*'] = { 'codespell', 'trim_whitespace' }
 fmt_formatter.go = { 'gofmt' }
 fmt_formatter.lua = { 'stylua' }
+fmt_formatter.sh = { 'shfmt' }
 fmt_formatter.rust = { 'rustfmt' }
 fmt_formatter.cpp = { 'clang_format' }
 fmt_formatter.toml = { 'toml_fmt' }
