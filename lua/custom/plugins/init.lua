@@ -7,21 +7,21 @@ local settings = require 'custom.settings'
 M = {}
 
 local plugins = {
-  'theme',
-  'git',
-  'orgmode',
+  'copilot',
+  'daps',
   'diffview',
+  'filetypes',
+  'git',
   'markdown',
-  'python',
+  'menus',
+  'orgmode',
   'platformio',
+  'python',
+  'qol',
   'silicon',
   'smooth_scroll',
+  'theme',
   'workspaces',
-  'menus',
-  'qol',
-  'daps',
-  'filetypes',
-  'copilot',
 }
 
 for _, plugin in ipairs(plugins) do
