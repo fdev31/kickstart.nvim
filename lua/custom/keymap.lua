@@ -12,8 +12,8 @@ map('n', '<leader>gd', require('custom.lib').openUnder, { desc = '_Definition (c
 
 -- basic operations
 map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
-map('n', '<leader>tn', '<cmd> set rnu! <CR>', { noremap = true, silent = true, desc = '[n]umber relative' })
-map('n', '<leader>tN', '<cmd> set number! <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
+map('n', '<leader>tn', '<cmd> set nonumber rnu! <CR>', { noremap = true, silent = true, desc = '[n]umber relative' })
+map('n', '<leader>tN', '<cmd> set number! nornu <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
 map('n', '<leader>oo', function()
   local file = vim.fn.expand '<cfile>'
   vim.cmd('tabnew ' .. file)
