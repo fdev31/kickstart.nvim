@@ -129,6 +129,10 @@ map('n', '<leader><leader>', function()
   require('telescope').extensions.smart_open.smart_open()
 end, { desc = 'Smart open' })
 
+map('n', '<leader>~', function()
+  require('telescope').extensions.smart_open.smart_open { cwd_only = true }
+end, { desc = 'Smart open cwd' })
+
 map('n', '<C-p>', function() -- pick symbol (aerial)
   require('telescope').extensions.aerial.aerial()
 end, { noremap = true, silent = true, desc = 'Toggle code outline window' })
