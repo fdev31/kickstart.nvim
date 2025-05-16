@@ -35,6 +35,9 @@ end
 for _, p in ipairs(M) do
   if type(p) == 'table' and not p.opts then
     p.opts = {}
+    if p.lazy == nil then
+      p.lazy = true
+    end
   end
 end
 
