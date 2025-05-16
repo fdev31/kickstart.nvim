@@ -13,6 +13,7 @@ local plugins = {
   'diffview',
   'markdown',
   'python',
+  'platformio',
   'silicon',
   'smooth_scroll',
   'workspaces',
