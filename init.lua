@@ -631,6 +631,9 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
+
+      local formatting_providers = vim.tbl_keys(require('conform').formatters_by_ft)
+      vim.tbl_extend('keep', ensure_installed, formatting_providers)
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
