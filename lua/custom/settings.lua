@@ -60,6 +60,7 @@ local M = {
     html = {},
     ruff = { enabled = false },
     pyright = { enabled = false },
+    pycodestyle = { enabled = false },
     bashls = {},
     cssls = {},
     clangd = {},
