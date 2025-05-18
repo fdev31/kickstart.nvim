@@ -37,9 +37,6 @@ for _, p in ipairs(M) do
     if not p.opts then
       p.opts = {}
     end
-    if p.lazy == nil then
-      p.lazy = 'VeryLazy'
-    end
   end
 end
 
