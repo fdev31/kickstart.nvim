@@ -46,9 +46,8 @@ end
 
 local M = {
   diagnostic_config = {
-    float = vim.tbl_deep_extend('force', { source = 'if_many' }, popup_style),
-    severity_sort = true,
     underline = { severity = vim.diagnostic.severity.ERROR },
+    virtual_text = false,
     signs = vim.g.have_nerd_font and {
       text = {
         [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -56,7 +55,23 @@ local M = {
         [vim.diagnostic.severity.INFO] = '󰋽 ',
         [vim.diagnostic.severity.HINT] = '󰌶 ',
       },
-    },
+    } or true,
+    float = vim.tbl_deep_extend('force', {
+      show_header = false,
+      update_in_insert = true,
+      focusable = false,
+      scope = 'line',
+      source = false,
+      close_events = {
+        'CursorMoved',
+        'CursorMovedI',
+        'BufHidden',
+        'InsertCharPre',
+        'WinLeave',
+      },
+    }, popup_style),
+
+    severity_sort = true,
   },
   useCopilot = true,
   popup_style = popup_style,

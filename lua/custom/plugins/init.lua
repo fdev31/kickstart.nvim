@@ -25,11 +25,18 @@ local plugins = {
   'workspaces',
 }
 
-for _, plugin in ipairs(plugins) do
+function load_plugin(plugin)
   local plug = require('custom.plugins.' .. plugin)
   vim.list_extend(M, plug)
   if plug.setup then
     plug.setup()
+  end
+end
+
+for _, plugin in ipairs(plugins) do
+  local ret, msg = pcall(load_plugin, plugin)
+  if not ret then
+    vim.notify('Failed to load plugin ' .. plugin .. ': ' .. msg, vim.log.levels.ERROR)
   end
 end
 

@@ -1,37 +1,36 @@
 local lib = require 'custom.lib'
+
+local origin_map = {
+  Harper = ' ',
+  Ruff = '󱐋 ',
+}
 vim.api.nvim_create_autocmd('CursorHold', {
   callback = function()
+    -- FIXME: commented out because it seems to prevent some tips to show
+    -- if lib.floating_win_exists() then
+    --   return
+    -- end
     vim.diagnostic.open_float(nil, {
-      focusable = false,
-      source = 'if_many',
       scope = 'line',
-      close_events = {
-        'CursorMoved',
-        'CursorMovedI',
-        'BufHidden',
-        'InsertCharPre',
-        'WinLeave',
-      },
-
+      header = '',
       format = function(diagnostic)
         local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
-        local prefix = ''
-
-        if origin == 'Harper' then
-          prefix = '  '
-          origin = ''
-        else
-          if diagnostic.code then
-            local safe_code = lib.safeString(diagnostic.code)
-            origin = string.format('%s %s', origin, safe_code)
-          else
-            origin = nil
-          end
-          origin = origin and string.format('🯖%s', origin) or ''
-        end
+        local prefix = '󰄳 '
 
         -- strip origin for newlines and blanks
         origin = origin:gsub('^%s+', ''):gsub('%s+$', ''):gsub('\n', ' ')
+        local sub = origin_map[origin]
+        if sub then
+          prefix = sub
+          origin = ''
+        end
+
+        if origin and origin ~= '' then
+          origin = string.format(' (%s)', origin)
+        else
+          origin = ''
+        end
+
         return string.format('%s%s%s', prefix, diagnostic.message, origin)
       end,
     })
