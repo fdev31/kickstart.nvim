@@ -8,7 +8,7 @@ map('n', '<leader>ga', '<cmd>G add %<CR>', { desc = '_add file (git)' })
 map('n', '<leader>gr', '<cmd>G reset HEAD %<CR>', { desc = '_reset file (git)' })
 map('n', '<leader>gc', '<cmd>DiffviewClose<CR><cmd>G commit %<CR>', { desc = '_commit file (git)' })
 map('n', '<leader>gC', '<cmd>DiffviewClose<CR><cmd>G commit<CR>', { desc = '_Commit all (git)' })
-map('n', '<leader>gd', require('custom.lib').openUnder, { desc = '_Definition (can open file under cursor)' })
+map('n', 'gd', require('custom.lib').openUnder, { desc = '_Definition (can open file under cursor)' })
 
 -- basic operations
 map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
