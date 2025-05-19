@@ -90,6 +90,7 @@ local M = {
     clangd = {},
     ccls = {},
     ts_ls = {},
+    pyflakes = { enabled = false },
     eslint = {},
     tailwindcss = {},
     stylua = {},
