@@ -25,36 +25,6 @@ fmt_formatter.toml = { 'toml_fmt' }
 fmt_formatter.python = { 'ruff_format' }
 fmt_formatter.javascript = { 'eslint_d', 'prettierd' }
 
--- style
-
-local no_background = { ctermbg = nil, guibg = nil, bg = nil }
-local sideColor = '#282a36'
-local hover_color = {
-  bg = '#2a3658',
-}
-local change_bg = '#154732' -- for diffview
-
-vim.api.nvim_set_hl(0, 'Special', { fg = '#ffaaac' })
-
--- lsp auto hover
-vim.api.nvim_set_hl(0, 'LspReferenceText', hover_color)
-vim.api.nvim_set_hl(0, 'LspReferenceWrite', hover_color)
-vim.api.nvim_set_hl(0, 'LspReferenceRead', hover_color)
--- diffview
-vim.api.nvim_set_hl(0, 'DiffChange', { bg = change_bg })
-vim.api.nvim_set_hl(0, 'DiffAdd', { bg = change_bg })
-vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#521414', fg = '#521414' })
-vim.api.nvim_set_hl(0, 'DiffText', { bold = true, bg = '#ddffee', fg = change_bg })
--- transparent backgrounds
-vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
-vim.api.nvim_set_hl(0, 'TabLineFill', no_background)
-vim.api.nvim_set_hl(0, 'StatusLine', no_background)
-vim.api.nvim_set_hl(0, 'TelescopeNormal', vim.tbl_deep_extend('force', { fg = '#d8d8f2' }, no_background))
--- cursor
-vim.api.nvim_set_hl(0, 'Cursor', { fg = '#000000', bg = '#FFaa33' })
-vim.api.nvim_set_hl(0, 'Cursor2', { fg = '#000000', bg = '#FF0066' })
-vim.o.guicursor = 'n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50'
-
 if vim.g.neovide then
   local mapKey = vim.keymap.set
   mapKey('!', '<S-Insert>', '<C-R>+') -- allow Shit+Insert on the prompt
