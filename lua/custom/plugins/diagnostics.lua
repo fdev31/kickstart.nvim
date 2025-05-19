@@ -4,7 +4,10 @@ local settings = require 'custom.settings'
 local origin_map = {
   Harper = ' ',
   Ruff = '󱐋 ',
+  typos = '󰓆 ',
 }
+origin_map['Lua Diagnostics.'] = ' '
+
 vim.api.nvim_create_autocmd('CursorHold', {
   callback = function()
     if not settings.showDiagnostics then
