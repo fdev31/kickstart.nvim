@@ -44,11 +44,20 @@ local function get_stb_ip()
   return nil
 end
 
-vim.diagnostic.config {
-  float = popup_style,
-}
-
 local M = {
+  diagnostic_config = {
+    float = vim.tbl_deep_extend('force', { source = 'if_many' }, popup_style),
+    severity_sort = true,
+    underline = { severity = vim.diagnostic.severity.ERROR },
+    signs = vim.g.have_nerd_font and {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '󰅚 ',
+        [vim.diagnostic.severity.WARN] = '󰀪 ',
+        [vim.diagnostic.severity.INFO] = '󰋽 ',
+        [vim.diagnostic.severity.HINT] = '󰌶 ',
+      },
+    },
+  },
   useCopilot = true,
   popup_style = popup_style,
   stb_ip = get_stb_ip(),
