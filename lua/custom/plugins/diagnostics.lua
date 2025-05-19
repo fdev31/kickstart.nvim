@@ -5,8 +5,8 @@ local origin_map = {
   Harper = ' ',
   Ruff = '󱐋 ',
   typos = '󰓆 ',
+  ['Lua Diagnostics.'] = ' ',
 }
-origin_map['Lua Diagnostics.'] = ' '
 
 vim.api.nvim_create_autocmd('CursorHold', {
   callback = function()
