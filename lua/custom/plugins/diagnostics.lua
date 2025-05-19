@@ -1,4 +1,5 @@
 local lib = require 'custom.lib'
+local settings = require 'custom.settings'
 
 local origin_map = {
   Harper = ' ',
@@ -6,11 +7,14 @@ local origin_map = {
 }
 vim.api.nvim_create_autocmd('CursorHold', {
   callback = function()
+    if not settings.showDiagnostics then
+      return
+    end
     -- FIXME: commented out because it seems to prevent some tips to show
     -- if lib.floating_win_exists() then
     --   return
     -- end
-    vim.diagnostic.open_float(nil, {
+    _, settings._diag_window = vim.diagnostic.open_float(nil, {
       scope = 'line',
       header = '',
       format = function(diagnostic)

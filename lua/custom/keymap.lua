@@ -1,6 +1,7 @@
 -- :vim: foldlevel=0:
 local partial = require('custom.lib').partial
 local map = vim.keymap.set
+local settings = require 'custom.settings'
 
 local telescope = require 'telescope.builtin'
 
@@ -158,8 +159,10 @@ end, { desc = 'Compare (git)' })
 
 -- toggle diagnostics
 map('n', '<leader>td', function()
-  local enabled = vim.diagnostic.enable(not enabled)
-  vim.cmd 'DiagflowToggle'
+  settings.showDiagnostics = not settings.showDiagnostics
+  if not settings.showDiagnostics then
+    vim.api.nvim_win_close(settings._diag_window, true)
+  end
 end, { desc = '[d]iagnostics' })
 
 -- dap

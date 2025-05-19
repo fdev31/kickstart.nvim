@@ -74,6 +74,8 @@ local M = {
     severity_sort = true,
   },
   useCopilot = true,
+  showDiagnostics = true,
+
   popup_style = popup_style,
   stb_ip = get_stb_ip(),
   lsp_servers = {
