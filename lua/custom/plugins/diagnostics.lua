@@ -14,24 +14,19 @@ vim.api.nvim_create_autocmd('CursorHold', {
       scope = 'line',
       header = '',
       format = function(diagnostic)
-        local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
         local prefix = '󰄳 '
-
+        local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
         -- strip origin for newlines and blanks
         origin = origin:gsub('^%s+', ''):gsub('%s+$', ''):gsub('\n', ' ')
-        local sub = origin_map[origin]
-        if sub then
-          prefix = sub
+
+        if origin_map[origin] then
+          prefix = origin_map[origin]
           origin = ''
         end
 
-        if origin and origin ~= '' then
-          origin = string.format(' (%s)', origin)
-        else
-          origin = ''
-        end
+        local suffix = (origin and origin ~= '' and string.format(' (%s)', origin)) or ''
 
-        return string.format('%s%s%s', prefix, diagnostic.message, origin)
+        return string.format('%s%s%s', prefix, diagnostic.message, suffix)
       end,
     })
   end,
