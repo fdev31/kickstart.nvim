@@ -77,34 +77,42 @@ local M = {
     ts_ls = {},
     eslint = {},
     tailwindcss = {},
+    stylua = {},
+    pylsp_mypy = {},
+    mypy = {},
+    python_lsp_isort = {},
     pylsp = {
-      settings = {
-        pylsp = {
-          plugins = {
-            -- formatter options
-            black = { enabled = false },
-            autopep8 = { enabled = false },
-            yapf = { enabled = false },
-            -- linter options
-            pylint = { enabled = true },
-            mccabe = { enabled = false },
-            pyflakes = { enabled = false },
-            pycodestyle = { enabled = false },
-            pydocstyle = { enabled = false },
-            pyright = { enabled = false },
-            -- type checker
-            pylsp_mypy = { enabled = true },
-            -- auto-completion options
-            jedi_completion = { fuzzy = true },
-            -- import sorting
-            pyls_isort = { enabled = false },
-            -- ruff
-            ruff = {
-              enabled = false,
-              formatEnabled = true,
-            },
-          },
+      plugins = {
+        -- formatter options
+        black = { enabled = false },
+        autopep8 = { enabled = false },
+        yapf = { enabled = false },
+        -- linter options
+        pylint = { enabled = true },
+        mccabe = { enabled = false },
+        pyflakes = { enabled = false },
+        pycodestyle = { enabled = false },
+        pydocstyle = { enabled = false },
+        pyright = { enabled = false },
+        -- type checker
+        pylsp_mypy = { enabled = true },
+        -- auto-completion options
+        jedi_completion = { fuzzy = true },
+        -- import sorting
+        pylsp_isort = { enabled = true },
+        -- ruff
+        ruff = {
+          enabled = false,
+          formatEnabled = true,
         },
+        -- navigation-related plugins
+        rope_completion = { enabled = true },
+        jedi_completion = { enabled = true },
+        jedi_definition = { enabled = true },
+        jedi_hover = { enabled = true },
+        jedi_references = { enabled = true },
+        jedi_signature_help = { enabled = true },
+        jedi_symbols = { enabled = true },
       },
     },
     volar = {

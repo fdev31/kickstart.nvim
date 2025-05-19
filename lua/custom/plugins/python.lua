@@ -1,9 +1,16 @@
 return {
   {
+    'karloskar/poetry-nvim',
+    filetype = { 'python' },
+    config = function()
+      require('poetry-nvim').setup()
+    end,
+  },
+  {
     'linux-cultist/venv-selector.nvim',
+    branch = 'regexp',
     dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
     opts = {
-      stay_on_this_version = true,
       -- Your options go here
       name = 'pyenv',
       auto_refresh = true,
