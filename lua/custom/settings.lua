@@ -80,11 +80,7 @@ local M = {
   stb_ip = get_stb_ip(),
   lsp_servers = {
     textlsp = {},
-    harper_ls = {
-      enabled = false,
-      userDictPath = '~/dict.txt',
-      linters = { SpellCheck = false },
-    },
+    harper_ls = {},
     dprint = {},
     typos_lsp = {},
     html = {},
