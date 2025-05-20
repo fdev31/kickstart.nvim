@@ -611,16 +611,17 @@ require('lazy').setup({
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
-        automatic_enable = true,
+        automatic_enable = ensure_installed,
       }
-      -- TODO: FIXME - can't find a place to load this
-      for i, server_name in pairs(ensure_installed) do
-        local opts = servers[server_name] or {}
+
+      for _, server_name in pairs(ensure_installed) do
+        local server = servers[server_name] or {}
         -- This handles overriding only values explicitly passed
         -- by the server configuration above. Useful when disabling
         -- certain features of an LSP (for example, turning off formatting for ts_ls)
-        opts.capabilities = vim.tbl_deep_extend('force', {}, capabilities, opts.capabilities or {})
-        require('lspconfig')[server_name].setup(opts)
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        -- vim.lsp.config(server_name, server)
+        require('lspconfig')[server_name].setup { server }
       end
     end,
   },

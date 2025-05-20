@@ -80,7 +80,11 @@ local M = {
   stb_ip = get_stb_ip(),
   lsp_servers = {
     textlsp = {},
-    harper_ls = {},
+    harper_ls = {
+      enabled = false,
+      userDictPath = '~/dict.txt',
+      linters = { SpellCheck = false },
+    },
     dprint = {},
     typos_lsp = {},
     html = {},
@@ -90,15 +94,15 @@ local M = {
     bashls = {},
     cssls = {},
     clangd = {},
-    ccls = {},
+    -- ccls = {},
     ts_ls = {},
     pyflakes = { enabled = false },
     eslint = {},
     tailwindcss = {},
-    stylua = {},
-    pylsp_mypy = {},
-    mypy = {},
-    python_lsp_isort = {},
+    -- stylua = {},
+    -- pylsp_mypy = {},
+    -- mypy = {},
+    -- python_lsp_isort = {},
     pylsp = {
       plugins = {
         -- formatter options

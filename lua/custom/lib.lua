@@ -84,9 +84,9 @@ return {
 
   filter_prop = function(list, propname, not_value)
     local filtered = {}
-    for _, item in ipairs(list) do
+    for name, item in pairs(list) do
       if item[propname] ~= not_value then
-        table.insert(filtered, item)
+        filtered[name] = item
       end
     end
     return filtered
