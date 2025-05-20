@@ -5,6 +5,7 @@ local origin_map = {
   Harper = ' ',
   Ruff = '󱐋 ',
   typos = '󰓆 ',
+  typescript = '󰛦 ',
   ['Lua Diagnostics.'] = ' ',
 }
 
