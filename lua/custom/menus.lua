@@ -78,12 +78,16 @@ M.git_menu = { --{{{
     cmd = '!git commit --amend --no-edit',
     silent = true,
   },
-  -- {
-  --   text = ' Cached',
-  --   command = 'git diff --cached',
-  -- },
   {
-    text = ' File history',
+    text = '󰇚 Pull',
+    cmd = 'G pull',
+  },
+  {
+    text = ' View Cached',
+    cmd = 'G diff --cached',
+  },
+  {
+    text = '  File history',
     handler = telescope.git_bcommits,
   },
   {
