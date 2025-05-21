@@ -14,6 +14,7 @@ local plugins = {
   'embedded',
   'filetypes',
   'git',
+  'http_client',
   'markdown',
   'menus',
   'orgmode',

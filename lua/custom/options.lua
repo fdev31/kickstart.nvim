@@ -13,6 +13,11 @@ conform.formatters.toml_fmt = {
   command = 'toml_reformat',
   stdin = true,
 }
+conform.formatters.kulala = {
+  command = 'kulala-fmt',
+  args = { 'format', '$FILENAME' },
+  stdin = false,
+}
 
 local fmt_formatter = require('conform').formatters_by_ft
 fmt_formatter['*'] = { 'codespell', 'trim_whitespace' }
@@ -24,6 +29,7 @@ fmt_formatter.cpp = { 'clang_format' }
 fmt_formatter.toml = { 'toml_fmt' }
 fmt_formatter.python = { 'ruff_format' }
 fmt_formatter.javascript = { 'eslint_d', 'prettierd' }
+fmt_formatter.http = { 'kulala' }
 
 if vim.g.neovide then
   local mapKey = vim.keymap.set

@@ -353,6 +353,7 @@ require('lazy').setup({
       spec = {
         { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
         { '<leader>d', group = 'Debugging' },
+        { '<leader>R', group = 'Request' },
         { '<leader>g', group = 'Git' },
         { '<leader>f', group = 'Find' },
         { '<leader>o', group = 'Org' },
