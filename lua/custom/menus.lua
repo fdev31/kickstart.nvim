@@ -2,6 +2,26 @@ local M = {}
 
 local telescope = require 'telescope.builtin'
 
+local cherryPickCommitsFromBranch = function(_, action)
+  action('i', '<CR>', function(prompt_bufnr)
+    local selection = require('telescope.actions.state').get_selected_entry()
+    require('telescope.actions').close(prompt_bufnr)
+    -- start a telescope listing commits of this branch
+    telescope.git_commits {
+      branch = selection.value,
+      attach_mappings = function(_, action)
+        action('i', '<CR>', function(prompt_bufnr)
+          local commit = require('telescope.actions.state').get_selected_entry()
+          require('telescope.actions').close(prompt_bufnr)
+          vim.cmd('Git cherry-pick ' .. commit.value .. ' -x')
+        end)
+        return true
+      end,
+    }
+  end)
+  return true
+end
+
 local openDiffView = function(_, action)
   action('i', '<CR>', function(prompt_bufnr)
     local selection = require('telescope.actions.state').get_selected_entry()
@@ -77,6 +97,12 @@ M.git_menu = { --{{{
   {
     text = ' Checkout branch',
     handler = telescope.git_branches,
+  },
+  {
+    text = ' Cherry-Pick ▶',
+    handler = function()
+      telescope.git_branches { attach_mappings = cherryPickCommitsFromBranch }
+    end,
   },
   {
     text = ' Stash changes ▶',
