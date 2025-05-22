@@ -5,32 +5,6 @@ vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
 -- Load custom snippets
 require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/.config/Code/User/snippets/' } }
 
--- formatter / linter options
---
-local conform = require 'conform'
-
-conform.formatters.toml_fmt = {
-  command = 'toml_reformat',
-  stdin = true,
-}
-conform.formatters.kulala = {
-  command = 'kulala-fmt',
-  args = { 'format', '$FILENAME' },
-  stdin = false,
-}
-
-local fmt_formatter = require('conform').formatters_by_ft
-fmt_formatter['*'] = { 'codespell', 'trim_whitespace' }
-fmt_formatter.go = { 'gofmt' }
-fmt_formatter.lua = { 'stylua' }
-fmt_formatter.sh = { 'shfmt' }
-fmt_formatter.rust = { 'rustfmt' }
-fmt_formatter.cpp = { 'clang_format' }
-fmt_formatter.toml = { 'toml_fmt' }
-fmt_formatter.python = { 'ruff_format' }
-fmt_formatter.javascript = { 'eslint_d', 'prettierd' }
-fmt_formatter.http = { 'kulala' }
-
 if vim.g.neovide then
   local mapKey = vim.keymap.set
   mapKey('!', '<S-Insert>', '<C-R>+') -- allow Shit+Insert on the prompt

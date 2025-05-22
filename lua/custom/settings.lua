@@ -78,6 +78,31 @@ local M = {
 
   popup_style = popup_style,
   stb_ip = get_stb_ip(),
+  conform_opts = {
+    formatters_by_ft = {
+      ['*'] = { 'codespell', 'trim_whitespace' },
+      go = { 'gofmt' },
+      lua = { 'stylua' },
+      sh = { 'shfmt' },
+      rust = { 'rustfmt' },
+      cpp = { 'clang_format' },
+      toml = { 'toml_fmt' },
+      python = { 'ruff_format' },
+      javascript = { 'eslint_d', 'prettierd' },
+      http = { 'kulala' },
+    },
+    formatters = {
+      toml_fmt = {
+        command = 'toml_reformat',
+        stdin = true,
+      },
+      kulala = {
+        command = 'kulala-fmt',
+        args = { 'format', '$FILENAME' },
+        stdin = false,
+      },
+    },
+  },
   lsp_servers = {
     textlsp = {},
     harper_ls = {},

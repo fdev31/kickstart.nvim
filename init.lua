@@ -659,7 +659,7 @@ require('lazy').setup({
         desc = '[f]ormat',
       },
     },
-    opts = {
+    opts = vim.tbl_deep_extend('force', settings.conform_opts, {
       notify_on_error = true,
       notify_no_formatters = true,
       format_on_save = function(bufnr)
@@ -680,9 +680,8 @@ require('lazy').setup({
           }
         end
       end,
-    },
+    }),
   },
-
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
