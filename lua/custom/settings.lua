@@ -133,17 +133,6 @@ local M = {
         jedi_symbols = { enabled = true },
       },
     },
-    volar = {
-      filetypes = { 'vue', 'json' },
-      init_options = {
-        filetypes = { 'vue', 'json' },
-        init_options = {
-          typescript = {
-            tsdk = '/usr/lib/node_modules/typescript/lib/',
-          },
-        },
-      },
-    },
     lua_ls = {
       -- cmd = { ... },
       -- filetypes = { ... },
