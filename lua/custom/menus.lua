@@ -140,15 +140,9 @@ M.git_menu = { --{{{
 } -- }}}
 
 M.main_menu = {
-  {
-    text = ' Git ▶',
-    options = M.git_menu,
-  },
-  {
-    text = ' DiffView ▶',
-    options = M.git_compare_what,
-  },
+  { text = ' DiffView ▶', options = M.git_compare_what },
   { text = ' Runnables ▶', cmd = 'OverseerRun' },
+  { text = ' Git ▶', options = M.git_menu },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
   { text = '󰚰 Lazy update', cmd = 'Lazy update' },
