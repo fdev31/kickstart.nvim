@@ -1,6 +1,7 @@
 return {
   {
     'mistweaverco/kulala.nvim',
+    ui = { formatter = true },
     keys = {
       { 's', desc = 'Send request' },
       { 'a', desc = 'Send all requests' },
