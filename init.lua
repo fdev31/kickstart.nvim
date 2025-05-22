@@ -614,16 +614,25 @@ require('lazy').setup({
         automatic_installation = true,
         automatic_enable = false,
       }
-
-      for _, server_name in pairs(ensure_installed) do
-        local server = servers[server_name] or {}
-        -- This handles overriding only values explicitly passed
-        -- by the server configuration above. Useful when disabling
-        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-        -- vim.lsp.config(server_name, server)
-        require('lspconfig')[server_name].setup { server }
+      function setup_servers()
+        for _, server_name in pairs(ensure_installed) do
+          local server = servers[server_name] or {}
+          -- This handles overriding only values explicitly passed
+          -- by the server configuration above. Useful when disabling
+          -- certain features of an LSP (for example, turning off formatting for ts_ls)
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          -- vim.lsp.config(server_name, server)
+          require('lspconfig')[server_name].setup { server }
+        end
       end
+      setup_servers()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MasonToolsUpdateCompleted',
+        callback = function(e)
+          -- vim.notify '  Ready!'
+          -- vim.schedule(setup_servers)
+        end,
+      })
     end,
   },
 
