@@ -102,7 +102,8 @@ M.git_menu = { --{{{
     text = ' Checkout branch',
     handler = telescope.git_branches,
   },
-  {
+  { -- TODO: allow cherry-picking multiple commits
+    -- alternative: ask to cherry-pick every commit AFTER the selected one
     text = ' Cherry-Pick ▶',
     handler = function()
       telescope.git_branches { attach_mappings = cherryPickCommitsFromBranch }
