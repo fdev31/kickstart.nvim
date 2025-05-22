@@ -203,5 +203,9 @@ map({ 'n', 'v' }, '<leader>cd', function()
 end, { desc = '[d]ocument' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
+  require('menus').menu(require('custom.menus').git_menu, 'Git')
+end, { desc = '[c]ommands' })
+
+map({ 'n', 'v' }, 'gm', function()
   require('menus').menu(require('custom.menus').main_menu)
 end, { desc = '[c]ommands' })
