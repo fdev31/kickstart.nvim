@@ -47,10 +47,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     --  Similar to document symbols, except searches over your entire project.
     lspmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-    -- Rename the variable under your cursor.
-    --  Most Language Servers support renaming across files, etc.
-    lspmap('<leader>rn', vim.lsp.buf.rename, 'Re[n]ame')
-
     -- hover
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
