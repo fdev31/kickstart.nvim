@@ -15,7 +15,7 @@ return {
         renderer = {
           type = 'imv',
           options = {
-            dark_mode = true,
+            dark_mode = false,
             format = nil, -- Allowed values: nil, 'png', 'svg'.
           },
         },
