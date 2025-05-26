@@ -622,12 +622,17 @@ require('lazy').setup({
           -- certain features of an LSP (for example, turning off formatting for ts_ls)
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           -- vim.lsp.config(server_name, server)
-          vim.lsp.config[server_name] = server
-          vim.lsp.enable(server_name)
-          -- require('lspconfig')[server_name].setup { server }
+          require('lspconfig')[server_name].setup { server }
         end
       end
       setup_servers()
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MasonToolsUpdateCompleted',
+        callback = function(e)
+          -- vim.notify '  Ready!'
+          -- vim.schedule(setup_servers)
+        end,
+      })
     end,
   },
 
