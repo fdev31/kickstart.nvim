@@ -87,6 +87,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 pcall(require, 'custom.init') -- let a chance to load custom code
+pcall(require, 'custom.filetype') -- let a chance to load custom code
 local custom_plugins = require 'custom.plugins' -- execute plugin code
 
 -- Set <space> as the leader key
