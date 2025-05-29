@@ -617,13 +617,15 @@ require('lazy').setup({
       }
       function setup_servers()
         for _, server_name in pairs(ensure_installed) do
-          local server = servers[server_name] or {}
+          local srv_config = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for ts_ls)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          srv_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, srv_config.capabilities or {})
+          if server_name == 'pylsp' then
+          end
           -- vim.lsp.config(server_name, server)
-          require('lspconfig')[server_name].setup { server }
+          require('lspconfig')[server_name].setup(srv_config)
         end
       end
       setup_servers()

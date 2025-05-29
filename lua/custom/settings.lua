@@ -109,9 +109,9 @@ local M = {
     dprint = {},
     typos_lsp = {},
     html = {},
-    ruff = { enabled = false },
+    ruff = { enabled = true, formatEnabled = true },
     pyright = { enabled = false },
-    pycodestyle = { enabled = false },
+    pycodestyle = { enabled = false }, -- in pylsp
     bashls = {},
     cssls = {},
     clangd = {},
@@ -120,42 +120,45 @@ local M = {
     pyflakes = { enabled = false },
     eslint = {},
     tailwindcss = {},
-    -- stylua = {},
-    -- pylsp_mypy = {},
-    -- mypy = {},
+    mypy = { enabled = false },
     -- python_lsp_isort = {},
     pylsp = {
-      plugins = {
-        -- formatter options
-        black = { enabled = false },
-        autopep8 = { enabled = false },
-        yapf = { enabled = false },
-        -- linter options
-        pylint = { enabled = true },
-        mccabe = { enabled = false },
-        pyflakes = { enabled = false },
-        pycodestyle = { enabled = false },
-        pydocstyle = { enabled = false },
-        pyright = { enabled = false },
-        -- type checker
-        pylsp_mypy = { enabled = true },
-        -- auto-completion options
-        jedi_completion = { fuzzy = true },
-        -- import sorting
-        pylsp_isort = { enabled = true },
-        -- ruff
-        ruff = {
-          enabled = false,
-          formatEnabled = true,
+      -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
+      settings = {
+        pylsp = {
+          signature_ = {
+            formatter = 'ruff',
+          },
+          plugins = {
+            -- formatter options
+            black = { enabled = false },
+            autopep8 = { enabled = false },
+            yapf = { enabled = true },
+            -- linter options
+            pylint = { enabled = true },
+            mccabe = { enabled = false },
+            pyflakes = { enabled = false },
+            pycodestyle = { enabled = true },
+            pydocstyle = { enabled = true },
+            pyright = { enabled = false },
+            -- type checker
+            pylsp_mypy = { enabled = true },
+            -- auto-completion options
+            jedi_completion = { fuzzy = true },
+            -- import sorting
+            pylsp_isort = { enabled = true },
+            -- ruff
+            -- navigation-related plugins
+            rope_completion = { enabled = true },
+            rope_autoimport = { enabled = true },
+            jedi_completion = { enabled = true },
+            jedi_definition = { enabled = true },
+            jedi_hover = { enabled = true },
+            jedi_references = { enabled = true },
+            jedi_signature_help = { enabled = true },
+            jedi_symbols = { enabled = true },
+          },
         },
-        -- navigation-related plugins
-        rope_completion = { enabled = true },
-        jedi_completion = { enabled = true },
-        jedi_definition = { enabled = true },
-        jedi_hover = { enabled = true },
-        jedi_references = { enabled = true },
-        jedi_signature_help = { enabled = true },
-        jedi_symbols = { enabled = true },
       },
     },
     lua_ls = {
