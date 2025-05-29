@@ -110,9 +110,11 @@ local M = {
     typos_lsp = {},
     html = {},
     ruff = { enabled = true, formatEnabled = true },
+    pylint = { enabled = false },
     pyright = { enabled = false },
     pycodestyle = { enabled = false }, -- in pylsp
     bashls = {},
+    black = { enabled = false },
     cssls = {},
     clangd = {},
     -- ccls = {},
@@ -131,23 +133,17 @@ local M = {
           },
           plugins = {
             -- formatter options
-            black = { enabled = false },
             autopep8 = { enabled = false },
             yapf = { enabled = true },
             -- linter options
-            pylint = { enabled = true },
             mccabe = { enabled = false },
             pyflakes = { enabled = false },
             pycodestyle = { enabled = true },
             pydocstyle = { enabled = true },
-            pyright = { enabled = false },
             -- type checker
-            pylsp_mypy = { enabled = true },
+            pylsp_mypy = { enabled = false },
             -- auto-completion options
             jedi_completion = { fuzzy = true },
-            -- import sorting
-            pylsp_isort = { enabled = true },
-            -- ruff
             -- navigation-related plugins
             rope_completion = { enabled = true },
             rope_autoimport = { enabled = true },
