@@ -87,7 +87,7 @@ local M = {
       rust = { 'rustfmt' },
       cpp = { 'clang_format' },
       toml = { 'toml_fmt' },
-      python = { 'ruff_format' },
+      python = { 'ruff_fix', 'ruff_format' },
       javascript = { 'eslint_d', 'prettierd' },
       http = { 'kulala' },
     },
