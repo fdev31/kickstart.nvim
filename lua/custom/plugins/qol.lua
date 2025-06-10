@@ -1,6 +1,8 @@
 local lib = require 'custom.lib'
 
 return {
+  { 'windwp/nvim-ts-autotag' },
+  { 'windwp/nvim-autopairs' },
   {
     'cbochs/grapple.nvim',
     opts = {
