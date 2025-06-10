@@ -2,6 +2,14 @@ local lib = require 'custom.lib'
 
 return {
   {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('marks').setup()
+      vim.api.nvim_set_hl(0, 'MarkSignHL', { link = 'AerialLine' })
+    end,
+  },
+  {
     'nvim-treesitter/nvim-treesitter-context',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
