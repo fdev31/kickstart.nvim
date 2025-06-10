@@ -15,7 +15,7 @@ vim.o.sw = 4
 vim.o.ts = 4
 vim.o.et = true
 -- vim.o.fdm = 'marker'
-vim.o.foldmethod = 'syntax'
+vim.o.foldmethod = 'manual'
 vim.o.autoread = true
 vim.o.number = false
 
