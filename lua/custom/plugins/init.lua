@@ -24,6 +24,7 @@ local plugins = {
   'smooth_scroll',
   'theme',
   'workspaces',
+  'misc',
 }
 
 function load_plugin(plugin)
