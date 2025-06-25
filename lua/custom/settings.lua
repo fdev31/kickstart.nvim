@@ -233,7 +233,7 @@ local M = {
   },
   lspconfig_dependencies = {},
   cmp_dependencies = {},
-  cmp_sources = { 'lsp', 'path', 'snippets', 'lazydev' },
+  cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
   cmp_providers = {
     lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
   },
