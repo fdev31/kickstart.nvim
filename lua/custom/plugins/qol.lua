@@ -26,8 +26,8 @@ return {
     keys = {
       { '<leader>m', '<cmd>Grapple toggle<cr>', desc = 'Grapple toggle tag' },
       { '<leader>M', '<cmd>Grapple toggle_tags<cr>', desc = 'Grapple open tags window' },
-      { '<leader>n', '<cmd>Grapple cycle_tags next<cr>', desc = 'Grapple cycle next tag' },
-      { '<leader>p', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Grapple cycle previous tag' },
+      -- { '<leader>n', '<cmd>Grapple cycle_tags next<cr>', desc = 'Grapple cycle next tag' },
+      -- { '<leader>p', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Grapple cycle previous tag' },
     },
   },
   {
@@ -45,7 +45,7 @@ return {
     },
     opts = {
       max_lines = 1, -- Maximum number of lines to show for a single context
-      multiwindow = true,
+      multiwindow = false,
     },
   },
   'onsails/lspkind.nvim',
