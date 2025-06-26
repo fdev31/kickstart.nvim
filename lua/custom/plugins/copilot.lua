@@ -43,7 +43,7 @@ if use_codecompanion then
           return require('codecompanion.adapters').extend('copilot', {
             schema = {
               model = {
-                -- default = use_model,
+                default = use_model,
               },
             },
           })
