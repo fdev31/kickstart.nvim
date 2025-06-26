@@ -74,6 +74,7 @@ local M = {
     severity_sort = true,
   },
   useCopilot = true,
+  copilotChat = 'codecompanion',
   showDiagnostics = true,
 
   popup_style = popup_style,

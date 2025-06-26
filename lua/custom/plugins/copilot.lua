@@ -4,7 +4,7 @@ if not settings.useCopilot then
   return {}
 end
 
-local use_codecompanion = true
+local use_codecompanion = settings.copilotChat == 'codecompanion'
 local use_model = 'claude-3.7-sonnet'
 
 settings.cmp_providers.copilot = {

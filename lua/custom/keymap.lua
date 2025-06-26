@@ -186,21 +186,29 @@ map('n', '<leader>do', function()
 end, { noremap = true, silent = true, desc = 'step [o]ut' })
 
 -- copilot
---
+
+map({ 'n', 'v' }, '<leader>cp', function()
+  if settings.copilotChat == 'codecompanion' then
+    if vim.fn.mode() == 'v' or vim.fn.mode() == 'V' or vim.fn.mode() == '\22' then
+      vim.cmd "'<,'>CodeCompanion"
+    else
+      vim.cmd 'CodeCompanion'
+    end
+  end
+end, { desc = '[p]rompt (AI)' })
 map({ 'n', 'v' }, '<leader>cC', function()
-  vim.cmd 'CopilotChat'
-end, { desc = '[C]hat' })
-map({ 'n', 'v' }, '<leader>ce', function()
-  vim.cmd 'CopilotChatExplain'
-end, { desc = '[e]xplain' })
+  if settings.copilotChat == 'codecompanion' then
+    vim.cmd('CodeCompanionChat', 'Toggle')
+  else
+    vim.cmd 'CopilotChat'
+  end
+end, { desc = '[C]hat (AI)' })
 
 map({ 'n', 'v' }, '<leader>co', function()
-  vim.cmd 'CopilotChatOptimize'
-end, { desc = '[o]ptimize' })
-
-map({ 'n', 'v' }, '<leader>cd', function()
-  vim.cmd 'CopilotChatOptimize'
-end, { desc = '[d]ocument' })
+  if settings.copilotChat == 'codecompanion' then
+    vim.cmd 'CodeCompanionActions'
+  end
+end, { desc = 'AI [O]ptions' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
   require('menus').menu(require('custom.menus').git_menu, 'Git')
