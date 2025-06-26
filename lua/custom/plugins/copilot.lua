@@ -16,11 +16,11 @@ settings.cmp_providers.copilot = {
 table.insert(settings.cmp_sources, 'copilot')
 
 local ai_plugins = {
-  { 'fang2hou/blink-copilot' },
+  { 'fang2hou/blink-copilot', event = 'InsertEnter' },
   {
     'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
     opts = { copilot_node_command = '/usr/bin/node' },
-    lazy = false,
   },
 }
 
@@ -39,9 +39,6 @@ if use_codecompanion then
         },
       },
       adapters = {
-        copilot_fast = function()
-          return require('codecompanion.adapters').extend 'copilot'
-        end,
         copilot = function()
           return require('codecompanion.adapters').extend('copilot', {
             schema = {
