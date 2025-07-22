@@ -44,6 +44,15 @@ local function get_stb_ip()
   return nil
 end
 
+local vue_language_server_path = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server'
+-- local vue_language_server_path = '/path/to/@vue/language-server'
+local vue_plugin = {
+  name = '@vue/typescript-plugin',
+  location = vue_language_server_path,
+  languages = { 'vue' },
+  configNamespace = 'typescript',
+}
+
 local M = {
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
@@ -163,8 +172,19 @@ local M = {
     black = { enabled = false },
     cssls = {},
     clangd = {},
-    -- ccls = {},
     ts_ls = {},
+    vtsls = {
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+      settings = {
+        vtsls = {
+          tsserver = {
+            globalPlugins = {
+              vue_plugin,
+            },
+          },
+        },
+      },
+    },
     pyflakes = { enabled = false },
     eslint = {},
     tailwindcss = {},
