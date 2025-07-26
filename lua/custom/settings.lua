@@ -1,5 +1,6 @@
 local popup_style = { border = 'rounded' }
 
+vim.fn.setreg('s', "'[v']")
 -- custom file types
 
 vim.o.spell = true
@@ -155,6 +156,23 @@ local M = {
     },
   },
   lsp_servers = {
+    qmlls = {
+      cmd = { 'qmlls' },
+      root_dir = function(fname)
+        return require('lspconfig.util').find_git_ancestor(fname) or vim.fn.getcwd()
+      end,
+      filetypes = { 'qml' },
+      capabilities = {
+        textDocument = {
+          completion = {
+            completionItem = {
+              snippetSupport = true,
+              commitCharactersSupport = true,
+            },
+          },
+        },
+      },
+    },
     textlsp = {},
     harper_ls = {
       ['harper-ls'] = {
