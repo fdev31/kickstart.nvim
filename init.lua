@@ -654,8 +654,8 @@ require('lazy').setup({
       {
         '<leader>tf',
         function()
-          vim.b.disable_autoformat = not vim.b.disable_autoformat
-          vim.notify(vim.b.disable_autoformat and 'Autoformat disabled' or 'Autoformat enabled')
+          vim.g.conform_enabled = not vim.g.conform_enabled
+          vim.notify(vim.g.conform_enabled and 'Autoformat enabled' or 'Autoformat disabled')
         end,
         mode = '',
         desc = '[f]ormat',
@@ -665,8 +665,7 @@ require('lazy').setup({
       notify_on_error = true,
       notify_no_formatters = true,
       format_on_save = function(bufnr)
-        -- log_level = vim.log.levels.DEBUG,
-        if vim.b.disable_autoformat then
+        if vim.g.conform_enabled == false then
           return
         end
         -- Disable "format_on_save lsp_fallback" for languages that don't

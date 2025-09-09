@@ -84,7 +84,8 @@ local M = {
     severity_sort = true,
   },
   useCopilot = true,
-  copilotChat = 'codecompanion',
+  -- copilotChat = 'codecompanion',
+  copilotChat = 'copilot',
   showDiagnostics = true,
 
   popup_style = popup_style,
@@ -99,7 +100,7 @@ local M = {
       cpp = { 'clang_format' },
       toml = { 'toml_fmt' },
       python = { 'ruff_fix', 'ruff_format' },
-      javascript = { 'eslint_d', 'prettierd' },
+      javascript = { 'prettierd' },
       http = { 'kulala' },
     },
     formatters = {
