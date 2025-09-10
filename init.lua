@@ -654,7 +654,8 @@ require('lazy').setup({
       {
         '<leader>tf',
         function()
-          vim.g.conform_enabled = not vim.g.conform_enabled
+          local enabled = vim.g.conform_enabled or vim.g.conform_enabled == nil
+          vim.g.conform_enabled = not enabled
           vim.notify(vim.g.conform_enabled and 'Autoformat enabled' or 'Autoformat disabled')
         end,
         mode = '',
