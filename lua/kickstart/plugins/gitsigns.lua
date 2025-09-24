@@ -6,7 +6,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     opts = {
-      on_attach = function(bufnr)
+      LspAttach = function(bufnr)
         local gitsigns = require 'gitsigns'
 
         local function map(mode, l, r, opts)
