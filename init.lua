@@ -623,8 +623,8 @@ require('lazy').setup({
           srv_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, srv_config.capabilities or {})
           if server_name == 'pylsp' then
           end
-          -- vim.lsp.config(server_name, server)
-          require('lspconfig')[server_name].setup(srv_config)
+          -- XXX: Legacy code: require('lspconfig')[server_name].setup(srv_config)
+          vim.lsp.config(server_name, srv_config)
         end
       end
       setup_servers()
