@@ -667,6 +667,7 @@ require('lazy').setup({
       notify_no_formatters = true,
       format_on_save = function(bufnr)
         if vim.g.conform_enabled == false then
+          lib.formatChangedLines()
           return
         end
         -- Disable "format_on_save lsp_fallback" for languages that don't
