@@ -654,7 +654,7 @@ require('lazy').setup({
       {
         '<leader>tf',
         function()
-          local enabled = vim.g.conform_enabled or vim.g.conform_enabled == nil
+          local enabled = vim.g.conform_enabled
           vim.g.conform_enabled = not enabled
           vim.notify(vim.g.conform_enabled and 'Autoformat enabled' or 'Autoformat disabled')
         end,
@@ -666,7 +666,7 @@ require('lazy').setup({
       notify_on_error = true,
       notify_no_formatters = true,
       format_on_save = function(bufnr)
-        if vim.g.conform_enabled == false then
+        if vim.g.conform_enabled == false or vim.g.conform_enabled == nil then
           lib.formatChangedLines()
           return
         end
