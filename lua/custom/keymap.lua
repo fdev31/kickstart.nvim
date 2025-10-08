@@ -50,7 +50,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- hover
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    local highlight_supported = client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+    -- FIXED: Use string method name instead of vim.lsp.protocol.Methods
+    local highlight_supported = client:supports_method('textDocument/documentHighlight', event.buf)
 
     if client and highlight_supported then
       local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })

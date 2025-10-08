@@ -615,6 +615,7 @@ require('lazy').setup({
         automatic_enable = false,
       }
       function setup_servers()
+        local enabled_servers = {}
         for _, server_name in pairs(ensure_installed) do
           local srv_config = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
@@ -625,7 +626,10 @@ require('lazy').setup({
           end
           -- XXX: Legacy code: require('lspconfig')[server_name].setup(srv_config)
           vim.lsp.config(server_name, srv_config)
+          table.insert(enabled_servers, server_name)
         end
+        -- CRITICAL: Enable all configured servers
+        vim.lsp.enable(enabled_servers)
       end
       setup_servers()
       vim.api.nvim_create_autocmd('User', {
