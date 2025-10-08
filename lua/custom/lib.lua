@@ -103,11 +103,15 @@ M.openUnder = function()
   end
 end
 
+local _warning_displayed = false
+
 -- https://github.com/stevearc/conform.nvim/issues/92
 M.formatChangedLines = function()
   local ignore_filetypes = { 'lua' }
   if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-    vim.notify('range formatting for ' .. vim.bo.filetype .. ' not working properly.')
+    if not _warning_displayed then
+      -- vim.notify('range formatting for ' .. vim.bo.filetype .. ' not working properly.')
+    end
     return
   end
 
@@ -120,8 +124,8 @@ M.formatChangedLines = function()
 
   local function format_range()
     if next(hunks) == nil then
-      vim.notify('done formatting git hunks', 'info', { title = 'formatting' })
-      return
+      -- vim.notify('done formatting git hunks', 'info', { title = 'formatting' })
+      return true
     end
     local hunk = nil
     while next(hunks) ~= nil and (hunk == nil or hunk.type == 'delete') do

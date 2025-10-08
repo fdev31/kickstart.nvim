@@ -3,6 +3,7 @@ local popup_style = { border = 'rounded' }
 vim.fn.setreg('s', "'[v']")
 -- custom file types
 
+vim.g.conform_enabled = 'limited'
 vim.o.spell = true
 vim.o.spelllang = 'en_us'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

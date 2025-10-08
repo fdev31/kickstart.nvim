@@ -656,11 +656,29 @@ require('lazy').setup({
         desc = '[f]or[m]at buffer',
       },
       {
+        '<leader>tF',
+        function()
+          local enabled = vim.g.conform_enabled
+          if enabled then
+            vim.g.conform_enabled = false
+          else
+            vim.g.conform_enabled = 'limited'
+          end
+          vim.notify(vim.g.conform_enabled and 'Selective autoformat ' or 'No autoformat')
+        end,
+        mode = '',
+        desc = '[f]ormat',
+      },
+      {
         '<leader>tf',
         function()
           local enabled = vim.g.conform_enabled
-          vim.g.conform_enabled = not enabled
-          vim.notify(vim.g.conform_enabled and 'Autoformat enabled' or 'Autoformat disabled')
+          if enabled == 'limited' then
+            vim.g.conform_enabled = true
+          else
+            vim.g.conform_enabled = 'limited'
+          end
+          vim.notify(vim.g.conform_enabled == true and 'Full autoformat ' or 'Selective autoformat')
         end,
         mode = '',
         desc = '[f]ormat',
@@ -670,9 +688,13 @@ require('lazy').setup({
       notify_on_error = true,
       notify_no_formatters = true,
       format_on_save = function(bufnr)
-        if vim.g.conform_enabled == false or vim.g.conform_enabled == nil then
-          lib.formatChangedLines()
+        if vim.g.conform_enabled == false then
           return
+        end
+        if vim.g.conform_enabled == nil or vim.g.conform_enabled == 'partial' then
+          if lib.formatChangedLines() then
+            return
+          end
         end
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
