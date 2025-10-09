@@ -1,4 +1,3 @@
-local partial = require('custom.lib').partial
 local map = vim.keymap.set
 local settings = require 'custom.settings'
 --------------------------------------------------
