@@ -1,4 +1,27 @@
 local settings = require 'custom.settings'
+
+-- read ~/.onemw/config and extract the value of STB_IP
+local _stb_ip = nil
+local function get_stb_ip()
+  if _stb_ip then
+    return _stb_ip
+  end
+  local file = io.open(os.getenv 'HOME' .. '/.onemw/config', 'r')
+  if not file then
+    return nil
+  end
+  for line in file:lines() do
+    local key, value = line:match '^(STB_IP)=(.*)$'
+    if key and value then
+      file:close()
+      _stb_ip = value
+      return value
+    end
+  end
+  file:close()
+  return nil
+end
+
 return {
   'nvim-neotest/nvim-nio',
   { -- DAPS
@@ -46,7 +69,7 @@ return {
           mode = 'remote',
           skipFiles = { '<node_internals>/**' },
           request = 'attach',
-          address = settings.stb_ip,
+          address = get_stb_ip(),
           port = 9230,
           remoteRoot = '/usr/share/lgias/app/',
           cwd = '${workspaceFolder}',
@@ -60,7 +83,7 @@ return {
           mode = 'remote',
           skipFiles = { '<node_internals>/**' },
           request = 'attach',
-          address = settings.stb_ip,
+          address = get_stb_ip(),
           port = 9229,
           remoteRoot = '/usr/share/lgioui/app/',
           cwd = '${workspaceFolder}',

@@ -91,23 +91,6 @@ vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
--- read ~/.onemw/config and extract the value of STB_IP
-local function get_stb_ip()
-  local file = io.open(os.getenv 'HOME' .. '/.onemw/config', 'r')
-  if not file then
-    return nil
-  end
-  for line in file:lines() do
-    local key, value = line:match '^(STB_IP)=(.*)$'
-    if key and value then
-      file:close()
-      return value
-    end
-  end
-  file:close()
-  return nil
-end
-
 local vue_language_server_path = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server'
 -- local vue_language_server_path = '/path/to/@vue/language-server'
 local vue_plugin = {
@@ -153,7 +136,6 @@ return {
   showDiagnostics = true,
 
   popup_style = popup_style,
-  stb_ip = get_stb_ip(),
   conform_opts = {
     formatters_by_ft = {
       ['*'] = { 'codespell', 'trim_whitespace' },
