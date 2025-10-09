@@ -15,6 +15,7 @@ return {
       { '<C-n>', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
     },
     opts = {
+      log_level = 'error',
       filesystem = {
         window = {
           mappings = {
