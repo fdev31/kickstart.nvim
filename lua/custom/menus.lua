@@ -1,49 +1,44 @@
-local M = {}
-
+local DIFF_COMMAND = 'DiffviewOpen -uno'
 local telescope = require 'telescope.builtin'
 
-local cherryPickCommitsFromBranch = function(_, action)
-  action('i', '<CR>', function(prompt_bufnr)
-    local selection = require('telescope.actions.state').get_selected_entry()
-    require('telescope.actions').close(prompt_bufnr)
-    -- start a telescope listing commits of this branch
-    telescope.git_commits {
-      branch = selection.value,
-      attach_mappings = function(_, action)
-        action('i', '<CR>', function(prompt_bufnr)
-          local commit = require('telescope.actions.state').get_selected_entry()
-          require('telescope.actions').close(prompt_bufnr)
-          vim.cmd('Git cherry-pick ' .. commit.value .. ' -x')
-        end)
-        return true
-      end,
-    }
-  end)
-  return true
+-- Custom menu functions
+
+local function _telescope(callback)
+  return function(_, action)
+    action('i', '<CR>', function(prompt_bufnr)
+      local selection = require('telescope.actions.state').get_selected_entry()
+      require('telescope.actions').close(prompt_bufnr)
+      callback(selection)
+    end)
+    return true
+  end
 end
 
-local openDiffView = function(_, action)
-  action('i', '<CR>', function(prompt_bufnr)
-    local selection = require('telescope.actions.state').get_selected_entry()
-    require('telescope.actions').close(prompt_bufnr)
-    vim.cmd('DiffviewOpen -uno ' .. selection.value)
-  end)
-  return true
-end
+local cherryPickCommitsFromBranch = _telescope(function(selection)
+  telescope.git_commits {
+    branch = selection.value,
+    attach_mappings = _telescope(function(commit)
+      vim.cmd('Git cherry-pick ' .. commit.value .. ' -x')
+    end),
+  }
+end)
 
-local openDiffViewMB = function(_, action)
-  action('i', '<CR>', function(prompt_bufnr)
-    local selection = require('telescope.actions.state').get_selected_entry()
-    require('telescope.actions').close(prompt_bufnr)
-    local result = vim.fn.system('git merge-base HEAD ' .. selection.value)
-    local merge_base = result:gsub('%s+', '')
-    vim.cmd('DiffviewOpen -uno ' .. merge_base)
-  end)
-  return true
-end
+local openDiffView = _telescope(function(selection)
+  vim.cmd(DIFF_COMMAND .. ' ' .. selection.value)
+end)
+
+local openDiffViewMB = _telescope(function(selection)
+  local result = vim.fn.system('git merge-base HEAD ' .. selection.value)
+  local merge_base = result:gsub('%s+', '')
+  vim.cmd(DIFF_COMMAND .. ' ' .. merge_base)
+end)
+
+-- Menu structure
+
+local M = {}
 
 M.git_compare_what = {
-  { text = 'Working copy', cmd = 'DiffviewOpen -uno' },
+  { text = 'Working copy', cmd = DIFF_COMMAND },
   {
     text = 'Branch ▶',
     handler = function()
