@@ -14,7 +14,7 @@ return {
     },
   },
   { 'windwp/nvim-ts-autotag' },
-  { 'windwp/nvim-autopairs' },
+  { 'windwp/nvim-autopairs', event = 'InsertEnter' },
   {
     'cbochs/grapple.nvim',
     opts = {
@@ -490,6 +490,10 @@ return {
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
+  },
+  { -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
   },
 }
 -- :ts=2:sw=2:et:

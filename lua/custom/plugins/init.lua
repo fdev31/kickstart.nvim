@@ -7,6 +7,7 @@ local settings = require 'custom.settings'
 M = {}
 
 local plugins = {
+  'neotree',
   'copilot',
   'daps',
   'diagnostics',
