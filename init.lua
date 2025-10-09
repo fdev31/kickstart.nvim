@@ -463,7 +463,6 @@ require('lazy').setup({
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       { 'mason-org/mason.nvim', opts = { ui = settings.popup_style } },
       'mason-org/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       -- { 'j-hui/fidget.nvim', opts = {} },
@@ -603,40 +602,31 @@ require('lazy').setup({
       --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local active_lsp_servers = servers or {}
 
-      local formatting_providers = vim.tbl_keys(require('conform').formatters_by_ft)
-      vim.tbl_extend('keep', ensure_installed, formatting_providers)
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      vim.tbl_extend('keep', active_lsp_servers, require('conform').formatters_by_ft)
 
       require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = true,
         automatic_enable = false,
       }
       function setup_servers()
-        local enabled_servers = {}
-        for _, server_name in pairs(ensure_installed) do
+        for server_name in pairs(active_lsp_servers) do
           local srv_config = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for ts_ls)
           srv_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, srv_config.capabilities or {})
-          if server_name == 'pylsp' then
-          end
-          -- XXX: Legacy code: require('lspconfig')[server_name].setup(srv_config)
-          vim.lsp.config(server_name, srv_config)
-          table.insert(enabled_servers, server_name)
+          vim.lsp.config(server_name, srv_config) -- NOTE: Replaces: require('lspconfig')[server_name].setup(srv_config)
         end
-        -- CRITICAL: Enable all configured servers
-        vim.lsp.enable(enabled_servers)
       end
       setup_servers()
+      vim.lsp.enable(vim.tbl_keys(active_lsp_servers))
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MasonToolsUpdateCompleted',
         callback = function(e)
-          -- vim.notify '  Ready!'
-          -- vim.schedule(setup_servers)
+          vim.notify '  Ready!'
+          vim.schedule(setup_servers)
         end,
       })
     end,
