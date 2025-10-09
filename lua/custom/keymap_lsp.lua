@@ -1,7 +1,7 @@
 return function(client, event)
   local lspmap = function(keys, func, desc, mode)
     mode = mode or 'n'
-    vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+    vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc .. ' (lsp)' })
   end
 
   -- Execute a code action, usually your cursor needs to be on top of an error
