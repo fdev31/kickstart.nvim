@@ -69,8 +69,6 @@ M.has = function(tbl, item)
   return false
 end
 
-M.isGitMergetool = vim.env.TEXTDOMAIN == 'git' or vim.env.GIT_PREFIX ~= nil
-
 M.filter_prop = function(list, propname, not_value)
   local filtered = {}
   for name, item in pairs(list) do
@@ -79,17 +77,6 @@ M.filter_prop = function(list, propname, not_value)
     end
   end
   return filtered
-end
-
-M.safeString = function(str)
-  if not str then
-    return ' '
-  end
-  if type(str) == 'string' then
-    return str
-  else
-    return vim.inspect('^%s*(.-)%s*$', '%1')
-  end
 end
 
 M.openUnder = function()
