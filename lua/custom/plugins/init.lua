@@ -7,7 +7,6 @@ local settings = require 'custom.settings'
 M = {}
 
 local plugins = {
-  'neotree',
   'copilot',
   'daps',
   'diagnostics',
@@ -28,6 +27,7 @@ local plugins = {
   'misc',
   'treesitter',
   'lsp',
+  'neotree',
 }
 
 function load_plugin(plugin)
