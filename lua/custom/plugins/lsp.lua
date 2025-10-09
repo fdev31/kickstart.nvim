@@ -225,16 +225,16 @@ local M = {
       --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local active_lsp_servers = servers or {}
+      local active_lsp_servers = vim.tbl_keys(servers) or {}
 
-      vim.tbl_extend('keep', active_lsp_servers, require('conform').formatters_by_ft)
+      vim.tbl_extend('keep', active_lsp_servers, vim.tbl_keys(require('conform').formatters_by_ft))
 
       require('mason-lspconfig').setup {
         automatic_installation = true,
         automatic_enable = false,
       }
       function setup_servers()
-        for server_name in pairs(active_lsp_servers) do
+        for _, server_name in pairs(active_lsp_servers) do
           local srv_config = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
@@ -244,7 +244,7 @@ local M = {
         end
       end
       setup_servers()
-      vim.lsp.enable(vim.tbl_keys(active_lsp_servers))
+      vim.lsp.enable(active_lsp_servers)
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MasonToolsUpdateCompleted',
         callback = function(e)

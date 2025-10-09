@@ -146,7 +146,7 @@ M.main_menu = {
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
   { text = '󰚰 Lazy update', cmd = 'Lazy update' },
-  { text = ' Mason update', cmd = 'MasonToolsUpdate' },
+  { text = ' Mason update', cmd = 'Mason' },
   { text = ' Venv selector', cmd = 'VenvSelect' },
   { text = ' PIO menu', cmd = 'Piomenu' },
   -- { text = '󰽿 Treesitter context (toggle)', handler = require('treesitter-context').toggle },
