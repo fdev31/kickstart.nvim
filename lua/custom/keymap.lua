@@ -5,6 +5,8 @@ local settings = require 'custom.settings'
 
 local telescope = require 'telescope.builtin'
 
+map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 map('n', '<leader>ga', '<cmd>G add %<CR>', { desc = '_add file (git)' })
 map('n', '<leader>gr', '<cmd>G reset HEAD %<CR>', { desc = '_reset file (git)' })
 map('n', '<leader>gc', '<cmd>DiffviewClose<CR><cmd>G commit %<CR>', { desc = '_commit file (git)' })
@@ -23,60 +25,11 @@ map('n', 'K', function()
   vim.lsp.buf.hover()
 end, { buffer = bufnr, desc = 'vim.lsp.buf.hover()' })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-  -- code actions
-  callback = function(event)
-    local lspmap = function(keys, func, desc, mode)
-      mode = mode or 'n'
-      map(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-    end
-    -- Execute a code action, usually your cursor needs to be on top of an error
-    -- or a suggestion from your LSP for this to activate.
-    lspmap('<leader>ca', vim.lsp.buf.code_action, 'Code [a]ctions', { 'n', 'x' })
-
-    -- WARN: This is not Goto Definition, this is Goto Declaration.
-    --  For example, in C this would take you to the header.
-    lspmap('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
-    -- Fuzzy find all the symbols in your current document.
-    --  Symbols are things like variables, functions, types, etc.
-    lspmap('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
-
-    -- Fuzzy find all the symbols in your current workspace.
-    --  Similar to document symbols, except searches over your entire project.
-    lspmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-    -- hover
-
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-    -- FIXED: Use string method name instead of vim.lsp.protocol.Methods
-    local highlight_supported = client:supports_method('textDocument/documentHighlight', event.buf)
-
-    if client and highlight_supported then
-      local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = event.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.document_highlight,
-      })
-
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = event.buf,
-        group = highlight_augroup,
-        callback = vim.lsp.buf.clear_references,
-      })
-
-      vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-        callback = function(event2)
-          vim.lsp.buf.clear_references()
-          vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-        end,
-      })
-    end
-  end,
-})
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-up>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-down>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- find stuff / telescope & co
 map('n', '<leader>fb', telescope.buffers, { desc = '[b]uffers' })

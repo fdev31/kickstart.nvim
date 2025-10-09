@@ -25,6 +25,8 @@ local plugins = {
   'theme',
   'workspaces',
   'misc',
+  'treesitter',
+  'lsp',
 }
 
 function load_plugin(plugin)

@@ -3,6 +3,8 @@ local screensaver_timeout = 60 * 10 -- in seconds
 local bg_color = '#100020'
 
 return {
+  -- Highlight todo, notes, etc in comments
+  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'Mofiqul/dracula.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
