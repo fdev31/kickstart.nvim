@@ -46,6 +46,8 @@ return {
   {
     'https://gitlab.com/itaranto/plantuml.nvim',
     version = '*',
+    dependencies = { 'aklt/plantuml-syntax' },
+    ft = 'plantuml',
     config = function()
       require('plantuml').setup {
         renderer = {

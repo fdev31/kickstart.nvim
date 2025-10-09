@@ -2,6 +2,10 @@
 local map = vim.keymap.set
 local telescope = require 'telescope.builtin'
 
+function get_snacks()
+  return package.loaded.snacks
+end
+
 --------------------------------------------------
 -- MENUS
 --------------------------------------------------
@@ -15,10 +19,16 @@ map('n', '<leader>fd', telescope.diagnostics, { desc = '[d]iagnostics' })
 map('n', '<leader>ff', telescope.find_files, { desc = '[f]iles' })
 map('n', '<leader>fF', telescope.git_files, { desc = '[F]iles (git)' })
 map('n', '<leader>fG', telescope.live_grep, { desc = '[G]rep' })
-map('n', '<leader>fg', package.loaded.snacks.picker.git_grep, { desc = '[g]rep (git)' })
+map('n', '<leader>fg', function()
+  get_snacks().picker.git_grep()
+end, { desc = '[g]rep (git)' })
 map('n', '<leader>fh', telescope.help_tags, { desc = '[h]elp' })
-map('n', '<leader>fi', package.loaded.snacks.picker.icons, { desc = '[i]cons' })
-map('n', '<leader>fj', package.loaded.snacks.picker.jumps, { desc = '[j]umps' })
+map('n', '<leader>fi', function()
+  get_snacks().picker.icons()
+end, { desc = '[i]cons' })
+map('n', '<leader>fj', function()
+  get_snacks().picker.jumps()
+end, { desc = '[j]umps' })
 map('n', '<leader>fk', telescope.keymaps, { desc = '[k]eymaps' })
 map('n', '<leader>fM', telescope.marks, { noremap = true, silent = true, desc = '[M]ark' })
 map('n', '<leader>fr', telescope.lsp_references, { desc = '[r]eference' })

@@ -127,7 +127,7 @@ return {
   {
     'rcarriga/nvim-dap-ui',
     dependencies = { 'mfussenegger/nvim-dap' },
-    lazy = false,
+    event = 'InsertEnter',
     opts = {
       controls = {
         element = 'repl',

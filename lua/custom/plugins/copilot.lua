@@ -58,7 +58,7 @@ if use_codecompanion then
 else
   table.insert(ai_plugins, {
     'CopilotC-Nvim/CopilotChat.nvim',
-    lazy = false,
+    cmd = { 'CopilotChat', 'CopilotChatOptimize' },
     branch = 'main',
     opts = {
       agent = 'copilot',

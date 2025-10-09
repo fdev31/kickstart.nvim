@@ -11,5 +11,5 @@ return {
       require('org-bullets').setup()
     end,
   },
-  { 'akinsho/org-bullets.nvim' }, -- bulletpoints in org mode
+  { 'akinsho/org-bullets.nvim', event = 'VeryLazy' }, -- bulletpoints in org mode
 }

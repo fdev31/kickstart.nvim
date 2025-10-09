@@ -1,7 +1,7 @@
 return {
   {
     'sindrets/diffview.nvim', -- better diff view
-    lazy = false,
+    event = 'VeryLazy',
     config = function()
       require('diffview').setup { -- {{{
         keymaps = {

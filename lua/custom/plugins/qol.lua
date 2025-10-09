@@ -13,7 +13,7 @@ return {
       { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
-  { 'windwp/nvim-ts-autotag' },
+  { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
   { 'windwp/nvim-autopairs', event = 'InsertEnter' },
   {
     'cbochs/grapple.nvim',
@@ -41,6 +41,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    event = 'VeryLazy',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
@@ -49,10 +50,10 @@ return {
       multiwindow = false,
     },
   },
-  'onsails/lspkind.nvim',
+  { 'onsails/lspkind.nvim', event = 'VeryLazy' }, -- vscode-like pictograms
   {
     'folke/snacks.nvim', -- QoL (images, keymaps, ...)
-    lazy = false,
+    event = 'VeryLazy',
     ---@type snacks.Config
     opts = {
       image = {},
@@ -60,17 +61,19 @@ return {
     },
     priority = 1000,
   },
-  'theHamsta/nvim-dap-virtual-text',
+  { 'theHamsta/nvim-dap-virtual-text', event = 'VeryLazy' },
   {
     'nvim-telescope/telescope-dap.nvim',
+    event = 'VeryLazy',
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('telescope').load_extension 'dap'
     end,
   },
-  'stevearc/dressing.nvim', -- better vim.ui (input, select, etc.)
+  { 'stevearc/dressing.nvim', event = 'VeryLazy' }, -- better vim.ui (input, select, etc.)
   {
     'fei6409/log-highlight.nvim', -- better log files
+    event = 'VeryLazy',
     config = function()
       require('log-highlight').setup {
         pattern = {
@@ -82,7 +85,7 @@ return {
   {
     'danielfalk/smart-open.nvim', -- magic open "anything"
     branch = '0.2.x',
-    lazy = false,
+    event = 'VeryLazy',
     config = function()
       require('telescope').load_extension 'smart_open'
     end,
@@ -97,6 +100,7 @@ return {
   },
   {
     'norcalli/nvim-colorizer.lua', -- color preview
+    event = 'VeryLazy',
     config = function()
       require('colorizer').setup({ '*' }, {
         css = true,
@@ -106,7 +110,7 @@ return {
   },
   {
     'stevearc/aerial.nvim', -- navigate code symbols
-    lazy = false,
+    event = 'VeryLazy',
     config = function()
       require('aerial').setup {
         -- optionally use on_attach to set keymaps when aerial has attached to a buffer
@@ -128,7 +132,7 @@ return {
   },
   { -- highlight args
     'm-demare/hlargs.nvim', -- make arguments a different color
-    lazy = false,
+    event = 'VeryLazy',
     config = function()
       local hlargs = require 'hlargs'
       hlargs.setup {
@@ -139,11 +143,11 @@ return {
   },
   {
     'Wansmer/treesj', -- merge / split lines
+    event = 'VeryLazy',
     opts = {
       use_default_keymaps = false,
       max_join_length = 300,
     },
-    lazy = false,
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   {
@@ -351,7 +355,8 @@ return {
   },
   { -- Autocompletion
     'saghen/blink.cmp',
-    event = 'VimEnter',
+    -- event = 'VimEnter',
+    event = 'InsertEnter',
     version = '1.*',
     dependencies = vim.list_extend({
       -- Snippet Engine
@@ -450,6 +455,7 @@ return {
   },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    event = 'VeryLazy',
     config = function()
       require('mini.align').setup {
         mappings = {
@@ -494,6 +500,7 @@ return {
   { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
+    event = 'VeryLazy',
   },
 }
 -- :ts=2:sw=2:et:

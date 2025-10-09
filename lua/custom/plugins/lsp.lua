@@ -109,6 +109,7 @@ local M = {
     -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
     ft = 'lua',
+    event = 'VeryLazy',
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
@@ -119,6 +120,7 @@ local M = {
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
     dependencies = {
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       { 'mason-org/mason.nvim', opts = { ui = settings.popup_style } },

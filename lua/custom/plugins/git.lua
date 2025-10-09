@@ -1,7 +1,8 @@
 return {
-  { 'tpope/vim-fugitive', config = function() end },
+  { 'tpope/vim-fugitive', event = 'VeryLazy', config = function() end },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'VeryLazy',
     opts = {
       signs = {
         add = { text = '' },
