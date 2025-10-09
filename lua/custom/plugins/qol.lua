@@ -329,8 +329,8 @@ return {
         if vim.g.conform_enabled == false then
           return
         end
-        if vim.g.conform_enabled == nil or vim.g.conform_enabled == 'partial' then
-          if lib.formatChangedLines() then
+        if vim.g.conform_enabled == nil or vim.g.conform_enabled == 'limited' then
+          if require 'custom.partial_formatter'() then
             return
           end
         end
