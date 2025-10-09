@@ -117,7 +117,7 @@ local vue_plugin = {
   configNamespace = 'typescript',
 }
 
-local M = {
+return {
   leader = '²',
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
@@ -204,4 +204,3 @@ local M = {
   ruff_rules = ruff.rules,
   ruff_ignore = ruff.ignore,
 }
-return M
