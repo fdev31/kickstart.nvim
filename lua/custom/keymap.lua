@@ -23,7 +23,7 @@ map('n', '<leader>oo', function()
 end, { desc = '[o]pen file under cursor' })
 map('n', 'K', function()
   vim.lsp.buf.hover()
-end, { buffer = bufnr, desc = 'vim.lsp.buf.hover()' })
+end, { buffer = bufnr, desc = 'LSP symbol doc' })
 
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -164,6 +164,8 @@ end, { desc = '[C]hat (AI)' })
 map({ 'n', 'v' }, '<leader>co', function()
   if settings.copilotChat == 'codecompanion' then
     vim.cmd 'CodeCompanionActions'
+  else
+    vim.cmd 'CopilotChatOptimize'
   end
 end, { desc = 'AI [O]ptions' })
 

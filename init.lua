@@ -1,8 +1,6 @@
-local lib = require 'custom.lib'
 local settings = require 'custom.settings'
 pcall(require, 'custom.init') -- let a chance to load custom code
 pcall(require, 'custom.filetype') -- let a chance to load custom code
-local custom_plugins = require 'custom.plugins' -- execute plugin code
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -20,7 +18,7 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 --Setup the plugins (lua/custom/plugins/init.lua)
-require('lazy').setup(custom_plugins, {
+require('lazy').setup(require 'custom.plugins', {
   ui = vim.tbl_deep_extend('force', {
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
