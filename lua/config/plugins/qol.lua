@@ -1,5 +1,5 @@
-local lib = require 'custom.lib'
-local settings = require 'custom.settings'
+local lib = require 'config.lib'
+local settings = require 'config.settings'
 
 return {
   {
@@ -333,7 +333,7 @@ return {
           return
         end
         if vim.g.conform_enabled == nil or vim.g.conform_enabled == 'limited' then
-          if require 'custom.partial_formatter'() then
+          if require 'config.partial_formatter'() then
             return
           end
         end

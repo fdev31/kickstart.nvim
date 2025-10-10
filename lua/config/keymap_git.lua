@@ -1,4 +1,4 @@
-local partial = require('custom.lib').partial
+local partial = require('config.lib').partial
 local map = vim.keymap.set
 
 local telescope = require 'telescope.builtin'
@@ -23,9 +23,9 @@ end, { desc = 'Diff view (toggle)' })
 
 map('n', '<C-Space>', require('gitsigns').stage_hunk, { desc = 'stage/unstage hunk (git)' })
 map('n', '<leader>C', function()
-  require('menus').menu(require('custom.menus').git_compare_what)
+  require('menus').menu(require('config.menus').git_compare_what)
 end, { desc = 'Compare (git)' })
 
 map({ 'n', 'v' }, '<leader>cc', function()
-  require('menus').menu(require('custom.menus').git_menu, 'Git')
+  require('menus').menu(require('config.menus').git_menu, 'Git')
 end, { desc = '[c]ommands' })

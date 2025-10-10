@@ -2,8 +2,8 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-local lib = require 'custom.lib'
-local settings = require 'custom.settings'
+local lib = require 'config.lib'
+local settings = require 'config.settings'
 M = {}
 
 local plugins = {
@@ -31,7 +31,7 @@ local plugins = {
 }
 
 function load_plugin(plugin)
-  local plug = require('custom.plugins.' .. plugin)
+  local plug = require('config.plugins.' .. plugin)
   vim.list_extend(M, plug)
   if plug.setup then
     plug.setup()

@@ -1,6 +1,0 @@
-require 'custom.keymap_basic'
-require 'custom.keymap_menus'
-require 'custom.keymap_git'
-require 'custom.keymap_lsp'
-require 'custom.keymap_debug'
-require 'custom.keymap_ai'

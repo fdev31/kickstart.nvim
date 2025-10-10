@@ -1,4 +1,4 @@
-local settings = require 'custom.settings'
+local settings = require 'config.settings'
 
 if not settings.useCopilot then
   return {}

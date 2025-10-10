@@ -1,4 +1,4 @@
-local settings = require 'custom.settings'
+local settings = require 'config.settings'
 
 -- read ~/.onemw/config and extract the value of STB_IP
 local _stb_ip = nil

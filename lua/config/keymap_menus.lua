@@ -10,7 +10,7 @@ end
 -- MENUS
 --------------------------------------------------
 map({ 'n', 'v' }, 'gm', function()
-  require('menus').menu(require('custom.menus').main_menu)
+  require('menus').menu(require('config.menus').main_menu)
 end, { desc = '[m]ain menu' })
 
 -- Basic telescope searches

@@ -1,4 +1,4 @@
-local settings = require 'custom.settings'
+local settings = require 'config.settings'
 
 local origin_map = {
   Harper = ' ',

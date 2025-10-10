@@ -1,5 +1,5 @@
 local popup_style = { border = 'rounded' }
-local ruff = require 'custom.ruff_rules'
+local ruff = require 'config.ruff_rules'
 
 -- select last "paste" with @s
 vim.fn.setreg('s', "'[v']")

@@ -1,0 +1,6 @@
+require 'config.keymap_basic'
+require 'config.keymap_menus'
+require 'config.keymap_git'
+require 'config.keymap_lsp'
+require 'config.keymap_debug'
+require 'config.keymap_ai'

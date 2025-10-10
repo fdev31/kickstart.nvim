@@ -1,2 +1,2 @@
-require 'custom.options'
-require 'custom.keymap'
+require 'config.options'
+require 'config.keymap'

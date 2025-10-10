@@ -1,4 +1,4 @@
-local settings = require 'custom.settings'
+local settings = require 'config.settings'
 
 return {
   { -- Highlight, edit, and navigate code

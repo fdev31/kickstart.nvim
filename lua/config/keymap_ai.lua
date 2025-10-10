@@ -1,5 +1,5 @@
 local map = vim.keymap.set
-local settings = require 'custom.settings'
+local settings = require 'config.settings'
 --------------------------------------------------
 -- AI FEATURES (COPILOT & CODECOMPANION)
 --------------------------------------------------
