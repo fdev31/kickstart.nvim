@@ -104,6 +104,7 @@ local lsp_servers = {
 }
 
 local M = {
+  'WhoIsSethDaniel/mason-tool-installer.nvim',
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
@@ -125,6 +126,7 @@ local M = {
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       { 'mason-org/mason.nvim', opts = { ui = settings.popup_style } },
       'mason-org/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
       'saghen/blink.cmp',
     },
     config = function()
@@ -245,6 +247,7 @@ local M = {
           vim.lsp.config(server_name, srv_config) -- NOTE: Replaces: require('lspconfig')[server_name].setup(srv_config)
         end
       end
+      require('mason-tool-installer').setup { ensure_installed = active_lsp_servers }
       setup_servers()
       vim.lsp.enable(active_lsp_servers)
       vim.api.nvim_create_autocmd('User', {

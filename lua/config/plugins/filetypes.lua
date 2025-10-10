@@ -15,13 +15,13 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
   callback = function(event)
     vim.lsp.start {
       name = 'hyprlang',
-      cmd = { 'hyprls' },
+      cmd = { os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/hyprls/hyprls' },
       root_dir = vim.fn.getcwd(),
     }
   end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
+autocmd('LspAttach', {
   callback = function()
     if require('nvim-treesitter.parsers').has_parser() then
       vim.o.foldexpr = 'nvim_treesitter#foldexpr()'

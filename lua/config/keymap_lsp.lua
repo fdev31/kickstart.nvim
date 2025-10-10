@@ -14,7 +14,10 @@ return function(client, event)
 
   -- Fuzzy find all the symbols in your current document.
   --  Symbols are things like variables, functions, types, etc.
-  lspmap('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+  lspmap('gO', require('telescope.builtin').lsp_document_symbols, 'Open every Document Symbols')
+  lspmap('go', function()
+    require('telescope.builtin').lsp_document_symbols { symbols = { 'interface', 'class', 'method', 'function' } }
+  end, 'Open Document Symbols')
 
   -- Fuzzy find all the symbols in your current workspace.
   --  Similar to document symbols, except searches over your entire project.
