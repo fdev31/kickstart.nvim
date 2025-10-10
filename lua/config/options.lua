@@ -80,9 +80,4 @@ return function()
   -- vim.o.relativenumber = true
   vim.o.mouse = 'a'
   vim.o.showmode = false
-
-  -- delayed to save some startup time
-  vim.schedule(function()
-    vim.o.clipboard = 'unnamedplus'
-  end)
 end
