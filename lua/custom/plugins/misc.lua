@@ -1,5 +1,5 @@
 return { {
   'szymonwilczek/vim-be-better',
-  event = 'VeryLazy',
+  cmd = { 'VimBeBetter' },
   config = function() end,
 } }
