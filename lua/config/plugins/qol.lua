@@ -179,10 +179,10 @@ return {
         -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
         -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
         keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
+          Up = '↑ ',
+          Down = '↓',
+          Left = '← ',
+          Right = '→ ',
           C = '<C-…> ',
           M = '<M-…> ',
           D = '<D-…> ',
