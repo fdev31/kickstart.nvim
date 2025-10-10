@@ -1,3 +1,4 @@
+require 'config.early_options'()
 local settings = require 'config.settings'
 pcall(require, 'config.custom') -- let a chance to load custom code
 
