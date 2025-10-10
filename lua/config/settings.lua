@@ -34,7 +34,6 @@ return {
   useCopilot = true,
   -- copilotChat = 'codecompanion',
   copilotChat = 'copilot',
-  showDiagnostics = true,
 
   popup_style = popup_style,
   conform_opts = {
@@ -86,4 +85,7 @@ return {
   },
   ruff_rules = ruff.rules,
   ruff_ignore = ruff.ignore,
+
+  -- dynamic settings (togglable)
+  showDiagnostics = true,
 }
