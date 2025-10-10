@@ -1,12 +1,12 @@
+local DIFF_COMMAND = 'DiffviewOpen -uno'
+
 local telescope = require 'telescope.builtin'
 local gitpick = require 'config.lib.gitpickers'
 local partial = require('config.lib.core').partial
-local DIFF_COMMAND = 'DiffviewOpen -uno'
 gitpick.set_diff_command(DIFF_COMMAND)
--- Menu structure
 
 local M = {}
-
+-- Menu structure
 M.git_compare_what = {
   { text = 'Working copy', cmd = DIFF_COMMAND },
   {
@@ -46,11 +46,11 @@ M.git_menu = { --{{{
     cmd = 'G diff --cached',
   },
   {
-    text = '  File history',
+    text = '  History (File)',
     handler = telescope.git_bcommits,
   },
   {
-    text = ' Line history',
+    text = '⎼⎼ History (Line)',
     handler = package.loaded.snacks.picker.git_log_line,
   },
   {
