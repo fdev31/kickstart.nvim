@@ -2,7 +2,7 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-local lib = require 'config.lib'
+local lib = require 'config.lib.core'
 local settings = require 'config.settings'
 M = {}
 

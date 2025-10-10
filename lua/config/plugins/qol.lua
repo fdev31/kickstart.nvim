@@ -1,4 +1,4 @@
-local lib = require 'config.lib'
+local lib = require 'config.lib.core'
 local settings = require 'config.settings'
 
 return {

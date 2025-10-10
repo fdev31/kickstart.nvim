@@ -10,7 +10,7 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Definition navigation and file opening
-map('n', 'gd', require('config.lib').openUnder, { desc = '_Definition (can open file under cursor)' })
+map('n', 'gd', require 'config.lib.open_under', { desc = '_Definition (can open file under cursor)' })
 map('n', '<leader>oo', function()
   local file = vim.fn.expand '<cfile>'
   vim.cmd('tabnew ' .. file)
