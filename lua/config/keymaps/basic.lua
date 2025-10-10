@@ -1,10 +1,10 @@
 local map = vim.keymap.set
 local settings = require 'config.settings'
-  --------------------------------------------------
-  -- BASIC OPERATIONS
-  --------------------------------------------------
-  -- select last "paste" command with @s
-  - vim.fn.setreg('s', "'[v']")
+--------------------------------------------------
+-- BASIC OPERATIONS
+--------------------------------------------------
+-- select last "paste" command with @s
+vim.fn.setreg('s', "'[v']")
 -- Clear search highlight and terminal escape
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
