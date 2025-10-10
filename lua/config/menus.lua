@@ -1,61 +1,29 @@
-local DIFF_COMMAND = 'DiffviewOpen -uno'
 local telescope = require 'telescope.builtin'
-
--- Custom menu functions
-
-local function _telescope(callback)
-  return function(_, action)
-    action('i', '<CR>', function(prompt_bufnr)
-      local selection = require('telescope.actions.state').get_selected_entry()
-      require('telescope.actions').close(prompt_bufnr)
-      callback(selection)
-    end)
-    return true
-  end
-end
-
-local cherryPickCommitsFromBranch = _telescope(function(selection)
-  telescope.git_commits {
-    branch = selection.value,
-    attach_mappings = _telescope(function(commit)
-      vim.cmd('Git cherry-pick ' .. commit.value .. ' -x')
-    end),
-  }
-end)
-
-local openDiffView = _telescope(function(selection)
-  vim.cmd(DIFF_COMMAND .. ' ' .. selection.value)
-end)
-
-local openDiffViewMB = _telescope(function(selection)
-  local result = vim.fn.system('git merge-base HEAD ' .. selection.value)
-  local merge_base = result:gsub('%s+', '')
-  vim.cmd(DIFF_COMMAND .. ' ' .. merge_base)
-end)
-
+local gitpick = require 'config.lib.gitpickers'
+local partial = require('config.lib.core').partial
+local DIFF_COMMAND = 'DiffviewOpen -uno'
+gitpick.init(DIFF_COMMAND)
 -- Menu structure
 
 local M = {}
+
+M.init = function(diffCmd)
+  DIFF_COMMAND = diffCmd
+end
 
 M.git_compare_what = {
   { text = 'Working copy', cmd = DIFF_COMMAND },
   {
     text = 'Branch ▶',
-    handler = function()
-      telescope.git_branches { attach_mappings = openDiffView }
-    end,
+    handler = partial(telescope.git_branches, { attach_mappings = openDiffView }),
   },
   {
     text = 'Commit ▶',
-    handler = function()
-      telescope.git_commits { attach_mappings = openDiffView }
-    end,
+    handler = partial(telescope.git_commits, { attach_mappings = openDiffView }),
   },
   {
     text = 'Branch "merge base" (PR like) ▶',
-    handler = function()
-      telescope.git_branches { attach_mappings = openDiffViewMB }
-    end,
+    handler = partial(telescope.git_branches, { attach_mappings = openDiffViewMB }),
   },
 }
 
@@ -100,9 +68,7 @@ M.git_menu = { --{{{
   { -- TODO: allow cherry-picking multiple commits
     -- alternative: ask to cherry-pick every commit AFTER the selected one
     text = ' Cherry-Pick ▶',
-    handler = function()
-      telescope.git_branches { attach_mappings = cherryPickCommitsFromBranch }
-    end,
+    handler = partial(telescope.git_branches, { attach_mappings = cherryPickCommitsFromBranch }),
   },
   {
     text = ' Stash changes ▶',
