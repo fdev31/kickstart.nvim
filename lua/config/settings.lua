@@ -1,9 +1,6 @@
 local popup_style = { border = 'rounded' }
 local ruff = require 'config.ruff_rules'
 
--- select last "paste" with @s
-vim.fn.setreg('s', "'[v']")
-
 vim.g.mapleader = '²'
 vim.g.maplocalleader = '²'
 
