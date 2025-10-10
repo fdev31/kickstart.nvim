@@ -100,7 +100,6 @@ return {
   },
   {
     'norcalli/nvim-colorizer.lua', -- color preview
-    event = 'VeryLazy',
     config = function()
       require('colorizer').setup({ '*' }, {
         css = true,
