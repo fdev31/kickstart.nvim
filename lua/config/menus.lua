@@ -11,15 +11,15 @@ M.git_compare_what = {
   { text = 'Working copy', cmd = DIFF_COMMAND },
   {
     text = 'Branch ▶',
-    handler = partial(telescope.git_branches, { attach_mappings = openDiffView }),
+    handler = partial(telescope.git_branches, { attach_mappings = gitpick.openDiffView }),
   },
   {
     text = 'Commit ▶',
-    handler = partial(telescope.git_commits, { attach_mappings = openDiffView }),
+    handler = partial(telescope.git_commits, { attach_mappings = gitpick.openDiffView }),
   },
   {
     text = 'Branch "merge base" (PR like) ▶',
-    handler = partial(telescope.git_branches, { attach_mappings = openDiffViewMB }),
+    handler = partial(telescope.git_branches, { attach_mappings = gitpick.openDiffViewMB }),
   },
 }
 
