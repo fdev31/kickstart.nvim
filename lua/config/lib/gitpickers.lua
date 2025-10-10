@@ -1,6 +1,12 @@
 local telescope = require 'telescope.builtin'
 local M = {}
 
+DIFF_COMMAND = 'DiffviewOpen'
+
+M.set_diff_command = function(cmd)
+  DIFF_COMMAND = cmd
+end
+
 -- Custom menu functions
 
 local function _telescope(callback)

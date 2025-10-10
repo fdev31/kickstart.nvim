@@ -14,7 +14,7 @@ map('n', '<leader>fc', telescope.git_status, { desc = '[c]hange (git)' })
 
 -- Diffview and git operations
 map('n', '<leader>D', function()
-  if next(require('diffview.lib.core').views) == nil then
+  if next(require('diffview.lib').views) == nil then
     vim.cmd 'DiffviewOpen -uno'
   else
     vim.cmd 'DiffviewClose'

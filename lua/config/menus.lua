@@ -2,14 +2,10 @@ local telescope = require 'telescope.builtin'
 local gitpick = require 'config.lib.gitpickers'
 local partial = require('config.lib.core').partial
 local DIFF_COMMAND = 'DiffviewOpen -uno'
-gitpick.init(DIFF_COMMAND)
+gitpick.set_diff_command(DIFF_COMMAND)
 -- Menu structure
 
 local M = {}
-
-M.init = function(diffCmd)
-  DIFF_COMMAND = diffCmd
-end
 
 M.git_compare_what = {
   { text = 'Working copy', cmd = DIFF_COMMAND },
