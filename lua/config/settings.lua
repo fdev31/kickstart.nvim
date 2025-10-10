@@ -1,8 +1,12 @@
-local popup_style = { border = 'rounded' }
 local ruff = require 'config.ruff_rules'
 
+local popup_style = { border = 'rounded' }
+
 return {
-  leader = '²',
+  leader = '²', -- leader key
+  popup_style = popup_style, -- style to apply to popups
+
+  -- diagnostic column settings
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
     virtual_text = false,
@@ -31,11 +35,11 @@ return {
 
     severity_sort = true,
   },
+  -- AI stuff
   useCopilot = true,
-  -- copilotChat = 'codecompanion',
-  copilotChat = 'copilot',
+  copilotChat = 'copilot', -- "codecompanion" or "copilot"
 
-  popup_style = popup_style,
+  -- (auto) formatting
   conform_opts = {
     formatters_by_ft = {
       ['*'] = { 'codespell', 'trim_whitespace' },
@@ -61,6 +65,7 @@ return {
       },
     },
   },
+  -- supported languages
   treesitter_languages = {
     'bash',
     'diff',
@@ -78,11 +83,13 @@ return {
     'markdown_inline',
     'vim',
   },
+  -- completion settings
   cmp_dependencies = {},
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
   cmp_providers = {
     lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
   },
+  -- python linting rules
   ruff_rules = ruff.rules,
   ruff_ignore = ruff.ignore,
 
