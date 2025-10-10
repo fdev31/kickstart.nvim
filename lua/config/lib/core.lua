@@ -12,9 +12,16 @@ end
 -- This is a collection of utility functions for various tasks.
 -- partial function supports think "functools.partial" in python
 M.partial = function(fn, ...)
-  local n, args = select('#', ...), { ... }
-  return function()
-    return fn(unpack(args, 1, n))
+  local args = { ... }
+  return function(...)
+    local combined_args = {}
+    for i, v in ipairs(args) do
+      combined_args[i] = v
+    end
+    for i, v in ipairs { ... } do
+      combined_args[#args + i] = v
+    end
+    return fn(unpack(combined_args))
   end
 end
 
