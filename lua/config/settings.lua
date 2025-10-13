@@ -6,6 +6,9 @@ return {
   leader = '²', -- leader key
   popup_style = popup_style, -- style to apply to popups
 
+  -- folder with wiki markdown files
+  wiki_folder = vim.fn.expand '~/Documents/wiki/myKB',
+
   -- diagnostic column settings
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },

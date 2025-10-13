@@ -1,4 +1,15 @@
+local settings = require 'config.settings'
+
 return {
+  {
+    'renerocksai/telekasten.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    cmd = 'Telekasten',
+    opts = {
+      home = settings.wiki_folder,
+    },
+  },
   {
     'MeanderingProgrammer/render-markdown.nvim', -- better markdown
     ft = { 'markdown', 'codecompanion' },

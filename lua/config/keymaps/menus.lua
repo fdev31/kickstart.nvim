@@ -35,6 +35,10 @@ map('n', '<leader>fr', telescope.lsp_references, { desc = '[r]eference' })
 map('n', '<leader>fs', telescope.builtin, { desc = '[s]elect Telescope' })
 map('n', '<leader>fw', telescope.grep_string, { desc = '[w]ord' })
 
+map('n', '<leader>fW', function()
+  package.loaded.telekasten.panel()
+end, { desc = '[W]iki' })
+
 -- Advanced search operations
 map('n', '<C-CR>', function()
   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
