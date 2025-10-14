@@ -1,3 +1,4 @@
+local lib = require 'config.lib.core'
 return function()
   -- Try LSP definition
   local result = vim.lsp.buf_request_sync(0, 'textDocument/definition', vim.lsp.util.make_position_params(), 500)
@@ -11,7 +12,7 @@ return function()
   end
   local file_under_cursor = vim.fn.fnamemodify(vim.fn.expand '<cfile>', ':p')
   -- Check if the file exists and is readable
-  if M.file_exists(file_under_cursor) then
+  if lib.file_exists(file_under_cursor) then
     vim.cmd('edit ' .. vim.fn.fnameescape(file_under_cursor))
   else
     vim.notify('Could not find ' .. file_under_cursor, vim.log.levels.WARN)
