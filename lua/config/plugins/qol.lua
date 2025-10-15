@@ -151,6 +151,9 @@ return {
   },
   {
     'klen/nvim-config-local',
+    dependencies = { -- to show nice notifications
+      'folke/snacks.nvim',
+    },
     opts = {
       -- Config file patterns to load (lua supported)
       config_files = { '.nvim.lua', '.nvimrc', '.exrc' },
