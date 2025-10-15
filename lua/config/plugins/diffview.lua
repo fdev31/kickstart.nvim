@@ -1,14 +1,7 @@
 return {
   {
     'sindrets/diffview.nvim', -- better diff view
-    event = function()
-      -- Check if started with diff arguments (vim -d)
-      if vim.o.diff or vim.tbl_contains(vim.v.argv, '-d') then
-        return 'VimEnter' -- Load immediately in diff mode
-      else
-        return 'VeryLazy' -- Load lazily for normal use
-      end
-    end,
+    cmd = 'DiffviewOpen',
     config = function()
       require('diffview').setup { -- {{{
         keymaps = {
