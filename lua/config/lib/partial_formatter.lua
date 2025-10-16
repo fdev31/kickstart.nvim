@@ -5,14 +5,16 @@ return function()
   local ignore_filetypes = { 'lua' }
   if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
     if not _warning_displayed then
-      -- vim.notify('range formatting for ' .. vim.bo.filetype .. ' not working properly.')
+      vim.notify('range formatting for ' .. vim.bo.filetype .. ' not working properly.')
+      _warning_displayed = true
     end
-    return
+    return false
   end
 
   local hunks = require('gitsigns').get_hunks()
   if hunks == nil then
-    return
+    vim.notify('No change detected', 'info', { title = 'formatting' })
+    return true
   end
 
   local format = require('conform').format
@@ -43,5 +45,5 @@ return function()
     end
   end
 
-  format_range()
+  return format_range()
 end

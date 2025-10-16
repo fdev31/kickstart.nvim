@@ -336,7 +336,7 @@ return {
           return
         end
         if vim.g.conform_enabled == nil or vim.g.conform_enabled == 'limited' then
-          if require 'config.lib.partial_formatter'() then
+          if require 'config.lib.partial_formatter'() ~= false then
             return
           end
         end
