@@ -8,6 +8,7 @@ return function(client, event)
   -- or a suggestion from your LSP for this to activate.
   lspmap('<leader>ca', vim.lsp.buf.code_action, 'Code [a]ctions', { 'n', 'x' })
 
+  lspmap('grd', vim.lsp.buf.definition, '[G]oto [d]efinition')
   -- WARN: This is not Goto Definition, this is Goto Declaration.
   --  For example, in C this would take you to the header.
   lspmap('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
