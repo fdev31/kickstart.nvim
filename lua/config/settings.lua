@@ -3,6 +3,13 @@ local ruff = require 'config.ruff_rules'
 local popup_style = { border = 'rounded' }
 
 return {
+  gitsigns = {
+    -- add = { text = '' },
+    -- change = { text = '' },
+    -- delete = { text = '' },
+    -- topdelete = { text = '' },
+    -- changedelete = { text = '' },
+  },
   leader = '²', -- leader key
   popup_style = popup_style, -- style to apply to popups
 
