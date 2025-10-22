@@ -1,12 +1,13 @@
--- You can add your own plugins here or in other files in this directory!
+-- You can add your own plugins here or in other files in this directory!:
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-local lib = require 'config.lib.core'
-local settings = require 'config.settings'
 M = {}
 
 local plugins = {
+  'autoformat',
+  'autocomplete',
+  'code_goodies',
   'copilot',
   'daps',
   'diagnostics',
@@ -15,22 +16,23 @@ local plugins = {
   'filetypes',
   'git',
   'http_client',
+  'lsp',
   'markdown',
   'menus',
+  'misc',
+  'neotree',
   'orgmode',
   'python',
   'qol',
   'silicon',
   'smooth_scroll',
   'theme',
-  'workspaces',
-  'misc',
   'treesitter',
-  'lsp',
-  'neotree',
+  'whichkey',
+  'workspaces',
 }
 
-function load_plugin(plugin)
+local load_plugin = function(plugin)
   local plug = require('config.plugins.' .. plugin)
   vim.list_extend(M, plug)
   if plug.setup then

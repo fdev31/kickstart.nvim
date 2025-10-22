@@ -1,4 +1,4 @@
--- vim: foldlevel=0:
+-- vim:ts=2:sw=2:et:
 local autocmd = vim.api.nvim_create_autocmd
 --
 -- delayed to save some startup time

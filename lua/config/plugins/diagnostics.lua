@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
 
 local origin_map = {
@@ -10,7 +11,9 @@ local origin_map = {
 
 return {
   setup = function()
+    -- INFO: vim.diagnostic.Opts
     vim.diagnostic.config(settings.diagnostic_config)
+    -- INFO: show diagnostic after a delay
     vim.api.nvim_create_autocmd('CursorHold', {
       callback = function()
         if not settings.showDiagnostics then

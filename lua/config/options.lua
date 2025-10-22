@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 return function()
   vim.g.mapleader = '²'
   vim.g.maplocalleader = '²'

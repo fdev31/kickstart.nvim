@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 local DIFF_COMMAND = 'DiffviewOpen -uno'
 
 local telescope = require 'telescope.builtin'

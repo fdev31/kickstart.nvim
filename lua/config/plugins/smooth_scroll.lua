@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 return {
   {
     'karb94/neoscroll.nvim', -- animated scroll

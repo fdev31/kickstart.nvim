@@ -1,4 +1,4 @@
--- :vim: foldlevel=0:
+-- :vim: foldlevel=0:ts=s:sw=2:et
 local map = vim.keymap.set
 local telescope = require 'telescope.builtin'
 

@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 vim.filetype.add {
   pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
   extension = {

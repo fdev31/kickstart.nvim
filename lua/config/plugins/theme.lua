@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 local screensaver_timeout = 60 * 10 -- in seconds
 
 local bg_color = '#100020'

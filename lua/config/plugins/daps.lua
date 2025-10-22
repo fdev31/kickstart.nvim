@@ -1,3 +1,4 @@
+-- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
 
 -- read ~/.onemw/config and extract the value of STB_IP
@@ -23,6 +24,16 @@ local function get_stb_ip()
 end
 
 return {
+  { 'theHamsta/nvim-dap-virtual-text', event = 'VeryLazy' },
+  {
+    'nvim-telescope/telescope-dap.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('telescope').load_extension 'dap'
+    end,
+  },
+
   'nvim-neotest/nvim-nio',
   { -- DAPS
     'mfussenegger/nvim-dap',
