@@ -1,6 +1,9 @@
 -- vim:ts=2:sw=2:et:
 
 vim.o.clipboard = 'unnamedplus'
+vim.o.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
+vim.o.winborder = 'rounded'
+vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 
 -- Go to the file's folder with :Chdir
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})

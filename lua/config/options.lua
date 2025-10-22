@@ -57,9 +57,6 @@ return function()
   vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
   vim.o.foldtext = 'getline(v:foldstart)'
   vim.o.wmh = 0
-  vim.o.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
-  vim.o.winborder = 'rounded'
-  vim.o.clipboard = 'unnamedplus'
 
   vim.o.sw = 4
   vim.o.ts = 4
@@ -75,7 +72,6 @@ return function()
 
   vim.o.foldenable = false
   vim.o.termguicolors = true
-  vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 
   vim.g.have_nerd_font = true
   -- vim.o.relativenumber = true
