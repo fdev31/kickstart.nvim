@@ -3,6 +3,7 @@ local ruff = require 'config.ruff_rules'
 local popup_style = { border = 'rounded' }
 
 return {
+  deduplicate_diagnostics = true,
   diff_command = 'DiffviewOpen -uno',
   gitsigns = {
     -- add = { text = '' },
