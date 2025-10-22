@@ -3,17 +3,7 @@ local lib = require 'config.lib.core'
 local settings = require 'config.settings'
 
 return {
-  {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    },
-  },
+  'NMAC427/guess-indent.nvim',
   {
     'cbochs/grapple.nvim',
     opts = {
@@ -39,17 +29,6 @@ return {
     end,
   },
   {
-    'nvim-treesitter/nvim-treesitter-context',
-    event = 'VeryLazy',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
-    opts = {
-      max_lines = 1, -- Maximum number of lines to show for a single context
-      multiwindow = false,
-    },
-  },
-  {
     'folke/snacks.nvim', -- QoL (images, keymaps, ...)
     event = 'VeryLazy',
     ---@type snacks.Config
@@ -60,17 +39,6 @@ return {
     priority = 1000,
   },
   { 'stevearc/dressing.nvim', event = 'VeryLazy' }, -- better vim.ui (input, select, etc.)
-  {
-    'fei6409/log-highlight.nvim', -- better log files
-    event = 'VeryLazy',
-    config = function()
-      require('log-highlight').setup {
-        pattern = {
-          'xdev=.*',
-        },
-      }
-    end,
-  },
   {
     'danielfalk/smart-open.nvim', -- magic open "anything"
     branch = '0.2.x',
@@ -114,7 +82,6 @@ return {
       lookup_parents = true, -- Lookup config files in parent directories
     },
   },
-  'NMAC427/guess-indent.nvim',
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     event = 'VeryLazy',

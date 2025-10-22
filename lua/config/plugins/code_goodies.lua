@@ -3,6 +3,28 @@ return {
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
   { 'windwp/nvim-autopairs', event = 'InsertEnter' },
   { 'onsails/lspkind.nvim', event = 'VeryLazy' }, -- vscode-like pictograms
+  { -- top (or bottom) line with code context
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    opts = {
+      max_lines = 1, -- Maximum number of lines to show for a single context
+      multiwindow = false,
+    },
+  },
+  { -- improve t/f navigation & other goodies
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    },
+  },
   {
     'stevearc/aerial.nvim', -- navigate code symbols
     event = 'VeryLazy',

@@ -37,6 +37,17 @@ autocmd('LspAttach', {
 
 return {
   {
+    'fei6409/log-highlight.nvim', -- better log files
+    event = 'VeryLazy',
+    config = function()
+      require('log-highlight').setup {
+        pattern = {
+          'xdev=.*',
+        },
+      }
+    end,
+  },
+  {
     'aklt/plantuml-syntax',
     ft = 'plantuml',
     config = function()
