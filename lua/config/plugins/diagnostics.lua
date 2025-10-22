@@ -1,5 +1,6 @@
 -- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
+local lib = require 'config.lib.core'
 
 local origin_map = {
   Harper = ' ',
@@ -79,7 +80,7 @@ return {
             local prefix = '󰄳 '
             local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
             -- strip origin for newlines and blanks
-            origin = origin:gsub('^%s+', ''):gsub('%s+$', ''):gsub('\n', ' ')
+            origin = lib.strip(origin)
 
             if origin_map[origin] then
               prefix = origin_map[origin]
