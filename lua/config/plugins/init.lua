@@ -5,8 +5,8 @@
 M = {}
 
 local plugins = {
-  'autoformat',
   'autocomplete',
+  'autoformat',
   'code_goodies',
   'copilot',
   'daps',
