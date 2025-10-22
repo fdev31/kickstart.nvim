@@ -33,7 +33,10 @@ return {
     event = 'VeryLazy',
     ---@type snacks.Config
     opts = {
-      notifier = {},
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
     },
     priority = 1000,
   },
