@@ -64,7 +64,7 @@ M.git_menu = { --{{{
   { -- TODO: allow cherry-picking multiple commits
     -- alternative: ask to cherry-pick every commit AFTER the selected one
     text = ' Cherry-Pick ▶',
-    handler = partial(telescope.git_branches, { attach_mappings = cherryPickCommitsFromBranch }),
+    handler = partial(telescope.git_branches, { attach_mappings = gitpick.cherryPickCommitsFromBranch }),
   },
   {
     text = ' Stash changes ▶',
