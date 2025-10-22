@@ -16,6 +16,23 @@ return {
   -- folder with wiki markdown files
   wiki_folder = vim.fn.expand '~/Documents/wiki/myKB',
 
+  -- lazy plugin manager icons
+  lazy_icons = {
+    cmd = '⌘',
+    config = '🛠',
+    event = '📅',
+    ft = '📂',
+    init = '⚙',
+    keys = ' ',
+    plugin = '🔌',
+    runtime = '💻',
+    require = '🌙',
+    source = '📄',
+    start = '🚀',
+    task = '📌',
+    lazy = '💤 ',
+  },
+
   -- diagnostic column settings
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
