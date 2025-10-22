@@ -13,7 +13,7 @@ return {
   setup = function()
     -- INFO: vim.diagnostic.Opts
     vim.diagnostic.config(settings.diagnostic_config)
-    -- INFO: De-duplicate Diagnostic icons by overriding the built-in signs handler
+    -- INFO: DE duplicate Diagnostic icons by overriding the built-in signs handler
     if settings.deduplicate_diagnostics then
       local orig_signs_handler = vim.diagnostic.handlers.signs
 
