@@ -14,18 +14,36 @@ return {
     vim.diagnostic.config(settings.diagnostic_config)
     -- INFO: De-duplicate Diagnostic icons by overriding the built-in signs handler
     if settings.deduplicate_diagnostics then
-      -- Store the original signs handler
       local orig_signs_handler = vim.diagnostic.handlers.signs
 
       -- Replace the signs handler with our custom implementation
       vim.diagnostic.handlers.signs = {
         show = function(namespace, bufnr, diagnostics, opts)
+          -- Return early if there are no diagnostics
+          if not diagnostics or #diagnostics == 0 then
+            return orig_signs_handler.show(namespace, bufnr, {}, opts)
+          end
+
           -- Find the "worst" (most severe) diagnostic per line
           local max_severity_per_line = {}
           for _, d in ipairs(diagnostics) do
-            local line = d.lnum
-            if not max_severity_per_line[line] or d.severity < max_severity_per_line[line].severity then
-              max_severity_per_line[line] = d
+            -- Skip diagnostics without line numbers
+            if d.lnum ~= nil then
+              local line = d.lnum
+
+              -- Initialize with current diagnostic if line not seen before
+              if not max_severity_per_line[line] then
+                max_severity_per_line[line] = d
+              else
+                -- Compare severities, handling missing severity values
+                local current_severity = d.severity or vim.diagnostic.severity.HINT
+                local existing_severity = max_severity_per_line[line].severity or vim.diagnostic.severity.HINT
+
+                -- Lower severity values are more severe in Neovim (1=ERROR, 2=WARN, etc.)
+                if current_severity < existing_severity then
+                  max_severity_per_line[line] = d
+                end
+              end
             end
           end
 
