@@ -12,35 +12,37 @@ return {
   setup = function()
     -- INFO: vim.diagnostic.Opts
     vim.diagnostic.config(settings.diagnostic_config)
-    -- INFO: Deduplicate icons
-    -- Override the built-in signs handler
-
+    -- INFO: De-duplicate Diagnostic icons by overriding the built-in signs handler
     if settings.deduplicate_diagnostics then
-      local ns = vim.api.nvim_create_namespace 'my_diagnostic_namespace'
-
-      -- Get a reference to the original signs handler
+      -- Store the original signs handler
       local orig_signs_handler = vim.diagnostic.handlers.signs
-      -- Make a proxy to the handler
-      local new_orig_signs_handler = vim.deepcopy(orig_signs_handler)
-      new_orig_signs_handler.show = function(namespace, bufnr, diagnostics, opts)
-        -- Get all diagnostics from the whole buffer
-        local all_diagnostics = vim.diagnostic.get(bufnr)
 
-        -- Find the "worst" (most severe) diagnostic per line
-        local max_severity_per_line = {}
-        for _, d in pairs(all_diagnostics) do
-          local m = max_severity_per_line[d.lnum]
-          if not m or d.severity < m.severity then
-            max_severity_per_line[d.lnum] = d
+      -- Replace the signs handler with our custom implementation
+      vim.diagnostic.handlers.signs = {
+        show = function(namespace, bufnr, diagnostics, opts)
+          -- Find the "worst" (most severe) diagnostic per line
+          local max_severity_per_line = {}
+          for _, d in ipairs(diagnostics) do
+            local line = d.lnum
+            if not max_severity_per_line[line] or d.severity < max_severity_per_line[line].severity then
+              max_severity_per_line[line] = d
+            end
           end
-        end
-        -- Pass the filtered diagnostics (with our custom namespace) to
-        -- the original handler
-        local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
-        return orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
-      end
-      -- Create a custom namespace for aggregating signs
-      vim.diagnostic.handlers.signs = new_orig_signs_handler
+
+          -- Convert the filtered diagnostics back to a list
+          local filtered_diagnostics = {}
+          for _, diagnostic in pairs(max_severity_per_line) do
+            table.insert(filtered_diagnostics, diagnostic)
+          end
+
+          -- Call the original handler with filtered diagnostics
+          orig_signs_handler.show(namespace, bufnr, filtered_diagnostics, opts)
+        end,
+
+        hide = function(namespace, bufnr)
+          orig_signs_handler.hide(namespace, bufnr)
+        end,
+      }
     end
     -- INFO: show diagnostic after a delay
     vim.api.nvim_create_autocmd('CursorHold', {
