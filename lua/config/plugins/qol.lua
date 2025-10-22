@@ -33,7 +33,6 @@ return {
     event = 'VeryLazy',
     ---@type snacks.Config
     opts = {
-      image = {},
       notifier = {},
     },
     priority = 1000,
