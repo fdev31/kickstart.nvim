@@ -1,15 +1,14 @@
 -- vim:ts=2:sw=2:et:
-local DIFF_COMMAND = 'DiffviewOpen -uno'
+local settings = require 'config.settings'
 
 local telescope = require 'telescope.builtin'
 local gitpick = require 'config.lib.gitpickers'
 local partial = require('config.lib.core').partial
-gitpick.set_diff_command(DIFF_COMMAND)
 
 local M = {}
 -- Menu structure
 M.git_compare_what = {
-  { text = 'Working copy', cmd = DIFF_COMMAND },
+  { text = 'Working copy', cmd = settings.diff_command },
   {
     text = 'Branch ▶',
     handler = partial(telescope.git_branches, { attach_mappings = gitpick.openDiffView }),

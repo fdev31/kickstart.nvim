@@ -1,11 +1,5 @@
 local telescope = require 'telescope.builtin'
-
-local DIFF_COMMAND = 'DiffviewOpen'
-local M = {}
-
-M.set_diff_command = function(cmd)
-  DIFF_COMMAND = cmd
-end
+local settings = require 'config.settings'
 
 -- Custom menu functions
 
@@ -30,13 +24,13 @@ M.cherryPickCommitsFromBranch = _telescope(function(selection)
 end)
 
 M.openDiffView = _telescope(function(selection)
-  vim.cmd(DIFF_COMMAND .. ' ' .. selection.value)
+  vim.cmd(settings.diff_command .. ' ' .. selection.value)
 end)
 
 M.openDiffViewMB = _telescope(function(selection)
   local result = vim.fn.system('git merge-base HEAD ' .. selection.value)
   local merge_base = result:gsub('%s+', '')
-  vim.cmd(DIFF_COMMAND .. ' ' .. merge_base)
+  vim.cmd(settings.diff_command .. ' ' .. merge_base)
 end)
 
 return M
