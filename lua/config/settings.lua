@@ -39,10 +39,10 @@ return {
     virtual_text = false,
     signs = vim.g.have_nerd_font and {
       text = {
-        [vim.diagnostic.severity.ERROR] = '󰅚 ',
-        [vim.diagnostic.severity.WARN] = '󰀪 ',
-        [vim.diagnostic.severity.INFO] = '󰋽 ',
-        [vim.diagnostic.severity.HINT] = '󰌶 ',
+        [vim.diagnostic.severity.ERROR] = '󰅚',
+        [vim.diagnostic.severity.WARN] = '󰀪',
+        [vim.diagnostic.severity.INFO] = '󰋽',
+        [vim.diagnostic.severity.HINT] = '󰌶',
       },
     } or true,
     float = vim.tbl_deep_extend('force', {
