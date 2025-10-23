@@ -1,8 +1,10 @@
 local _warning_displayed = false
 
+local ignore_filetypes = {}
+-- local ignore_filetypes = { 'lua' }
+
 -- https://github.com/stevearc/conform.nvim/issues/92
 return function()
-  local ignore_filetypes = { 'lua' }
   if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
     if not _warning_displayed then
       vim.notify('range formatting for ' .. vim.bo.filetype .. ' not working properly.')
@@ -20,27 +22,41 @@ return function()
   local format = require('conform').format
 
   local function format_range()
-    if next(hunks) == nil then
+    if not next(hunks) then
       -- vim.notify('done formatting git hunks', 'info', { title = 'formatting' })
       return true
     end
-    local hunk = nil
-    while next(hunks) ~= nil and (hunk == nil or hunk.type == 'delete') do
-      hunk = table.remove(hunks)
-    end
 
-    if hunk ~= nil and hunk.type ~= 'delete' then
-      local start = hunk.added.start
-      local last = start + hunk.added.count
-      -- show "start , end"
-      -- vim.notify(string.format("%s,%s", start, last), 'info', { title = 'formatting' })
-      -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
-      local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
-      local range = { start = { start, 0 }, ['end'] = { last - 1, last_hunk_line:len() } }
+    local hunk
+    repeat
+      hunk = table.remove(hunks, 1)
+    until not hunk or hunk.type ~= 'delete'
+
+    if hunk then
+      local start_line = hunk.added.start
+      local end_line = start_line + hunk.added.count
+
+      -- Ensure we don't try to format an empty range
+      if end_line < start_line then
+        vim.defer_fn(format_range, 1)
+        return
+      end
+
+      local range = {
+        start = { start_line, 0 },
+        ['end'] = { end_line, 0 },
+      }
+      -- For single line changes, format the whole line.
+      -- For multi-line, format up to the beginning of the last line.
+      -- This is safer than using col=-1 which can cause issues on empty lines.
+      if start_line ~= end_line then
+        range['end'] = { end_line, 0 }
+      else
+        range['end'] = { end_line, -1 }
+      end
+
       format({ range = range, async = true, lsp_fallback = true }, function()
-        vim.defer_fn(function()
-          format_range()
-        end, 1)
+        vim.defer_fn(format_range, 1)
       end)
     end
   end
