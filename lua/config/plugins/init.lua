@@ -36,7 +36,9 @@ local load_plugin = function(plugin)
   local plug = require('config.plugins.' .. plugin)
   vim.list_extend(M, plug)
   if plug.setup then
-    plug.setup()
+    if not pcall(plug.setup) then
+      vim.notify('Error in setup for plugin ' .. plugin, vim.log.levels.ERROR, { title = 'Plugin setup' })
+    end
   end
 end
 
