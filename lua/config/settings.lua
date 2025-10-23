@@ -3,6 +3,7 @@ local ruff = require 'config.ruff_rules'
 local popup_style = { border = 'rounded' }
 
 return {
+  leader = '²', -- leader key
   deduplicate_diagnostics = true,
   diff_command = 'DiffviewOpen -uno',
   gitsigns = {
@@ -12,7 +13,6 @@ return {
     -- topdelete = { text = '' },
     -- changedelete = { text = '' },
   },
-  leader = '²', -- leader key
   popup_style = popup_style, -- style to apply to popups
 
   -- folder with wiki markdown files
