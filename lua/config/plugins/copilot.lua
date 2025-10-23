@@ -1,10 +1,6 @@
 -- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
 
-if not settings.useCopilot then
-  return {}
-end
-
 local use_codecompanion = settings.copilotChat == 'codecompanion'
 local use_model = 'claude-3.7-sonnet'
 

@@ -64,7 +64,6 @@ return {
     severity_sort = true,
   },
   -- AI stuff
-  useCopilot = true,
   copilotChat = 'copilot', -- "codecompanion" or "copilot"
 
   -- (auto) formatting
