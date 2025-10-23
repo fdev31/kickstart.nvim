@@ -45,7 +45,7 @@ end
 for _, plugin in ipairs(plugins) do
   local ret, msg = pcall(load_plugin, plugin)
   if not ret then
-    vim.notify('Failed to load plugin ' .. plugin .. ': ' .. msg, vim.log.levels.ERROR)
+    vim.notify('Failed to load ' .. plugin .. ': ' .. msg, vim.log.levels.ERROR, { title = 'Plugin loader' })
   end
 end
 
