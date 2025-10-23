@@ -26,8 +26,12 @@ local get_default_value = function()
   end
 end
 
+local set_enabled = function(val)
+  vim.b.conform_enabled = val
+end
+
 local get_enabled = function()
-  local enabled = vim.g.conform_enabled
+  local enabled = vim.b.conform_enabled
   if enabled == nil then
     enabled = get_default_value()
   end
@@ -52,12 +56,12 @@ return {
         '<leader>tF',
         function()
           local enabled = get_enabled()
-          if enabled then
-            vim.g.conform_enabled = FormatMode.DISABLED
+          if enabled ~= FormatMode.DISABLED then
+            set_enabled(FormatMode.DISABLED)
           else
-            vim.g.conform_enabled = get_default_value()
+            set_enabled(get_default_value())
           end
-          vim.notify(vim.g.conform_enabled and 'Selective autoformat ' or 'No autoformat')
+          vim.notify(get_enabled() and 'Selective autoformat ' or 'No autoformat')
         end,
         mode = '',
         desc = '[F]ormat',
@@ -72,11 +76,11 @@ return {
           end
           local enabled = get_enabled()
           if enabled == FormatMode.SELECTIVE then
-            vim.g.conform_enabled = FormatMode.FULL
+            set_enabled(FormatMode.FULL)
           else
-            vim.g.conform_enabled = get_default_value()
+            set_enabled(get_default_value())
           end
-          vim.notify(vim.g.conform_enabled == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat')
+          vim.notify(get_enabled() == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat')
         end,
         mode = '',
         desc = 'selective [f]ormat',
