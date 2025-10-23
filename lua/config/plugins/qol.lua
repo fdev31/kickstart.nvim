@@ -17,14 +17,11 @@ return {
     event = 'VeryLazy',
     ---@type snacks.Config
     opts = {
-      notifier = {
-        enabled = true,
-        timeout = 3000,
-      },
+      input = { enable = true },
+      notifier = { enabled = true, timeout = 3000 },
     },
     priority = 1000,
   },
-  { 'stevearc/dressing.nvim', event = 'VeryLazy' }, -- better vim.ui (input, select, etc.)
   {
     'danielfalk/smart-open.nvim', -- magic open "anything"
     branch = '0.2.x',

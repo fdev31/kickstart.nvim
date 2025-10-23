@@ -15,25 +15,39 @@ return {
     keys = {
       { '<C-n>', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
     },
-    opts = {
-      log_level = 'error',
-      filesystem = {
-        window = {
-          mappings = {
-            ['<C-n>'] = 'close_window',
-            ['<leader>+'] = 'git_add_file',
-            ['<leader>-'] = 'git_unstage_file',
-            ['p'] = {
-              'toggle_preview',
-              config = {
-                use_float = false,
-                -- use_image_nvim = true,
-                -- title = 'Neo-tree Preview',
+    opts = function(_, opts)
+      local options = {
+        log_level = 'error',
+        filesystem = {
+          window = {
+            mappings = {
+              ['<C-n>'] = 'close_window',
+              ['<leader>+'] = 'git_add_file',
+              ['<leader>-'] = 'git_unstage_file',
+              ['p'] = {
+                'toggle_preview',
+                config = {
+                  use_float = false,
+                  -- use_image_nvim = true,
+                  -- title = 'Neo-tree Preview',
+                },
               },
             },
           },
         },
-      },
-    },
+      }
+      -- Snacks integration {{{
+      local function on_move(data)
+        Snacks.rename.on_rename_file(data.source, data.destination)
+      end
+      local events = require 'neo-tree.events'
+      opts.event_handlers = opts.event_handlers or {}
+      vim.list_extend(opts.event_handlers, {
+        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
+      })
+      --- snacks integration }}}
+      return options
+    end,
   },
 }
