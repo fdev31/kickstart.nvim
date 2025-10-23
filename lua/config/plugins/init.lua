@@ -47,12 +47,4 @@ for _, plugin in ipairs(plugins) do
   end
 end
 
-for _, p in ipairs(M) do
-  if type(p) == 'table' then
-    if not p.opts then
-      p.opts = {}
-    end
-  end
-end
-
 return M
