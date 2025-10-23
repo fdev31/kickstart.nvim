@@ -10,10 +10,22 @@ return {
     opts = { max_lines = 1, multiwindow = false },
   },
   {
-    'folke/flash.nvim', -- improve t/f navigation & other goodies
+    'folke/flash.nvim', -- improve t/f navigation
     event = 'VeryLazy',
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      multi_window = false,
+      wrap = false,
+      incremental = true,
+      modes = {
+        search = {
+          enabled = false,
+        },
+        char = {
+          jump_labels = true,
+        },
+      },
+    },
     -- stylua: ignore
     keys = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
@@ -56,10 +68,7 @@ return {
   {
     'Wansmer/treesj', -- merge / split lines
     event = 'VeryLazy',
-    opts = {
-      use_default_keymaps = false,
-      max_join_length = 300,
-    },
+    opts = { use_default_keymaps = false, max_join_length = 1000 },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 }

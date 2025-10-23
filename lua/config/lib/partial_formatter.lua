@@ -1,6 +1,8 @@
 local ignore_filetypes = { 'lua' }
 
 -- https://github.com/stevearc/conform.nvim/issues/92
+-- Format only the git changed hunks in the current buffer
+-- Returns false if this filetype can't be formatted, true otherwise
 return function()
   if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
     return false
