@@ -79,7 +79,7 @@ return {
           format = function(diagnostic)
             local prefix = '󰄳 '
             local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
-            -- strip origin for newlines and blanks
+            -- Strip origin for newlines and blanks
             origin = lib.strip(origin)
 
             if origin_map[origin] then

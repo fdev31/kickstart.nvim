@@ -15,7 +15,8 @@ local lsp_servers = {
   qmlls = {
     cmd = { 'qmlls' },
     root_dir = function(fname)
-      return require('lspconfig.util').find_git_ancestor(fname) or vim.fn.getcwd()
+      return vim.fs.dirname(vim.fs.find('.git', { path = '.', upwards = true })[1])
+      -- return require('lspconfig.util').find_git_ancestor(fname) or vim.fn.getcwd()
     end,
     filetypes = { 'qml' },
     capabilities = {
