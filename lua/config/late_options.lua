@@ -9,7 +9,7 @@ vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
 
 -- Load custom snippets
-require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/.config/Code/User/snippets/' } }
+require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.g.vscode_snippets_path } }
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
