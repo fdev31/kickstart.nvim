@@ -7,7 +7,7 @@ return {
   deduplicate_diagnostics = true,
   diff_command = 'DiffviewOpen -uno',
   gitsigns = {
-    add = { text = '▋' },
+    add = { text = '▋' }, -- ''
     -- change = { text = '' },
     -- delete = { text = '' },
     -- topdelete = { text = '' },
