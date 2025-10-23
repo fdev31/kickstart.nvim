@@ -1,15 +1,8 @@
-local _warning_displayed = false
-
-local ignore_filetypes = {}
--- local ignore_filetypes = { 'lua' }
+local ignore_filetypes = { 'lua' }
 
 -- https://github.com/stevearc/conform.nvim/issues/92
 return function()
   if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-    if not _warning_displayed then
-      vim.notify('range formatting for ' .. vim.bo.filetype .. ' not working properly.')
-      _warning_displayed = true
-    end
     return false
   end
 

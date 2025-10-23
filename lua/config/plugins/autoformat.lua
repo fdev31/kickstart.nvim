@@ -4,6 +4,8 @@ local lib = require 'config.lib.core'
 
 local disable_filetypes = {} --  { c = true, cpp = true }
 
+local _warned = false
+
 local options = {
   lsp_format = 'fallback',
   timeout_ms = 2000,
@@ -58,7 +60,7 @@ return {
           vim.notify(vim.g.conform_enabled and 'Selective autoformat ' or 'No autoformat')
         end,
         mode = '',
-        desc = '[f]ormat',
+        desc = '[F]ormat',
       },
       {
         '<leader>tf',
@@ -77,7 +79,7 @@ return {
           vim.notify(vim.g.conform_enabled == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat')
         end,
         mode = '',
-        desc = '[f]ormat',
+        desc = 'selective [f]ormat',
       },
     },
     opts = vim.tbl_deep_extend('force', settings.conform_opts, {
@@ -90,7 +92,12 @@ return {
         end
         if enabled == FormatMode.SELECTIVE then
           if require 'config.lib.partial_formatter'() ~= false then
-            return
+            return -- only stop if it got formatted
+          else
+            if not _warned then
+              _warned = true
+              vim.notify("Selective formatting didn't work, proceeding with full format", 'info', { title = 'formatting' })
+            end
           end
         end
         -- Disable "format_on_save lsp_fallback" for languages that don't

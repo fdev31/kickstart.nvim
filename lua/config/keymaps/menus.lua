@@ -2,7 +2,7 @@
 local map = vim.keymap.set
 local telescope = require 'telescope.builtin'
 
-function get_snacks()
+local get_snacks = function()
   return package.loaded.snacks
 end
 

@@ -24,6 +24,7 @@ local function get_stb_ip()
 end
 
 return {
+  'nvim-neotest/nvim-nio',
   { 'theHamsta/nvim-dap-virtual-text', event = 'VeryLazy' },
   {
     'nvim-telescope/telescope-dap.nvim',
@@ -33,8 +34,6 @@ return {
       require('telescope').load_extension 'dap'
     end,
   },
-
-  'nvim-neotest/nvim-nio',
   { -- DAPS
     'mfussenegger/nvim-dap',
     ft = { 'python', 'javascript', 'sh' },

@@ -3,19 +3,14 @@ return {
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
   { 'windwp/nvim-autopairs', event = 'InsertEnter' },
   { 'onsails/lspkind.nvim', event = 'VeryLazy' }, -- vscode-like pictograms
-  { -- top (or bottom) line with code context
-    'nvim-treesitter/nvim-treesitter-context',
+  {
+    'nvim-treesitter/nvim-treesitter-context', -- top (or bottom) line with code context
     event = 'VeryLazy',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
-    opts = {
-      max_lines = 1, -- Maximum number of lines to show for a single context
-      multiwindow = false,
-    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = { max_lines = 1, multiwindow = false },
   },
-  { -- improve t/f navigation & other goodies
-    'folke/flash.nvim',
+  {
+    'folke/flash.nvim', -- improve t/f navigation & other goodies
     event = 'VeryLazy',
     ---@type Flash.Config
     opts = {},
