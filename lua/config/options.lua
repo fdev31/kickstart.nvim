@@ -1,8 +1,7 @@
 -- vim:ts=2:sw=2:et:
 return function()
-  local settings = require 'config.settings'
-  vim.g.mapleader = settings.leader
-  vim.g.maplocalleader = settings.leader
+  vim.g.mapleader = '²'
+  vim.g.maplocalleader = '²'
 
   -- Enable break indent
   vim.o.breakindent = true
