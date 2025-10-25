@@ -1,7 +1,7 @@
 -- vim:ts=2:sw=2:et:
 return {
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy' },
-  { 'windwp/nvim-autopairs', event = 'InsertEnter' },
+  { 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
   { 'onsails/lspkind.nvim', event = 'VeryLazy' }, -- vscode-like pictograms
   {
     'nvim-treesitter/nvim-treesitter-context', -- top (or bottom) line with code context
