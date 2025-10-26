@@ -4,12 +4,6 @@ return {
   { 'windwp/nvim-autopairs', event = 'InsertEnter', config = true },
   { 'onsails/lspkind.nvim', event = 'VeryLazy' }, -- vscode-like pictograms
   {
-    'nvim-treesitter/nvim-treesitter-context', -- top (or bottom) line with code context
-    event = 'VeryLazy',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    opts = { max_lines = 1, multiwindow = false },
-  },
-  {
     'folke/flash.nvim', -- improve t/f navigation
     event = 'VeryLazy',
     ---@type Flash.Config
