@@ -70,6 +70,8 @@ return {
     'echasnovski/mini.nvim',
     event = 'VeryLazy',
     config = function()
+      vim.api.nvim_set_hl(0, 'MiniCursorword', { bg = '#111111' })
+      require('mini.cursorword').setup { delay = 300 }
       -- require('mini.indentscope').setup {
       --   symbol = '┆',
       -- }
