@@ -22,19 +22,6 @@ autocmd({ 'BufEnter', 'BufWinEnter' }, {
   end,
 })
 
-autocmd('LspAttach', {
-  callback = function()
-    if require('nvim-treesitter.parsers').has_parser() then
-      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-      vim.o.foldmethod = 'expr'
-      vim.o.foldtext = 'v:lua.vim.treesitter.foldtext()'
-    else
-      vim.o.foldmethod = 'syntax'
-    end
-    vim.o.foldlevel = 10
-  end,
-})
-
 return {
   {
     'fei6409/log-highlight.nvim', -- better log files

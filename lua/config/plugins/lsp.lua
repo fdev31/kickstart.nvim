@@ -144,10 +144,18 @@ local M = {
       vim.lsp.set_log_level 'off'
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        -- XXX: removing this breaks "go and gO display"
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          require 'config.keymaps.lsp'(client, event)
+          require 'config.keymaps.lsp'(client, event) -- XXX: removing this breaks "go and gO display"
+
+          if require('nvim-treesitter.parsers').has_parser() then
+            vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+            vim.o.foldmethod = 'expr'
+            vim.o.foldtext = 'v:lua.vim.treesitter.foldtext()'
+          else
+            vim.o.foldmethod = 'syntax'
+          end
+          vim.o.foldlevel = 10
         end,
       })
       -- LSP servers and clients are able to communicate to each other what features they support.
