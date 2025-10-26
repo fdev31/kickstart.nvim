@@ -2,7 +2,7 @@
 return {
   {
     'karb94/neoscroll.nvim', -- animated scroll
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     opts = {
       mappings = { -- Keys to be mapped to their corresponding default scrolling animation
         '<C-u>',
