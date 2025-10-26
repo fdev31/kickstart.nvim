@@ -1,5 +1,18 @@
 local M = {}
 
+--- removes consecutive spaces and stops at the first 0 (^@) character.
+M.clean_string = function(text, maxlen)
+  local cleaned = text:gsub('%s+', ' ')
+  local null_pos = cleaned:find '%z'
+  if null_pos then
+    cleaned = cleaned:sub(1, null_pos - 1)
+  end
+  if maxlen and #cleaned > maxlen then
+    cleaned = cleaned:sub(1, maxlen - 3) .. '…'
+  end
+  return cleaned
+end
+
 M.is_buffer_tracked = function()
   local file_path = vim.fn.expand '%:p'
   if file_path == '' then

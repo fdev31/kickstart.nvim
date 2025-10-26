@@ -2,6 +2,40 @@
 local lib = require 'config.lib.core'
 local settings = require 'config.settings'
 
+local _filter_node = function(node_type)
+  return true
+  -- return node_type:match 'class_definition' or node_type:match 'module' or node_type:match 'function' or node_type:match 'method'
+end
+
+local render_statusline = function()
+  local location = '%2l:%-2v'
+  -- Get current function/method name using Treesitter
+  local ts_utils = require 'nvim-treesitter.ts_utils'
+  local ok, node = pcall(ts_utils.get_node_at_cursor)
+
+  local first = true
+  if ok and node then
+    while node do
+      local node_type = node:type()
+      if _filter_node(node_type) then
+        local name_node = node:field('name')[1]
+        if name_node then
+          local func_name = lib.clean_string(vim.treesitter.get_node_text(name_node, 0), 20)
+          if first then
+            location = func_name .. '▐ ' .. location
+            first = false
+          else
+            location = func_name .. '.' .. location
+          end
+        end
+      end
+      node = node:parent()
+    end
+  end
+
+  return location
+end
+
 return {
   'NMAC427/guess-indent.nvim',
   {
@@ -67,7 +101,7 @@ return {
     },
   },
   { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
+    'echasnovski/mini.nvim', --  Check out: https://github.com/echasnovski/mini.nvim
     event = 'VeryLazy',
     config = function()
       vim.api.nvim_set_hl(0, 'MiniCursorword', { bg = '#111111' })
@@ -107,38 +141,7 @@ return {
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        local location = '%2l:%-2v'
-        -- Get current function/method name using Treesitter
-        local ts_utils = require 'nvim-treesitter.ts_utils'
-        local ok, node = pcall(ts_utils.get_node_at_cursor)
-
-        local first = true
-        if ok and node then
-          while node do
-            local node_type = node:type()
-            -- vim.notify(node_type)
-            if true or node_type:match 'class_definition' or node_type:match 'module' or node_type:match 'function' or node_type:match 'method' then
-              local name_node = node:field('name')[1]
-              if name_node then
-                local func_name = vim.treesitter.get_node_text(name_node, 0)
-                if first then
-                  location = func_name .. '▐ ' .. location
-                  first = false
-                else
-                  location = func_name .. '::' .. location
-                end
-              end
-            end
-            node = node:parent()
-          end
-        end
-
-        return location
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      statusline.section_location = render_statusline
     end,
   },
 }
