@@ -45,6 +45,26 @@ return {
   -- folder with wiki markdown files
   wiki_folder = vim.fn.expand '~/Documents/wiki/myKB',
 
+  -- supported languages
+  treesitter_languages = {
+    'bash',
+    'diff',
+    'toml',
+    'vue',
+    'c',
+    'cpp',
+    'css',
+    'python',
+    'html',
+    'javascript',
+    'json',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'vim',
+  },
+  -- AI stuff
+  copilotChat = 'copilot', -- "codecompanion" or "copilot"
   -- lazy plugin manager icons
   lazy_icons = {
     cmd = '⌘',
@@ -61,7 +81,12 @@ return {
     task = '📌',
     lazy = '💤 ',
   },
-
+  -- completion settings
+  cmp_dependencies = {},
+  cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
+  cmp_providers = {
+    lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+  },
   -- diagnostic column settings
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
@@ -91,9 +116,6 @@ return {
 
     severity_sort = true,
   },
-  -- AI stuff
-  copilotChat = 'copilot', -- "codecompanion" or "copilot"
-
   -- (auto) formatting
   conform_opts = {
     formatters_by_ft = {
@@ -120,35 +142,10 @@ return {
       },
     },
   },
-  -- supported languages
-  treesitter_languages = {
-    'bash',
-    'diff',
-    'toml',
-    'vue',
-    'c',
-    'cpp',
-    'css',
-    'python',
-    'html',
-    'javascript',
-    'json',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'vim',
-  },
-  -- completion settings
-  cmp_dependencies = {},
-  cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
-  cmp_providers = {
-    lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-  },
+  plugins = enabled_plugins,
   -- python linting rules
   ruff_rules = ruff.rules,
   ruff_ignore = ruff.ignore,
-
   -- dynamic settings (togglable)
   showDiagnostics = true,
-  plugins = enabled_plugins,
 }
