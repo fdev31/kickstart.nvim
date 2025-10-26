@@ -4,6 +4,7 @@ local settings = require 'config.settings'
 local telescope = require 'telescope.builtin'
 local gitpick = require 'config.lib.gitpickers'
 local partial = require('config.lib.core').partial
+local git = require 'config.lib.git'
 
 local M = {}
 -- Menu structure
@@ -27,7 +28,7 @@ M.git_menu = { --{{{
   {
     text = ' Commit',
     handler = function()
-      require('diffview').close()
+      git.close_diff_view()
       vim.cmd 'Neotree close'
       vim.cmd 'G commit'
     end,
@@ -90,7 +91,7 @@ M.git_menu = { --{{{
   {
     text = ' Push',
     handler = function()
-      require('diffview').close()
+      git.close_diff_view()
       vim.cmd 'G push'
     end,
   },

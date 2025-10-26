@@ -1,4 +1,6 @@
 local partial = require('config.lib.core').partial
+local git = require 'config.lib.git'
+local settings = require 'config.settings'
 local map = vim.keymap.set
 
 local telescope = require 'telescope.builtin'
@@ -6,18 +8,26 @@ local telescope = require 'telescope.builtin'
 --------------------------------------------------
 -- GIT OPERATIONS
 --------------------------------------------------
-map('n', '<leader>ga', '<cmd>G add %<CR>', { desc = '_add file (git)' })
-map('n', '<leader>gr', '<cmd>G reset HEAD %<CR>', { desc = '_reset file (git)' })
-map('n', '<leader>gc', '<cmd>DiffviewClose<CR><cmd>G commit %<CR>', { desc = '_commit file (git)' })
-map('n', '<leader>gC', '<cmd>DiffviewClose<CR><cmd>G commit<CR>', { desc = '_Commit all (git)' })
-map('n', '<leader>fc', telescope.git_status, { desc = '[c]hange (git)' })
+-- Navigate conflicts with ]x and [x (custom: jumps to next/prev conflict marker)
+map('n', ']x', function()
+  vim.cmd 'silent! normal! ]x'
+  -- Fallback: search for next <<<<<<< if vim-unimpaired not installed
+  if vim.v.hlsearch == 0 then
+    vim.cmd 'silent! /<<<<<<<'
+  end
+end, { desc = 'Next conflict' })
+map('n', '[x', function()
+  vim.cmd 'silent! normal! [x'
+  -- Fallback: search for prev <<<<<<<
+  if vim.v.hlsearch == 0 then
+    vim.cmd 'silent! ?>>>>>>>'
+  end
+end, { desc = 'Previous conflict' })
 
--- Diffview and git operations
+-- Toggle diff view
 map('n', '<leader>D', function()
-  if next(require('diffview.lib').views) == nil then
-    vim.cmd 'DiffviewOpen -uno'
-  else
-    vim.cmd 'DiffviewClose'
+  if not git.close_diff_view() then
+    vim.cmd(settings.diff_command)
   end
 end, { desc = 'Diff view (toggle)' })
 

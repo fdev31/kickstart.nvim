@@ -1,5 +1,11 @@
+vim.g._diffview_enabled = true
+
 -- vim:ts=2:sw=2:et:
 return {
+  setup = function()
+    local settings = require 'config.settings'
+    settings.diff_command = 'DiffviewOpen -uno'
+  end,
   {
     'sindrets/diffview.nvim', -- better diff view
     cmd = 'DiffviewOpen',

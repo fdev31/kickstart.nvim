@@ -2,9 +2,37 @@ local ruff = require 'config.ruff_rules'
 
 local popup_style = { border = 'rounded' }
 
+local enabled_plugins = {
+  'autocomplete',
+  'autoformat',
+  'code_goodies',
+  'copilot',
+  'daps',
+  'diagnostics',
+  'embedded',
+  'filetypes',
+  'git',
+  'http_client',
+  'lsp',
+  'markdown',
+  'menus',
+  'misc',
+  'neotree',
+  'orgmode',
+  'python',
+  'qol',
+  'silicon',
+  'smooth_scroll',
+  'theme',
+  'treesitter',
+  'whichkey',
+  'workspaces',
+  -- 'diffview',
+}
+
 return {
   deduplicate_diagnostics = true,
-  diff_command = 'DiffviewOpen -uno',
+  diff_command = 'Gvdiffsplit', -- 'DiffviewOpen -uno' -- set by diffview plugin
   gitsigns = {
     add = { text = '▋' }, -- ''
     -- change = { text = '' },
@@ -122,31 +150,5 @@ return {
 
   -- dynamic settings (togglable)
   showDiagnostics = true,
-  plugins = {
-    'autocomplete',
-    'autoformat',
-    'code_goodies',
-    'copilot',
-    'daps',
-    'diagnostics',
-    'diffview',
-    'embedded',
-    'filetypes',
-    'git',
-    'http_client',
-    'lsp',
-    'markdown',
-    'menus',
-    'misc',
-    'neotree',
-    'orgmode',
-    'python',
-    'qol',
-    'silicon',
-    'smooth_scroll',
-    'theme',
-    'treesitter',
-    'whichkey',
-    'workspaces',
-  },
+  plugins = enabled_plugins,
 }
