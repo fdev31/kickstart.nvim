@@ -17,6 +17,7 @@ return {
     event = 'VeryLazy',
     ---@type snacks.Config
     opts = {
+      indent = {},
       input = { enable = true },
       notifier = { enabled = true, timeout = 3000 },
     },
@@ -69,9 +70,9 @@ return {
     'echasnovski/mini.nvim',
     event = 'VeryLazy',
     config = function()
-      require('mini.indentscope').setup {
-        symbol = '┆',
-      }
+      -- require('mini.indentscope').setup {
+      --   symbol = '┆',
+      -- }
       require('mini.align').setup {
         mappings = {
           start = '',
