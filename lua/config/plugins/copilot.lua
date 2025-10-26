@@ -2,7 +2,7 @@
 local settings = require 'config.settings'
 
 local use_codecompanion = settings.copilotChat == 'codecompanion'
-local use_model = 'claude-3.7-sonnet'
+local use_model = 'claude-4.5-sonnet'
 
 settings.cmp_providers.copilot = {
   name = 'copilot',
