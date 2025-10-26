@@ -64,6 +64,8 @@ end, { desc = '[n]otifications' })
 
 -- Smart open and workspaces
 map('n', '<leader><leader>', function()
+  -- cheaper version:
+  -- package.loaded.snacks.picker.smart()
   require('telescope').extensions.smart_open.smart_open()
 end, { desc = 'Smart open' })
 
@@ -73,7 +75,7 @@ end, { desc = 'Smart open cwd' })
 
 map('n', '<leader>ww', function()
   require('telescope').extensions.workspaces.workspaces()
-end, { desc = '[w]alk [w]orkspaces' })
+end, { desc = '[w]alk workspaces' })
 
 map('n', '<C-p>', function() -- pick symbol (aerial)
   require('telescope').extensions.aerial.aerial()

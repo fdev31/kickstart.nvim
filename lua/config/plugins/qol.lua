@@ -51,9 +51,21 @@ return {
     event = 'VeryLazy',
     ---@type snacks.Config
     opts = {
+      picker = {
+        smart = {
+          multi = { 'recent', 'buffers', 'files' },
+          format = 'file', -- use `file` format for all sources
+          matcher = {
+            cwd_bonus = true, -- boost cwd matches
+            frecency = true, -- use frecency boosting
+            sort_empty = true, -- sort even when the filter is empty
+          },
+          transform = 'unique_file',
+        },
+      },
       indent = {},
-      input = { enable = true },
-      notifier = { enabled = true, timeout = 3000 },
+      input = {},
+      notifier = { timeout = 3000 },
     },
     priority = 1000,
   },
