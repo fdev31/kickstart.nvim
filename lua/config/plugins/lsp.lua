@@ -142,6 +142,14 @@ local M = {
     },
     config = function()
       vim.lsp.set_log_level 'off'
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        -- XXX: removing this breaks "go and gO display"
+        callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          require 'config.keymaps.lsp'(client, event)
+        end,
+      })
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
