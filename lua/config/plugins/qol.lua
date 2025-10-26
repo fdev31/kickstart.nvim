@@ -69,6 +69,9 @@ return {
     'echasnovski/mini.nvim',
     event = 'VeryLazy',
     config = function()
+      require('mini.indentscope').setup {
+        symbol = '┆',
+      }
       require('mini.align').setup {
         mappings = {
           start = '',
@@ -108,11 +111,6 @@ return {
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
-  },
-  { -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    event = 'VeryLazy',
   },
 }
 -- :ts=2:sw=2:et:
