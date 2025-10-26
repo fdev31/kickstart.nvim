@@ -39,4 +39,3 @@ map('n', '<leader>td', function()
   end
   vim.o.spell = settings.showDiagnostics
 end, { desc = '[d]iagnostics' })
-map('n', '<leader>ti', require('dapui').toggle, { noremap = true, silent = true, desc = '[i]nspector' })
