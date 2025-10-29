@@ -147,9 +147,8 @@ local M = {
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           require 'config.keymaps.lsp'(client, event)
-          -- vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc' -- using cmp
+          -- vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc' -- using blink.cmp
           vim.bo[event.buf].tagfunc = 'v:lua.vim.lsp.tagfunc'
-          vim.b._lsp_client_name = client.name
 
           if require('nvim-treesitter.parsers').has_parser() then
             vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -158,7 +157,6 @@ local M = {
           else
             vim.o.foldmethod = 'syntax'
           end
-          vim.o.foldlevel = 10
         end,
       })
       -- LSP servers and clients are able to communicate to each other what features they support.

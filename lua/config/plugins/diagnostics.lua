@@ -15,51 +15,29 @@ return {
     vim.diagnostic.config(settings.diagnostic_config)
     -- INFO: DE duplicate Diagnostic icons by overriding the built-in signs handler
     if settings.deduplicate_diagnostics then
+      local ns = vim.api.nvim_create_namespace 'my_namespace'
+      -- Get a reference to the original signs handler
       local orig_signs_handler = vim.diagnostic.handlers.signs
-
-      -- Replace the signs handler with our custom implementation
       vim.diagnostic.handlers.signs = {
-        show = function(namespace, bufnr, diagnostics, opts)
-          -- Return early if there are no diagnostics
-          if not diagnostics or #diagnostics == 0 then
-            return orig_signs_handler.show(namespace, bufnr, {}, opts)
-          end
-
-          -- Find the "worst" (most severe) diagnostic per line
+        show = function(_, bufnr, _, opts)
+          -- Get all diagnostics from the whole buffer rather than just the
+          -- diagnostics passed to the handler
+          local diagnostics = vim.diagnostic.get(bufnr)
+          -- Find the "worst" diagnostic per line
           local max_severity_per_line = {}
-          for _, d in ipairs(diagnostics) do
-            -- Skip diagnostics without line numbers
-            if d.lnum ~= nil then
-              local line = d.lnum
-
-              -- Initialize with current diagnostic if line not seen before
-              if not max_severity_per_line[line] then
-                max_severity_per_line[line] = d
-              else
-                -- Compare severities, handling missing severity values
-                local current_severity = d.severity or vim.diagnostic.severity.HINT
-                local existing_severity = max_severity_per_line[line].severity or vim.diagnostic.severity.HINT
-
-                -- Lower severity values are more severe in Neovim (1=ERROR, 2=WARN, etc.)
-                if current_severity < existing_severity then
-                  max_severity_per_line[line] = d
-                end
-              end
+          for _, d in pairs(diagnostics) do
+            local m = max_severity_per_line[d.lnum]
+            if not m or d.severity < m.severity then
+              max_severity_per_line[d.lnum] = d
             end
           end
-
-          -- Convert the filtered diagnostics back to a list
-          local filtered_diagnostics = {}
-          for _, diagnostic in pairs(max_severity_per_line) do
-            table.insert(filtered_diagnostics, diagnostic)
-          end
-
-          -- Call the original handler with filtered diagnostics
-          orig_signs_handler.show(namespace, bufnr, filtered_diagnostics, opts)
+          -- Pass the filtered diagnostics (with our custom namespace) to
+          -- the original handler
+          local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
+          orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
         end,
-
-        hide = function(namespace, bufnr)
-          orig_signs_handler.hide(namespace, bufnr)
+        hide = function(_, bufnr)
+          orig_signs_handler.hide(ns, bufnr)
         end,
       }
     end
