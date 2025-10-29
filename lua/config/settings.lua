@@ -2,6 +2,15 @@ local ruff = require 'config.ruff_rules'
 
 local popup_style = { border = 'rounded' }
 
+local gitsigns_icons = {
+  text = {
+    [vim.diagnostic.severity.ERROR] = '󰅚',
+    [vim.diagnostic.severity.WARN] = '󰀪',
+    [vim.diagnostic.severity.INFO] = '󰋽',
+    [vim.diagnostic.severity.HINT] = '󰌶',
+  },
+}
+
 local enabled_plugins = {
   'autocomplete',
   'autoformat',
@@ -31,6 +40,7 @@ local enabled_plugins = {
 }
 
 return {
+  leader = '²',
   deduplicate_diagnostics = true,
   diff_command = 'Gvdiffsplit', -- 'DiffviewOpen -uno' -- set by diffview plugin
   gitsigns = {
@@ -91,14 +101,7 @@ return {
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
     virtual_text = false,
-    signs = vim.g.have_nerd_font and {
-      text = {
-        [vim.diagnostic.severity.ERROR] = '󰅚',
-        [vim.diagnostic.severity.WARN] = '󰀪',
-        [vim.diagnostic.severity.INFO] = '󰋽',
-        [vim.diagnostic.severity.HINT] = '󰌶',
-      },
-    } or true,
+    signs = gitsigns_icons,
     float = vim.tbl_deep_extend('force', {
       show_header = false,
       update_in_insert = true,
