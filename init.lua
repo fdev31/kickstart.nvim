@@ -1,4 +1,4 @@
-require 'config.options'()
+require('config.options').setup()
 local settings = require 'config.settings'
 pcall(require, 'config.custom') -- let a chance to load custom code
 local plugins_spec = require 'config.plugins'

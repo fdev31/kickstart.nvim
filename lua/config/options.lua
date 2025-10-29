@@ -1,5 +1,5 @@
 -- vim:ts=2:sw=2:et:
-return function()
+local setup = function()
   vim.g.mapleader = '²'
   vim.g.maplocalleader = '²'
   vim.g.have_nerd_font = true
@@ -104,3 +104,6 @@ return function()
     end
   end
 end
+return {
+  setup = setup,
+}
