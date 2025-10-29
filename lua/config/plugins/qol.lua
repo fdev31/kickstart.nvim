@@ -33,6 +33,13 @@ local render_statusline = function()
     end
   end
 
+  if vim.b._lsp_client_name then
+    if not location then
+      return vim.b._lsp_client_name
+    else
+      return vim.b._lsp_client_name .. '▐ ' .. location
+    end
+  end
   return location
 end
 

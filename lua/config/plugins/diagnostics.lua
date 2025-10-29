@@ -88,7 +88,6 @@ return {
             end
 
             local suffix = (origin and origin ~= '' and string.format(' (%s)', origin)) or ''
-
             return string.format('%s%s%s', prefix, diagnostic.message, suffix)
           end,
         })

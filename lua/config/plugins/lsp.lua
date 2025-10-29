@@ -146,7 +146,10 @@ local M = {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          require 'config.keymaps.lsp'(client, event) -- XXX: removing this breaks "go and gO display"
+          require 'config.keymaps.lsp'(client, event)
+          -- vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc' -- using cmp
+          vim.bo[event.buf].tagfunc = 'v:lua.vim.lsp.tagfunc'
+          vim.b._lsp_client_name = client.name
 
           if require('nvim-treesitter.parsers').has_parser() then
             vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
