@@ -19,11 +19,6 @@ M.is_buffer_tracked = function()
     return false
   end
 
-  local git_dir = vim.fn.FugitiveGitDir()
-  if git_dir == '' then
-    return false
-  end
-
   -- Use fugitive to check if file is tracked
   local status = vim.fn.FugitiveStatusline()
   -- If the file is not tracked, status would typically be empty or indicate untracked
