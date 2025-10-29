@@ -4,6 +4,7 @@ return {
   {
     'karloskar/poetry-nvim',
     ft = { 'python' },
+    lazy = true,
     config = function()
       require('poetry-nvim').setup()
     end,
@@ -11,6 +12,7 @@ return {
   {
     'linux-cultist/venv-selector.nvim',
     ft = { 'python' },
+    lazy = true,
     branch = 'regexp',
     dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
     opts = {
@@ -28,6 +30,7 @@ return {
   {
     'andymass/vim-matchup', -- nice language aware "%"
     ft = { 'python', 'lua', 'javascript', 'typescript', 'html', 'css', 'vim', 'rust', 'go' },
+    lazy = true,
     event = 'VeryLazy',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
@@ -39,6 +42,7 @@ return {
   {
     'joshzcold/python.nvim',
     ft = { 'python' },
+    lazy = true,
     dependencies = {
       { 'mfussenegger/nvim-dap' },
       { 'mfussenegger/nvim-dap-python' },
