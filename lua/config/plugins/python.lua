@@ -2,22 +2,6 @@
 return {
   ---@module 'python'
   {
-    'joshzcold/python.nvim',
-    ft = { 'python' },
-    dependencies = {
-      { 'mfussenegger/nvim-dap' },
-      { 'mfussenegger/nvim-dap-python' },
-      { 'neovim/nvim-lspconfig' },
-      { 'L3MON4D3/LuaSnip' },
-      { 'nvim-neotest/neotest' },
-      { 'nvim-neotest/neotest-python' },
-    },
-    ---@type python.Config
-    opts = { ---@diagnostic disable-line: missing-fields`
-      python_lua_snippets = true,
-    },
-  },
-  {
     'karloskar/poetry-nvim',
     ft = { 'python' },
     config = function()
@@ -35,23 +19,37 @@ return {
       auto_refresh = true,
     },
     -- event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-    command = { 'VenvSelect', 'VenvSelectCached' },
+    command = { 'VenvSelect' },
     keys = {
       -- Keymap to open VenvSelector to pick a venv.
       { '<leader>vs', '<cmd>VenvSelect<cr>', desc = '[v]env [s]elect' },
-      -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-      { '<leader>vc', '<cmd>VenvSelectCached<cr>', desc = '[v]env [c]ache' },
     },
-    {
-      'andymass/vim-matchup', -- nice language aware "%"
-      ft = { 'python', 'lua', 'javascript', 'typescript', 'html', 'css', 'vim', 'rust', 'go' },
-      event = 'VeryLazy',
-      dependencies = { 'nvim-treesitter/nvim-treesitter' },
-      config = function()
-        local mod = require 'match-up'
-        mod.matchup_matchparen_offscreen = { method = 'popup' }
-        mod.setup {}
-      end,
+  },
+  {
+    'andymass/vim-matchup', -- nice language aware "%"
+    ft = { 'python', 'lua', 'javascript', 'typescript', 'html', 'css', 'vim', 'rust', 'go' },
+    event = 'VeryLazy',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      local mod = require 'match-up'
+      mod.matchup_matchparen_offscreen = { method = 'popup' }
+      mod.setup {}
+    end,
+  },
+  {
+    'joshzcold/python.nvim',
+    ft = { 'python' },
+    dependencies = {
+      { 'mfussenegger/nvim-dap' },
+      { 'mfussenegger/nvim-dap-python' },
+      { 'neovim/nvim-lspconfig' },
+      { 'L3MON4D3/LuaSnip' },
+      { 'nvim-neotest/neotest' },
+      { 'nvim-neotest/neotest-python' },
+    },
+    ---@type python.Config
+    opts = { ---@diagnostic disable-line: missing-fields`
+      python_lua_snippets = true,
     },
   },
 }
