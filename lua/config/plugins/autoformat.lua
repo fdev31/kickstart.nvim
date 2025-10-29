@@ -30,7 +30,7 @@ local set_enabled = function(val)
   vim.b.conform_enabled = val
 end
 
-local get_enabled = function()
+local get_format_mode = function()
   local enabled = vim.b.conform_enabled
   if enabled == nil then
     enabled = get_default_value()
@@ -55,13 +55,13 @@ return {
       {
         '<leader>tF',
         function()
-          local enabled = get_enabled()
-          if enabled ~= FormatMode.DISABLED then
+          local formatting_mode = get_format_mode()
+          if formatting_mode ~= FormatMode.DISABLED then
             set_enabled(FormatMode.DISABLED)
           else
             set_enabled(get_default_value())
           end
-          vim.notify(get_enabled() and 'Selective autoformat ' or 'No autoformat')
+          vim.notify(get_format_mode() and 'Selective autoformat ' or 'No autoformat')
         end,
         mode = '',
         desc = '[F]ormat',
@@ -74,13 +74,13 @@ return {
             vim.notify "File is untracked: can't enable selective formatting"
             return
           end
-          local enabled = get_enabled()
-          if enabled == FormatMode.SELECTIVE then
+          local formatting_mode = get_format_mode()
+          if formatting_mode == FormatMode.SELECTIVE then
             set_enabled(FormatMode.FULL)
           else
             set_enabled(get_default_value())
           end
-          vim.notify(get_enabled() == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat')
+          vim.notify(get_format_mode() == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat')
         end,
         mode = '',
         desc = 'selective [f]ormat',
@@ -90,11 +90,11 @@ return {
       notify_on_error = true,
       notify_no_formatters = true,
       format_on_save = function(bufnr)
-        local enabled = get_enabled()
-        if enabled == FormatMode.DISABLED then
+        local formatting_mode = get_format_mode()
+        if formatting_mode == FormatMode.DISABLED then
           return
         end
-        if enabled == FormatMode.SELECTIVE then
+        if formatting_mode == FormatMode.SELECTIVE then
           if require 'config.lib.partial_formatter'() ~= false then
             return -- only stop if it got formatted
           else
