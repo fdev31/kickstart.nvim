@@ -33,7 +33,7 @@ return {
       -- diffview
       vim.api.nvim_set_hl(0, 'DiffChange', { bg = change_bg })
       vim.api.nvim_set_hl(0, 'DiffAdd', { bg = change_bg })
-      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#521414', fg = '#622424' })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#521414', fg = '#f29924' })
       vim.api.nvim_set_hl(0, 'DiffText', { bold = true, bg = '#ddffee', fg = change_bg })
       -- transparent backgrounds
       vim.api.nvim_set_hl(0, 'NormalFloat', no_background)
