@@ -7,8 +7,7 @@ local _filter_node = function(node_type)
   -- return node_type:match 'class_definition' or node_type:match 'module' or node_type:match 'function' or node_type:match 'method'
 end
 
-local render_statusline = function()
-  local location = '%2l:%-2v'
+local _precise_render_statusline = function(location)
   -- Get current function/method name using Treesitter
   local ts_utils = require 'nvim-treesitter.ts_utils'
   local ok, node = pcall(ts_utils.get_node_at_cursor)
@@ -31,6 +30,7 @@ local render_statusline = function()
       end
       node = node:parent()
     end
+    return location
   end
 
   if vim.b._lsp_client_name then
@@ -40,7 +40,11 @@ local render_statusline = function()
       return vim.b._lsp_client_name .. '▐ ' .. location
     end
   end
-  return location
+end
+local render_statusline = function()
+  local location = '%2l:%-2v'
+  local _, ret = pcall(_precise_render_statusline, location)
+  return ret or location
 end
 
 return {
