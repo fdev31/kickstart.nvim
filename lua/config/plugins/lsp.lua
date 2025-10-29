@@ -12,24 +12,6 @@ local vue_plugin = {
 }
 
 local lsp_servers = {
-  qmlls = {
-    cmd = { 'qmlls' },
-    root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.git', { path = '.', upwards = true })[1])
-      -- return require('lspconfig.util').find_git_ancestor(fname) or vim.fn.getcwd()
-    end,
-    filetypes = { 'qml' },
-    capabilities = {
-      textDocument = {
-        completion = {
-          completionItem = {
-            snippetSupport = true,
-            commitCharactersSupport = true,
-          },
-        },
-      },
-    },
-  },
   textlsp = {},
   harper_ls = {
     ['harper-ls'] = {
@@ -109,6 +91,24 @@ local lsp_servers = {
         },
         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
         -- diagnostics = { disable = { 'missing-fields' } },
+      },
+    },
+  },
+  qmlls = {
+    cmd = { 'qmlls' },
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find('.git', { path = '.', upwards = true })[1])
+      -- return require('lspconfig.util').find_git_ancestor(fname) or vim.fn.getcwd()
+    end,
+    filetypes = { 'qml' },
+    capabilities = {
+      textDocument = {
+        completion = {
+          completionItem = {
+            snippetSupport = true,
+            commitCharactersSupport = true,
+          },
+        },
       },
     },
   },
