@@ -47,11 +47,11 @@ M.git_menu = { --{{{
     cmd = 'G diff --cached',
   },
   {
-    text = '  History (File)',
+    text = '  File History',
     handler = telescope.git_bcommits,
   },
   {
-    text = '⎼⎼ History (Line)',
+    text = '⎼⎼ Line History',
     handler = package.loaded.snacks.picker.git_log_line,
   },
   {
