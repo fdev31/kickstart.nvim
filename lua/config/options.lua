@@ -2,6 +2,7 @@
 return function()
   vim.g.mapleader = '²'
   vim.g.maplocalleader = '²'
+  vim.g.have_nerd_font = true
 
   -- Enable break indent
   vim.o.breakindent = true
@@ -76,7 +77,6 @@ return function()
   vim.o.foldenable = false
   vim.o.termguicolors = true
 
-  vim.g.have_nerd_font = true
   -- vim.o.relativenumber = true
   vim.o.mouse = 'a'
   vim.o.showmode = false
