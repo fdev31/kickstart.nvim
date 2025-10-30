@@ -3,11 +3,11 @@ local settings = require 'config.settings'
 local lib = require 'config.lib.core'
 
 local origin_map = {
-  Harper = ' ',
+  Harper = '  ',
   Ruff = '󱐋 ',
-  typos = '󰓆 ',
-  typescript = '󰛦 ',
-  ['Lua Diagnostics.'] = ' ',
+  typos = '󰓆  ',
+  typescript = '󰛦  ',
+  ['Lua Diagnostics.'] = '  ',
 }
 
 local filter_diagnostics = function(diagnostics)
