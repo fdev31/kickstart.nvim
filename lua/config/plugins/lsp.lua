@@ -62,7 +62,7 @@ local lsp_servers = {
           mccabe = { enabled = false },
           pyflakes = { enabled = false },
           pycodestyle = { enabled = true },
-          pydocstyle = { enabled = true },
+          pydocstyle = { enabled = false },
           -- type checker
           pylsp_mypy = { enabled = false },
           -- auto-completion options
