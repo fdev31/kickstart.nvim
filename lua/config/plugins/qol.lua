@@ -21,7 +21,7 @@ local _precise_render_statusline = function(location)
         if name_node then
           local func_name = lib.clean_string(vim.treesitter.get_node_text(name_node, 0), 20)
           if first then
-            location = func_name .. '▐ ' .. location
+            location = func_name .. '┃ ' .. location
             first = false
           else
             location = func_name .. '.' .. location
