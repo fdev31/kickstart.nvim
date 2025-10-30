@@ -32,14 +32,6 @@ local _precise_render_statusline = function(location)
     end
     return location
   end
-
-  if vim.b._lsp_client_name then
-    if not location then
-      return vim.b._lsp_client_name
-    else
-      return vim.b._lsp_client_name .. '▐ ' .. location
-    end
-  end
 end
 local render_statusline = function()
   local location = '%2l:%-2v'
