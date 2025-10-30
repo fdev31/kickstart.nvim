@@ -9,35 +9,50 @@ local origin_map = {
   typescript = '󰛦 ',
   ['Lua Diagnostics.'] = ' ',
 }
+
+local filter_diagnostics = function(diagnostics)
+  -- Group by line number AND namespace to see all diagnostics together
+  local max_severity_per_line = {}
+  for _, d in pairs(diagnostics) do
+    local m = max_severity_per_line[d.lnum]
+    -- Keep the diagnostic with lowest severity value (ERROR=1, WARN=2, etc.)
+    if not m or d.severity < m.severity then
+      max_severity_per_line[d.lnum] = d
+    end
+  end
+  return vim.tbl_values(max_severity_per_line)
+end
+
 return {
   setup = function()
-    -- INFO: vim.diagnostic.Opts
-    vim.diagnostic.config(settings.diagnostic_config)
-    -- INFO: DE duplicate Diagnostic icons by overriding the built-in signs handler
+    -- INFO: Deduplicate Diagnostic icons by filtering at config level
     if settings.deduplicate_diagnostics then
-      local ns = vim.api.nvim_create_namespace 'my_namespace'
-      -- Get a reference to the original signs handler
+      local ns = vim.api.nvim_create_namespace 'deduplicated_diagnostics'
+
+      -- Create a wrapper around the original show function
       local orig_signs_handler = vim.diagnostic.handlers.signs
+
       vim.diagnostic.handlers.signs = {
-        show = function(_, bufnr, _, opts)
-          -- Get all diagnostics from the whole buffer rather than just the
-          -- diagnostics passed to the handler
-          local diagnostics = vim.diagnostic.get(bufnr)
-          -- Find the "worst" diagnostic per line
-          local max_severity_per_line = {}
-          for _, d in pairs(diagnostics) do
-            local m = max_severity_per_line[d.lnum]
-            if not m or d.severity < m.severity then
-              max_severity_per_line[d.lnum] = d
-            end
-          end
-          -- Pass the filtered diagnostics (with our custom namespace) to
-          -- the original handler
-          local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
+        show = function(namespace, bufnr, diagnostics, opts)
+          -- Get ALL diagnostics from ALL namespaces in the buffer
+          local all_diagnostics = vim.diagnostic.get(bufnr, { namespace = nil })
+          vim.tbl_extend('force', all_diagnostics, diagnostics)
+
+          local filtered_diagnostics = filter_diagnostics(all_diagnostics)
+
+          -- Hide from the incoming namespace first
+          orig_signs_handler.hide(namespace, bufnr)
+          orig_signs_handler.hide(ns, bufnr)
+
+          -- Show filtered diagnostics in our deduplicated namespace
           orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
         end,
-        hide = function(_, bufnr)
-          orig_signs_handler.hide(ns, bufnr)
+
+        hide = function(namespace, bufnr)
+          orig_signs_handler.hide(namespace, bufnr)
+          -- NOTE: makes things blink then disappear
+          -- Also hide from our namespace to keep it clean
+          -- orig_signs_handler.hide(ns, bufnr)
         end,
       }
     end
@@ -71,5 +86,7 @@ return {
         })
       end,
     })
+
+    vim.diagnostic.config(settings.diagnostic_config)
   end,
 }
