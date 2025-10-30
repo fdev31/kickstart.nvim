@@ -1,6 +1,7 @@
 -- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
 local lib = require 'config.lib.core'
+local ruff = require 'config.ruff_rules'
 
 local vue_language_server_path = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server'
 
@@ -21,7 +22,13 @@ local lsp_servers = {
   dprint = {},
   typos_lsp = {},
   html = {},
-  ruff = { enabled = true, formatEnabled = true },
+  ruff = {
+    enabled = true,
+    formatEnabled = true,
+    -- python linting rules
+    rules = ruff.rules,
+    ignore = ruff.ignore,
+  },
   pylint = { enabled = false },
   pyright = { enabled = false },
   pycodestyle = { enabled = false }, -- in pylsp
