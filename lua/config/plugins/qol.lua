@@ -4,7 +4,7 @@ local settings = require 'config.settings'
 
 local _filter_node = function(node_type)
   return true
-  -- return node_type:match 'class_definition' or node_type:match 'module' or node_type:match 'function' or node_type:match 'method'
+  -- return node_type:match('class_definition|module|function|method|interface|struct')
 end
 
 local _precise_render_statusline = function(location)
