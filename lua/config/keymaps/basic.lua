@@ -26,6 +26,12 @@ vim.keymap.set('n', '<C-up>', '<C-w><C-j>', { desc = 'Move focus to the lower wi
 vim.keymap.set('n', '<C-down>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Toggles
+map('n', '<leader>tl', function()
+  vim.o.linebreak = not vim.o.linebreak
+end, { desc = '[l]ine break' })
+map('n', '<leader>tw', function()
+  vim.o.wrap = not vim.o.wrap
+end, { desc = 'line [w]rap' })
 map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
 map('n', '<leader>tn', '<cmd> set nonumber rnu! <CR>', { noremap = true, silent = true, desc = '[n]umber relative' })
 map('n', '<leader>tN', '<cmd> set number! nornu <CR>', { noremap = true, silent = true, desc = '[N]umbering' })

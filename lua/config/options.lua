@@ -12,6 +12,7 @@ local setup = function()
 
   -- Break on word boundaries
   vim.o.linebreak = true
+  vim.o.wrap = false
 
   -- Save undo history
   vim.o.undofile = true
