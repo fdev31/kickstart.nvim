@@ -36,7 +36,7 @@ local lsp_servers = {
   black = { enabled = false },
   cssls = {},
   clangd = {},
-  ts_ls = {},
+  ts_ls = { enabled = false },
   vtsls = {
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
     settings = {

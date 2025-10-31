@@ -6,7 +6,8 @@ local origin_map = {
   Harper = '  ',
   Ruff = '󱐋 ',
   typos = '󰓆  ',
-  typescript = '󰛦  ',
+  typescript = '󰛦  ', -- ts_ls
+  ts = '󰛦  ', -- vts_ls
   ['Lua Diagnostics.'] = '  ',
 }
 
