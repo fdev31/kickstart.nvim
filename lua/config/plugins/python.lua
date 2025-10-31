@@ -13,7 +13,7 @@ return {
     'linux-cultist/venv-selector.nvim',
     ft = { 'python' },
     lazy = true,
-    branch = 'regexp',
+    branch = 'main',
     dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
     opts = {
       -- Your options go here
