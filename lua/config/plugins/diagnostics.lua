@@ -22,9 +22,9 @@ local function get_origin_icon(source)
   end
 
   -- Fall back to pattern matching
-  for name, entry in pairs(origin_patterns) do
-    if source:match(name) then
-      return entry
+  for pattern, icon in pairs(origin_patterns) do
+    if source:match(pattern) then
+      return icon
     end
   end
 
