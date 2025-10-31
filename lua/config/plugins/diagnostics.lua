@@ -11,6 +11,26 @@ local origin_map = {
   ['Lua Diagnostics.'] = '  ',
 }
 
+local origin_patterns = {
+  ['.*Harper.*'] = '  ',
+}
+
+local function get_origin_icon(source)
+  -- Try exact match first
+  if origin_map[source] then
+    return origin_map[source]
+  end
+
+  -- Fall back to pattern matching
+  for name, entry in pairs(origin_patterns) do
+    if source:match(name) then
+      return entry
+    end
+  end
+
+  return nil -- or a default icon
+end
+
 local filter_diagnostics = function(diagnostics)
   -- Group by line number AND namespace to see all diagnostics together
   local max_severity_per_line = {}
@@ -76,8 +96,9 @@ return {
             -- Strip origin for newlines and blanks
             origin = lib.strip(origin)
 
-            if origin_map[origin] then
-              prefix = origin_map[origin]
+            local icon = get_origin_icon(origin)
+            if icon then
+              prefix = icon
               origin = ''
             end
 
