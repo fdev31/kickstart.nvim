@@ -31,7 +31,6 @@ return {
     'andymass/vim-matchup', -- nice language aware "%"
     ft = { 'python', 'lua', 'javascript', 'typescript', 'html', 'css', 'vim', 'rust', 'go' },
     lazy = true,
-    event = 'VeryLazy',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       local mod = require 'match-up'
