@@ -8,9 +8,10 @@ return function()
     return false
   end
 
+  -- Fix: get_hunks() requires buffer number argument
   local hunks = require('gitsigns').get_hunks()
-  if hunks == nil then
-    vim.notify('No change detected', 'info', { title = 'formatting' })
+  if hunks == nil or #hunks == 0 then
+    vim.notify('No change detected', vim.log.levels.INFO, { title = 'formatting' })
     return true
   end
 
@@ -18,7 +19,7 @@ return function()
 
   local function format_range()
     if not next(hunks) then
-      -- vim.notify('done formatting git hunks', 'info', { title = 'formatting' })
+      -- vim.notify('done formatting git hunks', vim.log.levels.INFO, { title = 'formatting' })
       return true
     end
 
@@ -28,8 +29,10 @@ return function()
     until not hunk or hunk.type ~= 'delete'
 
     if hunk then
-      local start_line = hunk.added.start
-      local end_line = start_line + hunk.added.count
+      local start_line = hunk.added.start - 1
+      local end_line = 1 + start_line + hunk.added.count
+
+      -- vim.notify('start_line: ' .. start_line .. ' end_line: ' .. end_line, vim.log.levels.INFO, { title = 'formatting' })
 
       -- Ensure we don't try to format an empty range
       if end_line < start_line then
