@@ -1,6 +1,8 @@
 local ignore_filetypes = { 'lua' }
 
--- https://github.com/stevearc/conform.nvim/issues/92
+local async_ops = false -- format BEFORE saving if not async (else may require two saves to apply formatting)
+
+-- Started from: https://github.com/stevearc/conform.nvim/issues/92
 -- Format only the git changed hunks in the current buffer
 -- Returns false if this filetype can't be formatted, true otherwise
 return function()
@@ -36,7 +38,11 @@ return function()
 
       -- Ensure we don't try to format an empty range
       if end_line < start_line then
-        vim.defer_fn(format_range, 1)
+        if async_ops then
+          vim.defer_fn(format_range, 1)
+        else
+          format_range()
+        end
         return
       end
 
@@ -53,8 +59,12 @@ return function()
         range['end'] = { end_line, -1 }
       end
 
-      format({ range = range, async = true, lsp_fallback = true }, function()
-        vim.defer_fn(format_range, 1)
+      format({ range = range, async = async_ops, lsp_fallback = true }, function()
+        if async_ops then
+          vim.defer_fn(format_range, 1)
+        else
+          format_range()
+        end
       end)
     end
   end
