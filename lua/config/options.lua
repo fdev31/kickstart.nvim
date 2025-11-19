@@ -6,7 +6,7 @@ local setup = function()
   vim.g.have_nerd_font = settings.use_nerd_font
 
   -- hide command bar when not needed
-  vim.o.cmdheight = 0
+  -- vim.o.cmdheight = 0
   -- Enable break indent
   vim.o.breakindent = true
 
