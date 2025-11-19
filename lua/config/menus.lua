@@ -39,6 +39,13 @@ M.git_menu = { --{{{
     silent = true,
   },
   {
+    text = ' Push',
+    handler = function()
+      git.close_diff_view()
+      vim.cmd 'G push'
+    end,
+  },
+  {
     text = '󰇚 Pull',
     cmd = 'G pull',
   },
@@ -87,13 +94,6 @@ M.git_menu = { --{{{
       },
       { text = '󰋺 Apply', handler = telescope.git_stash },
     },
-  },
-  {
-    text = ' Push',
-    handler = function()
-      git.close_diff_view()
-      vim.cmd 'G push'
-    end,
   },
 } -- }}}
 
