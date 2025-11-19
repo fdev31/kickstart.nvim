@@ -51,7 +51,7 @@ return {
   },
   {
     'folke/snacks.nvim', -- QoL (images, keymaps, ...)
-    event = 'VeryLazy',
+    lazy = false,
     ---@type snacks.Config
     opts = {
       picker = {
