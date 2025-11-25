@@ -66,7 +66,16 @@ return {
           transform = 'unique_file',
         },
       },
-      indent = {},
+      indent = {
+        chunk = {
+          enabled = true,
+          char = {
+            corner_top = '╭',
+            corner_bottom = '╰',
+            arrow = '󰛂',
+          },
+        },
+      },
       input = {},
       notifier = { timeout = 3000 },
     },
