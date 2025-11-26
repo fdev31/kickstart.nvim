@@ -87,6 +87,7 @@ return {
   leader = '²',
   deduplicate_diagnostics = true,
   diff_command = 'Gvdiffsplit', -- 'DiffviewOpen -uno' -- set by diffview plugin
+  snapshots = 'codesnap', -- codesnap or silicon
   gitsigns = {
     add = { text = '▋' }, -- ''
     -- change = { text = '' },
