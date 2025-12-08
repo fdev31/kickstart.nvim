@@ -71,7 +71,7 @@ local lsp_servers = {
           pycodestyle = { enabled = true },
           pydocstyle = { enabled = false },
           -- type checker
-          pylsp_mypy = { enabled = false },
+          pylsp_mypy = { enabled = true },
           -- auto-completion options
           jedi_completion = { fuzzy = true },
           -- navigation-related plugins
