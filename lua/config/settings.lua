@@ -85,7 +85,7 @@ local enabled_plugins = {
 
 return {
   leader = '²',
-  deduplicate_diagnostics = false,
+  deduplicate_diagnostics = true,
   diff_command = 'Gvdiffsplit', -- 'DiffviewOpen -uno' -- set by diffview plugin
   snapshots = 'silicon', -- codesnap or silicon
   gitsigns = {

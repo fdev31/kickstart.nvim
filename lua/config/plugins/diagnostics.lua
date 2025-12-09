@@ -47,36 +47,40 @@ end
 return {
   setup = function()
     -- INFO: Deduplicate Diagnostic icons by filtering at config level
-    if settings.deduplicate_diagnostics then
-      local ns = vim.api.nvim_create_namespace 'deduplicated_diagnostics'
 
-      -- Create a wrapper around the original show function
-      local orig_signs_handler = vim.diagnostic.handlers.signs
+    local dedup_ns = vim.api.nvim_create_namespace 'deduplicated_diagnostics'
+    local orig_signs_handler = vim.diagnostic.handlers.signs
+    local new_signs_handler = {
+      show = function(namespace, bufnr, diagnostics, opts)
+        if not settings.deduplicate_diagnostics and settings.showDiagnostics then
+          return orig_signs_handler.show(namespace, bufnr, diagnostics, opts)
+        end
+        -- Get ALL diagnostics from ALL namespaces in the buffer
+        local all_diagnostics = vim.diagnostic.get(bufnr, { namespace = nil })
+        vim.tbl_extend('force', all_diagnostics, diagnostics)
 
-      vim.diagnostic.handlers.signs = {
-        show = function(namespace, bufnr, diagnostics, opts)
-          -- Get ALL diagnostics from ALL namespaces in the buffer
-          local all_diagnostics = vim.diagnostic.get(bufnr, { namespace = nil })
-          vim.tbl_extend('force', all_diagnostics, diagnostics)
+        local filtered_diagnostics = filter_diagnostics(all_diagnostics)
 
-          local filtered_diagnostics = filter_diagnostics(all_diagnostics)
+        -- Hide from the incoming namespace first
+        orig_signs_handler.hide(namespace, bufnr)
+        orig_signs_handler.hide(dedup_ns, bufnr)
 
-          -- Hide from the incoming namespace first
-          orig_signs_handler.hide(namespace, bufnr)
-          orig_signs_handler.hide(ns, bufnr)
+        -- Show filtered diagnostics in our deduplicated namespace
+        if settings.showDiagnostics then
+          orig_signs_handler.show(dedup_ns, bufnr, filtered_diagnostics, opts)
+        end
+      end,
 
-          -- Show filtered diagnostics in our deduplicated namespace
-          orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
-        end,
+      hide = function(namespace, bufnr)
+        orig_signs_handler.hide(namespace, bufnr)
+        -- NOTE: makes things blink then disappear
+        -- Also hide from our namespace to keep it clean
+        orig_signs_handler.hide(dedup_ns, bufnr)
+      end,
+    }
 
-        hide = function(namespace, bufnr)
-          orig_signs_handler.hide(namespace, bufnr)
-          -- NOTE: makes things blink then disappear
-          -- Also hide from our namespace to keep it clean
-          -- orig_signs_handler.hide(ns, bufnr)
-        end,
-      }
-    end
+    vim.diagnostic.handlers.signs = new_signs_handler
+
     -- INFO: show diagnostic after a delay
     vim.api.nvim_create_autocmd('CursorHold', {
       callback = function()
