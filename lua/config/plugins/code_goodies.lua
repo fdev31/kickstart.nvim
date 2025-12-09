@@ -6,6 +6,7 @@ return {
   {
     'folke/flash.nvim', -- improve t/f navigation
     event = 'VeryLazy',
+    enabled = false,
     ---@type Flash.Config
     opts = {
       multi_window = false,
