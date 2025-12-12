@@ -78,7 +78,7 @@ else
         layout = 'vertical', -- 'vertical', 'horizontal', 'float'
         width = 0.5, -- 50% of screen width
       },
-      auto_insert_mode = true, -- Enter insert mode when opening
+      auto_insert_mode = false, -- Enter insert mode when opening
 
       -- question_header = 'Prompt ', -- Header to use for user questions
       -- answer_header = '  ', -- Header to use for AI answers
