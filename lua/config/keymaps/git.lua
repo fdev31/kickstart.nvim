@@ -27,7 +27,7 @@ end, { desc = 'Previous conflict' })
 -- Toggle diff view
 map('n', '<leader>D', function()
   if not git.close_diff_view() then
-    vim.cmd(settings.diff_command)
+    vim.cmd(settings.diff_command .. ' HEAD')
   end
 end, { desc = 'Diff view (toggle)' })
 

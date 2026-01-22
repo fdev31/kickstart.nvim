@@ -30,6 +30,7 @@ return {
     opts = {
       explorer = {
         position = 'bottom',
+        initial_focus = 'modified', -- Initial focus: "explorer", "original", or "modified"
         -- view_mode = 'tree',
         file_filter = {
           ignore = { '*.orig' }, -- Glob patterns to hide (e.g., {"*.lock", "dist/*"})
