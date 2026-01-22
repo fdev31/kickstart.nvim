@@ -4,6 +4,20 @@ local settings = require 'config.settings'
 
 return {
   { 'tpope/vim-fugitive', event = 'VeryLazy', config = function() end },
+  {
+    'esmuellert/codediff.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    cmd = 'CodeDiff',
+    opts = {
+      explorer = {
+        position = 'bottom',
+        -- view_mode = 'tree',
+        file_filter = {
+          ignore = { '*.orig' }, -- Glob patterns to hide (e.g., {"*.lock", "dist/*"})
+        },
+      },
+    },
+  },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
