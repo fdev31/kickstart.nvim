@@ -4,6 +4,25 @@ local settings = require 'config.settings'
 
 return {
   { 'tpope/vim-fugitive', event = 'VeryLazy', config = function() end },
+  -- NOTE: difftastic ones
+  -- {
+  --   'ahkohd/difft.nvim',
+  --   lazy = false,
+  --   config = function()
+  --     require('difft').setup()
+  --   end,
+  -- },
+  -- {
+  --   'clabby/difftastic.nvim',
+  --   dependencies = { 'MunifTanjim/nui.nvim' },
+  --   config = function()
+  --     require('difftastic-nvim').setup {
+  --       download = true, -- Auto-download pre-built binary
+  --       vcs = 'git',
+  --     }
+  --   end,
+  -- },
+  -- NOTE: vscode like
   {
     'esmuellert/codediff.nvim',
     dependencies = { 'MunifTanjim/nui.nvim' },
