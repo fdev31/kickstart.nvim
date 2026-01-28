@@ -40,10 +40,10 @@ return {
   },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
-    event = 'VeryLazy',
     opts = {
       signs = settings.gitsigns,
       current_line_blame = true,
+      signs_staged_enable = true,
       numhl = true,
       signcolumn = true,
       sign_priority = 100,
@@ -56,19 +56,21 @@ return {
           vim.keymap.set(mode, l, r, opts)
         end
 
+        local nav_opts = { target = 'all' }
+
         -- Navigation
         kmap('n', ']c', function()
           if vim.wo.diff then
             vim.cmd.normal { ']c', bang = true }
           else
-            gitsigns.nav_hunk 'next'
+            gitsigns.nav_hunk('next', nav_opts)
           end
         end, { desc = 'Jump to next git [c]hange' })
         kmap('n', '[c', function()
           if vim.wo.diff then
             vim.cmd.normal { '[c', bang = true }
           else
-            gitsigns.nav_hunk 'prev'
+            gitsigns.nav_hunk('prev', nav_opts)
           end
         end, { desc = 'Jump to previous git [c]hange' })
 
