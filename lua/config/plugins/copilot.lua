@@ -2,7 +2,7 @@
 local settings = require 'config.settings'
 
 local use_codecompanion = settings.copilotChat == 'codecompanion'
-local use_model = 'gpt-5-codex'
+local use_model = 'claude-opus-4.6'
 
 settings.cmp_providers.copilot = {
   name = 'copilot',
