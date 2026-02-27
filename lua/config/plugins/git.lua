@@ -28,6 +28,10 @@ return {
     dependencies = { 'MunifTanjim/nui.nvim' },
     cmd = 'CodeDiff',
     opts = {
+      diff = {
+        original_position = 'right', -- Position of original (old) content: "left" or "right"
+        conflict_ours_position = 'left', -- Position of ours (:2) in conflict view: "left" or "right"
+      },
       explorer = {
         position = 'bottom',
         initial_focus = 'modified', -- Initial focus: "explorer", "original", or "modified"
