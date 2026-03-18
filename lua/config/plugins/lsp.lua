@@ -31,6 +31,7 @@ local lsp_servers = {
   },
   pylint = { enabled = false },
   pyright = { enabled = false },
+  ty = {},
   pycodestyle = { enabled = false }, -- in pylsp
   bashls = {},
   black = { enabled = false },
