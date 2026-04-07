@@ -1,43 +1,32 @@
 -- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
 
-return {
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    event = 'VeryLazy',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      modules = { 'highlight', 'incremental_selection', 'folding', 'mashup' },
-      sync_install = true,
-      ignore_install = {},
-      ensure_installed = settings.treesitter_languages,
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<CR>',
-          scope_incremental = '<CR>',
-          node_incremental = '<TAB>',
-          node_decremental = '<S-TAB>',
-        },
-      },
-    },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  },
-}
+init = function()
+  local ensureInstalled = settings.treesitter_languages
+  local alreadyInstalled = require('nvim-treesitter').get_installed()
+  local parsersToInstall = vim
+    .iter(ensureInstalled)
+    :filter(function(parser)
+      return not vim.tbl_contains(alreadyInstalled, parser)
+    end)
+    :totable()
+  require('nvim-treesitter').install(parsersToInstall)
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    -- Enable treesitter highlighting and disable regex syntax
+    pcall(vim.treesitter.start)
+    -- Enable treesitter-based indentation
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    init()
+  end,
+})
+
+vim.keymap.set('n', '<CR>', 'van', { remap = true, desc = 'Start incremental selection' })
+vim.keymap.set('v', '<CR>', 'an', { remap = true, desc = 'Expand selection to parent node' })
+vim.keymap.set('v', '<S-CR>', 'in', { remap = true, desc = 'Shrink selection to child node' })
+vim.keymap.set('v', '<Tab>', ']n', { remap = true, desc = 'Select next sibling node' })
+vim.keymap.set('v', '<S-Tab>', '[n', { remap = true, desc = 'Select previous sibling node' })
+
+return {}

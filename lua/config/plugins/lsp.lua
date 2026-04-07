@@ -145,7 +145,7 @@ local M = {
           -- vim.bo[event.buf].omnifunc = 'v:lua.vim.lsp.omnifunc' -- using blink.cmp
           vim.bo[event.buf].tagfunc = 'v:lua.vim.lsp.tagfunc'
 
-          if require('nvim-treesitter.parsers').has_parser() then
+          if vim.treesitter.get_captures_at_cursor() then
             vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
             vim.o.foldmethod = 'expr'
             vim.o.foldtext = 'v:lua.vim.treesitter.foldtext()'

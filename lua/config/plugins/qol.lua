@@ -9,8 +9,8 @@ end
 
 local _precise_render_statusline = function(location)
   -- Get current function/method name using Treesitter
-  local ts_utils = require 'nvim-treesitter.ts_utils'
-  local ok, node = pcall(ts_utils.get_node_at_cursor)
+  local get_node = vim.treesitter.get_node
+  local ok, node = pcall(get_node)
 
   local first = true
   if ok and node then
@@ -144,13 +144,13 @@ return {
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      -- require('mini.ai').setup { n_lines = 500 }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       local statusline = require 'mini.statusline'

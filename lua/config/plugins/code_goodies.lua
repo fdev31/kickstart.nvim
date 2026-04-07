@@ -45,7 +45,6 @@ return {
     end,
     dependencies = {
       'nvim-telescope/telescope.nvim',
-      'nvim-treesitter/nvim-treesitter',
       'nvim-tree/nvim-web-devicons',
     },
   },
@@ -64,6 +63,5 @@ return {
     'Wansmer/treesj', -- merge / split lines
     event = 'VeryLazy',
     opts = { use_default_keymaps = false, max_join_length = 1000 },
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 }

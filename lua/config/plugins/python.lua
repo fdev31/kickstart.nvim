@@ -31,7 +31,7 @@ return {
     'andymass/vim-matchup', -- nice language aware "%"
     ft = { 'python', 'lua', 'javascript', 'typescript', 'html', 'css', 'vim', 'rust', 'go' },
     lazy = true,
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       local mod = require 'match-up'
       mod.matchup_matchparen_offscreen = { method = 'popup' }

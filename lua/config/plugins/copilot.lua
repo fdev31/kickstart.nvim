@@ -49,7 +49,6 @@ if use_codecompanion then
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
     },
   })
 else
