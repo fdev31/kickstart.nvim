@@ -57,7 +57,7 @@ return {
         end
         -- Get ALL diagnostics from ALL namespaces in the buffer
         local all_diagnostics = vim.diagnostic.get(bufnr, { namespace = nil })
-        vim.tbl_extend('force', all_diagnostics, diagnostics)
+        all_diagnostics = vim.list_extend(all_diagnostics, diagnostics)
 
         local filtered_diagnostics = filter_diagnostics(all_diagnostics)
 
