@@ -2,6 +2,7 @@
 -- ON_CMD: diff viewer
 local settings = require('config.settings')
 settings.diff_command = 'DiffviewOpen -uno'
+vim.g._diffview_enabled = true
 
 vim.api.nvim_create_user_command('DiffviewOpen', function(opts)
   vim.api.nvim_del_user_command('DiffviewOpen')
