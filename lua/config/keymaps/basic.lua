@@ -17,7 +17,7 @@ map('n', '<leader>oo', function()
 end, { desc = '[o]pen file under cursor' })
 map('n', 'K', function()
   vim.lsp.buf.hover()
-end, { buffer = bufnr, desc = 'LSP symbol doc' })
+end, { desc = 'LSP symbol doc' })
 
 -- Window navigation
 vim.keymap.set('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
