@@ -1,4 +1,9 @@
 -- vim:ts=2:sw=2:et:
+-- EAGER: LuaSnip must be on runtimepath early (needed by python.nvim etc.)
+vim.pack.add({
+  'https://github.com/L3MON4D3/LuaSnip',
+})
+
 -- SCHEDULE: LSP + Mason
 vim.schedule(function()
   local settings = require('config.settings')
@@ -9,7 +14,6 @@ vim.schedule(function()
     'https://github.com/mason-org/mason-lspconfig.nvim',
     'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
     -- blink.cmp loaded here so get_lsp_capabilities() works
-    'https://github.com/L3MON4D3/LuaSnip',
     'https://github.com/folke/lazydev.nvim',
     'https://github.com/saghen/blink.cmp',
   })
