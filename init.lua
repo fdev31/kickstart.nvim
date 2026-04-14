@@ -3,6 +3,15 @@ vim.loader.enable()
 require('config.options').setup()
 pcall(require, 'config.custom')
 
+-- Auto-accept plugin installations (skip confirmation prompt)
+do
+  local orig_add = vim.pack.add
+  vim.pack.add = function(specs, opts)
+    opts = vim.tbl_extend('keep', opts or {}, { confirm = false })
+    return orig_add(specs, opts)
+  end
+end
+
 -- PackChanged hooks (must be BEFORE any vim.pack.add() call)
 local augroup = vim.api.nvim_create_augroup('pack-hooks', { clear = true })
 vim.api.nvim_create_autocmd('PackChanged', {
