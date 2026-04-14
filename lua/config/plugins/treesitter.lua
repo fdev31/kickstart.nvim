@@ -1,7 +1,7 @@
 -- vim:ts=2:sw=2:et:
 local settings = require 'config.settings'
 
-init = function()
+local init = function()
   local ensureInstalled = settings.treesitter_languages
   local alreadyInstalled = require('nvim-treesitter').get_installed()
   local parsersToInstall = vim
