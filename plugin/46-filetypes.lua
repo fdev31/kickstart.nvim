@@ -10,10 +10,12 @@ vim.filetype.add({
 -- Register custom treesitter parser for confluence_wiki (new nvim-treesitter main branch API)
 -- Inject at startup so after/ftplugin/confluence_wiki.lua can trigger install immediately,
 -- and via User TSUpdate autocmd so it persists across nvim-treesitter's internal reloads.
+-- TSUpdate always rebuilds this parser from latest main (no pinned revision).
 local confluence_wiki_parser = {
   install_info = {
     url = 'https://github.com/fdev31/tree-sitter-confluence',
-    queries = 'queries', -- install highlights.scm, injections.scm, aerial.scm
+    branch = 'main',
+    queries = 'queries',
   },
 }
 
