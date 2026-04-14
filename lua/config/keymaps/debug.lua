@@ -7,7 +7,7 @@ map('n', '<leader>dC', function() -- DAP configurations
   require('telescope').extensions.dap.configurations {}
 end, { desc = 'DAP [C]onfigurations' })
 
-map('n', '<leader>ti', require('dapui').toggle, { noremap = true, silent = true, desc = '[i]nspector' })
+map('n', '<leader>ti', function() require('dapui').toggle() end, { noremap = true, silent = true, desc = '[i]nspector' })
 
 map('n', '<leader>db', function()
   require('dap').toggle_breakpoint()
