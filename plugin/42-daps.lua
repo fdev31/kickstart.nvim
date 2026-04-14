@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('FileType', {
       'https://github.com/rcarriga/nvim-dap-ui',
     })
 
-    pcall(require('telescope').load_extension, 'dap')
+    pcall(function() require('telescope').load_extension('dap') end)
 
     local dap = require('dap')
     vim.fn.sign_define('DapBreakpoint', { text = '🚩', texthl = '', linehl = '', numhl = '' })
