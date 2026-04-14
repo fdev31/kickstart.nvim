@@ -1,18 +1,13 @@
 -- vim:ts=2:sw=2:et:
--- ON_CMD: git commands (fugitive, codediff)
+-- SCHEDULE: fugitive (was VeryLazy in lazy.nvim, needed early for FugitiveStatusline)
+-- ON_CMD: codediff
 -- gitsigns is in 03-gitsigns.lua (EAGER)
 
--- Fugitive: stub commands
-for _, cmd in ipairs({ 'G', 'Git', 'Gvdiffsplit', 'GBrowse', 'Gedit', 'Gread', 'Gwrite' }) do
-  vim.api.nvim_create_user_command(cmd, function(opts)
-    -- Delete all stub commands
-    for _, c in ipairs({ 'G', 'Git', 'Gvdiffsplit', 'GBrowse', 'Gedit', 'Gread', 'Gwrite' }) do
-      pcall(vim.api.nvim_del_user_command, c)
-    end
-    vim.pack.add({ 'https://github.com/tpope/vim-fugitive' })
-    vim.cmd(cmd .. ' ' .. (opts.args or ''))
-  end, { nargs = '*', complete = 'file' })
-end
+-- Fugitive: load via schedule (like old VeryLazy) so FugitiveStatusline() is available
+-- before first BufWritePre (used by conform's is_buffer_tracked check)
+vim.schedule(function()
+  vim.pack.add({ 'https://github.com/tpope/vim-fugitive' })
+end)
 
 -- CodeDiff: stub command
 vim.api.nvim_create_user_command('CodeDiff', function(opts)
