@@ -21,11 +21,35 @@ local function ensure_parsers()
   end
 end
 
+-- Offer to install a parser for the current filetype if it's not in the curated list
+local declined_parsers = {}
+
+local function offer_parser_install()
+  local ft = vim.bo.filetype
+  if ft == '' then return end
+  local lang = vim.treesitter.language.get_lang(ft) or ft
+  if
+    vim.tbl_contains(settings.treesitter_languages, lang)
+    or declined_parsers[lang]
+    or vim.tbl_contains(require('nvim-treesitter').get_installed(), lang)
+  then
+    return
+  end
+  vim.schedule(function()
+    if vim.fn.confirm(("Install TreeSitter parser for '%s'?"):format(lang), '&Yes\n&No', 2) == 1 then
+      require('nvim-treesitter').install({ lang })
+    else
+      declined_parsers[lang] = true
+    end
+  end)
+end
+
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     pcall(vim.treesitter.start)
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     ensure_parsers()
+    offer_parser_install()
   end,
 })
 
