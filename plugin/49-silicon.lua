@@ -1,6 +1,5 @@
 -- vim:ts=2:sw=2:et:
 -- ON_CMD: code screenshots
-local settings = require('config.settings')
 
 vim.api.nvim_create_user_command('Silicon', function(opts)
   vim.api.nvim_del_user_command('Silicon')

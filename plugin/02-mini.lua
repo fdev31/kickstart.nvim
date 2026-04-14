@@ -2,10 +2,6 @@
 -- EAGER: statusline must be visible at startup
 local lib = require('config.lib.core')
 
-local _filter_node = function(node_type)
-  return true
-end
-
 local _precise_render_statusline = function(location)
   local get_node = vim.treesitter.get_node
   local ok, node = pcall(get_node)
@@ -13,17 +9,14 @@ local _precise_render_statusline = function(location)
   local first = true
   if ok and node then
     while node do
-      local node_type = node:type()
-      if _filter_node(node_type) then
-        local name_node = node:field('name')[1]
-        if name_node then
-          local func_name = lib.clean_string(vim.treesitter.get_node_text(name_node, 0), 20)
-          if first then
-            location = func_name .. '┃ ' .. location
-            first = false
-          else
-            location = func_name .. '.' .. location
-          end
+      local name_node = node:field('name')[1]
+      if name_node then
+        local func_name = lib.clean_string(vim.treesitter.get_node_text(name_node, 0), 20)
+        if first then
+          location = func_name .. '┃ ' .. location
+          first = false
+        else
+          location = func_name .. '.' .. location
         end
       end
       node = node:parent()

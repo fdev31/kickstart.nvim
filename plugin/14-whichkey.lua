@@ -48,7 +48,6 @@ vim.schedule(function()
       { '<leader>d', group = 'Debugging' },
       { '<leader>R', group = 'Request' },
       { '<leader>g', group = 'Git' },
-      { '<leader>d', group = 'Debugger' },
       { '<leader>f', group = 'Find' },
       { '<leader>o', group = 'Org' },
       { '<leader>r', group = 'Run' },

@@ -58,7 +58,7 @@ local gitsigns_icons = {
 return {
   leader = '²',
   deduplicate_diagnostics = true,
-  diff_command = 'CodeDiff', -- 'Gvdiffsplit' or 'DiffviewOpen -uno' -- set by diffview plugin
+  diff_command = 'DiffviewOpen -uno', -- overridden by plugin/52-diffview.lua when available
   snapshots = 'silicon', -- codesnap or silicon
   gitsigns = {
     add = { text = '▋' }, -- ''
@@ -77,7 +77,6 @@ return {
   -- AI stuff
   copilotChat = 'copilot', -- "codecompanion" or "copilot"
   -- completion settings
-  cmp_dependencies = {},
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
   cmp_providers = {
     lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },

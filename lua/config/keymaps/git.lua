@@ -1,4 +1,3 @@
-local partial = require('config.lib.core').partial
 local git = require 'config.lib.git'
 local settings = require 'config.settings'
 local map = vim.keymap.set
