@@ -1,6 +1,8 @@
 local telescope = require 'telescope.builtin'
 local settings = require 'config.settings'
 
+local M = {}
+
 -- Custom menu functions
 
 local function _telescope(callback)
