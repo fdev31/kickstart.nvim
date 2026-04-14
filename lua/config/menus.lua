@@ -103,7 +103,7 @@ M.main_menu = {
   { text = ' Git ▶', options = M.git_menu },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
   { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
-  { text = '󰚰 Lazy update', cmd = 'Lazy update' },
+  { text = '󰚰 Pack update', handler = function() vim.pack.update() end },
   { text = ' Mason update', cmd = 'Mason' },
   { text = ' Venv selector', cmd = 'VenvSelect' },
   { text = ' PIO menu', cmd = 'Piomenu' },

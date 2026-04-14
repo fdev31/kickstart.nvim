@@ -7,6 +7,18 @@ vim.filetype.add({
   },
 })
 
+-- Register custom treesitter parser for confluence_wiki (new nvim-treesitter main branch API)
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'TSUpdate',
+  callback = function()
+    require('nvim-treesitter.parsers').confluence_wiki = {
+      install_info = {
+        url = 'https://github.com/fdev31/tree-sitter-confluence',
+      },
+    }
+  end,
+})
+
 -- Hyprlang LSP
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = { '*.hl', 'hypr*.conf' },
