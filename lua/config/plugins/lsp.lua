@@ -146,7 +146,7 @@ local M = {
           vim.bo[event.buf].tagfunc = 'v:lua.vim.lsp.tagfunc'
 
           if vim.treesitter.get_captures_at_cursor() then
-            vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+            vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
             vim.o.foldmethod = 'expr'
             vim.o.foldtext = 'v:lua.vim.treesitter.foldtext()'
           else
