@@ -13,7 +13,6 @@ vim.filetype.add({
 local confluence_wiki_parser = {
   install_info = {
     url = 'https://github.com/fdev31/tree-sitter-confluence',
-    generate = true, -- repo has no pre-generated src/parser.c
     queries = 'queries', -- install highlights.scm, injections.scm, aerial.scm
   },
 }
