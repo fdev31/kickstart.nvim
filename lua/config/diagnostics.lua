@@ -114,5 +114,11 @@ return {
     })
 
     vim.diagnostic.config(settings.diagnostic_config)
+
+    -- Force re-render through the custom handler after LSP servers have sent diagnostics
+    vim.defer_fn(function()
+      vim.diagnostic.enable(false)
+      vim.diagnostic.enable(true)
+    end, 500)
   end,
 }
