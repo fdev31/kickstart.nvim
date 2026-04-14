@@ -19,7 +19,6 @@ local lsp_servers = {
       fileDictPath = '~/.config/nvim/spell/en.utf-8.add',
     },
   },
-  dartls = {},
   dprint = {},
   typos_lsp = {},
   html = {},
