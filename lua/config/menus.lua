@@ -59,7 +59,7 @@ M.git_menu = { --{{{
   },
   {
     text = '⎼⎼ Line History',
-    handler = package.loaded.snacks.picker.git_log_line,
+    handler = function() require('snacks').picker.git_log_line() end,
   },
   {
     text = ' Reset file',

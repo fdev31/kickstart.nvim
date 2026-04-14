@@ -3,7 +3,7 @@ local settings = require 'config.settings'
 local setup = function()
   vim.g.mapleader = settings.leader
   vim.g.maplocalleader = settings.leader
-  vim.g.have_nerd_font = settings.use_nerd_font
+  vim.g.have_nerd_font = true
 
   -- hide command bar when not needed
   -- vim.o.cmdheight = 0

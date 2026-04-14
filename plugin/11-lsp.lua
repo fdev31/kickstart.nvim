@@ -47,12 +47,13 @@ vim.schedule(function()
       require('config.keymaps.lsp')(client, event)
       vim.bo[event.buf].tagfunc = 'v:lua.vim.lsp.tagfunc'
 
-      if vim.treesitter.get_captures_at_cursor() then
-        vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.o.foldmethod = 'expr'
-        vim.o.foldtext = 'v:lua.vim.treesitter.foldtext()'
+      local has_parser = pcall(vim.treesitter.get_parser, event.buf)
+      if has_parser then
+        vim.wo[0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo[0].foldmethod = 'expr'
+        vim.wo[0].foldtext = 'v:lua.vim.treesitter.foldtext()'
       else
-        vim.o.foldmethod = 'syntax'
+        vim.wo[0].foldmethod = 'syntax'
       end
     end,
   })

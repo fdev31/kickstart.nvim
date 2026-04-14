@@ -59,7 +59,7 @@ return function()
         range['end'] = { end_line, -1 }
       end
 
-      format({ range = range, async = async_ops, lsp_fallback = true }, function()
+      format({ range = range, async = async_ops, lsp_format = 'fallback' }, function()
         if async_ops then
           vim.defer_fn(format_range, 1)
         else

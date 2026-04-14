@@ -1,7 +1,7 @@
 return {
   settings = {
     pylsp = {
-      signature_ = {
+      signature = {
         formatter = 'ruff',
       },
       plugins = {

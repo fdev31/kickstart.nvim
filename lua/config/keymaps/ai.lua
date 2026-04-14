@@ -15,7 +15,7 @@ end, { desc = '[p]rompt (AI)' })
 
 map({ 'n', 'v' }, '<leader>cC', function()
   if settings.copilotChat == 'codecompanion' then
-    vim.cmd('CodeCompanionChat', 'Toggle')
+    vim.cmd 'CodeCompanionChat Toggle'
   else
     vim.cmd 'CopilotChat'
   end

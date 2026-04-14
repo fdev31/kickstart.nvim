@@ -101,7 +101,7 @@ return {
           header = '',
           format = function(diagnostic)
             local prefix = '󰄳 '
-            local origin = diagnostic.user_data and diagnostic.user_data.lsp and diagnostic.user_data.lsp.source or ''
+            local origin = diagnostic.source or ''
             -- Strip origin for newlines and blanks
             origin = lib.strip(origin)
 

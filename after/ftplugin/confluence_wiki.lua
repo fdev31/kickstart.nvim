@@ -1,4 +1,4 @@
-vim.o.makeprg = 'br updes %'
+vim.bo.makeprg = 'br updes %'
 
 -- Install the confluence_wiki treesitter parser if not already available
 -- (parser URL is registered via User TSUpdate autocmd in plugin/46-filetypes.lua)

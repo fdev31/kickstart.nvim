@@ -41,7 +41,7 @@ map('n', '<leader>td', function()
   vim.diagnostic.enable(settings.showDiagnostics)
 
   if not settings.showDiagnostics and settings._diag_window then
-    vim.api.nvim_win_close(settings._diag_window, true)
+    pcall(vim.api.nvim_win_close, settings._diag_window, true)
   end
   vim.o.spell = settings.showDiagnostics
 end, { desc = '[d]iagnostics' })
