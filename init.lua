@@ -12,6 +12,24 @@ do
   end
 end
 
+local special_handlers = {
+  ['nvim-treesitter'] = function()
+    vim.cmd 'TSUpdate'
+  end,
+  ['telescope-fzf-native.nvim'] = function()
+    if vim.fn.executable 'make' == 1 then
+      local path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/telescope-fzf-native.nvim'
+      vim.fn.system { 'make', '-C', path }
+    end
+  end,
+  ['LuaSnip'] = function()
+    if vim.fn.executable 'make' == 1 then
+      local path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/LuaSnip'
+      vim.fn.system { 'make', 'install_jsregexp', '-C', path }
+    end
+  end,
+}
+
 -- PackChanged hooks (must be BEFORE any vim.pack.add() call)
 local augroup = vim.api.nvim_create_augroup('pack-hooks', { clear = true })
 vim.api.nvim_create_autocmd('PackChanged', {
@@ -19,26 +37,11 @@ vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
     -- Handle install & updates
-    if kind == 'install' or kind == 'update' then
-      -- Rebuild treesitter parsers on install/update
-      if name == 'nvim-treesitter' then
-        if not ev.data.active then
-          vim.cmd.packadd 'nvim-treesitter'
-        end
-        vim.cmd 'TSUpdate'
-      elseif name == 'telescope-fzf-native.nvim' then
-        -- Rebuild telescope-fzf-native on install/update
-        if vim.fn.executable 'make' == 1 then
-          local path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/telescope-fzf-native.nvim'
-          vim.fn.system { 'make', '-C', path }
-        end
-      elseif name == 'LuaSnip' then
-        -- Rebuild LuaSnip jsregexp on install/update
-        if vim.fn.executable 'make' == 1 then
-          local path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/LuaSnip'
-          vim.fn.system { 'make', 'install_jsregexp', '-C', path }
-        end
-      end
+    if not (kind == 'install' or kind == 'update') then
+      return
+    end
+    if special_handlers[name] then
+      special_handlers[name]()
     end
   end,
 })
