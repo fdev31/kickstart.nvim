@@ -15,7 +15,7 @@ vim.schedule(function()
     'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
     -- blink.cmp loaded here so get_lsp_capabilities() works
     'https://github.com/folke/lazydev.nvim',
-    'https://github.com/saghen/blink.cmp',
+    { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.*') },
   })
 
   require('mason').setup({ ui = settings.popup_style })
