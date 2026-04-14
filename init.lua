@@ -1,30 +1,35 @@
-local settings = require 'config.settings'
+vim.loader.enable()
+
 require('config.options').setup()
-pcall(require, 'config.custom') -- let a chance to load custom code
-local plugins_spec = require 'config.plugins'
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
-end
+pcall(require, 'config.custom')
 
----@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+-- PackChanged hooks (must be BEFORE any vim.pack.add() call)
+local augroup = vim.api.nvim_create_augroup('pack-hooks', { clear = true })
+vim.api.nvim_create_autocmd('PackChanged', {
+  group = augroup,
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    -- Rebuild treesitter parsers on install/update
+    if name == 'nvim-treesitter' and (kind == 'install' or kind == 'update') then
+      if not ev.data.active then
+        vim.cmd.packadd('nvim-treesitter')
+      end
+      vim.cmd('TSUpdate')
+    end
+    -- Rebuild telescope-fzf-native on install/update
+    if name == 'telescope-fzf-native.nvim' and (kind == 'install' or kind == 'update') then
+      local path = vim.fn.stdpath('data') .. '/site/pack/core/opt/telescope-fzf-native.nvim'
+      vim.fn.system({ 'make', '-C', path })
+    end
+    -- Rebuild LuaSnip jsregexp on install/update
+    if name == 'LuaSnip' and (kind == 'install' or kind == 'update') then
+      if vim.fn.executable('make') == 1 then
+        local path = vim.fn.stdpath('data') .. '/site/pack/core/opt/LuaSnip'
+        vim.fn.system({ 'make', 'install_jsregexp', '-C', path })
+      end
+    end
+  end,
+})
 
-local lazy_options = {
-  ui = vim.tbl_deep_extend('force', {
-    icons = settings.lazy_icons,
-  }, settings.popup_style),
-}
-
---Setup the plugins (lua/config/plugins/init.lua)
-require('lazy').setup(plugins_spec, lazy_options)
-
--- The line beneath this is called `modeline`. See `:help modeline`
+-- Everything else is handled by plugin/ directory (auto-sourced alphabetically)
 -- vim: ts=2 sts=2 sw=2 et

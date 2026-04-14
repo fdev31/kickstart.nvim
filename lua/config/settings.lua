@@ -55,34 +55,6 @@ local gitsigns_icons = {
   },
 }
 
-local enabled_plugins = {
-  'autocomplete',
-  'autoformat',
-  'code_goodies',
-  'copilot',
-  'daps',
-  'diagnostics',
-  'embedded',
-  'filetypes',
-  'git',
-  'http_client',
-  'lsp',
-  'markdown',
-  'menus',
-  'misc',
-  'neotree',
-  'orgmode',
-  'python',
-  'qol',
-  'silicon',
-  'smooth_scroll',
-  'theme',
-  'treesitter',
-  'whichkey',
-  'workspaces',
-  -- 'diffview',
-}
-
 return {
   leader = '²',
   deduplicate_diagnostics = true,
@@ -104,22 +76,6 @@ return {
   treesitter_languages = advanced_syntax_support,
   -- AI stuff
   copilotChat = 'copilot', -- "codecompanion" or "copilot"
-  -- lazy plugin manager icons
-  lazy_icons = {
-    cmd = '⌘',
-    config = '🛠',
-    event = '📅',
-    ft = '📂',
-    init = '⚙',
-    keys = ' ',
-    plugin = '🔌',
-    runtime = '💻',
-    require = '🌙',
-    source = '📄',
-    start = '🚀',
-    task = '📌',
-    lazy = '💤 ',
-  },
   -- completion settings
   cmp_dependencies = {},
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
@@ -151,7 +107,6 @@ return {
   },
   -- (auto) formatting
   conform_opts = autoformat_opts,
-  plugins = enabled_plugins,
   -- python linting rules
   ruff_rules = ruff.rules,
   ruff_ignore = ruff.ignore,
