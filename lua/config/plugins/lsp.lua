@@ -169,7 +169,7 @@ local M = {
         automatic_installation = true,
         automatic_enable = false,
       }
-      function setup_servers()
+      local function setup_servers()
         for _, server_name in pairs(active_lsp_servers) do
           local srv_config = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
