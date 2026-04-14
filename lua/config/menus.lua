@@ -102,18 +102,18 @@ M.update_menu = {
   { text = ' Force update (no confirm)', handler = function() vim.pack.update(nil, { force = true }) end },
   { text = '󰁨 Revert to lockfile', handler = function() vim.pack.update(nil, { target = 'lockfile' }) end },
   { text = '󰓙 Plugin health', cmd = 'checkhealth vim.pack' },
-  { text = ' 3rd party (Mason)', cmd = 'Mason' },
+  { text = ' 3rd party (Mason)', cmd = 'Mason' },
 }
 
 M.main_menu = {
-  { text = ' DiffView ▶', options = M.git_compare_what },
-  { text = ' Runnables ▶', cmd = 'OverseerRun' },
-  { text = ' Git ▶', options = M.git_menu },
-  { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
-  { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
+  { text = ' DiffView ▶', options = M.git_compare_what },
+  { text = ' Runnables ▶', cmd = 'OverseerRun' },
+  { text = ' Git ▶', options = M.git_menu },
+  { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
+  { text = ' Scp cra', cmd = '!scp "%" cra:/tmp' },
   { text = '󰚰 Update ▶', options = M.update_menu },
-  { text = ' Venv selector', cmd = 'VenvSelect' },
-  { text = ' PIO menu', cmd = 'Piomenu' },
+  { text = ' Venv selector', cmd = 'VenvSelect' },
+  { text = ' PIO menu', cmd = 'Piomenu' },
   -- { text = '󰽿 Treesitter context (toggle)', handler = require('treesitter-context').toggle },
 }
 
