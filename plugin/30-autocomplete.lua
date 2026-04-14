@@ -37,7 +37,10 @@ vim.api.nvim_create_autocmd('InsertEnter', {
         },
       },
       snippets = { preset = 'luasnip' },
-      fuzzy = { implementation = 'prefer_rust_with_warning' },
+      fuzzy = {
+        implementation = 'prefer_rust_with_warning',
+        prebuilt_binaries = { force_version = 'v1.*' },
+      },
       signature = { enabled = true },
     })
   end,
