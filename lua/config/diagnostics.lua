@@ -56,8 +56,7 @@ return {
           return orig_signs_handler.show(namespace, bufnr, diagnostics, opts)
         end
         -- Get ALL diagnostics from ALL namespaces in the buffer
-        local all_diagnostics = vim.diagnostic.get(bufnr, { namespace = nil })
-        all_diagnostics = vim.list_extend(all_diagnostics, diagnostics)
+        local all_diagnostics = vim.diagnostic.get(bufnr)
 
         local filtered_diagnostics = filter_diagnostics(all_diagnostics)
 
@@ -73,9 +72,15 @@ return {
 
       hide = function(namespace, bufnr)
         orig_signs_handler.hide(namespace, bufnr)
-        -- NOTE: makes things blink then disappear
-        -- Also hide from our namespace to keep it clean
+        -- Re-render dedup signs with remaining diagnostics
         orig_signs_handler.hide(dedup_ns, bufnr)
+        if settings.showDiagnostics then
+          local remaining = vim.diagnostic.get(bufnr)
+          if #remaining > 0 then
+            local filtered = filter_diagnostics(remaining)
+            orig_signs_handler.show(dedup_ns, bufnr, filtered, vim.diagnostic.config() or {})
+          end
+        end
       end,
     }
 
@@ -114,11 +119,5 @@ return {
     })
 
     vim.diagnostic.config(settings.diagnostic_config)
-
-    -- Force re-render through the custom handler after LSP servers have sent diagnostics
-    vim.defer_fn(function()
-      vim.diagnostic.enable(false)
-      vim.diagnostic.enable(true)
-    end, 500)
   end,
 }
