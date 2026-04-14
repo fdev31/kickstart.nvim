@@ -7,7 +7,6 @@ Mainly targets:
 - Javascript
 - Lua
 - Python
-- Rust
 - Shell / Bash
 - TOML
 - Markdown...
