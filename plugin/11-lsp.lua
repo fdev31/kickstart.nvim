@@ -2,14 +2,13 @@
 -- SCHEDULE: LSP + Mason
 vim.schedule(function()
   local settings = require('config.settings')
-  local lib = require('config.lib.core')
 
   vim.pack.add({
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/mason-org/mason-lspconfig.nvim',
     'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
-    -- blink.cmp loaded here too so get_lsp_capabilities() works
+    -- blink.cmp loaded here so get_lsp_capabilities() works
     'https://github.com/L3MON4D3/LuaSnip',
     'https://github.com/folke/lazydev.nvim',
     'https://github.com/saghen/blink.cmp',
@@ -17,32 +16,24 @@ vim.schedule(function()
 
   require('mason').setup({ ui = settings.popup_style })
 
-  -- Server list (enabled servers only)
-  local lsp_servers = {
-    'textlsp', 'harper_ls', 'dprint', 'typos_lsp', 'html', 'ruff',
-    'bashls', 'cssls', 'clangd', 'vtsls', 'eslint', 'tailwindcss',
-    'pylsp', 'lua_ls', 'qmlls', 'ty',
-  }
-
-  local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-  -- Apply capabilities to all servers
-  vim.lsp.config('*', { capabilities = capabilities })
-
+  -- LSP servers: mason-lspconfig v2 handles installation + vim.lsp.enable()
   require('mason-lspconfig').setup({
-    automatic_installation = true,
-    automatic_enable = false,
+    automatic_enable = true,
+    ensure_installed = {
+      'textlsp', 'harper_ls', 'dprint', 'typos_lsp', 'html', 'ruff',
+      'bashls', 'cssls', 'clangd', 'vtsls', 'eslint', 'tailwindcss',
+      'pylsp', 'lua_ls', 'qmlls', 'ty',
+    },
   })
 
-  -- Also ensure formatters/linters are installed
-  local ensure_installed = vim.list_extend(
-    vim.deepcopy(lsp_servers),
-    vim.tbl_keys(require('conform').formatters_by_ft)
-  )
+  -- Formatters/linters: mason-tool-installer handles non-LSP tools
+  require('mason-tool-installer').setup({
+    ensure_installed = { 'codespell', 'stylua', 'shfmt', 'prettierd' },
+  })
 
-  require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-
-  vim.lsp.enable(lsp_servers)
+  -- blink.cmp capabilities for all servers
+  local capabilities = require('blink.cmp').get_lsp_capabilities()
+  vim.lsp.config('*', { capabilities = capabilities })
 
   -- LspAttach autocmd
   vim.api.nvim_create_autocmd('LspAttach', {
@@ -63,14 +54,4 @@ vim.schedule(function()
   })
 
   vim.lsp.set_log_level('off')
-
-  -- Re-setup servers after Mason installs
-  vim.api.nvim_create_autocmd('User', {
-    pattern = 'MasonToolsUpdateCompleted',
-    callback = function()
-      vim.schedule(function()
-        vim.lsp.enable(lsp_servers)
-      end)
-    end,
-  })
 end)
