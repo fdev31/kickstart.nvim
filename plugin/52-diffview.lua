@@ -25,27 +25,17 @@ vim.api.nvim_create_user_command('DiffviewOpen', function(opts)
 end, { nargs = '*' })
 
 -- Overseer: task runner (ON_CMD)
-vim.api.nvim_create_user_command('OverseerRun', function(opts)
+local function load_overseer(cmd, args)
   for _, c in ipairs({ 'OverseerRun', 'OverseerToggle', 'OverseerOpen' }) do
     pcall(vim.api.nvim_del_user_command, c)
   end
   vim.pack.add({ 'https://github.com/stevearc/overseer.nvim' })
   require('overseer').setup({})
-  vim.cmd('OverseerRun ' .. (opts.args or ''))
-end, { nargs = '*' })
-vim.api.nvim_create_user_command('OverseerToggle', function(opts)
-  for _, c in ipairs({ 'OverseerRun', 'OverseerToggle', 'OverseerOpen' }) do
-    pcall(vim.api.nvim_del_user_command, c)
-  end
-  vim.pack.add({ 'https://github.com/stevearc/overseer.nvim' })
-  require('overseer').setup({})
-  vim.cmd('OverseerToggle ' .. (opts.args or ''))
-end, { nargs = '*' })
-vim.api.nvim_create_user_command('OverseerOpen', function(opts)
-  for _, c in ipairs({ 'OverseerRun', 'OverseerToggle', 'OverseerOpen' }) do
-    pcall(vim.api.nvim_del_user_command, c)
-  end
-  vim.pack.add({ 'https://github.com/stevearc/overseer.nvim' })
-  require('overseer').setup({})
-  vim.cmd('OverseerOpen ' .. (opts.args or ''))
-end, { nargs = '*' })
+  vim.cmd(cmd .. ' ' .. (args or ''))
+end
+
+for _, cmd in ipairs({ 'OverseerRun', 'OverseerToggle', 'OverseerOpen' }) do
+  vim.api.nvim_create_user_command(cmd, function(opts)
+    load_overseer(cmd, opts.args)
+  end, { nargs = '*' })
+end

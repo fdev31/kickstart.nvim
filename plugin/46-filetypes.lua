@@ -17,7 +17,10 @@ local confluence_wiki_parser = {
   },
 }
 
-require('nvim-treesitter.parsers').confluence_wiki = confluence_wiki_parser
+local ok, parsers = pcall(require, 'nvim-treesitter.parsers')
+if ok then
+  parsers.confluence_wiki = confluence_wiki_parser
+end
 
 vim.api.nvim_create_autocmd('User', {
   pattern = 'TSUpdate',
@@ -32,7 +35,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   callback = function()
     vim.lsp.start({
       name = 'hyprlang',
-      cmd = { os.getenv('HOME') .. '/.local/share/nvim/mason/packages/hyprls/hyprls' },
+      cmd = { vim.fn.stdpath('data') .. '/mason/packages/hyprls/hyprls' },
       root_dir = vim.fn.getcwd(),
     })
   end,
@@ -57,7 +60,7 @@ vim.api.nvim_create_autocmd('FileType', {
       'https://github.com/aklt/plantuml-syntax',
       'https://gitlab.com/itaranto/plantuml.nvim',
     })
-    vim.o.spell = false
+    vim.opt_local.spell = false
     vim.api.nvim_set_hl(0, 'PlantumlColonLine', { link = '@character' })
     require('plantuml').setup({
       renderer = {
