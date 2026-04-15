@@ -15,9 +15,7 @@ map('n', '<leader>oo', function()
   local file = vim.fn.expand '<cfile>'
   vim.cmd('tabnew ' .. file)
 end, { desc = '[o]pen file under cursor' })
-map('n', 'K', function()
-  vim.lsp.buf.hover()
-end, { desc = 'LSP symbol doc' })
+-- K -> vim.lsp.buf.hover() is a built-in default since 0.11
 
 -- Window navigation
 vim.keymap.set('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })

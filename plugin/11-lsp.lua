@@ -61,15 +61,22 @@ require('lazyload').on_vim_enter(function()
     callback = function(event)
       local client = vim.lsp.get_client_by_id(event.data.client_id)
       require('config.keymaps.lsp')(client, event)
-      vim.bo[event.buf].tagfunc = 'v:lua.vim.lsp.tagfunc'
 
-      local has_parser = pcall(vim.treesitter.get_parser, event.buf)
-      if has_parser then
-        vim.wo[0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo[0].foldmethod = 'expr'
-        vim.wo[0].foldtext = 'v:lua.vim.treesitter.foldtext()'
+      -- Enable linked editing range (auto-rename matching tags) when supported
+      if client and client:supports_method('textDocument/linkedEditingRange') then
+        vim.lsp.linked_editing_range.enable(true, { bufnr = event.buf })
+      end
+
+      -- Prefer LSP folding when supported, fallback to treesitter
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldmethod = 'expr'
+      if client and client:supports_method('textDocument/foldingRange') then
+        vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+      elseif pcall(vim.treesitter.get_parser, event.buf) then
+        vim.wo[win][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo[win][0].foldtext = 'v:lua.vim.treesitter.foldtext()'
       else
-        vim.wo[0].foldmethod = 'syntax'
+        vim.wo[win][0].foldmethod = 'syntax'
       end
     end,
   })

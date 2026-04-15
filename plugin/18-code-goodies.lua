@@ -6,7 +6,6 @@ require('lazyload').on_vim_enter(function()
     'https://github.com/stevearc/aerial.nvim',
     'https://github.com/m-demare/hlargs.nvim',
     'https://github.com/Wansmer/treesj',
-    'https://github.com/stevearc/dressing.nvim',
     'https://github.com/nvim-flutter/flutter-tools.nvim',
   })
 

@@ -88,28 +88,12 @@ local setup = function()
   vim.o.mouse = 'a'
   vim.o.showmode = false
 
-  local _diffopt = {
-    'internal',
-    -- 'iwhiteall',
-    'filler',
-    'closeoff',
-    'algorithm:histogram',
-    'indent-heuristic',
-    'linematch:60',
-    'vertical',
-    'foldcolumn:1',
-    'hiddenoff',
-  }
-  local diffopt = vim.opt.diffopt:get()
-  -- if not vim.tbl_contains(diffopt, 'algorithm:patience') then
-  --   vim.opt.diffopt:append 'algorithm:patience'
-  -- end
-  -- add each diff opt
-  for _, opt in pairs(_diffopt) do
-    if not vim.tbl_contains(diffopt, opt) then
-      vim.opt.diffopt:append(opt)
-    end
-  end
+  -- Only append diffopt values not already in 0.12 defaults
+  -- (internal, filler, closeoff, indent-heuristic, algorithm:histogram, linematch:40 are built-in)
+  vim.opt.diffopt:append('linematch:60')
+  vim.opt.diffopt:append('vertical')
+  vim.opt.diffopt:append('foldcolumn:1')
+  vim.opt.diffopt:append('hiddenoff')
 end
 return {
   setup = setup,
