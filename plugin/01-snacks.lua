@@ -6,6 +6,11 @@ vim.pack.add({
 
 require('snacks').setup({
   picker = {
+    sources = {
+      notifications = {
+        win = { preview = { wo = { wrap = true } } },
+      },
+    },
     smart = {
       multi = { 'recent', 'buffers', 'files' },
       format = 'file',
@@ -29,4 +34,8 @@ require('snacks').setup({
   },
   input = {},
   notifier = { timeout = 3000 },
+})
+
+Snacks.config.style('notification', {
+  wo = { wrap = true },
 })
