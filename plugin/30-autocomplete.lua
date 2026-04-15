@@ -1,17 +1,12 @@
 -- vim:ts=2:sw=2:et:
--- ON_EVENT InsertEnter: autocompletion
--- NOTE: blink.cmp is also loaded in 11-lsp.lua (for capabilities).
--- vim.pack.add() is idempotent so this is safe.
+-- ON_EVENT InsertEnter: autocompletion setup
+-- blink.cmp + LuaSnip are already on the runtimepath via 11-lsp.lua;
+-- this file just configures blink.cmp on first InsertEnter.
 local settings = require('config.settings')
 
 vim.api.nvim_create_autocmd('InsertEnter', {
   once = true,
   callback = function()
-    vim.pack.add({
-      'https://github.com/L3MON4D3/LuaSnip',
-      { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.*') },
-    })
-
     require('blink.cmp').setup({
       keymap = {
         preset = 'super-tab',
