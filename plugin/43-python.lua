@@ -5,6 +5,8 @@ vim.api.nvim_create_autocmd('FileType', {
   once = true,
   callback = function()
     vim.pack.add({
+      'https://github.com/nvim-lua/plenary.nvim',
+      'https://github.com/nvim-neotest/nvim-nio',
       'https://github.com/karloskar/poetry-nvim',
       'https://github.com/linux-cultist/venv-selector.nvim',
       'https://github.com/nvim-neotest/neotest',
