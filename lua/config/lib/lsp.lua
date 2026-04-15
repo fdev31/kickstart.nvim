@@ -15,7 +15,7 @@ M.any_client_supports = function(method, opts)
   end
 
   for _, client in ipairs(clients) do
-    if client.supports_method(method, { bufnr = bufnr }) then
+    if client:supports_method(method, { bufnr = bufnr }) then
       return true
     end
   end
