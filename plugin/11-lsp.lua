@@ -48,7 +48,7 @@ require('lazyload').on_vim_enter(function()
 
   -- Formatters/linters: mason-tool-installer handles non-LSP tools
   require('mason-tool-installer').setup({
-    ensure_installed = { 'codespell', 'stylua', 'shfmt', 'prettierd' },
+    ensure_installed = { 'codespell', 'stylua', 'shfmt', 'prettierd', 'js-debug-adapter' },
   })
 
   -- blink.cmp capabilities for all servers

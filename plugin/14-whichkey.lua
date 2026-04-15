@@ -52,6 +52,7 @@ require('lazyload').on_vim_enter(function()
       { '<leader>o', group = 'Org' },
       { '<leader>r', group = 'Run' },
       { '<leader>t', group = 'Toggle' },
+      { '<leader>T', group = 'Test' },
       { '<leader>h', group = 'Hunks (git)', mode = { 'n', 'v' } },
       { '<leader>v', group = 'Venv' },
       { '<leader>w', group = 'Workspaces' },

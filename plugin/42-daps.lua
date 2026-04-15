@@ -42,57 +42,64 @@ function _G.ensure_dap_loaded()
     command = '/usr/bin/kitty',
   }
 
-  dap.adapters.node2 = {
-    type = 'executable',
-    command = 'node',
-    args = { os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js' },
+  dap.adapters['pwa-node'] = {
+    type = 'server',
+    host = 'localhost',
+    port = '${port}',
+    executable = {
+      command = 'node',
+      args = {
+        vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js',
+        '${port}',
+      },
+    },
   }
   dap.configurations.javascript = {
     {
       name = 'Launch',
-      type = 'node2',
+      type = 'pwa-node',
       request = 'launch',
       program = '${file}',
       cwd = vim.fn.getcwd(),
       sourceMaps = true,
-      protocol = 'inspector',
       console = 'integratedTerminal',
+      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
     },
     {
       name = 'Attach to process',
-      type = 'node2',
+      type = 'pwa-node',
       request = 'attach',
       processId = require('dap.utils').pick_process,
+      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
     },
     {
       name = 'Attach to AS',
-      type = 'node2',
-      protocol = 'inspector',
-      mode = 'remote',
-      skipFiles = { '<node_internals>/**' },
+      type = 'pwa-node',
       request = 'attach',
       address = get_stb_ip(),
       port = 9230,
       remoteRoot = '/usr/share/lgias/app/',
       cwd = '${workspaceFolder}',
       localRoot = '${workspaceFolder}',
+      skipFiles = { '<node_internals>/**' },
       stopOnEntry = true,
+      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
     },
     {
       name = 'Attach to JSAPP',
-      type = 'node2',
-      protocol = 'inspector',
-      mode = 'remote',
-      skipFiles = { '<node_internals>/**' },
+      type = 'pwa-node',
       request = 'attach',
       address = get_stb_ip(),
       port = 9229,
       remoteRoot = '/usr/share/lgioui/app/',
       cwd = '${workspaceFolder}',
       localRoot = '${workspaceFolder}',
+      skipFiles = { '<node_internals>/**' },
       stopOnEntry = true,
+      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
     },
   }
+  dap.configurations.typescript = dap.configurations.javascript
   dap.configurations.sh = {
     {
       type = 'bashdb',
@@ -166,7 +173,7 @@ function _G.ensure_dap_loaded()
 end
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'python', 'javascript', 'sh' },
+  pattern = { 'python', 'javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'sh' },
   once = true,
   callback = _G.ensure_dap_loaded,
 })

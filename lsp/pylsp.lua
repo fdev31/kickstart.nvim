@@ -6,10 +6,10 @@ return {
       },
       plugins = {
         autopep8 = { enabled = false },
-        yapf = { enabled = true },
+        yapf = { enabled = false },
         mccabe = { enabled = false },
         pyflakes = { enabled = false },
-        pycodestyle = { enabled = true },
+        pycodestyle = { enabled = false },
         pydocstyle = { enabled = false },
         pylsp_mypy = { enabled = true },
         jedi_completion = { fuzzy = true },

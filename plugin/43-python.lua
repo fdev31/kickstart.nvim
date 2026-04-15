@@ -23,6 +23,14 @@ vim.api.nvim_create_autocmd('FileType', {
       python_lua_snippets = true,
     })
 
+    -- Neotest: register Python adapter (re-entrant, see lib/neotest.lua)
+    require('config.lib.neotest').register(
+      require('neotest-python')({
+        dap = { justMyCode = false },
+        runner = 'pytest',
+      })
+    )
+
     vim.keymap.set('n', '<leader>vs', '<cmd>VenvSelect<cr>', { desc = '[v]env [s]elect' })
   end,
 })

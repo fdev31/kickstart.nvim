@@ -3,6 +3,7 @@ local vue_path = vim.fn.stdpath('data')
 
 return {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
   settings = {
     vtsls = {
       tsserver = {
