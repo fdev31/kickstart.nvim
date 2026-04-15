@@ -58,5 +58,5 @@ vim.schedule(function()
     end,
   })
 
-  vim.lsp.set_log_level('off')
+  vim.lsp.log.set_level('off')
 end)
