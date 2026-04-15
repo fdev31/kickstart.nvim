@@ -3,13 +3,9 @@
 vim.o.clipboard = 'unnamedplus'
 vim.o.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
 vim.o.winborder = 'rounded'
-vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 
 -- Go to the file's folder with :Chdir
 vim.api.nvim_create_user_command('Chdir', 'cd %:h', {})
-
--- Load custom snippets
-require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.g.vscode_snippets_path } }
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
