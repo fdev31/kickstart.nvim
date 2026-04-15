@@ -4,8 +4,8 @@ vim.pack.add({
   'https://github.com/L3MON4D3/LuaSnip',
 })
 
--- SCHEDULE: LSP + Mason
-vim.schedule(function()
+-- DEFERRED: LSP + Mason
+require('lazyload').on_vim_enter(function()
   local settings = require('config.settings')
 
   vim.pack.add({

@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
--- SCHEDULE: smooth scrolling (remaps common motions)
-vim.schedule(function()
+-- DEFERRED: smooth scrolling (remaps common motions)
+require('lazyload').on_vim_enter(function()
   vim.pack.add({
     'https://github.com/karb94/neoscroll.nvim',
   })

@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
--- SCHEDULE: core fuzzy finder, many plugins depend on it
-vim.schedule(function()
+-- DEFERRED: core fuzzy finder, many plugins depend on it
+require('lazyload').on_vim_enter(function()
   vim.pack.add({
     'https://github.com/nvim-tree/nvim-web-devicons',
     'https://github.com/nvim-telescope/telescope-fzf-native.nvim',

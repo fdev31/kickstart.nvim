@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
--- SCHEDULE: autoformat (must be ready before first BufWritePre)
-vim.schedule(function()
+-- DEFERRED: autoformat (must be ready before first BufWritePre)
+require('lazyload').on_vim_enter(function()
   local settings = require('config.settings')
   local lib = require('config.lib.core')
 

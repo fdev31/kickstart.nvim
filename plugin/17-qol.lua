@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
--- SCHEDULE: quality of life plugins
-vim.schedule(function()
+-- DEFERRED: quality of life plugins
+require('lazyload').on_vim_enter(function()
   vim.pack.add {
     'https://github.com/NMAC427/guess-indent.nvim',
     'https://github.com/chentoast/marks.nvim',

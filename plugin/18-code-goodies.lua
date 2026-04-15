@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
--- SCHEDULE: code navigation and enhancement plugins
-vim.schedule(function()
+-- DEFERRED: code navigation and enhancement plugins
+require('lazyload').on_vim_enter(function()
   vim.pack.add({
     'https://github.com/onsails/lspkind.nvim',
     'https://github.com/stevearc/aerial.nvim',

@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
--- SCHEDULE: key hints popup
-vim.schedule(function()
+-- DEFERRED: key hints popup
+require('lazyload').on_vim_enter(function()
   local settings = require('config.settings')
 
   vim.pack.add({

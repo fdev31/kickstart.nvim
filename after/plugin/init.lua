@@ -1,5 +1,5 @@
 -- vim:ts=2:sw=2:et:
-vim.schedule(function()
+require('lazyload').on_vim_enter(function()
   require 'config.keymaps'
   require 'config.late_options'
-end)
+end, { sync = true })

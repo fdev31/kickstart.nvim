@@ -43,8 +43,8 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   end,
 })
 
--- Log highlight (schedule, not filetype-dependent)
-vim.schedule(function()
+-- Log highlight (deferred, not filetype-dependent)
+require('lazyload').on_vim_enter(function()
   vim.pack.add({
     'https://github.com/fei6409/log-highlight.nvim',
   })
