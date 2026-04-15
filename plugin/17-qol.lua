@@ -8,7 +8,6 @@ require('lazyload').on_vim_enter(function()
     'https://github.com/nvim-telescope/telescope-fzy-native.nvim',
     'https://github.com/danielfalk/smart-open.nvim',
     'https://github.com/catgoose/nvim-colorizer.lua',
-    'https://github.com/klen/nvim-config-local',
   }
 
   require('marks').setup()
@@ -20,13 +19,4 @@ require('lazyload').on_vim_enter(function()
     css = true,
     RRGGBBAA = true,
   })
-
-  require('config-local').setup {
-    config_files = { '.nvim.lua', '.nvimrc', '.exrc' },
-    hashfile = vim.fn.stdpath 'data' .. '/config-local',
-    autocommands_create = true,
-    commands_create = true,
-    silent = false,
-    lookup_parents = true,
-  }
 end)

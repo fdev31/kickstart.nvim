@@ -81,6 +81,9 @@ local setup = function()
   vim.o.foldenable = false
   vim.o.termguicolors = true
 
+  -- Enable native per-project config (.nvim.lua / .exrc in $cwd)
+  vim.o.exrc = true
+
   -- vim.o.relativenumber = true
   vim.o.mouse = 'a'
   vim.o.showmode = false
