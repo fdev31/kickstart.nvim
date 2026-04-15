@@ -1,14 +1,16 @@
 -- vim:ts=2:sw=2:et:
 -- EAGER: core infrastructure plugin, many depend on it
-vim.pack.add({
+vim.pack.add {
   'https://github.com/folke/snacks.nvim',
-})
+}
 
-require('snacks').setup({
+local notif_opts = { wo = { wrap = true } }
+
+require('snacks').setup {
   picker = {
     sources = {
       notifications = {
-        win = { preview = { wo = { wrap = true } } },
+        win = { preview = notif_opts },
       },
     },
     smart = {
@@ -34,8 +36,6 @@ require('snacks').setup({
   },
   input = {},
   notifier = { timeout = 3000 },
-})
+}
 
-Snacks.config.style('notification', {
-  wo = { wrap = true },
-})
+Snacks.config.style('notification', notif_opts)
