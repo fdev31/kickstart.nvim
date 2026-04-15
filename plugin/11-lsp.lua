@@ -18,6 +18,12 @@ vim.schedule(function()
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.*') },
   })
 
+  require('lazydev').setup({
+    library = {
+      { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+    },
+  })
+
   require('mason').setup({ ui = settings.popup_style })
 
   -- LSP servers: mason-lspconfig v2 handles installation + vim.lsp.enable()

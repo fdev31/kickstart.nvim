@@ -9,14 +9,7 @@ vim.api.nvim_create_autocmd('InsertEnter', {
   callback = function()
     vim.pack.add({
       'https://github.com/L3MON4D3/LuaSnip',
-      'https://github.com/folke/lazydev.nvim',
       { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.*') },
-    })
-
-    require('lazydev').setup({
-      library = {
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-      },
     })
 
     require('blink.cmp').setup({
