@@ -32,7 +32,7 @@ end, { desc = '[l]ine break' })
 map('n', '<leader>tw', function()
   vim.o.wrap = not vim.o.wrap
 end, { desc = 'line [w]rap' })
-map('n', '<leader>tm', require('treesj').toggle, { desc = '[m]ultiline' })
+map('n', '<leader>tm', function() require('treesj').toggle() end, { desc = '[m]ultiline' })
 map('n', '<leader>tn', '<cmd> set nonumber rnu! <CR>', { noremap = true, silent = true, desc = '[n]umber relative' })
 map('n', '<leader>tN', '<cmd> set number! nornu <CR>', { noremap = true, silent = true, desc = '[N]umbering' })
 map('n', '<leader>td', function()
