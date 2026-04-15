@@ -26,7 +26,7 @@ local declined_parsers = {}
 
 local function offer_parser_install()
   local ft = vim.bo.filetype
-  if ft == '' then return end
+  if ft == '' or vim.bo.buftype ~= '' then return end
   local lang = vim.treesitter.language.get_lang(ft) or ft
   if
     vim.tbl_contains(settings.treesitter_languages, lang)
