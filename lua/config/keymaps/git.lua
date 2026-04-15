@@ -30,7 +30,7 @@ map('n', '<leader>D', function()
   end
 end, { desc = 'Diff view (toggle)' })
 
-map('n', '<C-Space>', require('gitsigns').stage_hunk, { desc = 'stage/unstage hunk (git)' })
+map('n', '<C-Space>', function() require('gitsigns').stage_hunk() end, { desc = 'stage/unstage hunk (git)' })
 map('n', '<leader>C', function()
   require('menus').menu(require('config.menus').git_compare_what)
 end, { desc = 'Compare (git)' })

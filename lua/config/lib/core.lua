@@ -44,6 +44,16 @@ M.partial = function(fn, ...)
   end
 end
 
+--- Returns a proxy table that defers require(mod) until first access.
+--- Useful for keymaps that reference plugin modules at definition time
+--- before the plugin has been loaded.
+M.lazy_require = function(mod)
+  return setmetatable({}, {
+    __index = function(_, k) return require(mod)[k] end,
+    __call = function(_, ...) return require(mod)(...) end,
+  })
+end
+
 M.file_exists = function(name)
   local f = io.open(name, 'r')
   if f ~= nil then
