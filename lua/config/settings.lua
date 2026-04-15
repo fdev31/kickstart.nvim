@@ -28,16 +28,11 @@ local autoformat_opts = {
     sh = { 'shfmt' },
     rust = { 'rustfmt' },
     cpp = { 'clang_format' },
-    toml = { 'toml_fmt' },
     python = { 'ruff_fix', 'ruff_format' },
     javascript = { 'prettierd' },
     http = { 'kulala' },
   },
   formatters = {
-    toml_fmt = {
-      command = 'toml_reformat',
-      stdin = true,
-    },
     kulala = {
       command = 'kulala-fmt',
       args = { 'format', '$FILENAME' },

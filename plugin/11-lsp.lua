@@ -42,7 +42,7 @@ require('lazyload').on_vim_enter(function()
     ensure_installed = {
       'textlsp', 'harper_ls', 'dprint', 'typos_lsp', 'html', 'ruff',
       'bashls', 'cssls', 'clangd', 'vtsls', 'eslint', 'tailwindcss',
-      'pylsp', 'lua_ls', 'qmlls', 'ty',
+      'pylsp', 'lua_ls', 'qmlls', 'ty', 'tombi',
     },
   })
 

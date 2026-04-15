@@ -13,15 +13,20 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Telekasten: wiki (command-triggered)
-for _, cmd in ipairs({ 'Telekasten' }) do
-  vim.api.nvim_create_user_command(cmd, function(opts)
-    vim.api.nvim_del_user_command(cmd)
-    vim.pack.add({
-      'https://github.com/renerocksai/telekasten.nvim',
-    })
-    require('telekasten').setup({
-      home = settings.wiki_folder,
-    })
-    vim.cmd(cmd .. ' ' .. (opts.args or ''))
-  end, { nargs = '*' })
+local _telekasten_loaded = false
+function _G.ensure_telekasten_loaded()
+  if _telekasten_loaded then return end
+  _telekasten_loaded = true
+  pcall(vim.api.nvim_del_user_command, 'Telekasten')
+  vim.pack.add({
+    'https://github.com/renerocksai/telekasten.nvim',
+  })
+  require('telekasten').setup({
+    home = settings.wiki_folder,
+  })
 end
+
+vim.api.nvim_create_user_command('Telekasten', function(opts)
+  _G.ensure_telekasten_loaded()
+  vim.cmd('Telekasten ' .. (opts.args or ''))
+end, { nargs = '*' })

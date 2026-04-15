@@ -39,7 +39,8 @@ map('n', '<leader>fs', telescope.builtin, { desc = '[s]elect Telescope' })
 map('n', '<leader>fw', telescope.grep_string, { desc = '[w]ord' })
 
 map('n', '<leader>fW', function()
-  package.loaded.telekasten.panel()
+  _G.ensure_telekasten_loaded()
+  require('telekasten').panel()
 end, { desc = '[W]iki' })
 
 -- Advanced search operations
@@ -74,6 +75,7 @@ map('n', '<leader>~', function()
 end, { desc = 'Smart open cwd' })
 
 map('n', '<leader>ww', function()
+  _G.ensure_workspaces_loaded()
   require('telescope').extensions.workspaces.workspaces()
 end, { desc = '[w]alk workspaces' })
 
