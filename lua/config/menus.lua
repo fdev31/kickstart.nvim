@@ -114,7 +114,6 @@ M.main_menu = {
   { text = '󰚰 Update ▶', options = M.update_menu },
   { text = ' Venv selector', cmd = 'VenvSelect' },
   { text = ' PIO menu', cmd = 'Piomenu' },
-  -- { text = '󰽿 Treesitter context (toggle)', handler = require('treesitter-context').toggle },
 }
 
 return M

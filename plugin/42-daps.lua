@@ -1,21 +1,5 @@
 -- vim:ts=2:sw=2:et:
 -- ON_FT: debug adapters (python, javascript, sh)
-local _stb_ip = nil
-local function get_stb_ip()
-  if _stb_ip then return _stb_ip end
-  local file = io.open(os.getenv('HOME') .. '/.onemw/config', 'r')
-  if not file then return nil end
-  for line in file:lines() do
-    local key, value = line:match('^(STB_IP)=(.*)$')
-    if key and value then
-      file:close()
-      _stb_ip = value
-      return value
-    end
-  end
-  file:close()
-  return nil
-end
 
 local _dap_loaded = false
 function _G.ensure_dap_loaded()
@@ -39,7 +23,7 @@ function _G.ensure_dap_loaded()
 
   dap.defaults.fallback.force_external_terminal = true
   dap.defaults.fallback.external_terminal = {
-    command = '/usr/bin/kitty',
+    command = vim.fn.exepath('kitty'),
   }
 
   dap.adapters['pwa-node'] = {
@@ -72,33 +56,14 @@ function _G.ensure_dap_loaded()
       processId = require('dap.utils').pick_process,
       resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
     },
-    {
-      name = 'Attach to AS',
-      type = 'pwa-node',
-      request = 'attach',
-      address = get_stb_ip(),
-      port = 9230,
-      remoteRoot = '/usr/share/lgias/app/',
-      cwd = '${workspaceFolder}',
-      localRoot = '${workspaceFolder}',
-      skipFiles = { '<node_internals>/**' },
-      stopOnEntry = true,
-      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
-    },
-    {
-      name = 'Attach to JSAPP',
-      type = 'pwa-node',
-      request = 'attach',
-      address = get_stb_ip(),
-      port = 9229,
-      remoteRoot = '/usr/share/lgioui/app/',
-      cwd = '${workspaceFolder}',
-      localRoot = '${workspaceFolder}',
-      skipFiles = { '<node_internals>/**' },
-      stopOnEntry = true,
-      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
-    },
   }
+
+  -- Load work-specific STB remote-attach configs if available
+  pcall(function()
+    local stb = require('config.dap_stb')
+    vim.list_extend(dap.configurations.javascript, stb.configurations())
+  end)
+
   dap.configurations.typescript = dap.configurations.javascript
   dap.configurations.sh = {
     {
@@ -115,7 +80,7 @@ function _G.ensure_dap_loaded()
       terminalKind = 'integrated',
       runInTerminal = false,
       pathCat = 'cat',
-      pathBash = '/bin/bash',
+      pathBash = vim.fn.exepath('bash'),
       pathMkfifo = 'mkfifo',
       pathPkill = 'pkill',
       pathBashdb = vim.fn.stdpath('data') .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',

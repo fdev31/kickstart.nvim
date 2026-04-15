@@ -1,5 +1,3 @@
-local ruff = require 'config.ruff_rules'
-
 local popup_style = { border = 'rounded' }
 
 local advanced_syntax_support = {
@@ -51,7 +49,7 @@ local autoformat_opts = {
   },
 }
 
-local gitsigns_icons = {
+local diagnostic_signs = {
   text = {
     [vim.diagnostic.severity.ERROR] = '󰅚',
     [vim.diagnostic.severity.WARN] = '󰀪',
@@ -63,14 +61,9 @@ local gitsigns_icons = {
 return {
   leader = '²',
   deduplicate_diagnostics = true,
-  diff_command = 'DiffviewOpen -uno', -- overridden by plugin/52-diffview.lua when available
-  snapshots = 'silicon', -- codesnap or silicon
+  diff_command = 'DiffviewOpen -uno',
   gitsigns = {
-    add = { text = '▋' }, -- ''
-    -- change = { text = '' },
-    -- delete = { text = '' },
-    -- topdelete = { text = '' },
-    -- changedelete = { text = '' },
+    add = { text = '▋' },
   },
   popup_style = popup_style, -- style to apply to popups
 
@@ -80,7 +73,7 @@ return {
   -- supported languages
   treesitter_languages = advanced_syntax_support,
   -- AI stuff
-  copilotChat = 'copilot', -- "codecompanion" or "copilot"
+  copilot_chat = 'copilot', -- "codecompanion" or "copilot"
   -- completion settings
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
   cmp_providers = {
@@ -90,7 +83,7 @@ return {
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
     virtual_text = false,
-    signs = gitsigns_icons,
+    signs = diagnostic_signs,
     update_in_insert = false,
     float = vim.tbl_deep_extend('force', {
       show_header = false,
@@ -111,9 +104,6 @@ return {
   },
   -- (auto) formatting
   conform_opts = autoformat_opts,
-  -- python linting rules
-  ruff_rules = ruff.rules,
-  ruff_ignore = ruff.ignore,
   -- dynamic settings (togglable)
   showDiagnostics = true,
 }

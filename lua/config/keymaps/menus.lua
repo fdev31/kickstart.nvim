@@ -13,7 +13,6 @@ map({ 'n', 'v' }, 'gm', function()
   require('menus').menu(require('config.menus').main_menu)
 end, { desc = '[m]ain menu' })
 
--- vim.keymap.del('n', 'z=')
 map('n', 'z=', telescope.spell_suggest, { noremap = true, silent = false })
 -- Basic telescope searches
 map('n', '<leader>fb', telescope.buffers, { desc = '[b]uffers' })

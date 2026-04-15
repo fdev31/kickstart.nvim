@@ -4,7 +4,7 @@ local settings = require 'config.settings'
 -- AI FEATURES (COPILOT & CODECOMPANION)
 --------------------------------------------------
 map({ 'n', 'v' }, '<leader>cp', function()
-  if settings.copilotChat == 'codecompanion' then
+  if settings.copilot_chat == 'codecompanion' then
     if vim.fn.mode() == 'v' or vim.fn.mode() == 'V' or vim.fn.mode() == '\22' then
       vim.cmd "'<,'>CodeCompanion"
     else
@@ -14,7 +14,7 @@ map({ 'n', 'v' }, '<leader>cp', function()
 end, { desc = '[p]rompt (AI)' })
 
 map({ 'n', 'v' }, '<leader>cC', function()
-  if settings.copilotChat == 'codecompanion' then
+  if settings.copilot_chat == 'codecompanion' then
     vim.cmd 'CodeCompanionChat Toggle'
   else
     vim.cmd 'CopilotChat'
@@ -22,7 +22,7 @@ map({ 'n', 'v' }, '<leader>cC', function()
 end, { desc = '[C]hat (AI)' })
 
 map({ 'n', 'v' }, '<leader>co', function()
-  if settings.copilotChat == 'codecompanion' then
+  if settings.copilot_chat == 'codecompanion' then
     vim.cmd 'CodeCompanionActions'
   else
     vim.cmd 'CopilotChatOptimize'

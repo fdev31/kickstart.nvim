@@ -5,8 +5,6 @@ local setup = function()
   vim.g.maplocalleader = settings.leader
   vim.g.have_nerd_font = true
 
-  -- hide command bar when not needed
-  -- vim.o.cmdheight = 0
   -- Enable break indent
   vim.o.breakindent = true
 

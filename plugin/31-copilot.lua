@@ -1,7 +1,7 @@
 -- vim:ts=2:sw=2:et:
 -- ON_EVENT InsertEnter: AI copilot
 local settings = require('config.settings')
-local use_codecompanion = settings.copilotChat == 'codecompanion'
+local use_codecompanion = settings.copilot_chat == 'codecompanion'
 local use_model = 'claude-opus-4.6'
 
 -- Register copilot as a blink.cmp source
@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd('InsertEnter', {
       'https://github.com/zbirenbaum/copilot.lua',
     })
 
-    require('copilot').setup({ copilot_node_command = '/usr/bin/node' })
+    require('copilot').setup({ copilot_node_command = vim.fn.exepath('node') })
   end,
 })
 
@@ -74,7 +74,7 @@ else
         window = {
           layout = 'vertical',
           width = 0.5,
-          border = 'rounded',
+          border = settings.popup_style.border,
           title = '🤖 AI Assistant',
         },
         auto_insert_mode = false,

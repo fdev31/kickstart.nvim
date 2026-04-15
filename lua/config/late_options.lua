@@ -2,7 +2,7 @@
 
 vim.o.clipboard = 'unnamedplus'
 vim.o.guifont = 'Fira Code,Noto Color Emoji:h11:#e-subpixelantialias'
-vim.o.winborder = 'rounded'
+vim.o.winborder = require('config.settings').popup_style.border
 vim.g.vscode_snippets_path = '~/.config/Code/User/snippets/'
 
 -- Go to the file's folder with :Chdir
@@ -31,8 +31,8 @@ autocmd('VimResized', {
 })
 
 if vim.g.neovide then
-  local mapKey = vim.keymap.set
-  mapKey('!', '<S-Insert>', '<C-R>+') -- allow Shit+Insert on the prompt
+  local map = vim.keymap.set
+  map('!', '<S-Insert>', '<C-R>+') -- allow Shift+Insert on the prompt
 
   vim.g.neovide_opacity = 0.90
   vim.g.neovide_cursor_vfx_mode = 'railgun'
@@ -41,13 +41,13 @@ if vim.g.neovide then
   local _scaleChange = function(fac)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * fac
   end
-  mapKey('n', '<C-=>', '', {
+  map('n', '<C-=>', '', {
     silent = true,
     callback = function()
       _scaleChange(1.2)
     end,
   })
-  mapKey('n', '<C-->', '', {
+  map('n', '<C-->', '', {
     silent = true,
     callback = function()
       _scaleChange(1 / 1.2)

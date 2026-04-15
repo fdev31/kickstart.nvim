@@ -18,10 +18,10 @@ end, { desc = '[o]pen file under cursor' })
 -- K -> vim.lsp.buf.hover() is a built-in default since 0.11
 
 -- Window navigation
-vim.keymap.set('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-up>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-down>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+map('n', '<C-left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+map('n', '<C-right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+map('n', '<C-up>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+map('n', '<C-down>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Toggles
 map('n', '<leader>tl', function()

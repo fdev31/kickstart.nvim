@@ -20,7 +20,7 @@ if vim.g.neovide then
   vim.api.nvim_set_hl(0, 'NeoTreeNormal', { bg = bg_color })
 end
 
-local no_background = { ctermbg = nil, guibg = nil, bg = nil }
+local no_background = { bg = 'NONE' }
 local change_bg = '#154732'
 
 vim.api.nvim_set_hl(0, 'Special', { fg = '#ffaaac' })
