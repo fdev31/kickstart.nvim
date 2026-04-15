@@ -2,7 +2,6 @@
 -- DEFERRED: code navigation and enhancement plugins
 require('lazyload').on_vim_enter(function()
   vim.pack.add({
-    'https://github.com/onsails/lspkind.nvim',
     'https://github.com/stevearc/aerial.nvim',
     'https://github.com/m-demare/hlargs.nvim',
     'https://github.com/Wansmer/treesj',

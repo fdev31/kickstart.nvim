@@ -92,10 +92,6 @@ return {
         if not settings.showDiagnostics then
           return
         end
-        -- FIXME: commented out because it seems to prevent some tips to show
-        -- if lib.floating_win_exists() then
-        --   return
-        -- end
         _, settings._diag_window = vim.diagnostic.open_float(nil, {
           scope = 'line',
           header = '',

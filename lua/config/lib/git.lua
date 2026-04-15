@@ -17,14 +17,12 @@ M.has_fugitive_diff = function()
 end
 
 M.close_diff_view = function()
-  if vim.g._diffview_enabled then
-    if package.loaded.diffview then
-      if next(require('diffview.lib').views) == nil then
-        return false
-      else
-        package.loaded.diffview.close()
-        return true
-      end
+  if package.loaded.diffview then
+    if next(require('diffview.lib').views) == nil then
+      return false
+    else
+      package.loaded.diffview.close()
+      return true
     end
   end
   local ret = false

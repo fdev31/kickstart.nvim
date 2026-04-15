@@ -32,7 +32,6 @@ local setup = function()
 
   -- Configure how new splits should be opened
   vim.o.splitright = true
-  vim.o.splitbelow = false
 
   -- Sets how neovim will display certain whitespace characters in the editor.
   --  See `:help 'list'`
@@ -54,11 +53,6 @@ local setup = function()
   -- Minimal number of screen lines to keep above and below the cursor.
   vim.o.scrolloff = 10
 
-  -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
-  -- instead raise a dialog asking if you wish to save the current file(s)
-  -- See `:help 'confirm'`
-  vim.o.confirm = false
-
   vim.g.conform_enabled = 'limited'
   vim.o.spell = true
   vim.o.spelllang = 'en_us'
@@ -69,23 +63,14 @@ local setup = function()
   vim.o.sw = 4
   vim.o.ts = 4
   vim.o.et = true
-  -- vim.o.fdm = 'marker'
-  vim.o.foldmethod = 'manual'
-  vim.o.autoread = true
-  vim.o.number = false
-
-  vim.o.backup = false
   vim.o.swapfile = false
   vim.o.writebackup = false
 
   vim.o.foldenable = false
-  vim.o.termguicolors = true
 
   -- Enable native per-project config (.nvim.lua / .exrc in $cwd)
   vim.o.exrc = true
 
-  -- vim.o.relativenumber = true
-  vim.o.mouse = 'a'
   vim.o.showmode = false
 
   -- Only append diffopt values not already in 0.12 defaults

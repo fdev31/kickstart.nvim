@@ -5,11 +5,11 @@ require('lazyload').on_vim_enter(function()
     'https://github.com/NMAC427/guess-indent.nvim',
     'https://github.com/chentoast/marks.nvim',
     'https://github.com/kkharji/sqlite.lua',
-    'https://github.com/nvim-telescope/telescope-fzy-native.nvim',
     'https://github.com/danielfalk/smart-open.nvim',
     'https://github.com/catgoose/nvim-colorizer.lua',
   }
 
+  require('guess-indent').setup()
   require('marks').setup()
   vim.api.nvim_set_hl(0, 'MarkSignHL', { link = 'AerialLine' })
 
