@@ -1,8 +1,6 @@
 -- vim:ts=2:sw=2:et:
 -- EAGER: colorscheme must load before first paint
 vim.pack.add({
-  'https://github.com/nvim-lua/plenary.nvim',
-  'https://github.com/folke/todo-comments.nvim',
   'https://github.com/Mofiqul/dracula.nvim',
 })
 
