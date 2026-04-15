@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
 -- ON_EVENT InsertEnter: autocompletion setup
--- blink.cmp is already on the runtimepath via 11-lsp.lua;
+-- blink.cmp + LuaSnip are already on the runtimepath via 11-lsp.lua;
 -- this file just configures blink.cmp on first InsertEnter.
 local settings = require('config.settings')
 
@@ -24,10 +24,7 @@ vim.api.nvim_create_autocmd('InsertEnter', {
           codecompanion = { 'codecompanion' },
         },
       },
-      snippets = {
-        preset = 'default',
-        search_paths = { vim.fn.expand('~/.config/Code/User/snippets') },
-      },
+      snippets = { preset = 'luasnip' },
       fuzzy = {
         implementation = 'prefer_rust_with_warning',
         prebuilt_binaries = { force_version = 'v1.*' },
