@@ -4,14 +4,16 @@ return function(client, event)
     vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc .. ' (lsp)' })
   end
 
+  local dedup = require('config.lib.lsp').dedup_on_list
+
   -- Execute a code action, usually your cursor needs to be on top of an error
   -- or a suggestion from your LSP for this to activate.
   lspmap('<leader>ca', vim.lsp.buf.code_action, 'Code [a]ctions', { 'n', 'x' })
 
-  lspmap('grd', vim.lsp.buf.definition, '[G]oto [d]efinition')
+  lspmap('grd', function() vim.lsp.buf.definition { on_list = dedup } end, '[G]oto [d]efinition')
   -- WARN: This is not Goto Definition, this is Goto Declaration.
   --  For example, in C this would take you to the header.
-  lspmap('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  lspmap('grD', function() vim.lsp.buf.declaration { on_list = dedup } end, '[G]oto [D]eclaration')
 
   -- Fuzzy find all the symbols in your current document.
   --  Symbols are things like variables, functions, types, etc.

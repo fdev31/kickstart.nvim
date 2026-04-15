@@ -22,20 +22,42 @@ M.any_client_supports = function(method, opts)
   return false
 end
 
---- Try to call an LSP method and execute a function if successful
---- @param method string The LSP method to call (e.g., 'textDocument/definition').
---- @param func function The function to execute if the LSP method returns results.
---- @param params table The parameters to pass to the LSP method.
---- @return boolean True if the function was executed, false otherwise.
+--- Deduplicate and handle LSP location results.
+--- If a single unique result, jump directly. Otherwise open the quickfix list.
+---@param options table The on_list options from vim.lsp.buf (has .items and .title)
+M.dedup_on_list = function(options)
+  local seen = {}
+  local items = {}
+  for _, item in ipairs(options.items) do
+    local key = item.filename .. ':' .. item.lnum .. ':' .. item.col
+    if not seen[key] then
+      seen[key] = true
+      items[#items + 1] = item
+    end
+  end
+  if #items == 1 then
+    local item = items[1]
+    vim.cmd('edit ' .. vim.fn.fnameescape(item.filename))
+    vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
+  else
+    vim.fn.setqflist({}, ' ', { title = options.title, items = items })
+    vim.cmd('copen')
+  end
+end
 
-M.try_method = function(method, func, params)
+--- Try to call an LSP method synchronously and check if it has results.
+--- If results exist, call the handler with on_list deduplication.
+--- @param method string The LSP method to call (e.g., 'textDocument/definition').
+--- @param handler function The vim.lsp.buf function to call (e.g., vim.lsp.buf.definition).
+--- @param params table The position params for the sync probe.
+--- @return boolean True if the method returned results, false otherwise.
+M.try_method = function(method, handler, params)
   local result = vim.lsp.buf_request_sync(0, method, params, 1000)
   if result and next(result) then
     for _, res in pairs(result) do
       if res.result and #res.result > 0 then
-        if pcall(func) then
-          return true
-        end
+        handler { on_list = M.dedup_on_list }
+        return true
       end
     end
   end
