@@ -19,9 +19,7 @@ vim.api.nvim_create_autocmd('FileType', {
       auto_refresh = true,
     })
 
-    require('python').setup({
-      python_lua_snippets = true,
-    })
+    require('python').setup({})
 
     vim.keymap.set('n', '<leader>vs', '<cmd>VenvSelect<cr>', { desc = '[v]env [s]elect' })
   end,
