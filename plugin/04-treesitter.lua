@@ -33,9 +33,11 @@ end
 -- Offer to install a parser for the current filetype if it's not in the curated list
 local declined_parsers = {}
 
+local no_parser_ft = { netrw = true, DiffviewFiles = true, DiffviewFileHistory = true }
+
 local function offer_parser_install()
   local ft = vim.bo.filetype
-  if ft == '' or vim.bo.buftype ~= '' then return end
+  if ft == '' or vim.bo.buftype ~= '' or no_parser_ft[ft] then return end
   local lang = vim.treesitter.language.get_lang(ft) or ft
   if
     vim.tbl_contains(settings.treesitter_languages, lang)
