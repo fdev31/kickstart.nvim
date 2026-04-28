@@ -16,8 +16,6 @@ require('lazyload').on_vim_enter(function()
   pcall(require('telescope').load_extension, 'smart_open')
 
   require('colorizer').setup {
-    enable = true,
-    lazy_load = true,
     filetypes = { '*' },
     user_default_options = {
       css = true,
