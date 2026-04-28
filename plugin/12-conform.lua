@@ -1,12 +1,12 @@
 -- vim:ts=2:sw=2:et:
 -- DEFERRED: autoformat (must be ready before first BufWritePre)
 require('lazyload').on_vim_enter(function()
-  local settings = require('config.settings')
-  local lib = require('config.lib.core')
+  local settings = require 'config.settings'
+  local lib = require 'config.lib.core'
 
-  vim.pack.add({
+  vim.pack.add {
     'https://github.com/stevearc/conform.nvim',
-  })
+  }
 
   local disable_filetypes = {}
   local _warned = false
@@ -52,7 +52,8 @@ require('lazyload').on_vim_enter(function()
         return
       end
       if formatting_mode == FormatMode.SELECTIVE then
-        if require('config.lib.partial_formatter')() ~= false then
+        local ok, result = pcall(require 'config.lib.partial_formatter')
+        if not ok or result ~= false then
           return
         else
           if not _warned then
@@ -86,7 +87,7 @@ require('lazyload').on_vim_enter(function()
 
   vim.keymap.set('', '<leader>tf', function()
     if not lib.is_buffer_tracked() then
-      vim.notify("File is untracked: can't enable selective formatting")
+      vim.notify "File is untracked: can't enable selective formatting"
       return
     end
     local formatting_mode = get_format_mode()
