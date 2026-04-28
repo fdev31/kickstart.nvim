@@ -10,10 +10,14 @@ return function(client, event)
   -- or a suggestion from your LSP for this to activate.
   lspmap('<leader>ca', vim.lsp.buf.code_action, 'Code [a]ctions', { 'n', 'x' })
 
-  lspmap('grd', function() vim.lsp.buf.definition { on_list = dedup } end, '[G]oto [d]efinition')
+  lspmap('grd', function()
+    vim.lsp.buf.definition { on_list = dedup }
+  end, '[G]oto [d]efinition')
   -- WARN: This is not Goto Definition, this is Goto Declaration.
   --  For example, in C this would take you to the header.
-  lspmap('grD', function() vim.lsp.buf.declaration { on_list = dedup } end, '[G]oto [D]eclaration')
+  lspmap('grD', function()
+    vim.lsp.buf.declaration { on_list = dedup }
+  end, '[G]oto [D]eclaration')
 
   -- Fuzzy find all the symbols in your current document.
   --  Symbols are things like variables, functions, types, etc.

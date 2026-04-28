@@ -59,7 +59,9 @@ M.git_menu = { --{{{
   },
   {
     text = '⎼⎼ Line History',
-    handler = function() require('snacks').picker.git_log_line() end,
+    handler = function()
+      require('snacks').picker.git_log_line()
+    end,
   },
   {
     text = ' Reset file',
@@ -98,9 +100,24 @@ M.git_menu = { --{{{
 } -- }}}
 
 M.update_menu = {
-  { text = '󰚰 Plugins (vim.pack)', handler = function() vim.pack.update() end },
-  { text = '󰚰❗Force update (no confirm)', handler = function() vim.pack.update(nil, { force = true }) end },
-  { text = '󰁨 Revert to lockfile', handler = function() vim.pack.update(nil, { target = 'lockfile' }) end },
+  {
+    text = '󰚰 Plugins (vim.pack)',
+    handler = function()
+      vim.pack.update()
+    end,
+  },
+  {
+    text = '󰚰❗Force update (no confirm)',
+    handler = function()
+      vim.pack.update(nil, { force = true })
+    end,
+  },
+  {
+    text = '󰁨 Revert to lockfile',
+    handler = function()
+      vim.pack.update(nil, { target = 'lockfile' })
+    end,
+  },
   { text = '󰓙 Plugin health', cmd = 'checkhealth vim.pack' },
   { text = ' 3rd party (Mason)', cmd = 'Mason' },
 }

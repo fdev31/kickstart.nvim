@@ -73,10 +73,10 @@ local setup = function()
 
   -- Only append diffopt values not already in 0.12 defaults
   -- (internal, filler, closeoff, indent-heuristic, algorithm:histogram, linematch:40 are built-in)
-  vim.opt.diffopt:append('linematch:60')
-  vim.opt.diffopt:append('vertical')
-  vim.opt.diffopt:append('foldcolumn:1')
-  vim.opt.diffopt:append('hiddenoff')
+  vim.opt.diffopt:append 'linematch:60'
+  vim.opt.diffopt:append 'vertical'
+  vim.opt.diffopt:append 'foldcolumn:1'
+  vim.opt.diffopt:append 'hiddenoff'
 end
 return {
   setup = setup,

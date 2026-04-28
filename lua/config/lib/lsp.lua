@@ -41,7 +41,7 @@ M.dedup_on_list = function(options)
     vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
   else
     vim.fn.setqflist({}, ' ', { title = options.title, items = items })
-    vim.cmd('copen')
+    vim.cmd 'copen'
   end
 end
 
