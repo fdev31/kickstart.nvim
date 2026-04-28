@@ -29,7 +29,9 @@ M.git_menu = { --{{{
     text = ' Commit',
     handler = function()
       git.close_diff_view()
-      vim.cmd 'Neotree close'
+      if package.loaded['neo-tree'] then
+        vim.cmd 'Neotree close'
+      end
       vim.cmd 'G commit'
     end,
   },
