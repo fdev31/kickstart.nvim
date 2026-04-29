@@ -9,18 +9,10 @@ local telescope = require 'telescope.builtin'
 --------------------------------------------------
 -- Navigate conflicts with ]x and [x (custom: jumps to next/prev conflict marker)
 map('n', ']x', function()
-  vim.cmd 'silent! normal! ]x'
-  -- Fallback: search for next <<<<<<< if vim-unimpaired not installed
-  if vim.v.hlsearch == 0 then
-    vim.cmd 'silent! /<<<<<<<'
-  end
+  vim.fn.search('^<<<<<<<', 'W')
 end, { desc = 'Next conflict' })
 map('n', '[x', function()
-  vim.cmd 'silent! normal! [x'
-  -- Fallback: search for prev <<<<<<<
-  if vim.v.hlsearch == 0 then
-    vim.cmd 'silent! ?>>>>>>>'
-  end
+  vim.fn.search('^<<<<<<<', 'bW')
 end, { desc = 'Previous conflict' })
 
 -- Toggle diff view

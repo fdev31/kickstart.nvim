@@ -5,12 +5,12 @@ vim.api.nvim_create_user_command('DiffviewOpen', function(opts)
   vim.pack.add({
     'https://github.com/sindrets/diffview.nvim',
   })
+  local actions = require('diffview.actions')
   require('diffview').setup({
     keymaps = {
-      view = {
-        { 'n', 'dl', require('diffview.actions').conflict_choose('ours'), { desc = 'Get left version (ours conflict)' } },
-        { 'n', 'dr', require('diffview.actions').conflict_choose('theirs'), { desc = 'Get right version (theirs conflict)' } },
-        { 'n', 'db', require('diffview.actions').conflict_choose('base'), { desc = 'Get original version (before conflict)' } },
+      diff3 = {
+        { { 'n', 'x' }, 'Dl', actions.diffget('ours'), { desc = 'Diff from left (ours)' } },
+        { { 'n', 'x' }, 'Dr', actions.diffget('theirs'), { desc = 'Diff from right (theirs)' } },
       },
     },
     view = {
