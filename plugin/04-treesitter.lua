@@ -2,6 +2,14 @@
 -- Treesitter: parser installation + highlighting/indentation
 local settings = require 'config.settings'
 
+local no_parser_ft = {
+  netrw = true,
+  DiffviewFiles = true,
+  DiffviewFileHistory = true,
+  PKGBUILD = true,
+  systemd = true,
+}
+
 -- Build hook: update parsers on install/update
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
@@ -32,8 +40,6 @@ end
 
 -- Offer to install a parser for the current filetype if it's not in the curated list
 local declined_parsers = { conf = true }
-
-local no_parser_ft = { netrw = true, DiffviewFiles = true, DiffviewFileHistory = true }
 
 local function offer_parser_install()
   local ft = vim.bo.filetype
