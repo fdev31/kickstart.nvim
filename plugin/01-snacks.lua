@@ -36,6 +36,7 @@ require('snacks').setup {
   },
   input = {},
   notifier = { timeout = 3000 },
+  scroll = {},
 }
 
 Snacks.config.style('notification', notif_opts)
