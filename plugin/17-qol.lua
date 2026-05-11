@@ -15,14 +15,20 @@ require('lazyload').on_vim_enter(function()
 
   pcall(require('telescope').load_extension, 'smart_open')
 
+  vim.lsp.document_color.enable(false)
+
   require('colorizer').setup {
     filetypes = { '*' },
-    user_default_options = {
+    options = {
       css = true,
       RRGGBBAA = true,
       rgb_fn = true,
       hsl_fn = true,
       mode = 'background',
+      display = {
+        disable_document_color = true,
+      },
     },
+    require('colorizer').attach_to_buffer(0),
   }
 end)
