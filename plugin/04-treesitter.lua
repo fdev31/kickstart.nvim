@@ -8,6 +8,7 @@ local no_parser_ft = {
   DiffviewFileHistory = true,
   PKGBUILD = true,
   systemd = true,
+  log = true,
 }
 -- Build hook: update parsers on install/update
 vim.api.nvim_create_autocmd('PackChanged', {
