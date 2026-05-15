@@ -7,14 +7,11 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.pack.add({
       'https://github.com/nvim-lua/plenary.nvim',
       'https://github.com/nvim-neotest/nvim-nio',
-      'https://github.com/karloskar/poetry-nvim',
       'https://github.com/linux-cultist/venv-selector.nvim',
       'https://github.com/nvim-neotest/neotest',
       'https://github.com/nvim-neotest/neotest-python',
       'https://github.com/joshzcold/python.nvim',
     })
-
-    require('poetry-nvim').setup()
 
     require('venv-selector').setup({
       name = 'pyenv',
