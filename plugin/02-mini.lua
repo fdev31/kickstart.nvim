@@ -43,6 +43,7 @@ require('mini.align').setup({
     start_with_preview = 'gA',
   },
 })
+require('mini.ai').setup()
 
 local statusline = require('mini.statusline')
 statusline.setup({ use_icons = vim.g.have_nerd_font })
