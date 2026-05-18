@@ -1,6 +1,6 @@
 -- vim:ts=2:sw=2:et:
 -- EAGER: statusline must be visible at startup
-local lib = require('config.lib.core')
+local lib = require 'config.lib.core'
 
 local _precise_render_statusline = function(location)
   local get_node = vim.treesitter.get_node
@@ -31,20 +31,27 @@ local render_statusline = function()
   return ret or location
 end
 
-vim.pack.add({
+vim.pack.add {
   'https://github.com/echasnovski/mini.nvim',
-})
+}
 
 vim.api.nvim_set_hl(0, 'MiniCursorword', { link = 'LspReferenceText' })
-require('mini.cursorword').setup({ delay = 300 })
-require('mini.align').setup({
+require('mini.cursorword').setup { delay = 300 }
+require('mini.align').setup {
   mappings = {
     start = '',
     start_with_preview = 'gA',
   },
-})
-require('mini.ai').setup()
+}
+require('mini.ai').setup {
+  mappings = {
+    around_next = '',
+    inside_next = '',
+    around_last = '',
+    inside_last = '',
+  },
+}
 
-local statusline = require('mini.statusline')
-statusline.setup({ use_icons = vim.g.have_nerd_font })
+local statusline = require 'mini.statusline'
+statusline.setup { use_icons = vim.g.have_nerd_font }
 statusline.section_location = render_statusline
