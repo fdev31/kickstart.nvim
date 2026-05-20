@@ -14,6 +14,7 @@ return {
         pylsp_mypy = { enabled = true },
         jedi_completion = { fuzzy = true },
         jedi_symbols = { enabled = true },
+        rope_rename = { enabled = false },
       },
     },
   },
