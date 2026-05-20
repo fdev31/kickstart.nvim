@@ -10,16 +10,11 @@ vim.api.nvim_create_autocmd('FileType', {
       'https://github.com/linux-cultist/venv-selector.nvim',
       'https://github.com/nvim-neotest/neotest',
       'https://github.com/nvim-neotest/neotest-python',
-      'https://github.com/joshzcold/python.nvim',
     })
 
     require('venv-selector').setup({
       name = 'pyenv',
       auto_refresh = true,
-    })
-
-    require('python').setup({
-      python_lua_snippets = true,
     })
 
     -- Neotest: register Python adapter (re-entrant, see lib/neotest.lua)
