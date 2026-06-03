@@ -76,6 +76,35 @@ require('lazyload').on_vim_enter(function()
       local client = vim.lsp.get_client_by_id(event.data.client_id)
       require 'config.keymaps.lsp'(client, event)
 
+      -- Override built-in `grn`: when multiple LSP clients support rename,
+      -- prompt once for which client to use (avoids duplicate rename prompts,
+      -- e.g. pylsp + ty on Python buffers).
+      vim.keymap.set('n', 'grn', function()
+        local clients = vim.lsp.get_clients {
+          bufnr = event.buf,
+          method = 'textDocument/rename',
+        }
+        if #clients <= 1 then
+          vim.lsp.buf.rename()
+          return
+        end
+        vim.ui.select(clients, {
+          prompt = 'Rename via which LSP client?',
+          format_item = function(c)
+            return c.name
+          end,
+        }, function(choice)
+          if not choice then
+            return
+          end
+          vim.lsp.buf.rename(nil, {
+            filter = function(c)
+              return c.id == choice.id
+            end,
+          })
+        end)
+      end, { buffer = event.buf, desc = 'Rename (choose client)' })
+
       vim.lsp.document_color.enable(false, { bufnr = event.buf })
 
       require('colorizer').attach_to_buffer(0)
