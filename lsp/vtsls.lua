@@ -7,6 +7,8 @@ return {
   settings = {
     vtsls = {
       tsserver = {
+        -- Bump memory for large monorepos (e.g. onemw-js)
+        maxTsServerMemory = 8192,
         globalPlugins = {
           {
             name = '@vue/typescript-plugin',
