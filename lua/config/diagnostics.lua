@@ -92,6 +92,13 @@ return {
         if not settings.showDiagnostics then
           return
         end
+        -- Don't open the diagnostic float if another floating window is
+        -- already open (e.g. LSP hover via `K`), otherwise it would clobber it.
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          if vim.api.nvim_win_get_config(win).relative ~= '' then
+            return
+          end
+        end
         _, settings._diag_window = vim.diagnostic.open_float(nil, {
           scope = 'line',
           header = '',
