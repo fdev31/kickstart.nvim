@@ -38,7 +38,7 @@ require('lazyload').on_vim_enter(function()
 
   -- LSP servers: mason-lspconfig v2 handles installation + vim.lsp.enable()
   require('mason-lspconfig').setup {
-    automatic_enable = true,
+    automatic_enable = { exclude = { 'ty' } },
     ensure_installed = {
       'textlsp',
       'harper_ls',
@@ -55,7 +55,6 @@ require('lazyload').on_vim_enter(function()
       'pylsp',
       'lua_ls',
       'qmlls',
-      'ty',
       'tombi',
     },
   }
