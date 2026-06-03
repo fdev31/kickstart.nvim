@@ -106,4 +106,34 @@ return {
   conform_opts = autoformat_opts,
   -- dynamic settings (togglable)
   showDiagnostics = true,
+
+  -- Python LSP selection (startup-time; override in project-local .nvim.lua)
+  --   'pylsp' | 'ty' | 'both'
+  python_lsp = 'pylsp',
+
+  -- Inlay hints: server-agnostic presets, applied via lua/config/lib/inlay_hints.lua
+  -- The <leader>th keymap toggles rendering per buffer (see keymaps/lsp.lua).
+  inlay_hints = {
+    enabled_on_attach = false, -- off by default; toggle with <leader>th
+    preset = 'full',           -- 'full' | 'lean' | 'off' | a table
+    presets = {
+      full = {
+        parameter_names = 'all',
+        parameter_types = true,
+        variable_types  = true,
+        return_types    = true,
+        property_types  = true,
+        enum_values     = true,
+        extras          = true, -- server-specific goodies (await, BlockEnd, ...)
+      },
+      lean = {
+        parameter_names = 'literals',
+        enum_values     = true,
+      },
+      off = {},
+    },
+    -- Per-filetype override; value is a preset name or an inline table.
+    -- e.g. by_filetype = { javascript = 'lean', lua = 'full' }
+    by_filetype = {},
+  },
 }

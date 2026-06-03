@@ -37,8 +37,18 @@ require('lazyload').on_vim_enter(function()
   require('mason').setup { ui = settings.popup_style }
 
   -- LSP servers: mason-lspconfig v2 handles installation + vim.lsp.enable()
+  -- Python LSP selection is driven by settings.python_lsp ('pylsp' | 'ty' | 'both').
+  -- Override per project in .nvim.lua BEFORE this runs (exrc fires during init).
+  local py_exclude = {}
+  if settings.python_lsp == 'pylsp' then
+    table.insert(py_exclude, 'ty')
+  elseif settings.python_lsp == 'ty' then
+    table.insert(py_exclude, 'pylsp')
+    -- 'both' → exclude nothing
+  end
+
   require('mason-lspconfig').setup {
-    automatic_enable = { exclude = { 'ty' } },
+    automatic_enable = { exclude = py_exclude },
     ensure_installed = {
       'textlsp',
       'harper_ls',
@@ -58,6 +68,11 @@ require('lazyload').on_vim_enter(function()
       'tombi',
     },
   }
+
+  -- ty isn't managed by mason-lspconfig's auto-enable; turn it on explicitly.
+  if settings.python_lsp == 'ty' or settings.python_lsp == 'both' then
+    vim.lsp.enable('ty')
+  end
 
   -- Formatters/linters: mason-tool-installer handles non-LSP tools
   require('mason-tool-installer').setup {
