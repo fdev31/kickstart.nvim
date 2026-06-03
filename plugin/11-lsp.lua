@@ -113,6 +113,19 @@ require('lazyload').on_vim_enter(function()
       if client and client:supports_method 'textDocument/linkedEditingRange' then
         vim.lsp.linked_editing_range.enable(true, { bufnr = event.buf })
       end
+
+      -- Code lens: refresh on attach and on buffer events. `grx` (built-in
+      -- global mapping) runs the lens under the cursor.
+      if client and client:supports_method 'textDocument/codeLens' then
+        vim.lsp.codelens.refresh { bufnr = event.buf }
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'CursorHold' }, {
+          buffer = event.buf,
+          group = vim.api.nvim_create_augroup('lsp-codelens-' .. event.buf, { clear = true }),
+          callback = function()
+            vim.lsp.codelens.refresh { bufnr = event.buf }
+          end,
+        })
+      end
       -- Prefer LSP folding when supported, fallback to treesitter
       local win = vim.api.nvim_get_current_win()
       if not vim.wo[win].diff then
