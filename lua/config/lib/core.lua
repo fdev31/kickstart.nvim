@@ -1,5 +1,8 @@
 local M = {}
 
+-- Lua 5.1/LuaJIT: global unpack; Lua 5.2+: table.unpack only.
+local unpack = table.unpack or unpack
+
 --- removes consecutive spaces and stops at the first 0 (^@) character.
 M.clean_string = function(text, maxlen)
   local cleaned = text:gsub('%s+', ' ')

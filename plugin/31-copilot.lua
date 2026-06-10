@@ -2,7 +2,7 @@
 -- ON_EVENT InsertEnter: AI copilot
 local settings = require('config.settings')
 local use_codecompanion = settings.copilot_chat == 'codecompanion'
-local use_model = 'claude-opus-4.6'
+local use_model = settings.copilot_model
 
 -- Register copilot as a blink.cmp source
 settings.cmp_providers.copilot = {

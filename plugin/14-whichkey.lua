@@ -46,11 +46,9 @@ require('lazyload').on_vim_enter(function()
     spec = {
       { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
       { '<leader>d', group = 'Debugging' },
-      { '<leader>R', group = 'Request' },
-      { '<leader>g', group = 'Git' },
       { '<leader>f', group = 'Find' },
       { '<leader>o', group = 'Org' },
-      { '<leader>r', group = 'Run' },
+      { '<leader>r', group = 'Request (kulala)' },
       { '<leader>t', group = 'Toggle' },
       { '<leader>T', group = 'Test' },
       { '<leader>h', group = 'Hunks (git)', mode = { 'n', 'v' } },

@@ -74,6 +74,7 @@ return {
   treesitter_languages = advanced_syntax_support,
   -- AI stuff
   copilot_chat = 'copilot', -- "codecompanion" or "copilot"
+  copilot_model = 'claude-opus-4.6', -- model name for CopilotChat / CodeCompanion
   -- completion settings
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
   cmp_providers = {

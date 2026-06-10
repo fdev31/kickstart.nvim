@@ -3,8 +3,17 @@ local settings = require 'config.settings'
 --------------------------------------------------
 -- BASIC OPERATIONS
 --------------------------------------------------
--- select last "paste" command with @s
-vim.fn.setreg('s', "'[v']")
+-- @s replays the last "paste" as a visual selection.
+-- We set this register lazily on the first TextYankPost so we don't trample
+-- whatever the user already had in register 's' at startup.
+vim.api.nvim_create_autocmd('TextYankPost', {
+  once = true,
+  callback = function()
+    if vim.fn.getreg('s') == '' then
+      vim.fn.setreg('s', "'[v']")
+    end
+  end,
+})
 -- Clear search highlight and terminal escape
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
@@ -43,5 +52,7 @@ map('n', '<leader>td', function()
   if not settings.showDiagnostics and settings._diag_window then
     pcall(vim.api.nvim_win_close, settings._diag_window, true)
   end
+  -- Spell is treated as another "lint noise" source and toggled together
+  -- with diagnostics. Split into two keymaps if you want them independent.
   vim.o.spell = settings.showDiagnostics
-end, { desc = '[d]iagnostics' })
+end, { desc = '[d]iagnostics (+ spell)' })

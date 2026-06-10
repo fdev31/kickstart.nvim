@@ -121,7 +121,14 @@ require('lazyload').on_vim_enter(function()
 
       vim.lsp.document_color.enable(false, { bufnr = event.buf })
 
-      require('colorizer').attach_to_buffer(0)
+      -- Skip colorizer for buffers where color preview is noise.
+      local colorizer_skip = {
+        log = true, gitcommit = true, help = true,
+        ['TelescopeResults'] = true, ['neo-tree'] = true, [''] = true,
+      }
+      if not colorizer_skip[vim.bo[event.buf].filetype] then
+        require('colorizer').attach_to_buffer(event.buf)
+      end
 
       -- Enable linked editing range (auto-rename matching tags) when supported
       if client and client:supports_method 'textDocument/linkedEditingRange' then

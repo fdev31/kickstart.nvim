@@ -4,6 +4,7 @@ vim.filetype.add({
   pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
   extension = {
     wiki = 'confluence_wiki',
+    hl = 'hyprlang',
   },
 })
 
@@ -31,10 +32,16 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
--- Hyprlang LSP
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  pattern = { '*.hl', 'hypr*.conf' },
-  callback = function()
+-- Hyprlang LSP. Use FileType (which is dispatched once per buffer thanks to
+-- the vim.filetype.add() mapping above) plus a buffer-local guard so we don't
+-- restart the client on every re-enter.
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'hyprlang',
+  callback = function(ev)
+    if vim.b[ev.buf].hyprlang_started then
+      return
+    end
+    vim.b[ev.buf].hyprlang_started = true
     vim.lsp.start({
       name = 'hyprlang',
       cmd = { vim.fn.stdpath('data') .. '/mason/packages/hyprls/hyprls' },

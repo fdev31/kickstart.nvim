@@ -5,13 +5,16 @@ local async_ops = false -- format BEFORE saving if not async (else may require t
 -- Started from: https://github.com/stevearc/conform.nvim/issues/92
 -- Format only the git changed hunks in the current buffer
 -- Returns false if this filetype can't be formatted, true otherwise
-return function()
-  if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+return function(bufnr)
+  bufnr = bufnr or 0
+  if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
     return false
   end
 
-  -- Fix: get_hunks() requires buffer number argument
-  local hunks = require('gitsigns').get_hunks()
+  -- gitsigns.get_hunks accepts an optional bufnr; pass it explicitly so we
+  -- don't accidentally read hunks from the current buffer when format_on_save
+  -- was triggered for another one.
+  local hunks = require('gitsigns').get_hunks(bufnr)
   if hunks == nil or #hunks == 0 then
     vim.notify('No change detected', vim.log.levels.INFO, { title = 'formatting' })
     return true
@@ -59,7 +62,7 @@ return function()
         range['end'] = { end_line, -1 }
       end
 
-      format({ range = range, async = async_ops, lsp_format = 'fallback' }, function()
+      format({ range = range, async = async_ops, lsp_format = 'fallback', bufnr = bufnr }, function()
         if async_ops then
           vim.defer_fn(format_range, 1)
         else

@@ -29,6 +29,6 @@ require('lazyload').on_vim_enter(function()
         disable_document_color = true,
       },
     },
-    require('colorizer').attach_to_buffer(0),
   }
+  -- Per-buffer attach happens in plugin/11-lsp.lua on LspAttach.
 end)

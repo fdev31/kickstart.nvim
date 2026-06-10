@@ -3,7 +3,12 @@ vim.loader.enable()
 require('config.options').setup()
 pcall(require, 'config.custom')
 
--- Auto-accept plugin installations (skip confirmation prompt)
+-- Monkey-patch vim.pack.add so every spec defaults to confirm=false
+-- (skip the interactive confirmation prompt on first install).
+--
+-- This must run before any other module calls vim.pack.add — i.e. before
+-- the plugin/ directory is auto-sourced. Any code that captures a reference
+-- to vim.pack.add before this block executes will bypass the patch.
 do
   local orig_add = vim.pack.add
   vim.pack.add = function(specs, opts)

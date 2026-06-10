@@ -52,13 +52,17 @@ require('lazyload').on_vim_enter(function()
         return
       end
       if formatting_mode == FormatMode.SELECTIVE then
-        local ok, result = pcall(require 'config.lib.partial_formatter')
-        if not ok or result ~= false then
+        local ok, result = pcall(require 'config.lib.partial_formatter', bufnr)
+        -- partial_formatter returns:
+        --   false  -> filetype can't be handled, fall through to full format
+        --   true   -> handled (nothing to format, or no hunks)
+        --   nil    -> handled (range format dispatched)
+        if ok and result ~= false then
           return
         else
           if not _warned then
             _warned = true
-            vim.notify("Selective formatting didn't work, proceeding with full format", 'info', { title = 'formatting' })
+            vim.notify("Selective formatting didn't work, proceeding with full format", vim.log.levels.INFO, { title = 'formatting' })
           end
         end
       end
@@ -82,12 +86,12 @@ require('lazyload').on_vim_enter(function()
     else
       set_enabled(get_default_value())
     end
-    vim.notify(get_format_mode() and 'Selective autoformat ' or 'No autoformat')
+    vim.notify(get_format_mode() and 'Selective autoformat ' or 'No autoformat', vim.log.levels.INFO)
   end, { desc = '[F]ormat' })
 
   vim.keymap.set('', '<leader>tf', function()
     if not lib.is_buffer_tracked() then
-      vim.notify "File is untracked: can't enable selective formatting"
+      vim.notify("File is untracked: can't enable selective formatting", vim.log.levels.WARN)
       return
     end
     local formatting_mode = get_format_mode()
@@ -96,6 +100,6 @@ require('lazyload').on_vim_enter(function()
     else
       set_enabled(get_default_value())
     end
-    vim.notify(get_format_mode() == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat')
+    vim.notify(get_format_mode() == FormatMode.FULL and 'Full autoformat' or 'Selective autoformat', vim.log.levels.INFO)
   end, { desc = 'selective [f]ormat' })
 end)
