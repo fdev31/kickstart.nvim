@@ -87,6 +87,7 @@ M.git_menu = { --{{{
         handler = function()
           vim.ui.input({
             prompt = 'Stash message: ',
+            scope = 'tabpage',
           }, function(input)
             if input then
               vim.cmd('!git stash push -m "' .. input .. '"')
@@ -122,6 +123,7 @@ M.update_menu = {
   },
   { text = '󰓙 Plugin health', cmd = 'checkhealth vim.pack' },
   { text = ' 3rd party (Mason)', cmd = 'Mason' },
+  { text = '󰜉 Restart Neovim', cmd = 'restart' },
 }
 
 M.main_menu = {
