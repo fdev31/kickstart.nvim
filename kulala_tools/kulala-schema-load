@@ -1,0 +1,173 @@
+#!/bin/sh
+# kulala-schema-load — sideload a GraphQL introspection JSON into kulala-core's
+# SQLite cache so that kulala.nvim's LSP can serve completions for a host
+# whose endpoint can't (or shouldn't) be hit live.
+#
+# Usage:
+#   kulala-schema-load <json-file> [<host-or-url>]
+#
+# Examples:
+#   kulala-schema-load ./schema.json 192.168.0.156:81
+#   kulala-schema-load ./schema.json http://192.168.0.156:81/api/graphql
+#   kulala-schema-load ./schema.json                 # uses default below
+#
+# Cache key derivation (mirrors kulala-core's `graphqlSchemaHostFromUrl`):
+#   - lowercased hostname
+#   - append ":port" unless port is 80 or 443 (or absent)
+
+set -eu
+
+PROG=${0##*/}
+
+DEFAULT_HOST='192.168.0.156:81'
+DB="${XDG_DATA_HOME:-$HOME/.local/share}/kulala-core/kulala.db"
+
+usage() {
+    cat <<EOF
+$PROG — load a GraphQL introspection JSON into kulala-core's schema cache
+
+Usage: $PROG <json-file> [<host-or-url>]
+
+Arguments:
+  <json-file>     Path to introspection JSON. Accepted shapes:
+                    { "data": { "__schema": { ... } } }   (server envelope)
+                    { "__schema": { ... } }               (will be wrapped)
+  <host-or-url>   Cache key. If it looks like an http(s) URL, the host:port
+                  is derived (port stripped if 80/443). Default: $DEFAULT_HOST
+
+Files:
+  DB:    $DB
+  Backup: same dir, suffix .bak-YYYYmmdd-HHMMSS (created every run)
+EOF
+}
+
+die() { printf '%s: %s\n' "$PROG" "$*" >&2; exit 1; }
+
+case "${1:-}" in
+    -h|--help|'') usage; [ -z "${1:-}" ] && exit 2 || exit 0 ;;
+esac
+
+JSON_FILE=$1
+RAW_KEY=${2:-$DEFAULT_HOST}
+
+[ -f "$JSON_FILE" ] || die "JSON file not found: $JSON_FILE"
+[ -r "$JSON_FILE" ] || die "JSON file not readable: $JSON_FILE"
+ABS_JSON=$(readlink -f "$JSON_FILE")
+
+# --- Derive cache key ---------------------------------------------------------
+case "$RAW_KEY" in
+    http://*|https://*)
+        # Strip scheme, then take authority (up to first / ? #)
+        no_scheme=${RAW_KEY#*://}
+        authority=${no_scheme%%/*}
+        authority=${authority%%\?*}
+        authority=${authority%%#*}
+        host=${authority%%:*}
+        case "$authority" in
+            *:*) port=${authority##*:} ;;
+            *)   port='' ;;
+        esac
+        # Lowercase
+        host=$(printf '%s' "$host" | tr '[:upper:]' '[:lower:]')
+        case "$port" in
+            ''|80|443) KEY=$host ;;
+            *)         KEY=$host:$port ;;
+        esac
+        ;;
+    *)
+        KEY=$(printf '%s' "$RAW_KEY" | tr '[:upper:]' '[:lower:]')
+        ;;
+esac
+
+[ -n "$KEY" ] || die "could not derive cache key from: $RAW_KEY"
+
+# --- Validate / normalize JSON ------------------------------------------------
+command -v python3 >/dev/null 2>&1 || die "python3 required for JSON validation"
+
+# Produce a normalized envelope; auto-wrap bare { "__schema": ... }.
+# Writes the normalized file to a temp path and prints its absolute path.
+NORM=$(mktemp -t kulala-schema-XXXXXX.json)
+trap 'rm -f "$NORM"' EXIT INT HUP TERM
+
+python3 - "$ABS_JSON" "$NORM" <<'PY'
+import json, sys, pathlib
+src = pathlib.Path(sys.argv[1])
+dst = pathlib.Path(sys.argv[2])
+try:
+    payload = json.loads(src.read_text(encoding='utf-8'))
+except json.JSONDecodeError as e:
+    sys.exit(f"invalid JSON in {src}: {e}")
+
+if isinstance(payload, dict) and isinstance(payload.get('data'), dict) and isinstance(payload['data'].get('__schema'), dict):
+    schema = payload['data']['__schema']
+    envelope = payload
+elif isinstance(payload, dict) and isinstance(payload.get('__schema'), dict):
+    schema = payload['__schema']
+    envelope = {'data': payload}
+else:
+    sys.exit("JSON does not contain a __schema (expected either {data:{__schema:...}} or {__schema:...})")
+
+# minimal sanity: queryType.name must be a non-empty string (parseIntrospectionSchema bails otherwise)
+qt = schema.get('queryType')
+if not (isinstance(qt, dict) and isinstance(qt.get('name'), str) and qt['name']):
+    sys.exit("introspection has no queryType.name; kulala-core would reject it")
+
+dst.write_text(json.dumps(envelope), encoding='utf-8')
+types = schema.get('types', [])
+user_types = [t for t in types if isinstance(t, dict) and isinstance(t.get('name'), str) and not t['name'].startswith('__')]
+print(f"  envelope OK: {len(types)} types ({len(user_types)} user), queryType={qt['name']}")
+PY
+
+# --- DB pre-flight ------------------------------------------------------------
+command -v sqlite3 >/dev/null 2>&1 || die "sqlite3 CLI required"
+[ -f "$DB" ] || die "kulala-core DB not found at $DB (run kulala once to initialize it)"
+
+# Verify migration 2 is applied (the graphql_schemas table)
+mig=$(sqlite3 -readonly "$DB" "SELECT COUNT(*) FROM schema_migrations WHERE version >= 2;" 2>/dev/null || echo 0)
+[ "$mig" -ge 1 ] || die "kulala.db missing migration >=2 (graphql_schemas table). Update kulala-core."
+
+# --- Backup -------------------------------------------------------------------
+TS=$(date +%Y%m%d-%H%M%S)
+BAK="${DB}.bak-${TS}"
+# Use sqlite3 .backup so we get a transactionally consistent copy
+sqlite3 "$DB" ".backup '$BAK'"
+echo "  backup:    $BAK"
+
+# --- Insert -------------------------------------------------------------------
+# Escape single quotes for literal embedding in SQL string literals.
+sql_quote() { printf "%s" "$1" | sed "s/'/''/g"; }
+ESC_KEY=$(sql_quote "$KEY")
+ESC_NORM=$(sql_quote "$NORM")
+
+# NOTE: readfile() returns a BLOB. Bun's bun:sqlite (used by kulala-core)
+# distinguishes BLOB from TEXT and will hand the column to JSON.parse as a
+# Uint8Array — which silently fails and causes the cache lookup to miss,
+# triggering a live introspection call. CAST(... AS TEXT) is the fix.
+sqlite3 "$DB" "INSERT OR REPLACE INTO graphql_schemas(host, schema_json, updated_at) VALUES('${ESC_KEY}', CAST(readfile('${ESC_NORM}') AS TEXT), datetime('now'));"
+
+# --- Verify -------------------------------------------------------------------
+# Confirm the row was stored as TEXT (not BLOB) — Bun's bun:sqlite handles them
+# differently and a BLOB will silently break completion.
+stored_type=$(sqlite3 "$DB" "SELECT typeof(schema_json) FROM graphql_schemas WHERE host='${ESC_KEY}';")
+if [ "$stored_type" != "text" ]; then
+    die "stored column type is '$stored_type', expected 'text' — kulala-core won't read this. Aborting."
+fi
+
+echo "  cache state:"
+sqlite3 -column -header "$DB" \
+    "SELECT host, typeof(schema_json) AS type, length(schema_json) AS bytes, updated_at FROM graphql_schemas ORDER BY updated_at DESC;" \
+    | sed 's/^/    /'
+
+cat <<EOF
+
+OK: cached schema for host '$KEY'.
+
+Next steps in Neovim:
+  1. Open your .http file.
+  2. :LspRestart kulala     (only needed if the buffer was open before this insert)
+  3. Place cursor inside a GRAPHQL operation body and trigger completion.
+
+Note: pressing <leader>Rg in Neovim will overwrite this row with a freshly
+fetched introspection from the live endpoint (if it's reachable and
+introspection is enabled). Re-run this script to restore.
+EOF

@@ -1,0 +1,101 @@
+#!/bin/sh
+# kulala-schema-check — inspect the kulala-core GraphQL schema cache.
+#
+# Usage:
+#   kulala-schema-check                 # list all cached schemas
+#   kulala-schema-check <host>          # check a specific cache key
+#   kulala-schema-check <url>           # derive cache key from URL, then check
+#
+# Exit codes:
+#   0  found / listing succeeded
+#   1  specified key not found
+#   2  usage error / DB missing
+
+set -eu
+
+PROG=${0##*/}
+DB="${XDG_DATA_HOME:-$HOME/.local/share}/kulala-core/kulala.db"
+
+usage() {
+    cat <<EOF
+$PROG — inspect kulala-core's GraphQL schema cache
+
+Usage: $PROG [<host>|<url>]
+
+  no arg     list all rows in graphql_schemas
+  <host>     case-insensitive exact key match
+  <url>      derive host:port (port stripped if 80/443) and match
+
+DB: $DB
+EOF
+}
+
+die() { printf '%s: %s\n' "$PROG" "$*" >&2; exit 2; }
+
+case "${1:-}" in
+    -h|--help) usage; exit 0 ;;
+esac
+
+command -v sqlite3 >/dev/null 2>&1 || die "sqlite3 CLI required"
+[ -f "$DB" ] || die "kulala-core DB not found at $DB"
+
+if [ $# -eq 0 ]; then
+    echo "cache: $DB"
+    rows=$(sqlite3 "$DB" "SELECT COUNT(*) FROM graphql_schemas;")
+    if [ "$rows" = "0" ]; then
+        echo "(empty)"
+        exit 0
+    fi
+    sqlite3 -column -header "$DB" \
+        "SELECT host, typeof(schema_json) AS type, length(schema_json) AS bytes, updated_at FROM graphql_schemas ORDER BY updated_at DESC;"
+    exit 0
+fi
+
+RAW=$1
+case "$RAW" in
+    http://*|https://*)
+        no_scheme=${RAW#*://}
+        authority=${no_scheme%%/*}
+        authority=${authority%%\?*}
+        authority=${authority%%#*}
+        host=${authority%%:*}
+        case "$authority" in
+            *:*) port=${authority##*:} ;;
+            *)   port='' ;;
+        esac
+        host=$(printf '%s' "$host" | tr '[:upper:]' '[:lower:]')
+        case "$port" in
+            ''|80|443) KEY=$host ;;
+            *)         KEY=$host:$port ;;
+        esac
+        ;;
+    *)
+        KEY=$(printf '%s' "$RAW" | tr '[:upper:]' '[:lower:]')
+        ;;
+esac
+
+sql_quote() { printf "%s" "$1" | sed "s/'/''/g"; }
+ESC=$(sql_quote "$KEY")
+
+found=$(sqlite3 "$DB" "SELECT COUNT(*) FROM graphql_schemas WHERE host = '$ESC';")
+if [ "$found" = "0" ]; then
+    printf 'host %s: NOT CACHED\n' "$KEY" >&2
+    echo
+    echo "Other cached hosts:" >&2
+    sqlite3 -list -separator '  ' "$DB" \
+        "SELECT host, length(schema_json) || ' bytes', updated_at FROM graphql_schemas ORDER BY host;" >&2 \
+        | sed 's/^/  /' >&2
+    exit 1
+fi
+
+printf 'host %s: CACHED\n' "$KEY"
+sqlite3 -column -header "$DB" \
+    "SELECT host, typeof(schema_json) AS type, length(schema_json) AS bytes, updated_at FROM graphql_schemas WHERE host = '$ESC';"
+
+# Sanity-warn if stored as BLOB — kulala-core won't read it.
+stored_type=$(sqlite3 "$DB" "SELECT typeof(schema_json) FROM graphql_schemas WHERE host='$ESC';")
+if [ "$stored_type" != "text" ]; then
+    printf 'WARNING: column is %s, expected text. kulala-core will silently fail to load this row.\n' "$stored_type" >&2
+    exit 1
+fi
+exit 0
