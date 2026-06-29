@@ -4,6 +4,7 @@ local settings = require 'config.settings'
 
 local no_parser_ft = {
   netrw = true,
+  text = true,
   DiffviewFiles = true,
   DiffviewFileHistory = true,
   PKGBUILD = true,
