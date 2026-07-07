@@ -10,6 +10,7 @@ local no_parser_ft = {
   PKGBUILD = true,
   systemd = true,
   log = true,
+  calendar = true,
 }
 -- Build hook: update parsers on install/update
 vim.api.nvim_create_autocmd('PackChanged', {
