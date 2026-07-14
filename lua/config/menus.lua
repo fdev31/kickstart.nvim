@@ -106,13 +106,15 @@ M.update_menu = {
   {
     text = '󰚰 Plugins (vim.pack)',
     handler = function()
-      vim.pack.update()
+      require('pack_ui').status()
+      -- vim.pack.update()
     end,
   },
   {
     text = '󰚰❗Force update (no confirm)',
     handler = function()
-      vim.pack.update(nil, { force = true })
+      require('pack_ui').update_all()
+      -- vim.pack.update(nil, { force = true })
     end,
   },
   {

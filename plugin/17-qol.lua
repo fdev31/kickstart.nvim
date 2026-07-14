@@ -7,6 +7,7 @@ require('lazyload').on_vim_enter(function()
     'https://github.com/kkharji/sqlite.lua',
     'https://github.com/danielfalk/smart-open.nvim',
     'https://github.com/catgoose/nvim-colorizer.lua',
+    'https://github.com/jtprogru/pack-ui.nvim',
   }
 
   require('guess-indent').setup()

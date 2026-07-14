@@ -71,7 +71,7 @@ require('lazyload').on_vim_enter(function()
 
   -- ty isn't managed by mason-lspconfig's auto-enable; turn it on explicitly.
   if settings.python_lsp == 'ty' or settings.python_lsp == 'both' then
-    vim.lsp.enable('ty')
+    vim.lsp.enable 'ty'
   end
 
   -- Formatters/linters: mason-tool-installer handles non-LSP tools
@@ -123,8 +123,12 @@ require('lazyload').on_vim_enter(function()
 
       -- Skip colorizer for buffers where color preview is noise.
       local colorizer_skip = {
-        log = true, gitcommit = true, help = true,
-        ['TelescopeResults'] = true, ['neo-tree'] = true, [''] = true,
+        log = true,
+        gitcommit = true,
+        help = true,
+        ['TelescopeResults'] = true,
+        ['neo-tree'] = true,
+        [''] = true,
       }
       if not colorizer_skip[vim.bo[event.buf].filetype] then
         require('colorizer').attach_to_buffer(event.buf)
