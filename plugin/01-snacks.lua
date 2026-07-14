@@ -8,6 +8,7 @@ local notif_opts = { wo = { wrap = true } }
 
 require('snacks').setup {
   picker = {
+    ui_select = true,
     sources = {
       notifications = {
         win = { preview = notif_opts },
@@ -34,7 +35,9 @@ require('snacks').setup {
       },
     },
   },
-  input = {},
+  input = {
+    enabled = true,
+  },
   notifier = { timeout = 3000 },
   scroll = {},
 }
