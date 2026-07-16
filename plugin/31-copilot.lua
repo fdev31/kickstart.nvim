@@ -94,4 +94,7 @@ companion_plugins.copilot = function()
   end
 end
 
-companion_plugins[settings.copilot_chat]()
+local backend = companion_plugins[settings.copilot_chat]
+if backend ~= nil then
+  backend()
+end
