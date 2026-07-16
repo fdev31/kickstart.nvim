@@ -23,7 +23,7 @@ M.is_buffer_tracked = function()
   end
 
   -- Use fugitive to check if file is tracked
-  local status = vim.fn.FugitiveStatusline()
+  local success, status = pcall(vim.fn.FugitiveStatusline)
   -- If the file is not tracked, status would typically be empty or indicate untracked
   return status ~= '' and not status:match '%%%-' -- %- indicates untracked
 end
