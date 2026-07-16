@@ -1,8 +1,7 @@
 -- vim:ts=2:sw=2:et:
 -- ON_EVENT InsertEnter: AI copilot
-local settings = require('config.settings')
-local use_codecompanion = settings.copilot_chat == 'codecompanion'
-local use_model = settings.copilot_model
+local settings = require 'config.settings'
+local companion_model = settings.copilot_model
 
 -- Register copilot as a blink.cmp source
 settings.cmp_providers.copilot = {
@@ -16,25 +15,26 @@ table.insert(settings.cmp_sources, 'copilot')
 vim.api.nvim_create_autocmd('InsertEnter', {
   once = true,
   callback = function()
-    vim.pack.add({
+    vim.pack.add {
       'https://github.com/fang2hou/blink-copilot',
       'https://github.com/zbirenbaum/copilot.lua',
-    })
+    }
 
-    require('copilot').setup({ copilot_node_command = vim.fn.exepath('node') })
+    require('copilot').setup { copilot_node_command = vim.fn.exepath 'node' }
   end,
 })
 
--- CopilotChat or CodeCompanion (loaded on command)
-if use_codecompanion then
+local companion_plugins = {}
+-- CODE COMPANION
+companion_plugins.codecompanion = function()
   table.insert(settings.cmp_sources, 'codecompanion')
-  for _, cmd in ipairs({ 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' }) do
+  for _, cmd in ipairs { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' } do
     vim.api.nvim_create_user_command(cmd, function(opts)
       vim.api.nvim_del_user_command(cmd)
-      vim.pack.add({
+      vim.pack.add {
         'https://github.com/olimorris/codecompanion.nvim',
-      })
-      require('codecompanion').setup({
+      }
+      require('codecompanion').setup {
         log_level = 'DEBUG',
         strategies = {
           chat = { adapter = 'copilot' },
@@ -43,15 +43,18 @@ if use_codecompanion then
         adapters = {
           copilot = function()
             return require('codecompanion.adapters').extend('copilot', {
-              schema = { model = { default = use_model } },
+              schema = { model = { default = companion_model } },
             })
           end,
         },
-      })
+      }
       vim.cmd(cmd .. ' ' .. (opts.args or ''))
     end, { nargs = '*' })
   end
-else
+end
+
+-- COPILOT CHAT
+companion_plugins.copilot = function()
   vim.api.nvim_create_autocmd('BufEnter', {
     pattern = 'copilot-*',
     callback = function()
@@ -61,15 +64,15 @@ else
     end,
   })
 
-  for _, cmd in ipairs({ 'CopilotChat', 'CopilotChatOptimize' }) do
+  for _, cmd in ipairs { 'CopilotChat', 'CopilotChatOptimize' } do
     vim.api.nvim_create_user_command(cmd, function(opts)
       vim.api.nvim_del_user_command(cmd)
-      vim.pack.add({
+      vim.pack.add {
         { src = 'https://github.com/CopilotC-Nvim/CopilotChat.nvim', version = 'main' },
-      })
-      require('CopilotChat').setup({
+      }
+      require('CopilotChat').setup {
         agent = 'copilot',
-        model = use_model,
+        model = companion_model,
         temperature = 0.1,
         window = {
           layout = 'vertical',
@@ -85,8 +88,10 @@ else
         },
         auto_fold = true,
         separator = ' ──',
-      })
+      }
       vim.cmd(cmd .. ' ' .. (opts.args or ''))
     end, { nargs = '*' })
   end
 end
+
+companion_plugins[settings.copilot_chat]()
