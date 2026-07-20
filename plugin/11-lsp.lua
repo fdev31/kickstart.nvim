@@ -50,7 +50,6 @@ require('lazyload').on_vim_enter(function()
   require('mason-lspconfig').setup {
     automatic_enable = { exclude = py_exclude },
     ensure_installed = {
-      'textlsp',
       'harper_ls',
       'dprint',
       'typos_lsp',
