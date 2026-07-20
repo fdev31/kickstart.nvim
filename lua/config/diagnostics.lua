@@ -86,6 +86,23 @@ return {
 
     vim.diagnostic.handlers.signs = new_signs_handler
 
+    -- Namespace used only for the deduped float; no gutter/virtual-text side-effects.
+    local float_ns = vim.api.nvim_create_namespace 'diag_float_dedup'
+    vim.diagnostic.config({ signs = false, virtual_text = false, underline = false }, float_ns)
+
+    local function format_diagnostic(diagnostic)
+      local prefix = '󰄳 '
+      local origin = diagnostic.source or ''
+      origin = lib.strip(origin)
+      local icon = get_origin_icon(origin)
+      if icon then
+        prefix = icon
+        origin = ''
+      end
+      local suffix = (origin and origin ~= '' and string.format(' (%s)', origin)) or ''
+      return string.format('%s%s%s', prefix, diagnostic.message, suffix)
+    end
+
     -- INFO: show diagnostic after a delay
     vim.api.nvim_create_autocmd('CursorHold', {
       callback = function()
@@ -99,25 +116,34 @@ return {
             return
           end
         end
+
+        local bufnr = vim.api.nvim_get_current_buf()
+        local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+        local all = vim.diagnostic.get(bufnr, { lnum = lnum })
+        if #all == 0 then
+          return
+        end
+
+        -- Deduplicate by message text across all clients/namespaces.
+        local seen, deduped = {}, {}
+        for _, d in ipairs(all) do
+          if not seen[d.message] then
+            seen[d.message] = true
+            deduped[#deduped + 1] = d
+          end
+        end
+
+        -- Populate the silent namespace and open the float from it only.
+        -- set + reset happen in the same synchronous callback so the UI
+        -- never sees the intermediate gutter state.
+        vim.diagnostic.set(float_ns, bufnr, deduped)
         _, settings._diag_window = vim.diagnostic.open_float(nil, {
+          namespace = float_ns,
           scope = 'line',
           header = '',
-          format = function(diagnostic)
-            local prefix = '󰄳 '
-            local origin = diagnostic.source or ''
-            -- Strip origin for newlines and blanks
-            origin = lib.strip(origin)
-
-            local icon = get_origin_icon(origin)
-            if icon then
-              prefix = icon
-              origin = ''
-            end
-
-            local suffix = (origin and origin ~= '' and string.format(' (%s)', origin)) or ''
-            return string.format('%s%s%s', prefix, diagnostic.message, suffix)
-          end,
+          format = format_diagnostic,
         })
+        vim.diagnostic.reset(float_ns, bufnr)
       end,
     })
 
