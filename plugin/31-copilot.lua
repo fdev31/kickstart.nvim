@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd('InsertEnter', {
   callback = function()
     vim.pack.add {
       'https://github.com/fang2hou/blink-copilot',
-      "https://github.com/copilotlsp-nvim/copilot-lsp",
       'https://github.com/zbirenbaum/copilot.lua',
     }
 
