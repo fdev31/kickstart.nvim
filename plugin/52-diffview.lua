@@ -3,7 +3,7 @@
 vim.api.nvim_create_user_command('DiffviewOpen', function(opts)
   vim.api.nvim_del_user_command 'DiffviewOpen'
   vim.pack.add {
-    'https://github.com/sindrets/diffview.nvim',
+    'https://github.com/dlyongemallo/diffview-plus.nvim',
   }
   local actions = require 'diffview.actions'
   require('diffview').setup {
