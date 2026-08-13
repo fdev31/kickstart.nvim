@@ -8,6 +8,12 @@ require('lazyload').on_vim_enter(function()
     'https://github.com/danielfalk/smart-open.nvim',
     'https://github.com/catgoose/nvim-colorizer.lua',
     'https://github.com/jtprogru/pack-ui.nvim',
+    'https://github.com/karb94/neoscroll.nvim',
+  }
+
+  require('neoscroll').setup {
+    duration_multiplier = 0.5,
+    performance_mode = false,
   }
 
   require('guess-indent').setup()
