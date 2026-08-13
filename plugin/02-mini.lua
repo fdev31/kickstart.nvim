@@ -36,6 +36,7 @@ vim.pack.add {
 }
 
 vim.api.nvim_set_hl(0, 'MiniCursorword', { link = 'LspReferenceText' })
+require('mini.animate').setup { cursor = { enable = false } }
 require('mini.cursorword').setup { delay = 300 }
 require('mini.align').setup {
   mappings = {
