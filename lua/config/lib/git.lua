@@ -17,11 +17,14 @@ M.has_fugitive_diff = function()
 end
 
 M.close_diff_view = function()
-  if package.loaded.diffview then
-    if next(require('diffview.lib').views) == nil then
-      return false
-    else
-      package.loaded.diffview.close()
+  if package.loaded.differ then
+    local active
+      = require('differ.merge').current()
+      or require('differ.panel').current()
+      or require('differ.history').current()
+      or require('differ').active_view()
+    if active then
+      require('differ.command').close()
       return true
     end
   end
