@@ -5,7 +5,6 @@ vim.api.nvim_create_user_command('DiffviewOpen', function(opts)
   vim.pack.add {
     'https://github.com/dlyongemallo/diffview-plus.nvim',
   }
-  local actions = require 'diffview.actions'
   require('diffview').setup {
     view = {
       merge_tool = { layout = 'diff3_mixed' },
