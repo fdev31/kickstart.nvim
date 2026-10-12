@@ -61,7 +61,7 @@ local diagnostic_signs = {
 return {
   leader = '²',
   deduplicate_diagnostics = true,
-  diff_command = 'Differ',
+  diff_command = 'CodeDiff --side-by-side',
   gitsigns = {
     add = { text = '▋' },
   },

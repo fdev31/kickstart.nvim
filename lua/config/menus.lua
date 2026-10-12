@@ -129,7 +129,7 @@ M.update_menu = {
 }
 
 M.main_menu = {
-  { text = ' Differ ▶', options = M.git_compare_what },
+  { text = ' DiffView ▶', options = M.git_compare_what },
   { text = ' Runnables ▶', cmd = 'OverseerRun' },
   { text = ' Git ▶', options = M.git_menu },
   { text = ' Copy diff', cmd = '!git diff "%" | wl-copy' },
