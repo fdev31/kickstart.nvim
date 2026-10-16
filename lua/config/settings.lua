@@ -74,8 +74,8 @@ return {
   treesitter_languages = advanced_syntax_support,
   -- AI stuff
   ai_completion = 'minuet', -- file completion using blink (eg:"copilot" or "minuet")
-  copilot_chat = 'codecompanion', -- "codecompanion" or "copilot" (copilotchat)
-  copilot_model = 'qwen3.8-27b', -- model name for CopilotChat / CodeCompanion
+  ai_chat = 'codecompanion', -- "codecompanion" or "copilot" (copilotchat)
+  ai_model = 'qwen3.8-27b', -- model name for CopilotChat / CodeCompanion
   llama_url =  "http://gamix:8080",
   -- completion settings
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
