@@ -9,6 +9,7 @@
 local M = {}
 
 local vim_enter_queue = {}
+local insert_enter_queue = {}
 local override_queue = {}
 
 local function drain(queue)
@@ -50,6 +51,16 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd('InsertEnter', {
+  once = true,
+  callback = function()
+    drain(insert_enter_queue)
+    insert_enter_queue = nil
+    drain_override()
+  end,
+})
+
+
 --- Queue a function to run at VimEnter (after all plugin/ files have been sourced).
 --- If VimEnter has already fired, executes immediately (sync) or via vim.schedule (async).
 ---@param fn function
@@ -58,6 +69,21 @@ function M.on_vim_enter(fn, opts)
   local sync = opts and opts.sync or false
   if vim_enter_queue then
     table.insert(vim_enter_queue, { fn = fn, sync = sync })
+  elseif sync then
+    fn()
+  else
+    vim.schedule(fn)
+  end
+end
+
+--- Queue a function to run at InsertEnter (after all plugin/ files have been sourced).
+--- If InsertEnter has already fired, executes immediately (sync) or via vim.schedule (async).
+---@param fn function
+---@param opts? { sync: boolean }
+function M.on_insert_enter(fn, opts)
+  local sync = opts and opts.sync or false
+  if insert_enter_queue then
+    table.insert(insert_enter_queue, { fn = fn, sync = sync })
   elseif sync then
     fn()
   else

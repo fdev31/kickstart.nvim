@@ -4,10 +4,8 @@
 -- this file just configures blink.cmp on first InsertEnter.
 local settings = require('config.settings')
 
-vim.api.nvim_create_autocmd('InsertEnter', {
-  once = true,
-  callback = function()
-
+require('lazyload').on_insert_enter(
+  function()
     require('blink.cmp').setup({
       keymap = {
         preset = 'super-tab',
@@ -39,5 +37,4 @@ vim.api.nvim_create_autocmd('InsertEnter', {
       },
       signature = { enabled = true },
     })
-  end,
-})
+  end)
