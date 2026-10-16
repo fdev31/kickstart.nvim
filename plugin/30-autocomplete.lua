@@ -7,15 +7,23 @@ local settings = require('config.settings')
 vim.api.nvim_create_autocmd('InsertEnter', {
   once = true,
   callback = function()
+
     require('blink.cmp').setup({
       keymap = {
         preset = 'super-tab',
+
       },
       appearance = {
         nerd_font_variant = 'mono',
       },
       completion = {
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        documentation = {
+          auto_show = false,
+          auto_show_delay_ms = 500,
+        },
+        trigger = {
+          prefetch_on_insert = false,
+        } ,
       },
       sources = {
         default = settings.cmp_sources,
