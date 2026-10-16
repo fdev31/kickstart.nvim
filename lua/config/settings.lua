@@ -49,15 +49,6 @@ local autoformat_opts = {
   },
 }
 
-local diagnostic_signs = {
-  text = {
-    [vim.diagnostic.severity.ERROR] = '󰅚',
-    [vim.diagnostic.severity.WARN] = '󰀪',
-    [vim.diagnostic.severity.INFO] = '󰋽',
-    [vim.diagnostic.severity.HINT] = '󰌶',
-  },
-}
-
 return {
   leader = '²',
   deduplicate_diagnostics = true,
@@ -86,7 +77,14 @@ return {
   diagnostic_config = {
     underline = { severity = vim.diagnostic.severity.ERROR },
     virtual_text = false,
-    signs = diagnostic_signs,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '󰅚',
+        [vim.diagnostic.severity.WARN] = '󰀪',
+        [vim.diagnostic.severity.INFO] = '󰋽',
+        [vim.diagnostic.severity.HINT] = '󰌶',
+      },
+    },
     update_in_insert = false,
     float = vim.tbl_deep_extend('force', {
       show_header = false,
