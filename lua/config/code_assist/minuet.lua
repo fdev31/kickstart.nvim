@@ -1,7 +1,7 @@
-local settings = require 'config.settings'
 
 return {
     completion = function()
+        local settings = require 'config.settings'
         local minuet_provider = "openai_compatible"
         vim.pack.add {
             'https://github.com/milanglacier/minuet-ai.nvim',
@@ -28,6 +28,7 @@ return {
                     model = settings.ai_model,
                     end_point = settings.llama_url .. '/v1/chat/completions',
                     api_key = settings.llama_key,
+                    name = 'local llama',
                     stream = false,
                     optional = {
                         reasoning_effort = 'low'
