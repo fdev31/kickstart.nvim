@@ -27,7 +27,7 @@ return {
                 [minuet_provider] = {
                     model = settings.ai_model,
                     end_point = settings.llama_url .. '/v1/chat/completions',
-                    api_key = 'OPENROUTER_API_KEY',
+                    api_key = settings.llama_key,
                     stream = false,
                     optional = {
                         reasoning_effort = 'low'

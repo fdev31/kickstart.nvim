@@ -30,7 +30,7 @@ return {
               formatted_name = 'llama.cpp',
               env = {
                 url = settings.llama_url,
-                api_key = 'sk-no-key',
+                api_key = settings.llama_key,
                 chat_url = '/v1/chat/completions',
               },
               schema = {

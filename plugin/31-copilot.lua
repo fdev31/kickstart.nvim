@@ -4,10 +4,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
     local settings = require 'config.settings'
     if settings.ai_chat then
-      require('plugin.code_assist.' .. settings.ai_chat).assistant()
+      require('config.code_assist.' .. settings.ai_chat).assistant()
     end
     if settings.ai_completion then
-      require('plugin.code_assist.' .. settings.ai_completion).completion()
+      require('config.code_assist.' .. settings.ai_completion).completion()
     end
   end
 })
