@@ -2,20 +2,23 @@
 -- ON_CMD: workspace management
 local _workspaces_loaded = false
 function _G.ensure_workspaces_loaded()
-  if _workspaces_loaded then return end
+  if _workspaces_loaded then
+    return
+  end
   _workspaces_loaded = true
-  for _, c in ipairs({ 'WorkspacesOpen', 'WorkspacesAdd', 'WorkspacesList', 'WorkspacesRemove' }) do
+  for _, c in ipairs { 'WorkspacesOpen', 'WorkspacesAdd', 'WorkspacesList', 'WorkspacesRemove' } do
     pcall(vim.api.nvim_del_user_command, c)
   end
-  vim.pack.add({
+  local lib = require 'config.lib.core'
+  lib.add_package {
     'https://github.com/natecraddock/workspaces.nvim',
-  })
+  }
   pcall(require('telescope').load_extension, 'workspaces')
-  require('workspaces').setup({
+  require('workspaces').setup {
     hooks = {
       open = { 'Telescope find_files' },
     },
-  })
+  }
 end
 
 require('lazyload').on_lazy_commands({
@@ -23,6 +26,4 @@ require('lazyload').on_lazy_commands({
   'WorkspacesAdd',
   'WorkspacesList',
   'WorkspacesRemove',
-},
-  _G.ensure_workspaces_loaded
-)
+}, _G.ensure_workspaces_loaded)

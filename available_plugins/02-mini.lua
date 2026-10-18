@@ -31,7 +31,7 @@ local render_statusline = function()
   return ret or location
 end
 
-vim.pack.add {
+lib.add_package {
   'https://github.com/echasnovski/mini.nvim',
 }
 

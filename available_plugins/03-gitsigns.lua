@@ -1,12 +1,13 @@
 -- vim:ts=2:sw=2:et:
 -- EAGER: sign column + required by keymaps
-local settings = require('config.settings')
+local settings = require 'config.settings'
+local lib = require 'config.lib.core'
 
-vim.pack.add({
+lib.add_package {
   'https://github.com/lewis6991/gitsigns.nvim',
-})
+}
 
-require('gitsigns').setup({
+require('gitsigns').setup {
   signs = settings.gitsigns,
   current_line_blame = true,
   signs_staged_enable = true,
@@ -14,7 +15,7 @@ require('gitsigns').setup({
   signcolumn = true,
   sign_priority = 100,
   on_attach = function(bufnr)
-    local gitsigns = require('gitsigns')
+    local gitsigns = require 'gitsigns'
 
     local function kmap(mode, l, r, opts)
       opts = opts or {}
@@ -27,14 +28,14 @@ require('gitsigns').setup({
     -- Navigation
     kmap('n', ']c', function()
       if vim.wo.diff then
-        vim.cmd.normal({ ']c', bang = true })
+        vim.cmd.normal { ']c', bang = true }
       else
         gitsigns.nav_hunk('next', nav_opts)
       end
     end, { desc = 'Jump to next git [c]hange' })
     kmap('n', '[c', function()
       if vim.wo.diff then
-        vim.cmd.normal({ '[c', bang = true })
+        vim.cmd.normal { '[c', bang = true }
       else
         gitsigns.nav_hunk('prev', nav_opts)
       end
@@ -42,10 +43,10 @@ require('gitsigns').setup({
 
     -- Actions (visual)
     kmap('v', '<leader>hs', function()
-      gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+      gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
     end, { desc = 'git [s]tage hunk' })
     kmap('v', '<leader>hr', function()
-      gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+      gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
     end, { desc = 'git [r]eset hunk' })
     -- Actions (normal)
     kmap('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
@@ -56,10 +57,10 @@ require('gitsigns').setup({
     kmap('n', '<leader>hb', gitsigns.blame_line, { desc = 'git [b]lame line' })
     kmap('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
     kmap('n', '<leader>hD', function()
-      gitsigns.diffthis('@')
+      gitsigns.diffthis '@'
     end, { desc = 'git [D]iff against last commit' })
     -- Toggles
     kmap('n', '<leader>tB', gitsigns.toggle_current_line_blame, { desc = '[b]lame inline (git)' })
     kmap('n', '<leader>tx', gitsigns.preview_hunk_inline, { desc = 'show missing [x] (git)' })
   end,
-})
+}

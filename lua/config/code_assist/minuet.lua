@@ -2,7 +2,8 @@ return {
   completion = function()
     local settings = require 'config.settings'
     local minuet_provider = 'openai_fim_compatible'
-    vim.pack.add {
+    local lib = require 'config.lib.core'
+    lib.add_package {
       'https://github.com/milanglacier/minuet-ai.nvim',
     }
     settings.cmp_providers.minuet = {

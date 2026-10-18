@@ -6,5 +6,6 @@
 -- Fugitive: load at VimEnter so FugitiveStatusline() is available
 -- before first BufWritePre (used by conform's is_buffer_tracked check)
 require('lazyload').on_vim_enter(function()
-  vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
+  local lib = require 'config.lib.core'
+  lib.add_package { 'https://github.com/tpope/vim-fugitive' }
 end)

@@ -3,5 +3,6 @@
 require('lazyload').on_lazy_commands({
   'VimBeBetter',
 }, function(opts)
-  vim.pack.add({'https://github.com/szymonwilczek/vim-be-better'})
+  local lib = require 'config.lib.core'
+  lib.add_package { 'https://github.com/szymonwilczek/vim-be-better' }
 end)

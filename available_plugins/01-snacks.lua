@@ -1,6 +1,7 @@
 -- vim:ts=2:sw=2:et:
+local lib = require 'config.lib.core'
 -- EAGER: core infrastructure plugin, many depend on it
-vim.pack.add {
+lib.add_package {
   'https://github.com/folke/snacks.nvim',
 }
 

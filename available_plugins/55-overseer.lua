@@ -1,10 +1,11 @@
 -- vim:ts=2:sw=2:et:
+local lib = require 'config.lib.core'
 
 require('lazyload').on_lazy_commands({
   'OverseerRun',
   'OverseerToggle',
   'OverseerOpen',
 }, function()
-  vim.pack.add { 'https://github.com/stevearc/overseer.nvim' }
+  lib.add_package { 'https://github.com/stevearc/overseer.nvim' }
   require('overseer').setup {}
 end)

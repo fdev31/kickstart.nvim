@@ -1,6 +1,7 @@
 -- vim:ts=2:sw=2:et:
 -- Treesitter: parser installation + highlighting/indentation
 local settings = require 'config.settings'
+local lib = require 'config.lib.core'
 
 local no_parser_ft = {
   netrw = true,
@@ -22,7 +23,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end,
 })
 
-vim.pack.add {
+lib.add_package {
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
 }
 

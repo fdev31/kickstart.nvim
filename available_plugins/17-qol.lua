@@ -1,7 +1,8 @@
 -- vim:ts=2:sw=2:et:
 -- DEFERRED: quality of life plugins
 require('lazyload').on_vim_enter(function()
-  vim.pack.add {
+  local lib = require 'config.lib.core'
+  lib.add_package {
     'https://github.com/NMAC427/guess-indent.nvim',
     'https://github.com/chentoast/marks.nvim',
     'https://github.com/kkharji/sqlite.lua',

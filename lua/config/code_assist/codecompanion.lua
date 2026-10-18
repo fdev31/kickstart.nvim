@@ -1,7 +1,8 @@
 local settings = require 'config.settings'
 return {
   assistant = function()
-    vim.pack.add {
+    local lib = require 'config.lib.core'
+    lib.add_package {
       'https://github.com/nvim-lua/plenary.nvim',
       'https://github.com/olimorris/codecompanion.nvim',
     }

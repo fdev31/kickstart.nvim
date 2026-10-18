@@ -1,12 +1,13 @@
 -- vim:ts=2:sw=2:et:
+local lib = require 'config.lib.core'
 -- Filetype detection (runs eagerly, but plugins are lazy)
-vim.filetype.add({
+vim.filetype.add {
   pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
   extension = {
     wiki = 'confluence_wiki',
     hl = 'hyprlang',
   },
-})
+}
 
 -- Register custom treesitter parser for confluence_wiki (new nvim-treesitter main branch API)
 -- Inject at startup so after/ftplugin/confluence_wiki.lua can trigger install immediately,
@@ -42,22 +43,22 @@ vim.api.nvim_create_autocmd('FileType', {
       return
     end
     vim.b[ev.buf].hyprlang_started = true
-    vim.lsp.start({
+    vim.lsp.start {
       name = 'hyprlang',
-      cmd = { vim.fn.stdpath('data') .. '/mason/packages/hyprls/hyprls' },
+      cmd = { vim.fn.stdpath 'data' .. '/mason/packages/hyprls/hyprls' },
       root_dir = vim.fn.getcwd(),
-    })
+    }
   end,
 })
 
 -- Log highlight (deferred, not filetype-dependent)
 require('lazyload').on_vim_enter(function()
-  vim.pack.add({
+  lib.add_package {
     'https://github.com/fei6409/log-highlight.nvim',
-  })
-  require('log-highlight').setup({
+  }
+  require('log-highlight').setup {
     pattern = { 'xdev=.*' },
-  })
+  }
 end)
 
 -- PlantUML
@@ -65,19 +66,19 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'plantuml',
   once = true,
   callback = function()
-    vim.pack.add({
+    lib.add_package {
       'https://github.com/aklt/plantuml-syntax',
       'https://gitlab.com/itaranto/plantuml.nvim',
-    })
+    }
     vim.opt_local.spell = false
     vim.api.nvim_set_hl(0, 'PlantumlColonLine', { link = '@character' })
-    require('plantuml').setup({
+    require('plantuml').setup {
       renderer = {
         type = 'imv',
         options = { dark_mode = false, format = nil },
       },
       render_on_write = true,
-    })
+    }
   end,
 })
 
@@ -86,6 +87,6 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'just',
   once = true,
   callback = function()
-    vim.pack.add({ 'https://github.com/NoahTheDuke/vim-just' })
+    lib.add_package { 'https://github.com/NoahTheDuke/vim-just' }
   end,
 })

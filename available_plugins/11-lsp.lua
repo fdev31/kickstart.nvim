@@ -1,6 +1,7 @@
 -- vim:ts=2:sw=2:et:
 -- EAGER: LuaSnip must be on runtimepath early (needed by python.nvim etc.)
 -- Build hook: compile jsregexp on install/update
+local lib = require 'config.lib.core'
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
     if ev.data.spec.name == 'LuaSnip' and (ev.data.kind == 'install' or ev.data.kind == 'update') then
@@ -10,7 +11,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
     end
   end,
 })
-vim.pack.add {
+lib.add_package {
   'https://github.com/L3MON4D3/LuaSnip',
 }
 
@@ -18,7 +19,7 @@ vim.pack.add {
 require('lazyload').on_vim_enter(function()
   local settings = require 'config.settings'
 
-  vim.pack.add {
+  lib.add_package {
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/mason-org/mason-lspconfig.nvim',

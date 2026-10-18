@@ -3,20 +3,23 @@
 local loaded = false
 
 local function load_neotree()
-  if loaded then return end
+  if loaded then
+    return
+  end
   loaded = true
+  local lib = require 'config.lib.core'
 
-  vim.pack.add({
+  lib.add_package {
     'https://github.com/MunifTanjim/nui.nvim',
     'https://github.com/nvim-neo-tree/neo-tree.nvim',
-  })
+  }
 
-  local events = require('neo-tree.events')
+  local events = require 'neo-tree.events'
   local function on_move(data)
     Snacks.rename.on_rename_file(data.source, data.destination)
   end
 
-  require('neo-tree').setup({
+  require('neo-tree').setup {
     log_level = 'error',
     filesystem = {
       window = {
@@ -35,10 +38,10 @@ local function load_neotree()
       { event = events.FILE_MOVED, handler = on_move },
       { event = events.FILE_RENAMED, handler = on_move },
     },
-  })
+  }
 end
 
 vim.keymap.set('n', '<C-n>', function()
   load_neotree()
-  vim.cmd('Neotree reveal')
+  vim.cmd 'Neotree reveal'
 end, { desc = 'NeoTree reveal', silent = true })

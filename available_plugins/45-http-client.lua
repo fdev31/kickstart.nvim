@@ -4,15 +4,16 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'http', 'rest' },
   once = true,
   callback = function(ev)
-    vim.pack.add({
+    local lib = require 'config.lib.core'
+    lib.add_package {
       'https://github.com/mistweaverco/kulala.nvim',
-    })
+    }
 
-    require('kulala').setup({
+    require('kulala').setup {
       global_keymaps = true,
       global_keymaps_prefix = '<leader>r',
       kulala_keymaps_prefix = '',
-    })
+    }
 
     -- kulala.setup() registers a FileType autocmd to attach its LSP, but that
     -- autocmd is registered AFTER the FileType event for the current buffer

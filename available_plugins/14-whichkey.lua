@@ -1,13 +1,14 @@
 -- vim:ts=2:sw=2:et:
 -- DEFERRED: key hints popup
 require('lazyload').on_vim_enter(function()
-  local settings = require('config.settings')
+  local lib = require 'config.lib.core'
+  local settings = require 'config.settings'
 
-  vim.pack.add({
+  lib.add_package {
     'https://github.com/folke/which-key.nvim',
-  })
+  }
 
-  require('which-key').setup({
+  require('which-key').setup {
     delay = 100,
     win = settings.popup_style,
     icons = {
@@ -55,5 +56,5 @@ require('lazyload').on_vim_enter(function()
       { '<leader>v', group = 'Venv' },
       { '<leader>w', group = 'Workspaces' },
     },
-  })
+  }
 end)
