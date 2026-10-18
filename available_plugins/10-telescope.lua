@@ -13,7 +13,7 @@ require('lazyload').on_vim_enter(function()
     end,
   })
 
-  lib.add_package {
+  lib.plugin {
     'https://github.com/nvim-lua/plenary.nvim',
     'https://github.com/nvim-tree/nvim-web-devicons',
     'https://github.com/nvim-telescope/telescope-fzf-native.nvim',

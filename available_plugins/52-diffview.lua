@@ -4,7 +4,7 @@ local lib = require 'config.lib.core'
 
 require('lazyload').on_lazy_commands({ 'CodeDiff' }, function()
   settings.diff_command = 'DiffviewToggle'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/dlyongemallo/diffview-plus.nvim',
   }
   require('diffview').setup {

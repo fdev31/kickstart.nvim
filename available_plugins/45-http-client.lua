@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('FileType', {
   once = true,
   callback = function(ev)
     local lib = require 'config.lib.core'
-    lib.add_package {
+    lib.plugin {
       'https://github.com/mistweaverco/kulala.nvim',
     }
 

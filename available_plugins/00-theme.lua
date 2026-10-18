@@ -1,7 +1,7 @@
 -- vim:ts=2:sw=2:et:
 -- EAGER: colorscheme must load before first paint
 local lib = require 'config.lib.core'
-lib.add_package {
+lib.plugin {
   'https://github.com/Mofiqul/dracula.nvim',
 }
 

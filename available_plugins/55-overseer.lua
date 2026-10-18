@@ -6,6 +6,6 @@ require('lazyload').on_lazy_commands({
   'OverseerToggle',
   'OverseerOpen',
 }, function()
-  lib.add_package { 'https://github.com/stevearc/overseer.nvim' }
+  lib.plugin { 'https://github.com/stevearc/overseer.nvim' }
   require('overseer').setup {}
 end)

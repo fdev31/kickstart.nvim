@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'codecompanion' },
   once = true,
   callback = function()
-    lib.add_package {
+    lib.plugin {
       'https://github.com/MeanderingProgrammer/render-markdown.nvim',
     }
   end,
@@ -21,7 +21,7 @@ function _G.ensure_telekasten_loaded()
   end
   _telekasten_loaded = true
   pcall(vim.api.nvim_del_user_command, 'Telekasten')
-  lib.add_package {
+  lib.plugin {
     'https://github.com/renerocksai/telekasten.nvim',
   }
   require('telekasten').setup {

@@ -11,7 +11,7 @@ return {
     }
     table.insert(settings.cmp_sources, 'copilot')
     local lib = require 'config.lib.core'
-    lib.add_package {
+    lib.plugin {
       'https://github.com/fang2hou/blink-copilot',
       'https://github.com/zbirenbaum/copilot.lua',
     }

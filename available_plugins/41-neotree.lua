@@ -9,7 +9,7 @@ local function load_neotree()
   loaded = true
   local lib = require 'config.lib.core'
 
-  lib.add_package {
+  lib.plugin {
     'https://github.com/MunifTanjim/nui.nvim',
     'https://github.com/nvim-neo-tree/neo-tree.nvim',
   }

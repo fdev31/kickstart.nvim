@@ -2,7 +2,7 @@
 -- ON_CMD: PlatformIO
 require('lazyload').on_lazy_commands({ 'Pioinit', 'Piorun', 'Piocmd', 'Piomon', 'Piodebug', 'Piolib' }, function()
   local lib = require 'config.lib.core'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/akinsho/nvim-toggleterm.lua',
     'https://github.com/anurag3301/nvim-platformio.lua',
   }

@@ -3,7 +3,7 @@ return {
     local settings = require 'config.settings'
     local minuet_provider = 'openai_fim_compatible'
     local lib = require 'config.lib.core'
-    lib.add_package {
+    lib.plugin {
       'https://github.com/milanglacier/minuet-ai.nvim',
     }
     settings.cmp_providers.minuet = {

@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'python',
   once = true,
   callback = function()
-    lib.add_package {
+    lib.plugin {
       'https://github.com/nvim-lua/plenary.nvim',
       'https://github.com/nvim-neotest/nvim-nio',
       'https://github.com/linux-cultist/venv-selector.nvim',
@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'python', 'lua', 'javascript', 'typescript', 'html', 'css', 'vim', 'rust', 'go' },
   once = true,
   callback = function()
-    lib.add_package {
+    lib.plugin {
       'https://github.com/andymass/vim-matchup',
     }
     local mod = require 'match-up'

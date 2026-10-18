@@ -4,7 +4,7 @@ require('lazyload').on_vim_enter(function()
   local settings = require 'config.settings'
   local lib = require 'config.lib.core'
 
-  lib.add_package {
+  lib.plugin {
     'https://github.com/stevearc/conform.nvim',
   }
 

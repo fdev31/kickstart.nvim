@@ -3,7 +3,7 @@
 
 require('lazyload').on_insert_enter(function()
   local lib = require 'config.lib.core'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/windwp/nvim-autopairs',
   }
 

@@ -2,7 +2,7 @@
 -- DEFERRED: code navigation and enhancement plugins
 require('lazyload').on_vim_enter(function()
   local lib = require 'config.lib.core'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/stevearc/aerial.nvim',
     'https://github.com/m-demare/hlargs.nvim',
     'https://github.com/Wansmer/treesj',

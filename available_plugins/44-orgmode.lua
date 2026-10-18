@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'org',
   once = true,
   callback = function()
-    lib.add_package {
+    lib.plugin {
       'https://github.com/akinsho/org-bullets.nvim',
       'https://github.com/nvim-orgmode/orgmode',
     }

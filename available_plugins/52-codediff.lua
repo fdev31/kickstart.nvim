@@ -5,7 +5,7 @@ local lib = require 'config.lib.core'
 settings.diff_command = 'CodeDiff --side-by-side'
 
 require('lazyload').on_lazy_commands({ 'CodeDiff' }, function()
-  lib.add_package {
+  lib.plugin {
     'https://github.com/MunifTanjim/nui.nvim',
     'https://github.com/esmuellert/codediff.nvim',
   }

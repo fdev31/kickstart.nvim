@@ -2,7 +2,7 @@
 -- DEFERRED: custom menus
 require('lazyload').on_vim_enter(function()
   local lib = require 'config.lib.core'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/fdev31/menus.nvim',
   }
 end)

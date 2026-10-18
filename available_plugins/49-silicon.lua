@@ -1,7 +1,7 @@
 -- vim:ts=2:sw=2:et:
 require('lazyload').on_lazy_commands({ 'Silicon' }, function()
   local lib = require 'config.lib.core'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/michaelrommel/nvim-silicon',
   }
   require('nvim-silicon').setup {

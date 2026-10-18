@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
   once = true,
   callback = function()
-    lib.add_package {
+    lib.plugin {
       'https://github.com/nvim-neotest/neotest',
       'https://github.com/marilari88/neotest-vitest',
     }

@@ -3,7 +3,7 @@
 local settings = require 'config.settings'
 local lib = require 'config.lib.core'
 
-lib.add_package {
+lib.plugin {
   'https://github.com/lewis6991/gitsigns.nvim',
 }
 

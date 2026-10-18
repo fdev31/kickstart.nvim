@@ -4,7 +4,7 @@ require('lazyload').on_vim_enter(function()
   local lib = require 'config.lib.core'
   local settings = require 'config.settings'
 
-  lib.add_package {
+  lib.plugin {
     'https://github.com/folke/which-key.nvim',
   }
 

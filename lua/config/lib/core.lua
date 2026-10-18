@@ -4,7 +4,7 @@ local M = {}
 local unpack = table.unpack or unpack
 
 --- adds a package
-M.add_package = function(specs, opts)
+M.plugin = function(specs, opts)
   opts = vim.tbl_extend('keep', opts or {}, { confirm = false })
   return vim.pack.add(specs, opts)
 end

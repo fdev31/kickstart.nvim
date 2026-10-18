@@ -2,7 +2,7 @@ local settings = require 'config.settings'
 return {
   assistant = function()
     local lib = require 'config.lib.core'
-    lib.add_package {
+    lib.plugin {
       'https://github.com/nvim-lua/plenary.nvim',
       'https://github.com/olimorris/codecompanion.nvim',
     }

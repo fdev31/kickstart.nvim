@@ -9,7 +9,7 @@ function _G.ensure_dap_loaded()
   _dap_loaded = true
   local lib = require 'config.lib.core'
 
-  lib.add_package {
+  lib.plugin {
     'https://github.com/nvim-neotest/nvim-nio',
     'https://github.com/theHamsta/nvim-dap-virtual-text',
     'https://github.com/nvim-telescope/telescope-dap.nvim',

@@ -10,7 +10,7 @@ function _G.ensure_workspaces_loaded()
     pcall(vim.api.nvim_del_user_command, c)
   end
   local lib = require 'config.lib.core'
-  lib.add_package {
+  lib.plugin {
     'https://github.com/natecraddock/workspaces.nvim',
   }
   pcall(require('telescope').load_extension, 'workspaces')

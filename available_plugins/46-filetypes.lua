@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Log highlight (deferred, not filetype-dependent)
 require('lazyload').on_vim_enter(function()
-  lib.add_package {
+  lib.plugin {
     'https://github.com/fei6409/log-highlight.nvim',
   }
   require('log-highlight').setup {
@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'plantuml',
   once = true,
   callback = function()
-    lib.add_package {
+    lib.plugin {
       'https://github.com/aklt/plantuml-syntax',
       'https://gitlab.com/itaranto/plantuml.nvim',
     }
@@ -87,6 +87,6 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'just',
   once = true,
   callback = function()
-    lib.add_package { 'https://github.com/NoahTheDuke/vim-just' }
+    lib.plugin { 'https://github.com/NoahTheDuke/vim-just' }
   end,
 })

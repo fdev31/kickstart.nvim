@@ -6,7 +6,7 @@ return {
       vim.api.nvim_create_user_command(cmd, function(opts)
         vim.api.nvim_del_user_command(cmd)
         local lib = require 'config.lib.core'
-        lib.add_package {
+        lib.plugin {
           { src = 'https://github.com/CopilotC-Nvim/CopilotChat.nvim', version = 'main' },
         }
         require('CopilotChat').setup {

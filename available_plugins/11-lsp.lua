@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
     end
   end,
 })
-lib.add_package {
+lib.plugin {
   'https://github.com/L3MON4D3/LuaSnip',
 }
 
@@ -19,7 +19,7 @@ lib.add_package {
 require('lazyload').on_vim_enter(function()
   local settings = require 'config.settings'
 
-  lib.add_package {
+  lib.plugin {
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/mason-org/mason-lspconfig.nvim',

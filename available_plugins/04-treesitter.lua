@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end,
 })
 
-lib.add_package {
+lib.plugin {
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
 }
 
