@@ -52,7 +52,7 @@ local autoformat_opts = {
 return {
   leader = '²',
   deduplicate_diagnostics = true,
-  diff_command = 'CodeDiff --side-by-side',
+  diff_command = 'CodeDiff',
   gitsigns = {
     add = { text = '▋' },
   },

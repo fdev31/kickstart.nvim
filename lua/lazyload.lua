@@ -102,4 +102,19 @@ function M.on_override(fn)
   end
 end
 
+function M.on_lazy_commands(commands, handler)
+  local function _load(cmd, args)
+    for _, c in ipairs(commands) do
+      pcall(vim.api.nvim_del_user_command, c)
+    end
+    pcall(handler)
+    vim.cmd(cmd .. ' ' .. (args or ''))
+  end
+  for _, cmd in ipairs(commands) do
+    vim.api.nvim_create_user_command(cmd, function(opts)
+      _load(cmd, opts.args)
+    end, { nargs = '*' })
+  end
+end
+
 return M

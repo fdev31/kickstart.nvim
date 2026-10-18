@@ -18,9 +18,11 @@ function _G.ensure_workspaces_loaded()
   })
 end
 
-for _, cmd in ipairs({ 'WorkspacesOpen', 'WorkspacesAdd', 'WorkspacesList', 'WorkspacesRemove' }) do
-  vim.api.nvim_create_user_command(cmd, function(opts)
-    _G.ensure_workspaces_loaded()
-    vim.cmd(cmd .. ' ' .. (opts.args or ''))
-  end, { nargs = '*' })
-end
+require('lazyload').on_lazy_commands({
+  'WorkspacesOpen',
+  'WorkspacesAdd',
+  'WorkspacesList',
+  'WorkspacesRemove',
+},
+  _G.ensure_workspaces_loaded
+)

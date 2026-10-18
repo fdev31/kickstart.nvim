@@ -26,7 +26,6 @@ function _G.ensure_telekasten_loaded()
   })
 end
 
-vim.api.nvim_create_user_command('Telekasten', function(opts)
-  _G.ensure_telekasten_loaded()
-  vim.cmd('Telekasten ' .. (opts.args or ''))
-end, { nargs = '*' })
+require('lazyload').on_lazy_commands({'Telekasten'},
+  _G.ensure_telekasten_loaded
+)
