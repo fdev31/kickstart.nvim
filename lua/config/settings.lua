@@ -64,12 +64,13 @@ return {
   -- supported languages
   treesitter_languages = advanced_syntax_support,
   -- AI stuff - use copilot + copilotchat for easy copilot integration
-  ai_completion = 'minuet', -- file completion using blink (eg:"copilot" or "minuet")
+  ai_completion = nil, -- 'minuet', -- file completion using blink (eg:"copilot" or "minuet")
   ai_chat = 'codecompanion', -- "codecompanion" or "copilot" (copilotchat)
   ai_model = 'qwen3.8-27b', -- model name for CopilotChat / CodeCompanion
+  ai_fim_model = 'qwen25coder', -- model name for minuet / copilot
   -- for local instances (minuet / codecompanion)
-  llama_url =  os.getenv("LLAMA_CPP_BASE_URL") or "http://localhost:8080",
-  llama_key = "LLAMA_CPP_KEY",
+  llama_url = os.getenv 'LLAMA_CPP_BASE_URL' or 'http://localhost:8080',
+  llama_key = 'LLAMA_CPP_KEY',
   -- completion settings
   cmp_sources = { 'lsp', 'path', 'buffer', 'snippets', 'lazydev' },
   cmp_providers = {
