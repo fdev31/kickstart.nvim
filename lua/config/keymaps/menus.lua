@@ -62,6 +62,8 @@ map('n', '<leader>fn', function()
   package.loaded.snacks.picker.notifications()
 end, { desc = '[n]otifications' })
 
+map('n', '<leader>fq', telescope.quickfix, { desc = '[q]uickfix' })
+
 -- Smart open and workspaces
 map('n', '<leader><leader>', function()
   -- cheaper version:
